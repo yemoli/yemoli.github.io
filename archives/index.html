@@ -346,6 +346,46 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/01/11/emlog后台数据备份getshell/">
+            
+                <span>emlog后台数据备份getshell</span>
+        </a>
+        <div class="abstract-content">
+            此漏洞适用版本&lt;= 5.1.2
+漏洞原理是通过在恢复数据库备份时插入恶意代码，以达到getshell的目的
+首先登陆到博客后台，进入数据备份和恢复功能
+
+点击开始备份，我们会在本地生成一个数据库文件
+要getshell，我们可以在得到的数据库文件中插入生成恶意文件的代码，但是我们需要知道该站点在服务器中的绝对路径
+经过审计发现在admin/index.php中存在如下代码
+这样我们只需访问127.0.0.1/admin/index.php?action=phpinfo就可以触发phpinfo()函数进而得到绝对路径了
+
+有了绝对路径我们就可以在数据库备份文件中插入如下代码
+
+这里调...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/11</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="漏洞复现">漏洞复现</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2018/11/30/pwn简单栈溢出/">
             
                 <span>pwn简单栈溢出</span>
@@ -479,9 +519,16 @@
     
     
     
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 1
+        Total : 2
         </div>
         <!-- search  -->
         
@@ -491,6 +538,20 @@
     
     
     
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/11</span><a class="archive-post-title" href="/2019/01/11/emlog后台数据备份getshell/">emlog后台数据备份getshell</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
@@ -504,6 +565,8 @@
   </div>
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="漏洞复现"><span class="iconfont-archer">&#xe606;</span>漏洞复现</span>
     
         <span class="sidebar-tag-name" data-tags="pwn"><span class="iconfont-archer">&#xe606;</span>pwn</span>
     
