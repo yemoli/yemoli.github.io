@@ -359,6 +359,46 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/01/12/PHP反序列化总结/">
+            
+                <span>PHP反序列化总结</span>
+        </a>
+        <div class="abstract-content">
+            漏洞成因Demo：
+&lt;?php
+class A{
+public $target = &quot;demo&quot;;
+function __destruct(){
+        echo &quot;destructing!&lt;br/&gt;&quot;;
+        echo $this-&gt;target.&quot;&lt;br/&gt;&quot;;
+        echo &quot;destructed!&lt;br/&gt;&quot;;
+}
+}
+$a = $_GET[&apos;test&apos;];
+$a_unser = unserialize(...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/12</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="反序列化">反序列化</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/01/11/emlog后台数据备份getshell/">
             
                 <span>emlog后台数据备份getshell</span>
@@ -636,9 +676,20 @@ height:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 2
+        Total : 3
         </div>
         <!-- search  -->
         
@@ -651,6 +702,11 @@ height:50vh;
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/12</span><a class="archive-post-title" href="/2019/01/12/PHP反序列化总结/">PHP反序列化总结</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -676,9 +732,11 @@ height:50vh;
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name" data-tags="漏洞复现"><span class="iconfont-archer">&#xe606;</span>漏洞复现</span>
+    
         <span class="sidebar-tag-name" data-tags="pwn"><span class="iconfont-archer">&#xe606;</span>pwn</span>
     
-        <span class="sidebar-tag-name" data-tags="漏洞复现"><span class="iconfont-archer">&#xe606;</span>漏洞复现</span>
+        <span class="sidebar-tag-name" data-tags="反序列化"><span class="iconfont-archer">&#xe606;</span>反序列化</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
