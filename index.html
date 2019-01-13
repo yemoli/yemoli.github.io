@@ -359,6 +359,53 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/01/13/2018安恒12月赛复现/">
+            
+                <span>2018安恒12月赛复现</span>
+        </a>
+        <div class="abstract-content">
+            WEBeasy题目是如下代码
+&lt;?php  
+@error_reporting(1); 
+include &apos;flag.php&apos;;
+class baby 
+{   
+public $file;
+function __toString()  
+{  
+if(isset($this-&gt;file)) 
+{
+$filename = &quot;./{$this-&gt;file}&quot;;
+if (file_get_contents($filename)) 
+{  
+return file_get_contents($filename); 
+} 
+} 
+}  
+...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/13</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="CTF">CTF</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/01/12/PHP反序列化总结/">
             
                 <span>PHP反序列化总结</span>
@@ -687,9 +734,18 @@ $a_unser = unserialize(...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 3
+        Total : 4
         </div>
         <!-- search  -->
         
@@ -702,6 +758,11 @@ $a_unser = unserialize(...
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/13</span><a class="archive-post-title" href="/2019/01/13/2018安恒12月赛复现/">2018安恒12月赛复现</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -732,11 +793,13 @@ $a_unser = unserialize(...
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="漏洞复现"><span class="iconfont-archer">&#xe606;</span>漏洞复现</span>
+        <span class="sidebar-tag-name" data-tags="CTF"><span class="iconfont-archer">&#xe606;</span>CTF</span>
     
         <span class="sidebar-tag-name" data-tags="pwn"><span class="iconfont-archer">&#xe606;</span>pwn</span>
     
         <span class="sidebar-tag-name" data-tags="反序列化"><span class="iconfont-archer">&#xe606;</span>反序列化</span>
+    
+        <span class="sidebar-tag-name" data-tags="漏洞复现"><span class="iconfont-archer">&#xe606;</span>漏洞复现</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
