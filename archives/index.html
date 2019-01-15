@@ -346,6 +346,44 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/01/15/PHP利用回溯次数限制绕过/">
+            
+                <span>PHP利用回溯次数限制绕过</span>
+        </a>
+        <div class="abstract-content">
+            回溯绕过这里以i春秋圣诞欢乐赛中一道题为例代码如下
+&lt;?php
+function areyouok($greeting){
+return preg_match(&apos;/Merry.*Christmas/is&apos;,$greeting);
+}
+
+$greeting=@$_POST[&apos;greeting&apos;];
+if(!areyouok($greeting)){
+if(strpos($greeting,&apos;Merry Christmas&apos;)!==false){
+echo &apos;Merry Christmas. &apos;.&apos...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/15</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="代码审计">代码审计</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/01/13/2018安恒12月赛复现/">
             
                 <span>2018安恒12月赛复现</span>
@@ -633,9 +671,14 @@ $a_unser = unserialize(...
     
     
     
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 4
+        Total : 5
         </div>
         <!-- search  -->
         
@@ -648,6 +691,11 @@ $a_unser = unserialize(...
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/15</span><a class="archive-post-title" href="/2019/01/15/PHP利用回溯次数限制绕过/">PHP利用回溯次数限制绕过</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -683,13 +731,15 @@ $a_unser = unserialize(...
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name" data-tags="代码审计"><span class="iconfont-archer">&#xe606;</span>代码审计</span>
+    
         <span class="sidebar-tag-name" data-tags="CTF"><span class="iconfont-archer">&#xe606;</span>CTF</span>
+    
+        <span class="sidebar-tag-name" data-tags="漏洞复现"><span class="iconfont-archer">&#xe606;</span>漏洞复现</span>
     
         <span class="sidebar-tag-name" data-tags="pwn"><span class="iconfont-archer">&#xe606;</span>pwn</span>
     
         <span class="sidebar-tag-name" data-tags="反序列化"><span class="iconfont-archer">&#xe606;</span>反序列化</span>
-    
-        <span class="sidebar-tag-name" data-tags="漏洞复现"><span class="iconfont-archer">&#xe606;</span>漏洞复现</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
