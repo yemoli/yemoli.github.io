@@ -346,6 +346,45 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/01/17/命令执行漏洞小结/">
+            
+                <span>命令执行漏洞小结</span>
+        </a>
+        <div class="abstract-content">
+            当应用程序调用一些可执行命令的函数，如PHP中 eval assert systempreg_replace call_user_func 等等函数，当函数参数变成可控参数时就可以将恶意的命令拼接到正常命令中，造成命令执行
+这里在本地搭建了dvwa 环境进行漏洞的测试
+进入命令执行测试界面
+
+输入点输入ip可以执行ping命令
+接下来看一下源代码(low)
+&lt;?php
+
+if( isset( $_POST[ &apos;Submit&apos; ]  ) ) {
+// Check Anti-CSRF token
+checkToken( $_REQUEST[ &apos;user_t...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/17</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="总结">总结</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/01/16/file-put-contents-的妙用/">
             
                 <span>file_put_contents()的妙用</span>
@@ -697,9 +736,22 @@ $a_unser = unserialize(...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 6
+        Total : 7
         </div>
         <!-- search  -->
         
@@ -712,6 +764,11 @@ $a_unser = unserialize(...
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/17</span><a class="archive-post-title" href="/2019/01/17/命令执行漏洞小结/">命令执行漏洞小结</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -757,15 +814,17 @@ $a_unser = unserialize(...
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="代码审计"><span class="iconfont-archer">&#xe606;</span>代码审计</span>
-    
         <span class="sidebar-tag-name" data-tags="CTF"><span class="iconfont-archer">&#xe606;</span>CTF</span>
+    
+        <span class="sidebar-tag-name" data-tags="漏洞复现"><span class="iconfont-archer">&#xe606;</span>漏洞复现</span>
     
         <span class="sidebar-tag-name" data-tags="反序列化"><span class="iconfont-archer">&#xe606;</span>反序列化</span>
     
+        <span class="sidebar-tag-name" data-tags="代码审计"><span class="iconfont-archer">&#xe606;</span>代码审计</span>
+    
         <span class="sidebar-tag-name" data-tags="pwn"><span class="iconfont-archer">&#xe606;</span>pwn</span>
     
-        <span class="sidebar-tag-name" data-tags="漏洞复现"><span class="iconfont-archer">&#xe606;</span>漏洞复现</span>
+        <span class="sidebar-tag-name" data-tags="总结"><span class="iconfont-archer">&#xe606;</span>总结</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
