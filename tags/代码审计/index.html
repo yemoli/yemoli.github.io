@@ -346,6 +346,44 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/01/18/无数字和字母的webshell/">
+            
+                <span>无数字和字母的webshell</span>
+        </a>
+        <div class="abstract-content">
+            先看一下这个例子
+&lt;?php
+if(!preg_match(&apos;/[a-z0-9]/is&apos;,$_GET[&apos;shell&apos;])) {
+  eval($_GET[&apos;shell&apos;]);
+}
+这算是一个极限利用了，要求我们不用数字和字母构造webshell
+这样的问题我们可以类比于各类变形的一句话木马，用异或的方式得到一个新的字符，这时我们就可以用非数字和字母的字符串将数字或者字母异或出来
+异或例如这个
+&lt;?php
+$_=(&apos;%01&apos;^&apos;`&apos;).(&apos;%13&apos;^&apos...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/18</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="代码审计">代码审计</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/01/16/file-put-contents-的妙用/">
             
                 <span>file_put_contents()的妙用</span>
@@ -583,9 +621,18 @@ echo &apos;Merry Christmas. &apos;.&apos...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 7
+        Total : 8
         </div>
         <!-- search  -->
         
@@ -598,6 +645,11 @@ echo &apos;Merry Christmas. &apos;.&apos...
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/18</span><a class="archive-post-title" href="/2019/01/18/无数字和字母的webshell/">无数字和字母的webshell</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -650,13 +702,13 @@ echo &apos;Merry Christmas. &apos;.&apos...
     
         <span class="sidebar-tag-name" data-tags="CTF"><span class="iconfont-archer">&#xe606;</span>CTF</span>
     
-        <span class="sidebar-tag-name" data-tags="漏洞复现"><span class="iconfont-archer">&#xe606;</span>漏洞复现</span>
+        <span class="sidebar-tag-name" data-tags="代码审计"><span class="iconfont-archer">&#xe606;</span>代码审计</span>
     
         <span class="sidebar-tag-name" data-tags="反序列化"><span class="iconfont-archer">&#xe606;</span>反序列化</span>
     
-        <span class="sidebar-tag-name" data-tags="代码审计"><span class="iconfont-archer">&#xe606;</span>代码审计</span>
-    
         <span class="sidebar-tag-name" data-tags="pwn"><span class="iconfont-archer">&#xe606;</span>pwn</span>
+    
+        <span class="sidebar-tag-name" data-tags="漏洞复现"><span class="iconfont-archer">&#xe606;</span>漏洞复现</span>
     
         <span class="sidebar-tag-name" data-tags="总结"><span class="iconfont-archer">&#xe606;</span>总结</span>
     
