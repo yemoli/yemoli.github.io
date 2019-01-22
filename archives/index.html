@@ -346,6 +346,50 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/01/22/pwn学习笔记-ret2libc1/">
+            
+                <span>pwn学习笔记-ret2libc1</span>
+        </a>
+        <div class="abstract-content">
+            试着运行程序
+
+程序只有一个输入点，检查程序
+
+程序开启了NX，拖进ida查看
+int __cdecl main(int argc, const char **argv, const char **envp)
+{
+  char s; // [esp+1Ch] [ebp-64h]
+
+  setvbuf(stdout, 0, 2, 0);
+  setvbuf(_bss_start, 0, 1, 0);
+  puts(&quot;RET2LIBC &gt;_&lt;&quot;);
+  gets(&amp;s);
+  return 0;
+}
+这里同样有gets函数，并且经检测需覆盖字符仍为11...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/22</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="pwn">pwn</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/01/21/pwn学习笔记-ret2text/">
             
                 <span>pwn学习笔记-ret2text</span>
@@ -694,46 +738,6 @@ $a_unser = unserialize(...
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/01/11/emlog后台数据备份getshell/">
-            
-                <span>emlog后台数据备份getshell</span>
-        </a>
-        <div class="abstract-content">
-            此漏洞适用版本&lt;= 5.1.2
-漏洞原理是通过在恢复数据库备份时插入恶意代码，以达到getshell的目的
-首先登陆到博客后台，进入数据备份和恢复功能
-
-点击开始备份，我们会在本地生成一个数据库文件
-要getshell，我们可以在得到的数据库文件中插入生成恶意文件的代码，但是我们需要知道该站点在服务器中的绝对路径
-经过审计发现在admin/index.php中存在如下代码
-这样我们只需访问127.0.0.1/admin/index.php?action=phpinfo就可以触发phpinfo()函数进而得到绝对路径了
-
-有了绝对路径我们就可以在数据库备份文件中插入如下代码
-
-这里调...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/11</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="漏洞复现">漏洞复现</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
@@ -948,9 +952,24 @@ $a_unser = unserialize(...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 11
+        Total : 12
         </div>
         <!-- search  -->
         
@@ -963,6 +982,11 @@ $a_unser = unserialize(...
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/22</span><a class="archive-post-title" href="/2019/01/22/pwn学习笔记-ret2libc1/">pwn学习笔记-ret2libc1</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1033,19 +1057,19 @@ $a_unser = unserialize(...
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name" data-tags="系统总结"><span class="iconfont-archer">&#xe606;</span>系统总结</span>
+    
         <span class="sidebar-tag-name" data-tags="CTF"><span class="iconfont-archer">&#xe606;</span>CTF</span>
     
-        <span class="sidebar-tag-name" data-tags="系统总结"><span class="iconfont-archer">&#xe606;</span>系统总结</span>
+        <span class="sidebar-tag-name" data-tags="代码审计"><span class="iconfont-archer">&#xe606;</span>代码审计</span>
+    
+        <span class="sidebar-tag-name" data-tags="漏洞复现"><span class="iconfont-archer">&#xe606;</span>漏洞复现</span>
     
         <span class="sidebar-tag-name" data-tags="反序列化"><span class="iconfont-archer">&#xe606;</span>反序列化</span>
     
         <span class="sidebar-tag-name" data-tags="pwn"><span class="iconfont-archer">&#xe606;</span>pwn</span>
     
-        <span class="sidebar-tag-name" data-tags="代码审计"><span class="iconfont-archer">&#xe606;</span>代码审计</span>
-    
         <span class="sidebar-tag-name" data-tags="总结"><span class="iconfont-archer">&#xe606;</span>总结</span>
-    
-        <span class="sidebar-tag-name" data-tags="漏洞复现"><span class="iconfont-archer">&#xe606;</span>漏洞复现</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
