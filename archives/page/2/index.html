@@ -346,6 +346,46 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/01/12/PHP反序列化总结/">
+            
+                <span>PHP反序列化总结</span>
+        </a>
+        <div class="abstract-content">
+            漏洞成因Demo：
+&lt;?php
+class A{
+public $target = &quot;demo&quot;;
+function __destruct(){
+        echo &quot;destructing!&lt;br/&gt;&quot;;
+        echo $this-&gt;target.&quot;&lt;br/&gt;&quot;;
+        echo &quot;destructed!&lt;br/&gt;&quot;;
+}
+}
+$a = $_GET[&apos;test&apos;];
+$a_unser = unserialize(...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/12</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="反序列化">反序列化</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/01/11/emlog后台数据备份getshell/">
             
                 <span>emlog后台数据备份getshell</span>
@@ -640,9 +680,20 @@
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 12
+        Total : 13
         </div>
         <!-- search  -->
         
@@ -655,6 +706,11 @@
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/23</span><a class="archive-post-title" href="/2019/01/23/pwn学习笔记-ret2libc2/">pwn学习笔记-ret2libc2</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -732,15 +788,15 @@
     
         <span class="sidebar-tag-name" data-tags="系统总结"><span class="iconfont-archer">&#xe606;</span>系统总结</span>
     
+        <span class="sidebar-tag-name" data-tags="漏洞复现"><span class="iconfont-archer">&#xe606;</span>漏洞复现</span>
+    
         <span class="sidebar-tag-name" data-tags="CTF"><span class="iconfont-archer">&#xe606;</span>CTF</span>
+    
+        <span class="sidebar-tag-name" data-tags="pwn"><span class="iconfont-archer">&#xe606;</span>pwn</span>
     
         <span class="sidebar-tag-name" data-tags="代码审计"><span class="iconfont-archer">&#xe606;</span>代码审计</span>
     
-        <span class="sidebar-tag-name" data-tags="漏洞复现"><span class="iconfont-archer">&#xe606;</span>漏洞复现</span>
-    
         <span class="sidebar-tag-name" data-tags="反序列化"><span class="iconfont-archer">&#xe606;</span>反序列化</span>
-    
-        <span class="sidebar-tag-name" data-tags="pwn"><span class="iconfont-archer">&#xe606;</span>pwn</span>
     
         <span class="sidebar-tag-name" data-tags="总结"><span class="iconfont-archer">&#xe606;</span>总结</span>
     
