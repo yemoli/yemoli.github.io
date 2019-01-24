@@ -346,6 +346,45 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/01/24/pwn学习笔记-ret2libc3/">
+            
+                <span>pwn学习笔记-ret2libc3</span>
+        </a>
+        <div class="abstract-content">
+            在ret2libc2的基础上，将 system 函数的地址去掉。此时，我们需要同时找到 system 函数地址与 /bin/sh 字符串的地址。首先，查看安全保护
+
+程序仍然开启了NX
+拖入ida中查看
+int __cdecl main(int argc, const char **argv, const char **envp)
+{
+  char s; // [esp+1Ch] [ebp-64h]
+
+  setvbuf(stdout, 0, 2, 0);
+  setvbuf(stdin, 0, 1, 0);
+  puts(&quot;No surprise anymore, syste...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/24</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="pwn">pwn</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/01/23/pwn学习笔记-ret2libc2/">
             
                 <span>pwn学习笔记-ret2libc2</span>
@@ -690,53 +729,6 @@ echo &apos;Merry Christmas. &apos;.&apos...
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/01/13/2018安恒12月赛复现/">
-            
-                <span>2018安恒12月赛复现</span>
-        </a>
-        <div class="abstract-content">
-            WEBeasy题目是如下代码
-&lt;?php  
-@error_reporting(1); 
-include &apos;flag.php&apos;;
-class baby 
-{   
-public $file;
-function __toString()  
-{  
-if(isset($this-&gt;file)) 
-{
-$filename = &quot;./{$this-&gt;file}&quot;;
-if (file_get_contents($filename)) 
-{  
-return file_get_contents($filename); 
-} 
-} 
-}  
-...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/13</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="CTF">CTF</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
@@ -977,9 +969,22 @@ return file_get_contents($filename);
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 13
+        Total : 14
         </div>
         <!-- search  -->
         
@@ -992,6 +997,11 @@ return file_get_contents($filename);
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/24</span><a class="archive-post-title" href="/2019/01/24/pwn学习笔记-ret2libc3/">pwn学习笔记-ret2libc3</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1072,17 +1082,17 @@ return file_get_contents($filename);
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="系统总结"><span class="iconfont-archer">&#xe606;</span>系统总结</span>
-    
-        <span class="sidebar-tag-name" data-tags="漏洞复现"><span class="iconfont-archer">&#xe606;</span>漏洞复现</span>
-    
         <span class="sidebar-tag-name" data-tags="CTF"><span class="iconfont-archer">&#xe606;</span>CTF</span>
     
-        <span class="sidebar-tag-name" data-tags="pwn"><span class="iconfont-archer">&#xe606;</span>pwn</span>
+        <span class="sidebar-tag-name" data-tags="系统总结"><span class="iconfont-archer">&#xe606;</span>系统总结</span>
     
         <span class="sidebar-tag-name" data-tags="代码审计"><span class="iconfont-archer">&#xe606;</span>代码审计</span>
     
+        <span class="sidebar-tag-name" data-tags="漏洞复现"><span class="iconfont-archer">&#xe606;</span>漏洞复现</span>
+    
         <span class="sidebar-tag-name" data-tags="反序列化"><span class="iconfont-archer">&#xe606;</span>反序列化</span>
+    
+        <span class="sidebar-tag-name" data-tags="pwn"><span class="iconfont-archer">&#xe606;</span>pwn</span>
     
         <span class="sidebar-tag-name" data-tags="总结"><span class="iconfont-archer">&#xe606;</span>总结</span>
     
