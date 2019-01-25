@@ -346,109 +346,27 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/01/18/无数字和字母的webshell/">
+        <a class="abstract-title" href="/2019/01/25/Waf那些事/">
             
-                <span>无数字和字母的webshell</span>
+                <span>Waf那些事</span>
         </a>
         <div class="abstract-content">
-            先看一下这个例子
-&lt;?php
-if(!preg_match(&apos;/[a-z0-9]/is&apos;,$_GET[&apos;shell&apos;])) {
-  eval($_GET[&apos;shell&apos;]);
-}
-这算是一个极限利用了，要求我们不用数字和字母构造webshell
-这样的问题我们可以类比于各类变形的一句话木马，用异或的方式得到一个新的字符，这时我们就可以用非数字和字母的字符串将数字或者字母异或出来
-异或例如这个
-&lt;?php
-$_=(&apos;%01&apos;^&apos;`&apos;).(&apos;%13&apos;^&apos...
+            介绍wafWaf是Web应用防火墙通过执行一系列针对HTTP/HTTPS的安全策略来专门为Web应用提供保护的一款产品
+Waf通常有以下几类：
+软件型waf以软件形式装在所保护的服务器上的waf，由于安装在服务器上，所以可以接触到服务器上的文件，直接检测服务器上是否存在webshell，是否有文件被创建等。
+硬件型waf以硬件形式部署在线路中，支持多种部署方式，当串联到链路中时可以拦截恶意流量，在旁路监听模式时只记录攻击不进行拦截。
+云waf一般以反向代理的形式工作，通过配置NS记录或CNAME记录，使对网站的请求报文优先经过waf主机，经过waf主机的过滤后，将认为无害的请求报文再发送...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/18</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/25</span>
             </div>
             <!-- tags  -->
             
             <div class="abstract-tags">
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="代码审计">代码审计</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/01/16/file-put-contents-的妙用/">
-            
-                <span>file_put_contents()的妙用</span>
-        </a>
-        <div class="abstract-content">
-            今天偶然在群里看到这个骚操作
-file_put_contents()第二个参数是可以传入数组的，那么在存在某些正则校验的时候，就可能带来绕过的可能
-例如有如下代码
-&lt;?php
-$text = $_GET[&apos;text&apos;];
-if(preg_match(&apos;[&lt;&gt;?]&apos;, $text)) {
-die(&apos;fuck!!!!&apos;);
-}
-file_put_contents(&apos;shell.php&apos;, $text);
-如果我们想写入一个php文件,正常的话传入
-text = &lt;?php phpinfo(...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/16</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="代码审计">代码审计</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/01/15/PHP利用回溯次数限制绕过/">
-            
-                <span>PHP利用回溯次数限制绕过</span>
-        </a>
-        <div class="abstract-content">
-            回溯绕过这里以i春秋圣诞欢乐赛中一道题为例代码如下
-&lt;?php
-function areyouok($greeting){
-return preg_match(&apos;/Merry.*Christmas/is&apos;,$greeting);
-}
-
-$greeting=@$_POST[&apos;greeting&apos;];
-if(!areyouok($greeting)){
-if(strpos($greeting,&apos;Merry Christmas&apos;)!==false){
-echo &apos;Merry Christmas. &apos;.&apos...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/15</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="代码审计">代码审计</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="读书心得">读书心得</a>
     
 </div>
             
