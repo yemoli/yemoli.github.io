@@ -346,6 +346,52 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/01/27/php反序列化pop链的构造/">
+            
+                <span>php反序列化pop链的构造</span>
+        </a>
+        <div class="abstract-content">
+            通常反序列化的攻击是在魔术方法中出现一些可利用的漏洞，通过自动调用来触发漏洞。
+但是如果关键代码不在魔术方法中，而是在一个类的普通方法中。这个时候我们可以通过寻找相同的函数名将类的属性和敏感函数联系起来
+借用网上的代码：
+&lt;?php
+class lemon {
+protected $ClassObj;
+
+function __construct() {
+$this-&gt;ClassObj = new normal();
+}
+
+function __destruct() {
+$this-&gt;ClassObj-&gt;action();
+}
+}
+
+class normal {
+f...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/27</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="漏洞复现">漏洞复现</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/01/20/flask-debug模式下pin码安全/">
             
                 <span>flask debug模式下pin码安全</span>
@@ -679,9 +725,33 @@ win下SOFTWARE\Microsoft\C...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 15
+        Total : 17
         </div>
         <!-- search  -->
         
@@ -694,6 +764,16 @@ win下SOFTWARE\Microsoft\C...
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/27</span><a class="archive-post-title" href="/2019/01/27/php反序列化pop链的构造/">php反序列化pop链的构造</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/26</span><a class="archive-post-title" href="/2019/01/26/HGAME-2019-week1-writeup/">HGAME 2019-week1 writeup</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -786,11 +866,13 @@ win下SOFTWARE\Microsoft\C...
     
         <span class="sidebar-tag-name" data-tags="CTF"><span class="iconfont-archer">&#xe606;</span>CTF</span>
     
-        <span class="sidebar-tag-name" data-tags="反序列化"><span class="iconfont-archer">&#xe606;</span>反序列化</span>
-    
         <span class="sidebar-tag-name" data-tags="代码审计"><span class="iconfont-archer">&#xe606;</span>代码审计</span>
     
         <span class="sidebar-tag-name" data-tags="系统总结"><span class="iconfont-archer">&#xe606;</span>系统总结</span>
+    
+        <span class="sidebar-tag-name" data-tags="反序列化"><span class="iconfont-archer">&#xe606;</span>反序列化</span>
+    
+        <span class="sidebar-tag-name" data-tags="ctf"><span class="iconfont-archer">&#xe606;</span>ctf</span>
     
         <span class="sidebar-tag-name" data-tags="读书心得"><span class="iconfont-archer">&#xe606;</span>读书心得</span>
     
