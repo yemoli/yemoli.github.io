@@ -359,6 +359,42 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/01/28/CTF中常出现的PHP函数/">
+            
+                <span>CTF中常出现的PHP函数</span>
+        </a>
+        <div class="abstract-content">
+            文章部分内容来源于网络
+strcmpstrcmp(a1，a2)函数用来比较两个字符串是否相等的，比较的是对应字符的ascii码，如果相等返回0，当a1的ascii大于a2的返回小于0，a1的ascii码小于a2的，返回大于0.
+但是这个函数是存在漏洞的，我们知道这个函数是用来比较字符串的，但是当我们传入为数组是，那变成字符串和数组进行比较了，因此php在5.2之前，默认返回的-1，5.2版本之后返回0.因此有时我们便可以利用这个漏洞
+demo：
+&lt;?php
+  error_reporting();
+  $flag=$_GET[&apos;flag&apos;];
+  if(strc...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/28</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="CTF">CTF</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/01/27/php反序列化pop链的构造/">
             
                 <span>php反序列化pop链的构造</span>
@@ -701,44 +737,6 @@ ip分别是192.168.18.131,192.168.18.135
             <div class="abstract-tags">
     
         <a class="post-tag" href="javascript:void(0);" data-tags="系统总结">系统总结</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/01/18/无数字和字母的webshell/">
-            
-                <span>无数字和字母的webshell</span>
-        </a>
-        <div class="abstract-content">
-            先看一下这个例子
-&lt;?php
-if(!preg_match(&apos;/[a-z0-9]/is&apos;,$_GET[&apos;shell&apos;])) {
-  eval($_GET[&apos;shell&apos;]);
-}
-这算是一个极限利用了，要求我们不用数字和字母构造webshell
-这样的问题我们可以类比于各类变形的一句话木马，用异或的方式得到一个新的字符，这时我们就可以用非数字和字母的字符串将数字或者字母异或出来
-异或例如这个
-&lt;?php
-$_=(&apos;%01&apos;^&apos;`&apos;).(&apos;%13&apos;^&apos...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/18</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="代码审计">代码审计</a>
     
 </div>
             
@@ -1132,9 +1130,24 @@ $_=(&apos;%01&apos;^&apos;`&apos;).(&apos;%13&apos;^&apos...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 17
+        Total : 18
         </div>
         <!-- search  -->
         
@@ -1147,6 +1160,11 @@ $_=(&apos;%01&apos;^&apos;`&apos;).(&apos;%13&apos;^&apos...
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/28</span><a class="archive-post-title" href="/2019/01/28/CTF中常出现的PHP函数/">CTF中常出现的PHP函数</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1249,13 +1267,13 @@ $_=(&apos;%01&apos;^&apos;`&apos;).(&apos;%13&apos;^&apos...
     
         <span class="sidebar-tag-name" data-tags="CTF"><span class="iconfont-archer">&#xe606;</span>CTF</span>
     
-        <span class="sidebar-tag-name" data-tags="代码审计"><span class="iconfont-archer">&#xe606;</span>代码审计</span>
-    
         <span class="sidebar-tag-name" data-tags="系统总结"><span class="iconfont-archer">&#xe606;</span>系统总结</span>
     
-        <span class="sidebar-tag-name" data-tags="反序列化"><span class="iconfont-archer">&#xe606;</span>反序列化</span>
-    
         <span class="sidebar-tag-name" data-tags="ctf"><span class="iconfont-archer">&#xe606;</span>ctf</span>
+    
+        <span class="sidebar-tag-name" data-tags="代码审计"><span class="iconfont-archer">&#xe606;</span>代码审计</span>
+    
+        <span class="sidebar-tag-name" data-tags="反序列化"><span class="iconfont-archer">&#xe606;</span>反序列化</span>
     
         <span class="sidebar-tag-name" data-tags="读书心得"><span class="iconfont-archer">&#xe606;</span>读书心得</span>
     

@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>yemoli&#39;s blog</title>
+    <title>CTF中常出现的PHP函数 · yemoli&#39;s blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -203,12 +203,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/">yemoli&#39;s blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">CTF中常出现的PHP函数</a>
+            </div>
+    </div>
     
     <a class="home-link" href="/">yemoli's blog.</a>
 </header>
@@ -220,24 +231,74 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            CTF中常出现的PHP函数
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class="post-intro-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="CTF">CTF</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">662</span>阅读时长: <span class="post-count reading-time">2 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/01/28</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -338,43 +399,117 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/01/25/Waf那些事/">
-            
-                <span>Waf那些事</span>
-        </a>
-        <div class="abstract-content">
-            介绍wafWaf是Web应用防火墙通过执行一系列针对HTTP/HTTPS的安全策略来专门为Web应用提供保护的一款产品
-Waf通常有以下几类：
-软件型waf以软件形式装在所保护的服务器上的waf，由于安装在服务器上，所以可以接触到服务器上的文件，直接检测服务器上是否存在webshell，是否有文件被创建等。
-硬件型waf以硬件形式部署在线路中，支持多种部署方式，当串联到链路中时可以拦截恶意流量，在旁路监听模式时只记录攻击不进行拦截。
-云waf一般以反向代理的形式工作，通过配置NS记录或CNAME记录，使对网站的请求报文优先经过waf主机，经过waf主机的过滤后，将认为无害的请求报文再发送...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/25</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="读书心得">读书心得</a>
-    
-</div>
-            
-        </div>
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>文章部分内容来源于网络</p>
+<h2 id="strcmp"><a href="#strcmp" class="headerlink" title="strcmp"></a>strcmp</h2><p>strcmp(a1，a2)函数用来比较两个字符串是否相等的，比较的是对应字符的ascii码，如果相等返回0，当a1的ascii大于a2的返回小于0，a1的ascii码小于a2的，返回大于0.</p>
+<p>但是这个函数是存在漏洞的，我们知道这个函数是用来比较字符串的，但是当我们传入为数组是，那变成字符串和数组进行比较了，因此php在5.2之前，默认返回的-1，5.2版本之后返回0.因此有时我们便可以利用这个漏洞</p>
+<p>demo：</p>
+<pre><code>&lt;?php
+  error_reporting();
+  $flag=$_GET[&apos;flag&apos;];
+  if(strcmp(&apos;Waldo_cuit&apos;,$flag)){
+  echo &apos;NO!&apos;;
+   }
+  else{
+  echo &apos;YES!&apos;;
+  }
+?&gt;
+</code></pre><h2 id="ereg"><a href="#ereg" class="headerlink" title="ereg"></a>ereg</h2><pre><code>ereg (&quot;^[a-zA-Z0-9]+$&quot;, $_GET[&apos;password&apos;]) === FALSE
+</code></pre><p>字符串对比解析，这里如果$_GET[‘password’]为数组，则返回值为NULL<br>，如果为123 || asd || 12as || 123%00&amp;&amp;&amp;**，则返回值为true </p>
+<h2 id="is-numeric"><a href="#is-numeric" class="headerlink" title="is_numeric"></a>is_numeric</h2><p>demo:</p>
+<pre><code>&lt;?php
+
+echo is_numeric(233333);   # 1
+
+echo is_numeric(&apos;233333&apos;);# 1
+
+echo is_numeric(0x233333);# 1
+
+echo is_numeric(&apos;0x233333&apos;);   # 1
+
+echo is_numeric(&apos;233333abc&apos;);  # 0
+
+?&gt;
+</code></pre><h2 id="Intval"><a href="#Intval" class="headerlink" title="Intval"></a>Intval</h2><p>获取变量的整数值，允许以使用特定的进制返回。默认10进制 </p>
+<p>注:如果参数为整数，则不做任何处理。</p>
+<p>我们可以构造字符串绕过：</p>
+<p>当取回字符串整数的时候，如果字符串中含有非数字的字符，将会返回第一次出现非数字符的前面的整数。若果没有数字返回0</p>
+<h2 id="parse-str"><a href="#parse-str" class="headerlink" title="parse_str"></a>parse_str</h2><p>与 parse_str() 类似的函数还有 mb_parse_str()，parse_str 将字符串解析成多个变量，如果参数str是URL传递入的查询字符串（query string），则将它解析为变量并设置到当前作用域。</p>
+<pre><code>//var.php?var=new
+
+$var=&apos;init&apos;;
+
+parse_str($_SERVER[&apos;QUERY_STRING&apos;]);
+
+print $var;
+</code></pre><h2 id="MD5"><a href="#MD5" class="headerlink" title="MD5"></a>MD5</h2><p>PHP在处理哈希字符串时，会利用”!=”或”==”来对哈希值进行比较，它把每一个以”0E”开头的哈希值都解释为0，所以如果两个不同的密码经过哈希以后，其哈希值都是以”0E”开头的，那么PHP将会认为他们相同，都是0</p>
+<p>常见字符串：</p>
+<pre><code>QNKCDZO
+240610708
+s878926199a
+s155964671a
+s214587387a
+s214587387a
+sha1(str)
+sha1(&apos;aaroZmOk&apos;)  
+sha1(&apos;aaK1STfY&apos;)
+sha1(&apos;aaO8zKZF&apos;)
+sha1(&apos;aa3OFF9m&apos;)
+</code></pre><p>同时MD5不能处理数组，有以下判断可用数组绕过：</p>
+<pre><code>if(@md5($_GET[&apos;a&apos;]) == @md5($_GET[&apos;b&apos;]))
+{
+echo &quot;yes&quot;;
+}
+</code></pre><h2 id="preg-match"><a href="#preg-match" class="headerlink" title="preg_match"></a>preg_match</h2><p>如果在进行正则表达式匹配的时候，没有限制字符串的开始和结束(^ 和 $)，则可以存在绕过的问题</p>
+<pre><code>&lt;?php
+$ip = &apos;1.1.1.1 abcd&apos;; // 可以绕过
+if(!preg_match(&quot;/(\d+)\.(\d+)\.(\d+)\.(\d+)/&quot;,$ip)) {
+  die(&apos;error&apos;);
+} else {
+   echo(&apos;key...&apos;);
+}
+?&gt;
+</code></pre>
     </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="https://yml-sec.top">夜莫离、</a>
+            </p><p>原文链接：<a href="https://yml-sec.top/2019/01/28/CTF中常出现的PHP函数/">https://yml-sec.top/2019/01/28/CTF中常出现的PHP函数/</a>
+            </p><p>发表日期：<a href="https://yml-sec.top/2019/01/28/CTF中常出现的PHP函数/">January 28th 2019, 8:03:48 pm</a>
+            </p><p>更新日期：<a href="https://yml-sec.top/2019/01/28/CTF中常出现的PHP函数/">January 28th 2019, 8:26:16 pm</a>
+            </p><p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2019/01/27/php反序列化pop链的构造/" title="php反序列化pop链的构造">
+                    <div class="prevTitle">php反序列化pop链的构造</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -459,6 +594,24 @@ Waf通常有以下几类：
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#strcmp"><span class="toc-number">1.</span> <span class="toc-text">strcmp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ereg"><span class="toc-number">2.</span> <span class="toc-text">ereg</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#is-numeric"><span class="toc-number">3.</span> <span class="toc-text">is_numeric</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Intval"><span class="toc-number">4.</span> <span class="toc-text">Intval</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#parse-str"><span class="toc-number">5.</span> <span class="toc-text">parse_str</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MD5"><span class="toc-number">6.</span> <span class="toc-text">MD5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#preg-match"><span class="toc-number">7.</span> <span class="toc-text">preg_match</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -877,6 +1030,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
