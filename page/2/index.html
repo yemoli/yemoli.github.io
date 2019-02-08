@@ -359,6 +359,240 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href="/2019/01/23/pwn学习笔记-ret2libc2/">
+            
+                <span>pwn学习笔记-ret2libc2</span>
+        </a>
+        <div class="abstract-content">
+            查看程序保护机制
+
+拖入ida查看
+int __cdecl main(int argc, const char **argv, const char **envp)
+{
+  char s; // [esp+1Ch] [ebp-64h]
+
+  setvbuf(stdout, 0, 2, 0);
+  setvbuf(_bss_start, 0, 1, 0);
+  puts(&quot;Something surprise here, but I don&apos;t think it will work.&quot;);
+  printf(&quot;What do you think ?&...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/23</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="pwn">pwn</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/01/22/pwn学习笔记-ret2libc1/">
+            
+                <span>pwn学习笔记-ret2libc1</span>
+        </a>
+        <div class="abstract-content">
+            试着运行程序
+
+程序只有一个输入点，检查程序
+
+程序开启了NX，拖进ida查看
+int __cdecl main(int argc, const char **argv, const char **envp)
+{
+  char s; // [esp+1Ch] [ebp-64h]
+
+  setvbuf(stdout, 0, 2, 0);
+  setvbuf(_bss_start, 0, 1, 0);
+  puts(&quot;RET2LIBC &gt;_&lt;&quot;);
+  gets(&amp;s);
+  return 0;
+}
+这里同样有gets函数，并且经检测需覆盖字符仍为11...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/22</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="pwn">pwn</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/01/21/pwn学习笔记-ret2text/">
+            
+                <span>pwn学习笔记-ret2text</span>
+        </a>
+        <div class="abstract-content">
+            查看程序基本信息
+
+开启了NX，代表着栈上的数据是不可执行的
+运行程序看一下
+
+程序只有一个输入点，下面将程序拖入ida
+int __cdecl main(int argc, const char **argv, const char **envp)
+{
+  char s; // [esp+1Ch] [ebp-64h]
+
+  setvbuf(stdout, 0, 2, 0);
+  setvbuf(_bss_start, 0, 1, 0);
+  puts(&quot;There is something amazing here, do you know anything?&quot;);...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/21</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="pwn">pwn</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/01/20/flask-debug模式下pin码安全/">
+            
+                <span>flask debug模式下pin码安全</span>
+        </a>
+        <div class="abstract-content">
+            flask在开启debug模式时其会生成一个pin码，在同一台机器上，多次重启Flask服务，PIN码值不改变。
+这说明PIN码是经过运算生成而不是随机生成的，经过网络搜索，我找到了生成pin 码的流程，生成的pin 码主要由6个值决定的
+
+当前计算机的用户名
+flask.app
+Flask
+E:\flask-file\flask\lib\site-packages\flask\app.py
+当前计算机网卡的Mac地址(linux下获取该值可以访问：/sys/class/net/eth0(eth1,ens33,eth2)/address)
+win下SOFTWARE\Microsoft\C...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/20</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="漏洞复现">漏洞复现</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/01/19/ARP欺骗原理及实例/">
+            
+                <span>ARP欺骗原理及实例</span>
+        </a>
+        <div class="abstract-content">
+            arp协议简介arp是一种地址转换协议，在以太网中，网络设备之间相互通信是用Mac地址进行数据交流，而arp协议就是吧IP地址转换成Mac地址的
+arp欺骗原理每台机器都会有一张arp缓存表，缓存表记录了ip地址与Mac地址的对应关系，在同一局域网中，A主机与B主机通信需要经过网关，但是arp缓存表存在一个缺陷，当主机收到arp应答包后，不会验证自己是否向对方主机发送过arp请求包，而是直接将返回包中的ip和Mac地址对应的关系添加到arp缓存表中。
+实例复现这里使用一台winxp和kali虚拟机
+ip分别是192.168.18.131,192.168.18.135
+
+
+这里我们为的是侦...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/19</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="系统总结">系统总结</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/01/18/无数字和字母的webshell/">
+            
+                <span>无数字和字母的webshell</span>
+        </a>
+        <div class="abstract-content">
+            先看一下这个例子
+&lt;?php
+if(!preg_match(&apos;/[a-z0-9]/is&apos;,$_GET[&apos;shell&apos;])) {
+  eval($_GET[&apos;shell&apos;]);
+}
+这算是一个极限利用了，要求我们不用数字和字母构造webshell
+这样的问题我们可以类比于各类变形的一句话木马，用异或的方式得到一个新的字符，这时我们就可以用非数字和字母的字符串将数字或者字母异或出来
+异或例如这个
+&lt;?php
+$_=(&apos;%01&apos;^&apos;`&apos;).(&apos;%13&apos;^&apos...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/18</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="代码审计">代码审计</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href="/2019/01/17/命令执行漏洞小结/">
             
                 <span>命令执行漏洞小结</span>
@@ -516,121 +750,10 @@ return file_get_contents($filename);
         </div>
     </article>
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/01/12/PHP反序列化总结/">
-            
-                <span>PHP反序列化总结</span>
-        </a>
-        <div class="abstract-content">
-            漏洞成因Demo：
-&lt;?php
-class A{
-public $target = &quot;demo&quot;;
-function __destruct(){
-        echo &quot;destructing!&lt;br/&gt;&quot;;
-        echo $this-&gt;target.&quot;&lt;br/&gt;&quot;;
-        echo &quot;destructed!&lt;br/&gt;&quot;;
-}
-}
-$a = $_GET[&apos;test&apos;];
-$a_unser = unserialize(...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/12</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="反序列化">反序列化</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2019/01/11/emlog后台数据备份getshell/">
-            
-                <span>emlog后台数据备份getshell</span>
-        </a>
-        <div class="abstract-content">
-            此漏洞适用版本&lt;= 5.1.2
-漏洞原理是通过在恢复数据库备份时插入恶意代码，以达到getshell的目的
-首先登陆到博客后台，进入数据备份和恢复功能
-
-点击开始备份，我们会在本地生成一个数据库文件
-要getshell，我们可以在得到的数据库文件中插入生成恶意文件的代码，但是我们需要知道该站点在服务器中的绝对路径
-经过审计发现在admin/index.php中存在如下代码
-这样我们只需访问127.0.0.1/admin/index.php?action=phpinfo就可以触发phpinfo()函数进而得到绝对路径了
-
-有了绝对路径我们就可以在数据库备份文件中插入如下代码
-
-这里调...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/11</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="漏洞复现">漏洞复现</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href="/2018/11/30/pwn简单栈溢出/">
-            
-                <span>pwn简单栈溢出</span>
-        </a>
-        <div class="abstract-content">
-            作为队伍里稍微会一点逆向的小白，开坑pwn也确实遇到了许多问题，暴露出很多基础知识的欠缺，直至编写本文时，编者从未在任何比赛中触碰过pwn，更多的时候是对pwn深深的“恐惧”，这也是许多人的通病，也导致精通pwn的人都被业界称为“pwn爷爷”甚至“pwn祖宗”，可见pwn在ctf领域中是一座冰山，很少有人触及，小编由于在最近的几场比赛中深深被pwn拖了后腿，因此决定在闲暇之余会一会这座“冰山”,以后的几期中，小编将记录下自己学习的历程，希望能在二进制这方面有所收获，也希望正在阅读本文的你能绕过小编踩过的坑。
-今天记录一下开坑的第一个程序，虽然程序很简单，但是收获了不少东西
-首先我们拿到一...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/11/30</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class="abstract-tags">
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags="pwn">pwn</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/">&#60; PREV</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+        <a class="extend prev" rel="prev" href="/">&#60; PREV</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">NEXT &#62;</a>
     </nav>
     
 </main>
@@ -1018,9 +1141,89 @@ $a_unser = unserialize(...
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 17
+        Total : 23
         </div>
         <!-- search  -->
         
@@ -1036,12 +1239,42 @@ $a_unser = unserialize(...
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">02/08</span><a class="archive-post-title" href="/2019/02/08/HTTP简介/">HTTP简介</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/08</span><a class="archive-post-title" href="/2019/02/08/浅谈ssrf绕过/">浅谈ssrf绕过</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/31</span><a class="archive-post-title" href="/2019/01/31/安恒杯1月赛wp/">安恒杯1月赛wp</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/30</span><a class="archive-post-title" href="/2019/01/30/RedHat-2017-pwn1题目复现/">RedHat 2017-pwn1题目复现</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/29</span><a class="archive-post-title" href="/2019/01/29/pwn之shellcode编写/">pwn之shellcode编写</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">01/28</span><a class="archive-post-title" href="/2019/01/28/CTF中常出现的PHP函数/">CTF中常出现的PHP函数</a>
         </li>
     
     
         <li class="archive-post-item">
             <span class="archive-post-date">01/27</span><a class="archive-post-title" href="/2019/01/27/php反序列化pop链的构造/">php反序列化pop链的构造</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/26</span><a class="archive-post-title" href="/2019/01/26/HGAME-2019-week1-writeup/">HGAME 2019-week1 writeup</a>
         </li>
     
     
@@ -1133,19 +1366,23 @@ $a_unser = unserialize(...
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name" data-tags="CTF"><span class="iconfont-archer">&#xe606;</span>CTF</span>
+    
         <span class="sidebar-tag-name" data-tags="系统总结"><span class="iconfont-archer">&#xe606;</span>系统总结</span>
     
         <span class="sidebar-tag-name" data-tags="代码审计"><span class="iconfont-archer">&#xe606;</span>代码审计</span>
     
-        <span class="sidebar-tag-name" data-tags="CTF"><span class="iconfont-archer">&#xe606;</span>CTF</span>
+        <span class="sidebar-tag-name" data-tags="ctf"><span class="iconfont-archer">&#xe606;</span>ctf</span>
     
         <span class="sidebar-tag-name" data-tags="反序列化"><span class="iconfont-archer">&#xe606;</span>反序列化</span>
+    
+        <span class="sidebar-tag-name" data-tags="pwn"><span class="iconfont-archer">&#xe606;</span>pwn</span>
     
         <span class="sidebar-tag-name" data-tags="读书心得"><span class="iconfont-archer">&#xe606;</span>读书心得</span>
     
         <span class="sidebar-tag-name" data-tags="漏洞复现"><span class="iconfont-archer">&#xe606;</span>漏洞复现</span>
     
-        <span class="sidebar-tag-name" data-tags="pwn"><span class="iconfont-archer">&#xe606;</span>pwn</span>
+        <span class="sidebar-tag-name" data-tags="pwn，CTF"><span class="iconfont-archer">&#xe606;</span>pwn，CTF</span>
     
         <span class="sidebar-tag-name" data-tags="总结"><span class="iconfont-archer">&#xe606;</span>总结</span>
     
