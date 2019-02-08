@@ -346,34 +346,121 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href="/2019/01/26/HGAME-2019-week1-writeup/">
+        <a class="abstract-title" href="/2019/01/31/安恒杯1月赛wp/">
             
-                <span>HGAME 2019-week1 writeup</span>
+                <span>安恒杯1月赛wp</span>
         </a>
         <div class="abstract-content">
-            web谁吃了我的flag题目是考察备份文件的恢复，将.index.html.swp下载下来，然后使用命令vim -r index.html即可恢复文件查看到flag
-
-换头大作战在响应头出多次按照提示变换，最后得到flag
-
-very easy web题目代码如下
-&lt;?php
-error_reporting(0);
-include(&quot;flag.php&quot;);
-
-if(strpos(&quot;vidar&quot;,$_GET[&apos;id&apos;])!==FALSE)
-  die(&quot;&lt;p&gt;干巴爹&lt;/p&gt;&quot;);
-...
+            webbabygo题目源码
+&lt;?php  
+@error_reporting(1); 
+include &apos;flag.php&apos;;
+class baby 
+{   
+    protected $skyobj;  
+    public $aaa;
+    public $bbb;
+    function __construct() 
+    {      
+        $this-&gt;skyobj = new sec;
+    }  
+    function __toString()      
+    {          
+        if (...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/26</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/31</span>
             </div>
             <!-- tags  -->
             
             <div class="abstract-tags">
     
-        <a class="post-tag" href="javascript:void(0);" data-tags="ctf">ctf</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="CTF">CTF</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/01/28/CTF中常出现的PHP函数/">
+            
+                <span>CTF中常出现的PHP函数</span>
+        </a>
+        <div class="abstract-content">
+            文章部分内容来源于网络
+strcmpstrcmp(a1，a2)函数用来比较两个字符串是否相等的，比较的是对应字符的ascii码，如果相等返回0，当a1的ascii大于a2的返回小于0，a1的ascii码小于a2的，返回大于0.
+但是这个函数是存在漏洞的，我们知道这个函数是用来比较字符串的，但是当我们传入为数组是，那变成字符串和数组进行比较了，因此php在5.2之前，默认返回的-1，5.2版本之后返回0.因此有时我们便可以利用这个漏洞
+demo：
+&lt;?php
+  error_reporting();
+  $flag=$_GET[&apos;flag&apos;];
+  if(strc...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/28</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="CTF">CTF</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href="/2019/01/13/2018安恒12月赛复现/">
+            
+                <span>2018安恒12月赛复现</span>
+        </a>
+        <div class="abstract-content">
+            WEBeasy题目是如下代码
+&lt;?php  
+@error_reporting(1); 
+include &apos;flag.php&apos;;
+class baby 
+{   
+public $file;
+function __toString()  
+{  
+if(isset($this-&gt;file)) 
+{
+$filename = &quot;./{$this-&gt;file}&quot;;
+if (file_get_contents($filename)) 
+{  
+return file_get_contents($filename); 
+} 
+} 
+}  
+...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/01/13</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class="abstract-tags">
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="CTF">CTF</a>
     
 </div>
             
@@ -895,15 +982,15 @@ if(strpos(&quot;vidar&quot;,$_GET[&apos;id&apos;])!==FALSE)
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name" data-tags="CTF"><span class="iconfont-archer">&#xe606;</span>CTF</span>
-    
         <span class="sidebar-tag-name" data-tags="系统总结"><span class="iconfont-archer">&#xe606;</span>系统总结</span>
-    
-        <span class="sidebar-tag-name" data-tags="代码审计"><span class="iconfont-archer">&#xe606;</span>代码审计</span>
     
         <span class="sidebar-tag-name" data-tags="ctf"><span class="iconfont-archer">&#xe606;</span>ctf</span>
     
+        <span class="sidebar-tag-name" data-tags="CTF"><span class="iconfont-archer">&#xe606;</span>CTF</span>
+    
         <span class="sidebar-tag-name" data-tags="反序列化"><span class="iconfont-archer">&#xe606;</span>反序列化</span>
+    
+        <span class="sidebar-tag-name" data-tags="代码审计"><span class="iconfont-archer">&#xe606;</span>代码审计</span>
     
         <span class="sidebar-tag-name" data-tags="pwn"><span class="iconfont-archer">&#xe606;</span>pwn</span>
     
