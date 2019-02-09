@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-circle.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="转载文章,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="代码审计（Code audit）是一种以发现程序错误，安全漏洞和违反程序规范为目标的源代码分析。 学习代码审计的目标是能够独立完成对代码安全监测。其通用的思路有：  通读全文代码，从功能函数代码开始阅读，例如include文件夹下的common_fun.php，或者有类似关键字的文件。  看配置文件，带有config关键字的文件，找到mysql.class.php文件的connect()函数，查看">
+<meta name="keywords" content="转载文章">
+<meta property="og:type" content="article">
+<meta property="og:title" content="转载-PHP代码审计">
+<meta property="og:url" content="https://yml-sec.top/2019/02/09/转载-PHP代码审计/index.html">
+<meta property="og:site_name" content="yemoli&#39;s blog">
+<meta property="og:description" content="代码审计（Code audit）是一种以发现程序错误，安全漏洞和违反程序规范为目标的源代码分析。 学习代码审计的目标是能够独立完成对代码安全监测。其通用的思路有：  通读全文代码，从功能函数代码开始阅读，例如include文件夹下的common_fun.php，或者有类似关键字的文件。  看配置文件，带有config关键字的文件，找到mysql.class.php文件的connect()函数，查看">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-09T14:28:18.379Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="转载-PHP代码审计">
+<meta name="twitter:description" content="代码审计（Code audit）是一种以发现程序错误，安全漏洞和违反程序规范为目标的源代码分析。 学习代码审计的目标是能够独立完成对代码安全监测。其通用的思路有：  通读全文代码，从功能函数代码开始阅读，例如include文件夹下的common_fun.php，或者有类似关键字的文件。  看配置文件，带有config关键字的文件，找到mysql.class.php文件的connect()函数，查看">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://yml-sec.top/2019/02/09/转载-PHP代码审计/">
+
+
+
+
+
+  <title>转载-PHP代码审计 | yemoli's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">yemoli's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2019/02/09/转载-PHP代码审计/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="夜莫离、">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yemoli's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">转载-PHP代码审计</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-09T22:08:48+08:00">
+                2019-02-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.8k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>代码审计（Code audit）是一种以发现程序错误，安全漏洞和违反程序规范为目标的源代码分析。</p>
+<p>学习代码审计的目标是能够独立完成对代码安全监测。其通用的思路有：</p>
+<ul>
+<li><p>通读全文代码，从功能函数代码开始阅读，例如include文件夹下的common_fun.php，或者有类似关键字的文件。</p>
+</li>
+<li><p>看配置文件，带有config关键字的文件，找到mysql.class.php文件的connect()函数，查看在数据库连接时是否出现漏洞。</p>
+</li>
+<li><p>继续跟读首页文件index.php，了解程序运作时调用了哪些函数和文件 以index.php文件作为标线，一层一层去扩展阅读所包含的文件，了解其功能，之后进入其功能文件夹的首页文件，进行扩展阅读。</p>
+</li>
+</ul>
+<h1 id="一、输入输出验证"><a href="#一、输入输出验证" class="headerlink" title="一、输入输出验证"></a>一、输入输出验证</h1><p>用户的一切输入都是有害的，大多数漏洞的形成原因主要都是未对输入数据进行安全验证或对输出数据未经过安全处理。</p>
+<p>所以我们需要针对输入输出数据进行以下的安全检查：</p>
+<ol>
+<li><p>对数据进行精确匹配</p>
+</li>
+<li><p>接受白名单的数据</p>
+</li>
+<li><p>拒绝黑名单的数据</p>
+</li>
+<li><p>对匹配黑名单的数据进行编码</p>
+</li>
+</ol>
+<p>在PHP中，能够由用户输入的变量有：</p>
+<pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$_SERVER</span><br><span class="line">$_GET</span><br><span class="line">$_POST</span><br><span class="line">$_COOKIE</span><br><span class="line">$_REQUEST</span><br><span class="line">$_FILES</span><br><span class="line">$_ENV</span><br><span class="line">$_HTTP_COOKIE_VARS</span><br><span class="line">$_HTTP_ENV_VARS</span><br><span class="line">$_HTTP_GET_VARS</span><br><span class="line">$_HTTP_POST_FILES</span><br><span class="line">$_HTTP_POST_VARS</span><br><span class="line">$_HTTP_SERVER_VARS</span><br></pre></td></tr></table></figure>
+</code></pre><p>我们需要针对这些函数进行必要的安全检查。</p>
+<h2 id="1-XSS"><a href="#1-XSS" class="headerlink" title="1. XSS"></a>1. XSS</h2><p>反射型XSS出现在接受用户提交的变量后进行处理，直接输出显示给酷护短，存储型XSS出现在用户提交的变量进行处理后存储到数据库中，再从数据库中读取这条信息输出到客户端。</p>
+<p>对于反射型XSS，应当在当前的PHP页面检查变量被提交时是否经过了安全检查，是否在当前的PHP页面有立即显示。</p>
+<p>对于存储型XSS，首先对于输入的数据进行安全检查后再写入数据库，在输出显示时是否有安全检查。</p>
+<p>防御策略：</p>
+<p>对输入的数据进行严格的匹配，过滤所有的非法字符进行过滤。</p>
+<p>对于输出的数据进行HTML编码，</p>
+<pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt; → &amp;lt;</span><br><span class="line">&gt; → &amp;gt;</span><br><span class="line">( → &amp;<span class="comment">#40;</span></span><br><span class="line">) → &amp;<span class="comment">#41;</span></span><br><span class="line"><span class="comment"># → &amp;#35</span></span><br><span class="line">&amp; → &amp;amp;</span><br><span class="line"><span class="string">" → &amp;quot;</span></span><br><span class="line"><span class="string">’ → &amp;apos;</span></span><br><span class="line"><span class="string">` → %60</span></span><br></pre></td></tr></table></figure>
+</code></pre><h2 id="2-SQL注入"><a href="#2-SQL注入" class="headerlink" title="2.SQL注入"></a>2.SQL注入</h2><p>SQL注入关系到的是数据库安全，所以对于用户的恶意输入必须做严格的过滤。</p>
+<p>在SQL注入攻击中，一般会用到 ’、select、insert、delete、from、=、in、update等关键字，需要针对这些字符进行过滤，要查看传递的变量参数是否用户可控制，以及它们是否做到安全检查。</p>
+<p>防御策略：</p>
+<p>使用参数化查询</p>
+<h2 id="3-文件上传"><a href="#3-文件上传" class="headerlink" title="3. 文件上传"></a>3. 文件上传</h2><p>任意文件上传可能会造成网站getshell，也是一个非常危险的功能，对于文件上传也需要非常警惕。</p>
+<p>PHP的文件上传通常会使用move_uploaded_file()函数，在文件上传的位置也需要进行上传文件的检测，做好安全检查。</p>
+<p>防御策略：</p>
+<p>使用白名单检测上传文件后缀。</p>
+<p>上传后随机生成文件名称。</p>
+<p>上传目录限制文件不可执行。</p>
+<p>注意防范%00进行的截断。</p>
+<h2 id="4-文件包含"><a href="#4-文件包含" class="headerlink" title="4. 文件包含"></a>4. 文件包含</h2><p>文件包含漏洞可以读取敏感文件，配合文件上传功能可以得到webshell,远程文件包含可以直接远程包含shell。</p>
+<p>PHP可能出现文件包含的函数：include、include_once、require、require_once、show_source、highlight_file、readfile、file_get_contents、fopen、file。</p>
+<p>防御策略：</p>
+<p>对输入数据进行精确匹配。</p>
+<p>过滤参数中的/、..等字符。</p>
+<h2 id="5-命令注入"><a href="#5-命令注入" class="headerlink" title="5. 命令注入"></a>5. 命令注入</h2><p>php执行系统命令可以使用以下几个函数：system、exec、passthru、“、shell_exec、popen、proc_open、pcntl_exec。</p>
+<p>我们通过在全部程序文件中搜索这些函数，确定函数的参数是否会因为外部提交而改变，检查这些参数是否有经过安全处理。</p>
+<p>防御策略：</p>
+<p>使用自定义函数或函数库来替代外部命令的功能。</p>
+<p>使用escapeshellarg函数来处理命令参数。</p>
+<p>使用safe_mode_exec_dir指定可执行文件的路径。</p>
+<h2 id="6-代码注入"><a href="#6-代码注入" class="headerlink" title="6. 代码注入"></a>6. 代码注入</h2><p>PHP可能出现代码注入的函数：eval、preg_replace+/e、assert、call_user_func、call_user_func_array、create_function。</p>
+<p>查找程序中程序中使用这些函数的地方，检查提交变量是否用户可控，有无做输入验证</p>
+<p>防御策略：</p>
+<p>输入数据精确匹配。</p>
+<p>使用白名单过滤可执行的函数。</p>
+<h2 id="7-文件管理"><a href="#7-文件管理" class="headerlink" title="7. 文件管理"></a>7. 文件管理</h2><p>PHP的用于文件管理的函数，如果输入变量可由用户提交，程序中也没有做数据验证，可能成为高危漏洞。我们应该在程序中搜索如下函数：copy、rmdir、unlink、delete、fwrite、chmod、fgetc、 fgetcsv、fgets、fgetss、file、file_get_contents、fread、readfile、ftruncate、 file_put_contents、fputcsv、fputs，但通常PHP中每一个文件操作函数都可能是危险的。</p>
+<p>防御策略：</p>
+<p>对提交数据进行严格匹配。</p>
+<p>限定文件可操作的目录。</p>
+<h2 id="8-变量覆盖"><a href="#8-变量覆盖" class="headerlink" title="8. 变量覆盖"></a>8. 变量覆盖</h2><p>PHP的变量覆盖会出现在以下集中情况：</p>
+<p>遍历初始化变量</p>
+<p>函数覆盖变量parse_str、mb_parse_str、import_request_variables</p>
+<p>3.Register_globals=ON时，GET方式提交变量会直接覆盖</p>
+<p>防御策略：</p>
+<p>设置Register_globals=OFF。</p>
+<p>不使用覆盖变量的函数来获取变量。</p>
+<h1 id="二、会话安全"><a href="#二、会话安全" class="headerlink" title="二、会话安全"></a>二、会话安全</h1><h2 id="1-HTTPOnly设置"><a href="#1-HTTPOnly设置" class="headerlink" title="1. HTTPOnly设置"></a>1. HTTPOnly设置</h2><p>打开该指令可以有效预防通过XSS攻击劫持会话ID。</p>
+<h2 id="2-domain设置"><a href="#2-domain设置" class="headerlink" title="2. domain设置"></a>2. domain设置</h2><p>检查session.cookie_domain是否只包含本域，如果是父域，则其他子域能够获取本域的cookies。</p>
+<h2 id="3-path设置"><a href="#3-path设置" class="headerlink" title="3. path设置"></a>3. path设置</h2><p>检查session.cookie_path，如果网站本身应用在/app，则path必须设置为/app/，才能保证安全。</p>
+<h2 id="4-cookies持续时间"><a href="#4-cookies持续时间" class="headerlink" title="4. cookies持续时间"></a>4. cookies持续时间</h2><p>检查session.cookie_lifetime，如果时间设置过程过长，即使用户关闭浏览器，攻击者也会危害到帐户安全。</p>
+<h2 id="5-secure设置"><a href="#5-secure设置" class="headerlink" title="5. secure设置"></a>5. secure设置</h2><p>如果使用HTTPS，那么应该设置session.cookie_secure=ON，确保使用HTTPS来传输cookies。</p>
+<h2 id="6-session固定"><a href="#6-session固定" class="headerlink" title="6. session固定"></a>6. session固定</h2><p>如果当权限级别改变时（例如核实用户名和密码后，普通用户提升到管理员），我们就应该修改即将重新生成的会话ID，否则程序会面临会话固定攻击的风险。</p>
+<h2 id="7-CSRF"><a href="#7-CSRF" class="headerlink" title="7. CSRF"></a>7. CSRF</h2><p>跨站请求伪造攻击，是攻击者伪造一个恶意请求链接，通过各种方式让正常用户访问后，会以用户的身份执行这些恶意的请求。我们应该对比较重要的程序模块，比如修改用户密码，添加用户的功能进行审查，检查有无使用一次性令牌防御csrf攻击。</p>
+<h1 id="三、加密"><a href="#三、加密" class="headerlink" title="三、加密"></a>三、加密</h1><h2 id="1-明文存储密码"><a href="#1-明文存储密码" class="headerlink" title="1. 明文存储密码"></a>1. 明文存储密码</h2><p>采用明文的形式存储密码会严重威胁到用户、应用程序、系统安全。</p>
+<h2 id="2-密码弱加密"><a href="#2-密码弱加密" class="headerlink" title="2. 密码弱加密"></a>2. 密码弱加密</h2><p>使用容易破解的加密算法，MD5加密已经部分可以利用md5破解网站来破解。</p>
+<h2 id="3-密码存储在攻击者能访问到的文件"><a href="#3-密码存储在攻击者能访问到的文件" class="headerlink" title="3. 密码存储在攻击者能访问到的文件"></a>3. 密码存储在攻击者能访问到的文件</h2><p>例如：保存密码在txt、ini、conf、inc、xml等文件中，或者直接写在HTML注释中。</p>
+<h1 id="四、认证和授权"><a href="#四、认证和授权" class="headerlink" title="四、认证和授权"></a>四、认证和授权</h1><h2 id="1-用户认证"><a href="#1-用户认证" class="headerlink" title="1. 用户认证"></a>1. 用户认证</h2><p>检查代码进行用户认证的位置，是否能够绕过认证，例如：登录代码可能存在表单注入。</p>
+<p>检查登录代码有无使用验证码等，防止暴力破解的手段。</p>
+<h2 id="2-函数或文件的未认证调用"><a href="#2-函数或文件的未认证调用" class="headerlink" title="2. 函数或文件的未认证调用"></a>2. 函数或文件的未认证调用</h2><p>一些管理页面是禁止普通用户访问的，有时开发者会忘记对这些文件进行权限验证，导致漏洞发生</p>
+<p>某些页面使用参数调用功能，没有经过权限验证，比如index.php?action=upload。</p>
+<h2 id="3-密码硬编码"><a href="#3-密码硬编码" class="headerlink" title="3. 密码硬编码"></a>3. 密码硬编码</h2><p>有的程序会把数据库链接账号和密码，直接写到数据库链接函数中。</p>
+<h1 id="五、PHP危险函数"><a href="#五、PHP危险函数" class="headerlink" title="五、PHP危险函数"></a>五、PHP危险函数</h1><h2 id="1-缓冲区溢出"><a href="#1-缓冲区溢出" class="headerlink" title="1. 缓冲区溢出"></a>1. 缓冲区溢出</h2><p>（1）confirm_phpdoc_compiled</p>
+<p>影响版本：</p>
+<p>phpDocumentor phpDocumentor 1.3.1</p>
+<p>phpDocumentor phpDocumentor 1.3 RC4</p>
+<p>phpDocumentor phpDocumentor 1.3 RC3</p>
+<p>phpDocumentor phpDocumentor 1.2.3</p>
+<p>phpDocumentor phpDocumentor 1.2.2</p>
+<p>phpDocumentor phpDocumentor 1.2.1</p>
+<p>phpDocumentor phpDocumentor 1.2</p>
+<p>（2）mssql_pconnect/mssql_connect</p>
+<p>影响版本：PHP &lt; = 4.4.6</p>
+<p>（3）crack_opendict</p>
+<p>影响版本：PHP = 4.4.6</p>
+<p>（4）snmpget</p>
+<p>影响版本：PHP &lt;= 5.2.3</p>
+<p>（5）ibase_connect</p>
+<p>影响版本：PHP = 4.4.6</p>
+<p>（6）unserialize</p>
+<p>影响版本：PHP 5.0.2、PHP 5.0.1、PHP 5.0.0、PHP 4.3.9、PHP 4.3.8、PHP 4.3.7、PHP 4.3.6、PHP 4.3.3、PHP 4.3.2、PHP 4.3.1、PHP 4.3.0、PHP 4.2.3、PHP 4.2.2、PHP 4.2.1、PHP 4.2.0、PHP 4.2-dev、PHP 4.1.2、PHP 4.1.1、PHP 4.1.0、PHP 4.1、PHP 4.0.7、PHP 4.0.6、PHP 4.0.5、PHP 4.0.4、PHP 4.0.3pl1、PHP 4.0.3、PHP 4.0.2、PHP 4.0.1pl2、PHP 4.0.1pl1、PHP 4.0.1</p>
+<h2 id="2-session-destroy-删除文件漏洞"><a href="#2-session-destroy-删除文件漏洞" class="headerlink" title="2. session_destroy()删除文件漏洞"></a>2. session_destroy()删除文件漏洞</h2><p>影响版本：不祥，需要具体测试。</p>
+<p>测试代码如下：</p>
+<pre><code><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">session_save_path(<span class="string">'./'</span>);</span><br><span class="line">session_start();</span><br><span class="line"><span class="keyword">if</span>($_GET[<span class="string">'del'</span>]) &#123;</span><br><span class="line">session_unset();</span><br><span class="line">session_destroy();</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">$_SESSION[<span class="string">'do'</span>]=<span class="number">1</span>;</span><br><span class="line">echo(session_id());</span><br><span class="line">print_r($_SESSION);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+</code></pre><p>当我们提交cookieHPSESSIONID=/../1.php，相当于删除了此文件。</p>
+<h2 id="3-unset-zend-hash-del-key-or-index漏洞"><a href="#3-unset-zend-hash-del-key-or-index漏洞" class="headerlink" title="3. unset()-zend_hash_del_key_or_index漏洞"></a>3. unset()-zend_hash_del_key_or_index漏洞</h2><p>zend_hash_del_key_or_index PHP4小于4.4.3和PHP5小于5.1.3，可能会导致zend_hash_del删除了错误的元素。当PHP的unset()函数被调用时，它会阻止变量被unset。</p>
+<h1 id="六、信息泄露"><a href="#六、信息泄露" class="headerlink" title="六、信息泄露"></a>六、信息泄露</h1><h2 id="phpinfo"><a href="#phpinfo" class="headerlink" title="phpinfo()"></a>phpinfo()</h2><p>如果攻击者可以浏览到程序中调用phpinfo显示的环境信息，会为进一步攻击提供便利。</p>
+<h1 id="七、PHP环境"><a href="#七、PHP环境" class="headerlink" title="七、PHP环境"></a>七、PHP环境</h1><h2 id="1-open-basedir设置"><a href="#1-open-basedir设置" class="headerlink" title="1. open_basedir设置"></a>1. open_basedir设置</h2><p>open_basedir能限制应用程序能访问的目录，检查有没有对open_basedir进行设置，当然有的通过web服务器来设置，例如：apache的php_admin_value，nginx+fcgi通过conf来控制php设置。</p>
+<h2 id="2-allow-url-fopen设置"><a href="#2-allow-url-fopen设置" class="headerlink" title="2. allow_url_fopen设置"></a>2. allow_url_fopen设置</h2><p>如果allow_url_fopen=ON，那么php可以读取远程文件进行操作，这个容易被攻击者利用。</p>
+<h2 id="3-allow-url-include设置"><a href="#3-allow-url-include设置" class="headerlink" title="3. allow_url_include设置"></a>3. allow_url_include设置</h2><p>如果allow_url_include=ON，那么php可以包含远程文件，会导致严重漏洞。</p>
+<h2 id="4-safe-mode-exec-dir设置"><a href="#4-safe-mode-exec-dir设置" class="headerlink" title="4. safe_mode_exec_dir设置"></a>4. safe_mode_exec_dir设置</h2><p>这个选项能控制php可调用的外部命令的目录，如果PHP程序中有调用外部命令，那么指定外部命令的目录，能控制程序的风险。</p>
+<h2 id="5-magic-quote-gpc设置"><a href="#5-magic-quote-gpc设置" class="headerlink" title="5. magic_quote_gpc设置"></a>5. magic_quote_gpc设置</h2><p>这个选项能转义提交给参数中的特殊字符，建议设置magic_quote_gpc=ON。</p>
+<h2 id="6-register-globals设置"><a href="#6-register-globals设置" class="headerlink" title="6. register_globals设置"></a>6. register_globals设置</h2><p>开启这个选项，将导致php对所有外部提交的变量注册为全局变量，后果相当严重。</p>
+<h2 id="7-safe-mode设置"><a href="#7-safe-mode设置" class="headerlink" title="7. safe_mode设置"></a>7. safe_mode设置</h2><p>safe_mode是PHP的重要安全特性，建议开启。</p>
+<h2 id="8-session-use-trans-sid设置"><a href="#8-session-use-trans-sid设置" class="headerlink" title="8. session_use_trans_sid设置"></a>8. session_use_trans_sid设置</h2><p>如果启用 session.use_trans_sid，会导致 PHP 通过 URL 传递会话 ID，这样一来，攻击者就更容易劫持当前会话，或者欺骗用户使用已被攻击者控制的现有会话。</p>
+<h2 id="9-display-errors设置"><a href="#9-display-errors设置" class="headerlink" title="9. display_errors设置"></a>9. display_errors设置</h2><p>如果启用此选项，PHP将输出所有的错误或警告信息，攻击者能利用这些信息获取web根路径等敏感信息。</p>
+<h2 id="10-expose-php设置"><a href="#10-expose-php设置" class="headerlink" title="10. expose_php设置"></a>10. expose_php设置</h2><p>如果启用 expose_php 选项，那么由 PHP 解释器生成的每个响应都会包含主机系统上所安装的 PHP 版本。了解到远程服务器上运行的 PHP 版本后，攻击者就能针对系统枚举已知的盗取手段，从而大大增加成功发动攻击的机会。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="夜莫离、 WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="夜莫离、 Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/转载文章/" rel="tag"># 转载文章</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/08/HTTP简介/" rel="next" title="HTTP简介">
+                <i class="fa fa-chevron-left"></i> HTTP简介
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">夜莫离、</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yemoli" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.baidu.com/" title="Baidu" target="_blank">Baidu</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、输入输出验证"><span class="nav-number">1.</span> <span class="nav-text">一、输入输出验证</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-XSS"><span class="nav-number">1.1.</span> <span class="nav-text">1. XSS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-SQL注入"><span class="nav-number">1.2.</span> <span class="nav-text">2.SQL注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-文件上传"><span class="nav-number">1.3.</span> <span class="nav-text">3. 文件上传</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-文件包含"><span class="nav-number">1.4.</span> <span class="nav-text">4. 文件包含</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-命令注入"><span class="nav-number">1.5.</span> <span class="nav-text">5. 命令注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-代码注入"><span class="nav-number">1.6.</span> <span class="nav-text">6. 代码注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-文件管理"><span class="nav-number">1.7.</span> <span class="nav-text">7. 文件管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-变量覆盖"><span class="nav-number">1.8.</span> <span class="nav-text">8. 变量覆盖</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、会话安全"><span class="nav-number">2.</span> <span class="nav-text">二、会话安全</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-HTTPOnly设置"><span class="nav-number">2.1.</span> <span class="nav-text">1. HTTPOnly设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-domain设置"><span class="nav-number">2.2.</span> <span class="nav-text">2. domain设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-path设置"><span class="nav-number">2.3.</span> <span class="nav-text">3. path设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-cookies持续时间"><span class="nav-number">2.4.</span> <span class="nav-text">4. cookies持续时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-secure设置"><span class="nav-number">2.5.</span> <span class="nav-text">5. secure设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-session固定"><span class="nav-number">2.6.</span> <span class="nav-text">6. session固定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-CSRF"><span class="nav-number">2.7.</span> <span class="nav-text">7. CSRF</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、加密"><span class="nav-number">3.</span> <span class="nav-text">三、加密</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-明文存储密码"><span class="nav-number">3.1.</span> <span class="nav-text">1. 明文存储密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-密码弱加密"><span class="nav-number">3.2.</span> <span class="nav-text">2. 密码弱加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-密码存储在攻击者能访问到的文件"><span class="nav-number">3.3.</span> <span class="nav-text">3. 密码存储在攻击者能访问到的文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、认证和授权"><span class="nav-number">4.</span> <span class="nav-text">四、认证和授权</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-用户认证"><span class="nav-number">4.1.</span> <span class="nav-text">1. 用户认证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-函数或文件的未认证调用"><span class="nav-number">4.2.</span> <span class="nav-text">2. 函数或文件的未认证调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-密码硬编码"><span class="nav-number">4.3.</span> <span class="nav-text">3. 密码硬编码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五、PHP危险函数"><span class="nav-number">5.</span> <span class="nav-text">五、PHP危险函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-缓冲区溢出"><span class="nav-number">5.1.</span> <span class="nav-text">1. 缓冲区溢出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-session-destroy-删除文件漏洞"><span class="nav-number">5.2.</span> <span class="nav-text">2. session_destroy()删除文件漏洞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-unset-zend-hash-del-key-or-index漏洞"><span class="nav-number">5.3.</span> <span class="nav-text">3. unset()-zend_hash_del_key_or_index漏洞</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#六、信息泄露"><span class="nav-number">6.</span> <span class="nav-text">六、信息泄露</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#phpinfo"><span class="nav-number">6.1.</span> <span class="nav-text">phpinfo()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#七、PHP环境"><span class="nav-number">7.</span> <span class="nav-text">七、PHP环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-open-basedir设置"><span class="nav-number">7.1.</span> <span class="nav-text">1. open_basedir设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-allow-url-fopen设置"><span class="nav-number">7.2.</span> <span class="nav-text">2. allow_url_fopen设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-allow-url-include设置"><span class="nav-number">7.3.</span> <span class="nav-text">3. allow_url_include设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-safe-mode-exec-dir设置"><span class="nav-number">7.4.</span> <span class="nav-text">4. safe_mode_exec_dir设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-magic-quote-gpc设置"><span class="nav-number">7.5.</span> <span class="nav-text">5. magic_quote_gpc设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-register-globals设置"><span class="nav-number">7.6.</span> <span class="nav-text">6. register_globals设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-safe-mode设置"><span class="nav-number">7.7.</span> <span class="nav-text">7. safe_mode设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-session-use-trans-sid设置"><span class="nav-number">7.8.</span> <span class="nav-text">8. session_use_trans_sid设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-display-errors设置"><span class="nav-number">7.9.</span> <span class="nav-text">9. display_errors设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-expose-php设置"><span class="nav-number">7.10.</span> <span class="nav-text">10. expose_php设置</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">夜莫离、</span>
+
+  
+</div>
+
+
+  <!-- <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div> 
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>-->
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>

