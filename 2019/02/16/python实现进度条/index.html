@@ -86,23 +86,23 @@
 
 
 
-<meta name="description" content="最近在写python的项目，为了美观想加一个进度条，正好这里收集一下找到的众多可用例子 一12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061#!/usr/bin/env python3import timeclass Ind">
+<meta name="description" content="最近在写python的项目，为了美观想加一个进度条，正好这里收集一下找到的众多可用例子 因为只是装饰作用，就没收集带第三方库的代码 一12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061#!/usr/bin/env pytho">
 <meta name="keywords" content="代码收集">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python实现进度条">
 <meta property="og:url" content="https://yml-sec.top/2019/02/16/python实现进度条/index.html">
 <meta property="og:site_name" content="yemoli&#39;s blog">
-<meta property="og:description" content="最近在写python的项目，为了美观想加一个进度条，正好这里收集一下找到的众多可用例子 一12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061#!/usr/bin/env python3import timeclass Ind">
+<meta property="og:description" content="最近在写python的项目，为了美观想加一个进度条，正好这里收集一下找到的众多可用例子 因为只是装饰作用，就没收集带第三方库的代码 一12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061#!/usr/bin/env pytho">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://i.imgur.com/jMjcOVZ.gif">
 <meta property="og:image" content="https://i.imgur.com/HvE0T7Q.gif">
 <meta property="og:image" content="https://i.imgur.com/qbDWFft.gif">
 <meta property="og:image" content="https://i.imgur.com/qWxnp2Q.gif">
 <meta property="og:image" content="https://i.imgur.com/yegrcTY.gif">
-<meta property="og:updated_time" content="2019-02-16T14:23:52.609Z">
+<meta property="og:updated_time" content="2019-02-16T14:27:33.940Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python实现进度条">
-<meta name="twitter:description" content="最近在写python的项目，为了美观想加一个进度条，正好这里收集一下找到的众多可用例子 一12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061#!/usr/bin/env python3import timeclass Ind">
+<meta name="twitter:description" content="最近在写python的项目，为了美观想加一个进度条，正好这里收集一下找到的众多可用例子 因为只是装饰作用，就没收集带第三方库的代码 一12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061#!/usr/bin/env pytho">
 <meta name="twitter:image" content="https://i.imgur.com/jMjcOVZ.gif">
 
 
@@ -326,7 +326,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  401
+                  421
                 </span>
               
 
@@ -342,7 +342,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  2
                 </span>
               
             </div>
@@ -364,6 +364,7 @@
 
       
         <p>最近在写python的项目，为了美观想加一个进度条，正好这里收集一下找到的众多可用例子</p>
+<p>因为只是装饰作用，就没收集带第三方库的代码</p>
 <h2 id="一"><a href="#一" class="headerlink" title="一"></a>一</h2><pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Index</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, number=<span class="number">50</span>, decimal=<span class="number">2</span>)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :param decimal: 你保留的保留小数位</span></span><br><span class="line"><span class="string">        :param number: # 号的 个数</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        self.decimal = decimal</span><br><span class="line">        self.number = number</span><br><span class="line">        self.a = <span class="number">100</span> / number  <span class="comment"># 在百分比 为几时增加一个 # 号</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self, now, total)</span>:</span></span><br><span class="line">        <span class="comment"># 1. 获取当前的百分比数</span></span><br><span class="line">        percentage = self.percentage_number(now, total)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 2. 根据 现在百分比计算</span></span><br><span class="line">        well_num = int(percentage / self.a)</span><br><span class="line">        <span class="comment"># print("well_num: ", well_num, percentage)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 3. 打印字符进度条</span></span><br><span class="line">        progress_bar_num = self.progress_bar(well_num)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 4. 完成的进度条</span></span><br><span class="line">        result = <span class="string">"\r%s %s"</span> % (progress_bar_num, percentage)</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">percentage_number</span><span class="params">(self, now, total)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        计算百分比</span></span><br><span class="line"><span class="string">        :param now:  现在的数</span></span><br><span class="line"><span class="string">        :param total:  总数</span></span><br><span class="line"><span class="string">        :return: 百分</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">return</span> round(now / total * <span class="number">100</span>, self.decimal)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">progress_bar</span><span class="params">(self, num)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        显示进度条位置</span></span><br><span class="line"><span class="string">        :param num:  拼接的  “#” 号的</span></span><br><span class="line"><span class="string">        :return: 返回的结果当前的进度条</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="comment"># 1. "#" 号个数</span></span><br><span class="line">        well_num = <span class="string">"#"</span> * num</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 2. 空格的个数</span></span><br><span class="line">        space_num = <span class="string">" "</span> * (self.number - num)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'[%s%s]'</span> % (well_num, space_num)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">index = Index()</span><br><span class="line"></span><br><span class="line">start = <span class="number">371</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(start + <span class="number">1</span>):</span><br><span class="line">    print(index(i, start), end=<span class="string">''</span>)</span><br><span class="line">    time.sleep(<span class="number">0.01</span>)</span><br><span class="line">    <span class="comment"># \r 返回本行开头</span></span><br><span class="line">    <span class="comment"># end : python 结尾不加任何操作, 默认是空格</span></span><br></pre></td></tr></table></figure>
 </code></pre><p>效果图：</p>
 <p><img src="https://i.imgur.com/jMjcOVZ.gif" alt=""></p>
