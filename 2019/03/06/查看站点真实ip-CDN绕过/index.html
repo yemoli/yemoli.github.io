@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="项目,">
+  <meta name="keywords" content="系统总结,">
 
 
 
@@ -86,27 +86,20 @@
 
 
 
-<meta name="description" content="框架首发于 安恒网络空间安全讲武堂 :https://mp.weixin.qq.com/s/r5gc0nfids896thBIW7XFg 花了大半个寒假的时间，终于完成了一直想写的awd线下半自动框架，编写过程中学到了很多，也感谢一些师傅的指点，文末会分享部分原创核心函数 框架已在我自有服务器搭建的awd环境下经过数次调试，修补了绝大部分致命bug 开发思路： 框架整体结构|--main.py(主">
-<meta name="keywords" content="项目">
+<meta name="description" content="CDN（content delivery network 或 content distribution network）即内容分发网络。一些站点开启了CDN后就会隐藏掉自己的真实ip，在某些需要获取站点真实ip的工作中，这将是一个障碍，下面总结一下常见的获取站点真实ip的方法。 判断是否存在cdnping通过多地ping可以查到站点的IP地址，如果返回的ip地址不是相同的，基本可以判定存在cdn">
+<meta name="keywords" content="系统总结">
 <meta property="og:type" content="article">
-<meta property="og:title" content="置顶-项目发布-YML-AWD-FRAMEWORK">
-<meta property="og:url" content="https://yml-sec.top/2019/03/04/置顶-项目发布-YML-AWD-FRAMEWORK/index.html">
+<meta property="og:title" content="查看站点真实ip-CDN绕过">
+<meta property="og:url" content="https://yml-sec.top/2019/03/06/查看站点真实ip-CDN绕过/index.html">
 <meta property="og:site_name" content="yemoli&#39;s blog">
-<meta property="og:description" content="框架首发于 安恒网络空间安全讲武堂 :https://mp.weixin.qq.com/s/r5gc0nfids896thBIW7XFg 花了大半个寒假的时间，终于完成了一直想写的awd线下半自动框架，编写过程中学到了很多，也感谢一些师傅的指点，文末会分享部分原创核心函数 框架已在我自有服务器搭建的awd环境下经过数次调试，修补了绝大部分致命bug 开发思路： 框架整体结构|--main.py(主">
+<meta property="og:description" content="CDN（content delivery network 或 content distribution network）即内容分发网络。一些站点开启了CDN后就会隐藏掉自己的真实ip，在某些需要获取站点真实ip的工作中，这将是一个障碍，下面总结一下常见的获取站点真实ip的方法。 判断是否存在cdnping通过多地ping可以查到站点的IP地址，如果返回的ip地址不是相同的，基本可以判定存在cdn">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://i.imgur.com/n1e9dGx.gif">
-<meta property="og:image" content="https://i.imgur.com/uv1yySL.gif">
-<meta property="og:image" content="https://i.imgur.com/zG1Wruj.jpg">
-<meta property="og:image" content="https://i.imgur.com/AJ4ygEO.jpg">
-<meta property="og:image" content="https://i.imgur.com/mxTK5OS.jpg">
-<meta property="og:image" content="https://i.imgur.com/FBZNNEh.jpg">
-<meta property="og:image" content="https://i.imgur.com/DgdjvR9.jpg">
-<meta property="og:image" content="https://i.imgur.com/cAF95An.gif">
-<meta property="og:updated_time" content="2019-03-04T11:00:39.124Z">
+<meta property="og:image" content="https://i.imgur.com/prNxcq9.jpg">
+<meta property="og:updated_time" content="2019-03-06T13:22:06.619Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="置顶-项目发布-YML-AWD-FRAMEWORK">
-<meta name="twitter:description" content="框架首发于 安恒网络空间安全讲武堂 :https://mp.weixin.qq.com/s/r5gc0nfids896thBIW7XFg 花了大半个寒假的时间，终于完成了一直想写的awd线下半自动框架，编写过程中学到了很多，也感谢一些师傅的指点，文末会分享部分原创核心函数 框架已在我自有服务器搭建的awd环境下经过数次调试，修补了绝大部分致命bug 开发思路： 框架整体结构|--main.py(主">
-<meta name="twitter:image" content="https://i.imgur.com/n1e9dGx.gif">
+<meta name="twitter:title" content="查看站点真实ip-CDN绕过">
+<meta name="twitter:description" content="CDN（content delivery network 或 content distribution network）即内容分发网络。一些站点开启了CDN后就会隐藏掉自己的真实ip，在某些需要获取站点真实ip的工作中，这将是一个障碍，下面总结一下常见的获取站点真实ip的方法。 判断是否存在cdnping通过多地ping可以查到站点的IP地址，如果返回的ip地址不是相同的，基本可以判定存在cdn">
+<meta name="twitter:image" content="https://i.imgur.com/prNxcq9.jpg">
 
 
 
@@ -136,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="https://yml-sec.top/2019/03/04/置顶-项目发布-YML-AWD-FRAMEWORK/">
+  <link rel="canonical" href="https://yml-sec.top/2019/03/06/查看站点真实ip-CDN绕过/">
 
 
 
 
 
-  <title>置顶-项目发布-YML-AWD-FRAMEWORK | yemoli's blog</title>
+  <title>查看站点真实ip-CDN绕过 | yemoli's blog</title>
   
 
 
@@ -268,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2019/03/04/置顶-项目发布-YML-AWD-FRAMEWORK/">
+    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2019/03/06/查看站点真实ip-CDN绕过/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="夜莫离、">
@@ -285,7 +278,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">置顶-项目发布-YML-AWD-FRAMEWORK</h1>
+          <h1 class="post-title" itemprop="name headline">查看站点真实ip-CDN绕过</h1>
         
 
         <div class="post-meta">
@@ -297,8 +290,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-04T16:55:15+08:00">
-                2019-03-04
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-06T20:48:16+08:00">
+                2019-03-06
               </time>
             
 
@@ -329,7 +322,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1.4k
+                  487
                 </span>
               
 
@@ -345,7 +338,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  5
+                  1
                 </span>
               
             </div>
@@ -366,78 +359,17 @@
       
 
       
-        <p>框架首发于 安恒网络空间安全讲武堂 :<a href="https://mp.weixin.qq.com/s/r5gc0nfids896thBIW7XFg" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/r5gc0nfids896thBIW7XFg</a></p>
-<p>花了大半个寒假的时间，终于完成了一直想写的awd线下半自动框架，编写过程中学到了很多，也感谢一些师傅的指点，文末会分享部分原创核心函数</p>
-<p>框架已在我自有服务器搭建的awd环境下经过数次调试，修补了绝大部分致命bug</p>
-<p>开发思路：</p>
-<h1 id="框架整体结构"><a href="#框架整体结构" class="headerlink" title="框架整体结构"></a>框架整体结构</h1><pre><code>|--main.py(主函数及cmd交互模块)
-|
-|--code--addshell.py(自写第三方库文件)
-|
-|--data(存放用于加载数据的TXT文件)
-|
-|--html(用于存放站点源码)
-</code></pre><h1 id="开发思路和部分模块工作原理"><a href="#开发思路和部分模块工作原理" class="headerlink" title="开发思路和部分模块工作原理"></a>开发思路和部分模块工作原理</h1><h2 id="ip和shell存储模块"><a href="#ip和shell存储模块" class="headerlink" title="ip和shell存储模块"></a>ip和shell存储模块</h2><p>为了方便后续维护和新功能的添加，将以TXT文件读写的方式存储和读取ip和shell信息，方便在程序退出第二次使用时，快速加载已储存的ip和shell信息</p>
-<h2 id="ip录入模块"><a href="#ip录入模块" class="headerlink" title="ip录入模块"></a>ip录入模块</h2><p>由于线下awd赛事靶机ip的不同(正式比赛中可能是范围类ip，小型比赛中可能是范围类端口)，框架同时支持范围ip和端口的添加，两类例子如下</p>
-<p>ip范围：</p>
-<p><img src="https://i.imgur.com/n1e9dGx.gif" alt=""></p>
-<p>端口范围：</p>
-<p><img src="https://i.imgur.com/uv1yySL.gif" alt=""></p>
-<h2 id="不死马上传模块"><a href="#不死马上传模块" class="headerlink" title="不死马上传模块"></a>不死马上传模块</h2><p>不死马是awd线下赛中一大杀器，其删不掉，改不了的特性往往能在线下赛中打乱对手的比赛心态，为了提高框架在各类环境成功生成不死马的几率，作者使用了直接在靶机上命令执行的方式(网上流行的不死马PHP启动文件的方式其实对于框架编写来说更加简单，但是其触发过程中可能遭遇目标靶机waf的拦截)，在成功添加了基础shell后，可以直接使用不死马模块进行不死马上传，为适应各类基础shell，上传支持post和get两种方式。</p>
-<p>核心代码如图</p>
-<p><img src="https://i.imgur.com/zG1Wruj.jpg" alt=""></p>
-<h2 id="流量混淆模块"><a href="#流量混淆模块" class="headerlink" title="流量混淆模块"></a>流量混淆模块</h2><p>在获取站点源码结构时本来想利用自己的靶机做目录遍历然后返回路径列表，后来为了提升效率选择了将源码放在本地进行遍历，在使用模块前需要在库中attack_all()函数中修改框架所在路径，如图</p>
-<p><img src="https://i.imgur.com/AJ4ygEO.jpg" alt=""></p>
-<p>为了模拟真实流量，在每段正常发送的URL后都会添加？shell=(随机字符串)，已达到隐藏获取flag真实流量的目的，相应代码如图</p>
-<p><img src="https://i.imgur.com/mxTK5OS.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/FBZNNEh.jpg" alt=""></p>
-<h2 id="获取flag及提交模块"><a href="#获取flag及提交模块" class="headerlink" title="获取flag及提交模块"></a>获取flag及提交模块</h2><p>获取flag前需要再次添加shell，可以是生成的不死马shell，设置再次添加是为了当比赛中直接有可获取flag的后门时可以直接使用收发flag模块</p>
-<p>同时为了避免框架出现不可预期错误，程序会将最新flag保存在data目录下，在flag获取模块中，自动的过滤了重复的flag，减轻了框架在本地环境下的运行负担</p>
-<p><img src="https://i.imgur.com/DgdjvR9.jpg" alt=""></p>
-<h1 id="交互体验"><a href="#交互体验" class="headerlink" title="交互体验"></a>交互体验</h1><p>为了框架的运行稳定性，使用了cmd模块，cmd模块类型提供了一个创建命令行解析器的框架，在某部分函数出错时，不至于导致框架崩溃</p>
-<h1 id="使用方法和基本流程："><a href="#使用方法和基本流程：" class="headerlink" title="使用方法和基本流程："></a>使用方法和基本流程：</h1><p>命令集合：</p>
-<pre><code>Command          Tips
--------       -----------
-addip         添加shell ip和端口
-addshell      添加shell路径
-saveshell     保存shell到文件
-showip        查看ip列表
-removeip      移除某个ip
-clearip       清除ip列表
-saveip        将ip保存到文件
-updead        上传bash不死马文件(.crons.php)
-loadip        加载储存的IP列表
-loadwebshell  加载储存的shell列表
-liuliang      进行流量混淆(请先添加ip或loadip)
-addflagshell  添加获取flag的shell
-saveflagshell 将获取flag的shell储存到文件
-loadflagshell 加载储存的flagshell列表
-getflag       获取flag(demo: getflag-cat /flag  注意分隔符是&quot;-&quot;)
-exit          退出
-</code></pre><p>添加ip时需要添加ip地址和端口号，分割符为空格，两者皆支持范围添加，例如下面的例子</p>
-<pre><code>addip 10.10.10.10 80
-addip 10.10.10.10-19 80
-addip 10.10.10.10 80-90
-</code></pre><p>removeip 可以删除掉自己机器的ip地址</p>
-<p>确认ip地址无误后，可以通过saveip将其保存下来</p>
-<p>addshell命令可以添加对方机器上的预留shell，支持get和post格式，已下是输入例子</p>
-<pre><code>addshell /a.php c post
-addshell /a.php c get
-</code></pre><p>其中c为a.php的密码</p>
-<p>添加完成后通过saveshell保存下来</p>
-<p>如果希望维持权限，可以通过Updead上传不死马文件</p>
-<p>flagshell是特定的shell文件，因为用Python去实现菜刀的功能很麻烦，所以获取flag 暂时通过命令执行的方式进行获取,添加flagshell的语法和addshell一样</p>
-<p>getflag需要附带获取flag的命令，添加后会提示输入提交flag的地址，这时需要用yml-flag来代替flag当做命令输入，如下图的演示</p>
-<p><img src="https://i.imgur.com/cAF95An.gif" alt=""></p>
-<p>这样就可以进行自动获取和提交了</p>
-<p>关于流量混淆模块：</p>
-<p>本人项目是在E盘写的，所以要正常使用该模块需要放在E盘下，并将站点源码放入html目录</p>
-<p>进行流量混淆时，需要先加载ip列表（loadip）而后使用命令liuliang进行流量混淆</p>
-<p>为了程序更好的兼容，将程序打包成了exe可执行程序，无需安装Python环境即可使用</p>
-<p>同时也将源码全部打包，欢迎各位大佬完善和指点</p>
-<p>程序源码在github:<a href="https://github.com/yemoli/yml-AWD-FRAMEWORK" target="_blank" rel="noopener">https://github.com/yemoli/yml-AWD-FRAMEWORK</a></p>
-<p>已打包为exe格式的文件在百度网盘：<a href="https://pan.baidu.com/s/17UWvbfer8vlCcKw3NaJ2Eg" target="_blank" rel="noopener">https://pan.baidu.com/s/17UWvbfer8vlCcKw3NaJ2Eg</a></p>
-<p>提取码1q3j</p>
+        <p>CDN（content delivery network 或 content distribution network）即内容分发网络。一些站点开启了CDN后就会隐藏掉自己的真实ip，在某些需要获取站点真实ip的工作中，这将是一个障碍，下面总结一下常见的获取站点真实ip的方法。</p>
+<h1 id="判断是否存在cdn"><a href="#判断是否存在cdn" class="headerlink" title="判断是否存在cdn"></a>判断是否存在cdn</h1><h2 id="ping"><a href="#ping" class="headerlink" title="ping"></a>ping</h2><p>通过多地ping可以查到站点的IP地址，如果返回的ip地址不是相同的，基本可以判定存在cdn</p>
+<p>这里分享一个在线ping 的站点<a href="http://ping.chinaz.com/" target="_blank" rel="noopener">http://ping.chinaz.com/</a></p>
+<p><img src="https://i.imgur.com/prNxcq9.jpg" alt=""></p>
+<h2 id="ip域名强绑"><a href="#ip域名强绑" class="headerlink" title="ip域名强绑"></a>ip域名强绑</h2><p>我们可以使一个域名和我们当前所查到的ip强绑，如果页面发生变化，应该存在cdn，强绑只需要在本机的host文件中修改就可以了</p>
+<h1 id="寻找真实ip"><a href="#寻找真实ip" class="headerlink" title="寻找真实ip"></a>寻找真实ip</h1><h2 id="非大陆访问"><a href="#非大陆访问" class="headerlink" title="非大陆访问"></a>非大陆访问</h2><p>有些站点加cdn仅仅是为了加速，所以在非大陆地区进行访问时，通过国外的DNS解析，可能会得到站点的真实ip</p>
+<h2 id="邮件响应头"><a href="#邮件响应头" class="headerlink" title="邮件响应头"></a>邮件响应头</h2><p>如果站点有发送邮件功能的话，可以想办法使站点向你的邮箱发送邮件，查看邮件响应头，往往可以暴露站点的真实ip</p>
+<h2 id="超流量回源"><a href="#超流量回源" class="headerlink" title="超流量回源"></a>超流量回源</h2><p>有些站点的cdn往往可用流量是有限的，这时我们可以发送大量的请求包，类似cc攻击，当流量到达界限时，就会发生回源现象，这通常发生在一些免费CDN套餐和小CDN厂商上，一般高防CDN不会出现这种情况。</p>
+<h2 id="查看解析历史"><a href="#查看解析历史" class="headerlink" title="查看解析历史"></a>查看解析历史</h2><p>这是一种成功率极高的方法，站点可能创建之初并未添加CDN，这样就会存留下解析记录，通过查看解析历史可以寻找到服务器的真实ip</p>
+<p>一般可以在：<a href="https://www.17ce.com/" target="_blank" rel="noopener">https://www.17ce.com/</a>上查到解析历史记录</p>
+<h2 id="CloudFlare"><a href="#CloudFlare" class="headerlink" title="CloudFlare"></a>CloudFlare</h2><p>freebuf上有一篇专门写对CloudFlare CDN的绕过：<a href="https://www.freebuf.com/articles/web/41533.html" target="_blank" rel="noopener">https://www.freebuf.com/articles/web/41533.html</a></p>
 
       
     </div>
@@ -484,7 +416,7 @@ addshell /a.php c get
       
         <div class="post-tags">
           
-            <a href="/tags/项目/" rel="tag"># 项目</a>
+            <a href="/tags/系统总结/" rel="tag"># 系统总结</a>
           
         </div>
       
@@ -497,8 +429,8 @@ addshell /a.php c get
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/25/2019-安恒2月赛部分writeup/" rel="next" title="2019-安恒2月赛部分writeup">
-                <i class="fa fa-chevron-left"></i> 2019-安恒2月赛部分writeup
+              <a href="/2019/03/04/置顶-项目发布-YML-AWD-FRAMEWORK/" rel="next" title="置顶-项目发布-YML-AWD-FRAMEWORK">
+                <i class="fa fa-chevron-left"></i> 置顶-项目发布-YML-AWD-FRAMEWORK
               </a>
             
           </div>
@@ -506,10 +438,6 @@ addshell /a.php c get
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/06/查看站点真实ip-CDN绕过/" rel="prev" title="查看站点真实ip-CDN绕过">
-                查看站点真实ip-CDN绕过 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -660,7 +588,7 @@ addshell /a.php c get
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#框架整体结构"><span class="nav-number">1.</span> <span class="nav-text">框架整体结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开发思路和部分模块工作原理"><span class="nav-number">2.</span> <span class="nav-text">开发思路和部分模块工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ip和shell存储模块"><span class="nav-number">2.1.</span> <span class="nav-text">ip和shell存储模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ip录入模块"><span class="nav-number">2.2.</span> <span class="nav-text">ip录入模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不死马上传模块"><span class="nav-number">2.3.</span> <span class="nav-text">不死马上传模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流量混淆模块"><span class="nav-number">2.4.</span> <span class="nav-text">流量混淆模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取flag及提交模块"><span class="nav-number">2.5.</span> <span class="nav-text">获取flag及提交模块</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#交互体验"><span class="nav-number">3.</span> <span class="nav-text">交互体验</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用方法和基本流程："><span class="nav-number">4.</span> <span class="nav-text">使用方法和基本流程：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#判断是否存在cdn"><span class="nav-number">1.</span> <span class="nav-text">判断是否存在cdn</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ping"><span class="nav-number">1.1.</span> <span class="nav-text">ping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ip域名强绑"><span class="nav-number">1.2.</span> <span class="nav-text">ip域名强绑</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#寻找真实ip"><span class="nav-number">2.</span> <span class="nav-text">寻找真实ip</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#非大陆访问"><span class="nav-number">2.1.</span> <span class="nav-text">非大陆访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#邮件响应头"><span class="nav-number">2.2.</span> <span class="nav-text">邮件响应头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#超流量回源"><span class="nav-number">2.3.</span> <span class="nav-text">超流量回源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看解析历史"><span class="nav-number">2.4.</span> <span class="nav-text">查看解析历史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CloudFlare"><span class="nav-number">2.5.</span> <span class="nav-text">CloudFlare</span></a></li></ol></li></ol></div>
             
 
           </div>
