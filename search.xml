@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[置顶-搭建属于自己的AWD训练平台]]></title>
+    <url>%2F2019%2F03%2F07%2F%E7%BD%AE%E9%A1%B6-%E6%90%AD%E5%BB%BA%E5%B1%9E%E4%BA%8E%E8%87%AA%E5%B7%B1%E7%9A%84AWD%E8%AE%AD%E7%BB%83%E5%B9%B3%E5%8F%B0%2F</url>
+    <content type="text"><![CDATA[本文首发于 安恒网络空间安全讲武堂 :https://mp.weixin.qq.com/tmpl/0_4476224-zh_CN.html 很多师傅可能很少有接触线下赛AWD的机会，所以可能在比赛中比他人少很多经验，今天就和大家分享一下如何在资源有限的情况下去搭建自己的awd线下赛环境 因为前一段时间写awd框架的缘故，我迫切的需要找一个实战环境来实验自己的框架是否可以正常运行，翻遍各大资源站点后，终于在github上找到了一个开源项目，这里分享给大家：https://github.com/zhl2008/awd-platform 在搭建的过程中大家可能看不太懂项目中的说明文档，所以在这里我实际给大家演示一遍，其中的一些细节我尽量一一说到，另外在文末还会分享我自己写的一个积分统计板(我的第二个版本源码找不到了，所以在这里给大家分享我第一次写的那个) 因为是个人嘛，毕竟资源有限，我只有一个腾讯云的学生机在空闲，今天就以这个机器为例进行搭建，给大家看一下我的配置 这配置很低了，不过实测开启10个队伍的靶机是无压力的 首先我们装一个ubuntu16.04的云服务器，然后登陆远程的ssh 将项目克隆到服务器上： git clone https://github.com/zhl2008/awd-platform.git 然后进入项目 cd awd-platform/ 然后下载一下镜像： docker pull zhl2008/web_14.04 这块我卡了好久，他最后按文档操作会报错，后来我看源码的docker名字不是这个，而是zhl2008/web_14.04 web_14.04 所以为了方便直接可以改一下镜像的名字，这样就不用改源码去了 docker tag zhl2008/web_14.04 web_14.04 然后接下来按照文档里说的操作一下 我这里实际的命令有 python batch.py web_yunnan_simple 10 python start.py ./ 10 这里用这个web_yunnan_simple的环境做例子，这个环境非常典型，包含了很多的基础漏洞，包括我的框架就是依照这个环境测试的 到现在为止，我们的靶机就可以访问了 因为是在一个服务器上运行了多个docker，靶机的映射端口规则是: team1 ---- 8801 team3 ---- 8802 team3 ---- 8803 ....以此类推 例如在我的环境下，靶机的地址就是：http://119.29.147.75:8801-8810 各个靶机的ssh密码可以在项目的文件夹下的pass.txt文件中 ssh的端口规则是： team1 ---- 2201 team2 ---- 2202 team3 ---- 2203 ....以此类推 关于check模块，他的check脚本是不能用的，我们需要进行一些修改，这个规则要根据自己的环镜自己编写，总体思路就是判断页面是否存在，存在就加一分，不存在就减一分，在他内置check脚本的基础上，我们可以稍微修改一下靶机环境的源码，然后用check脚本去访问，在他内置的脚本中还可以修改每次加分和扣分的多少 还有一个要注意的地方就是，在项目的根目录的flag_server/中，我们要赋予score.txt 和result.txt 777权限，否则分数变动无法进行同步 关于flag的提交方式和文档是一样的 得分情况可以访问ip:8080/score.txt 像我这个 我感觉太难看了，就写了个计分板 在使用的时候改一下源码里的ip地址就可以了 计分板源码打包：https://pan.baidu.com/s/18KlIeluaTtm-kT3KuXHseQ 提取码：cvdn 最后祝x平台越办越好。]]></content>
+      <tags>
+        <tag>原创教程</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[查看站点真实ip-CDN绕过]]></title>
     <url>%2F2019%2F03%2F06%2F%E6%9F%A5%E7%9C%8B%E7%AB%99%E7%82%B9%E7%9C%9F%E5%AE%9Eip-CDN%E7%BB%95%E8%BF%87%2F</url>
     <content type="text"><![CDATA[CDN（content delivery network 或 content distribution network）即内容分发网络。一些站点开启了CDN后就会隐藏掉自己的真实ip，在某些需要获取站点真实ip的工作中，这将是一个障碍，下面总结一下常见的获取站点真实ip的方法。 判断是否存在cdnping通过多地ping可以查到站点的IP地址，如果返回的ip地址不是相同的，基本可以判定存在cdn 这里分享一个在线ping 的站点http://ping.chinaz.com/ ip域名强绑我们可以使一个域名和我们当前所查到的ip强绑，如果页面发生变化，应该存在cdn，强绑只需要在本机的host文件中修改就可以了 寻找真实ip非大陆访问有些站点加cdn仅仅是为了加速，所以在非大陆地区进行访问时，通过国外的DNS解析，可能会得到站点的真实ip 邮件响应头如果站点有发送邮件功能的话，可以想办法使站点向你的邮箱发送邮件，查看邮件响应头，往往可以暴露站点的真实ip 超流量回源有些站点的cdn往往可用流量是有限的，这时我们可以发送大量的请求包，类似cc攻击，当流量到达界限时，就会发生回源现象，这通常发生在一些免费CDN套餐和小CDN厂商上，一般高防CDN不会出现这种情况。 查看解析历史这是一种成功率极高的方法，站点可能创建之初并未添加CDN，这样就会存留下解析记录，通过查看解析历史可以寻找到服务器的真实ip 一般可以在：https://www.17ce.com/上查到解析历史记录 CloudFlarefreebuf上有一篇专门写对CloudFlare CDN的绕过：https://www.freebuf.com/articles/web/41533.html]]></content>
