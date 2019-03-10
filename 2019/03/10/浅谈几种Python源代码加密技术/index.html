@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="系统总结,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="文章首发于 安恒网络空间安全讲武堂 ：https://mp.weixin.qq.com/s/N8liasMhiiTHC_1KC3JQJQ 随着Python近年的流行，很多开发者选择用Python作为自己首选的开发语言，其简洁的语法和轻量的运行方式受到越来越多开发者的喜爱，但是对于一些个人开发者而言，某些不想开源的程序使用Python开发后很难保证其源代码不被他人剽窃，今天作者就和大家说说几种流行的">
+<meta name="keywords" content="系统总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈几种Python源代码加密技术">
+<meta property="og:url" content="https://yml-sec.top/2019/03/10/浅谈几种Python源代码加密技术/index.html">
+<meta property="og:site_name" content="yemoli&#39;s blog">
+<meta property="og:description" content="文章首发于 安恒网络空间安全讲武堂 ：https://mp.weixin.qq.com/s/N8liasMhiiTHC_1KC3JQJQ 随着Python近年的流行，很多开发者选择用Python作为自己首选的开发语言，其简洁的语法和轻量的运行方式受到越来越多开发者的喜爱，但是对于一些个人开发者而言，某些不想开源的程序使用Python开发后很难保证其源代码不被他人剽窃，今天作者就和大家说说几种流行的">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://i.imgur.com/qDVGebW.jpg">
+<meta property="og:image" content="https://i.imgur.com/nBydT2F.jpg">
+<meta property="og:image" content="https://i.imgur.com/UKj0YcX.jpg">
+<meta property="og:image" content="https://i.imgur.com/Mkwqpj8.jpg">
+<meta property="og:image" content="https://i.imgur.com/otBfkuf.jpg">
+<meta property="og:image" content="https://i.imgur.com/0KhICdR.jpg">
+<meta property="og:image" content="https://i.imgur.com/UQI4dgv.jpg">
+<meta property="og:image" content="https://i.imgur.com/MPuWLSe.jpg">
+<meta property="og:updated_time" content="2019-03-10T06:32:54.793Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅谈几种Python源代码加密技术">
+<meta name="twitter:description" content="文章首发于 安恒网络空间安全讲武堂 ：https://mp.weixin.qq.com/s/N8liasMhiiTHC_1KC3JQJQ 随着Python近年的流行，很多开发者选择用Python作为自己首选的开发语言，其简洁的语法和轻量的运行方式受到越来越多开发者的喜爱，但是对于一些个人开发者而言，某些不想开源的程序使用Python开发后很难保证其源代码不被他人剽窃，今天作者就和大家说说几种流行的">
+<meta name="twitter:image" content="https://i.imgur.com/qDVGebW.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://yml-sec.top/2019/03/10/浅谈几种Python源代码加密技术/">
+
+
+
+
+
+  <title>浅谈几种Python源代码加密技术 | yemoli's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">yemoli's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2019/03/10/浅谈几种Python源代码加密技术/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="夜莫离、">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yemoli's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">浅谈几种Python源代码加密技术</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-10T14:30:59+08:00">
+                2019-03-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.1k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  8
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>文章首发于 安恒网络空间安全讲武堂 ：<a href="https://mp.weixin.qq.com/s/N8liasMhiiTHC_1KC3JQJQ" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/N8liasMhiiTHC_1KC3JQJQ</a></p>
+<p>随着Python近年的流行，很多开发者选择用Python作为自己首选的开发语言，其简洁的语法和轻量的运行方式受到越来越多开发者的喜爱，但是对于一些个人开发者而言，某些不想开源的程序使用Python开发后很难保证其源代码不被他人剽窃，今天作者就和大家说说几种流行的Python代码加密方式，分析各种利弊并给大家推荐一下最佳的Python代码加密方案，今天主要的对象是基于Python3.X开发的应用程序(实测这些方法在2.x版本中也是可以使用的)</p>
+<h1 id="生成pyc文件发布"><a href="#生成pyc文件发布" class="headerlink" title="生成pyc文件发布"></a>生成pyc文件发布</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>pyc文件是一种经py文件编译后的二进制文件，他可以跨平台在Python虚拟机中运行，pyc文件打开是无法看到我们正常的源码的，例如这样：</p>
+<p>源代码：</p>
+<p><img src="https://i.imgur.com/qDVGebW.jpg" alt=""></p>
+<p>编译成的pyc文件：</p>
+<p><img src="https://i.imgur.com/nBydT2F.jpg" alt=""></p>
+<p>可以看到辨识度基本为0</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>一般一个项目的代码会有多个Python文件，我们需要批量生成pyc文件，这里可以使用compileall模块，我这里的示例项目是在E盘下code文件夹中，生成代码为：</p>
+<pre><code>import compileall
+compileall.compile_dir(r&apos;E:/code&apos;)
+</code></pre><p><img src="https://i.imgur.com/UKj0YcX.jpg" alt=""></p>
+<p>执行完后会发现项目下多了一个 <strong>pycache</strong> 文件夹，打开后就是编译后的pyc文件</p>
+<p><img src="https://i.imgur.com/Mkwqpj8.jpg" alt=""></p>
+<h1 id="代码函数变量混淆"><a href="#代码函数变量混淆" class="headerlink" title="代码函数变量混淆"></a>代码函数变量混淆</h1><p>这种加密方式类似于PHP的变量混淆加密，通过奇特的变量命名方式使代码难以被读取和理解，这种混淆非常恶心，有时源代码就在你眼前，你却无法知道该段代码的含义，令人很头疼</p>
+<p>经过一番探索，我找到了一个在线进行混淆的站点，下个月计划自己写一个混淆代码的程序，届时也会第一时间开源分享给大家</p>
+<p>神奇的站点：<a href="http://pyob.oxyry.com/" target="_blank" rel="noopener">http://pyob.oxyry.com/</a></p>
+<p>拿我写的一个函数作为例子(特意找了一个长的，方便大家更直观看到差别)</p>
+<p>源代码：</p>
+<pre><code>def get_flag(get_flag_cmd):
+    list = []
+    global flag
+    print(&quot;DEMO:http://10.10.10.10/index.php?flag= yml-flag &amp;name=666&quot;)
+    submit_flag_url = input(&quot;请输入提交flag的链接(flag用yml-flag替换,两边加空格):&quot;)
+    with open(&quot;data/flagshell.txt&quot;, &apos;r&apos;) as f:
+        line = f.readline().strip()
+        while line:
+            list.append(line)
+            line = f.readline().strip()
+    i = 0
+    url = {}
+    passwd = {}
+    method = {}
+    for data in list:
+        if data:
+            ls = data.split(&quot;,&quot;)
+            method_tmp = str(ls[2])
+            method_tmp = method_tmp.lower()
+            #print(method_tmp)
+            if method_tmp == &apos;post&apos; or method_tmp == &apos;get&apos;:
+                url[i] = str(ls[0])
+                method[i] = method_tmp
+                passwd[i] = str(ls[1])
+                #print(url[i])
+                #print(method[i])
+                #print(passwd[i])
+                i += 1
+            else:
+                print(&quot;[-] %s request method error!&quot; % (str(ls[0])))
+        else:
+            pass
+    time_temp = 1
+    while True:
+        for j in range(len(url)):
+                return_flag = socket_flag(url=url[j], method=method[j], passwd=passwd[j], get_flag_cmd=get_flag_cmd)
+                flag.append(return_flag)
+        save_flag()
+        print(&quot;3秒后尝试提交flag:&quot;)
+        for i in range(1, 4):
+            s = &apos;&gt;&apos; * i + &apos;[&apos; + str(i) + &apos;s&apos; + &apos;]&apos;  # 这个方法同第二种类似
+            print(&apos;%s&apos; % s, end=&apos;\r&apos;)  # 每行以&apos;\r&apos;结尾，就可以输出在同一行
+            time.sleep(1)
+        for submit_flag_str in flag:
+            submit_flag(url=submit_flag_url, flag=submit_flag_str)
+        print(&quot;60秒进行下一轮操作:&quot;)
+        for i in range(1, 61):
+            s = &apos;&gt;&apos; * i + &apos;[&apos; + str(i) + &apos;s&apos; + &apos;]&apos;  # 这个方法同第二种类似
+            print(&apos;%s&apos; % s, end=&apos;\r&apos;)
+            time.sleep(1)
+        flag = []
+        time_temp = time_temp + 1
+        print(time_temp)
+</code></pre><p>混淆后的代码：</p>
+<pre><code>def get_flag (OOOO0000O0OOOOOO0 ):#line:1
+    O00000OOO0OO00OOO =[]#line:2
+    global flag #line:3
+    print (&quot;DEMO:http://10.10.10.10/index.php?flag= yml-flag &amp;name=666&quot;)#line:4
+    OO0OOOO0OOOO00OO0 =input (&quot;请输入提交flag的链接(flag用yml-flag替换,两边加空格):&quot;)#line:5
+    with open (&quot;data/flagshell.txt&quot;,&apos;r&apos;)as OOO0000OO0O0O00O0 :#line:6
+        OOOO0OO0O000O0OO0 =OOO0000OO0O0O00O0 .readline ().strip ()#line:7
+        while OOOO0OO0O000O0OO0 :#line:8
+            O00000OOO0OO00OOO .append (OOOO0OO0O000O0OO0 )#line:9
+            OOOO0OO0O000O0OO0 =OOO0000OO0O0O00O0 .readline ().strip ()#line:10
+    O00OOOO0000OO00O0 =0 #line:11
+    OO00OO00000OOOOOO ={}#line:12
+    OO0OO000O0O0OO0O0 ={}#line:13
+    OOOOO0OO0O00OOOOO ={}#line:14
+    for OO00OOOO0000OOO0O in O00000OOO0OO00OOO :#line:15
+        if OO00OOOO0000OOO0O :#line:16
+            O00O0O00O000000O0 =OO00OOOO0000OOO0O .split (&quot;,&quot;)#line:17
+            OO000OO00OO00OO0O =str (O00O0O00O000000O0 [2 ])#line:18
+            OO000OO00OO00OO0O =OO000OO00OO00OO0O .lower ()#line:19
+            if OO000OO00OO00OO0O ==&apos;post&apos;or OO000OO00OO00OO0O ==&apos;get&apos;:#line:21
+                OO00OO00000OOOOOO [O00OOOO0000OO00O0 ]=str (O00O0O00O000000O0 [0 ])#line:22
+                OOOOO0OO0O00OOOOO [O00OOOO0000OO00O0 ]=OO000OO00OO00OO0O #line:23
+                OO0OO000O0O0OO0O0 [O00OOOO0000OO00O0 ]=str (O00O0O00O000000O0 [1 ])#line:24
+                O00OOOO0000OO00O0 +=1 #line:28
+            else :#line:29
+                print (&quot;[-] %s request method error!&quot;%(str (O00O0O00O000000O0 [0 ])))#line:30
+        else :#line:31
+            pass #line:32
+    O00O00O000OOO000O =1 #line:33
+    while True :#line:34
+        for O00000O00O000O0O0 in range (len (OO00OO00000OOOOOO )):#line:35
+                OOO0OO0OO0000OO0O =socket_flag (url =OO00OO00000OOOOOO [O00000O00O000O0O0 ],method =OOOOO0OO0O00OOOOO [O00000O00O000O0O0 ],passwd =OO0OO000O0O0OO0O0 [O00000O00O000O0O0 ],get_flag_cmd =OOOO0000O0OOOOOO0 )#line:36
+                flag .append (OOO0OO0OO0000OO0O )#line:37
+        save_flag ()#line:38
+        print (&quot;3秒后尝试提交flag:&quot;)#line:39
+        for O00OOOO0000OO00O0 in range (1 ,4 ):#line:40
+            OOO00O0O0O0OO0O00 =&apos;&gt;&apos;*O00OOOO0000OO00O0 +&apos;[&apos;+str (O00OOOO0000OO00O0 )+&apos;s&apos;+&apos;]&apos;#line:41
+            print (&apos;%s&apos;%OOO00O0O0O0OO0O00 ,end =&apos;\r&apos;)#line:42
+            time .sleep (1 )#line:43
+        for O0OO0O00OO0000OO0 in flag :#line:44
+            submit_flag (url =OO0OOOO0OOOO00OO0 ,flag =O0OO0O00OO0000OO0 )#line:45
+        print (&quot;60秒进行下一轮操作:&quot;)#line:46
+        for O00OOOO0000OO00O0 in range (1 ,61 ):#line:47
+            OOO00O0O0O0OO0O00 =&apos;&gt;&apos;*O00OOOO0000OO00O0 +&apos;[&apos;+str (O00OOOO0000OO00O0 )+&apos;s&apos;+&apos;]&apos;#line:48
+            print (&apos;%s&apos;%OOO00O0O0O0OO0O00 ,end =&apos;\r&apos;)#line:49
+            time .sleep (1 )#line:50
+        flag =[]#line:51
+        O00O00O000OOO000O =O00O00O000OOO000O +1 #line:52
+        print (O00O00O000OOO000O )
+</code></pre><p>假如只给你混淆后的代码，相信很难会理解这个函数究竟在程序中干了什么</p>
+<h1 id="打包成exe文件发布"><a href="#打包成exe文件发布" class="headerlink" title="打包成exe文件发布"></a>打包成exe文件发布</h1><h2 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h2><p>这里就要向大家介绍一款神器—pyinstaller，这是一个专门用来将Python程序打包成exe格式的应用程序，除此之外它还有一个特别大的优点，经pyinstaller打包后的程序可以无需安装Python环境直接在其他机器上运行，该程序的安装方式可以参考官网：<a href="http://www.pyinstaller.org/" target="_blank" rel="noopener">http://www.pyinstaller.org/</a></p>
+<h2 id="使用操作"><a href="#使用操作" class="headerlink" title="使用操作"></a>使用操作</h2><p>我的操作系统是windows10，这里给大家演示一下打包的操作</p>
+<p>就拿我前几天发布的AWD框架作为例子</p>
+<p>源码结构：</p>
+<p><img src="https://i.imgur.com/otBfkuf.jpg" alt=""></p>
+<p>定位到pyinstaller主程序的位置，在cmd窗口中输入命令</p>
+<pre><code>pyinstaller -F E:\YML-AWD-FRAMEWORK\main.py
+</code></pre><p>-F后输入的是项目主文件路径</p>
+<p><img src="https://i.imgur.com/0KhICdR.jpg" alt=""></p>
+<p>成功生成后会在dist文件夹下找到刚刚打包好的文件</p>
+<p><img src="https://i.imgur.com/UQI4dgv.jpg" alt=""></p>
+<p>但是当我们打开生成的程序时，却发生了闪退，为了看清错误，我们在powershell下运行程序，错误提示我们缺少自写的第三方库</p>
+<p>相信如果用过这个打包程序的师傅都会遇到这个问题，在打包简单程序时可以正常打开运行，但是当我们写的程序包含了自写的第三方库时，就会出现异常，最开始这个问题出现在我写机器人插件的时候，无奈之下我去百度上寻找pyinstaller的详细工作方式，它在打包的时候会自动导入Python的内置库，抱着试一试的心态我把自己写的第三方库放到了Python系统库目录下，而后同上面方式进行打包，最终成功解决了这个问题，后来的几个项目打包我也是采用这种方式，都很奏效。</p>
+<p>通过打包成exe的方式，我们可以发布exe文件，这样就可以很好的保护源代码</p>
+<h1 id="弊端分析"><a href="#弊端分析" class="headerlink" title="弊端分析"></a>弊端分析</h1><p>对于第一种编译为pyc的方法，近年出现了pyc的反编译技术，一些ctf比赛也以此作为一个考点 有很多站点例如<a href="https://tool.lu/pyc/" target="_blank" rel="noopener">https://tool.lu/pyc/</a>就可以将pyc文件还原成Python代码</p>
+<p>对于第三种方法，可能有人会觉得很安全，有一个名为pyinstxtractor.py的脚本可以在打包完毕的程序中提取出pyc文件，我们可以通过反编译pyc文件获得源代码 ，脚本下载地址：<a href="https://sourceforge.net/projects/pyinstallerextractor/" target="_blank" rel="noopener">https://sourceforge.net/projects/pyinstallerextractor/</a></p>
+<h1 id="方法推荐"><a href="#方法推荐" class="headerlink" title="方法推荐"></a>方法推荐</h1><h2 id="函数变量混淆-pyc编译"><a href="#函数变量混淆-pyc编译" class="headerlink" title="函数变量混淆+pyc编译"></a>函数变量混淆+pyc编译</h2><p>虽然pyc文件可以反编译出源代码，但是经过我多次试验，将源代码经过变量混淆后再反编译为pyc文件是很困难的，以我上面混淆完的函数为例子，它编译成pyc文件后在进行反编译结果如下：</p>
+<p><img src="https://i.imgur.com/MPuWLSe.jpg" alt=""></p>
+<p>可以看到它无法还原，甚至部分还原出来的代码都是错的</p>
+<h2 id="打包为exe文件加壳"><a href="#打包为exe文件加壳" class="headerlink" title="打包为exe文件加壳"></a>打包为exe文件加壳</h2><p>这个思路就很简单了，将项目用pyinstaller打包后再加壳，这样就很难进行源代码还原操作了</p>
+<p>最后感谢大家的阅读，祝安恒学院越来越好</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="夜莫离、 WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="夜莫离、 Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/系统总结/" rel="tag"># 系统总结</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/07/置顶-搭建属于自己的AWD训练平台/" rel="next" title="置顶-搭建属于自己的AWD训练平台">
+                <i class="fa fa-chevron-left"></i> 置顶-搭建属于自己的AWD训练平台
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">夜莫离、</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yemoli" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.baidu.com/" title="Baidu" target="_blank">Baidu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://chxing.xyz/" title="Bling_Dog" target="_blank">Bling_Dog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.smi1e.top/" title="Smi1e" target="_blank">Smi1e</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://altman.vip/" title="Altman" target="_blank">Altman</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#生成pyc文件发布"><span class="nav-number">1.</span> <span class="nav-text">生成pyc文件发布</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法"><span class="nav-number">1.2.</span> <span class="nav-text">方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码函数变量混淆"><span class="nav-number">2.</span> <span class="nav-text">代码函数变量混淆</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#打包成exe文件发布"><span class="nav-number">3.</span> <span class="nav-text">打包成exe文件发布</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介-1"><span class="nav-number">3.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用操作"><span class="nav-number">3.2.</span> <span class="nav-text">使用操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#弊端分析"><span class="nav-number">4.</span> <span class="nav-text">弊端分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方法推荐"><span class="nav-number">5.</span> <span class="nav-text">方法推荐</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数变量混淆-pyc编译"><span class="nav-number">5.1.</span> <span class="nav-text">函数变量混淆+pyc编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打包为exe文件加壳"><span class="nav-number">5.2.</span> <span class="nav-text">打包为exe文件加壳</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">夜莫离、</span>
+
+  
+</div>
+
+
+  <!-- <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div> 
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>-->
+
+
+
+<div class="theme-info">
+ <div class="powered-by"></div>
+ <span class="post-count">博客全站共30.7k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>
