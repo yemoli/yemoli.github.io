@@ -94,19 +94,19 @@
 <meta property="og:site_name" content="yemoli&#39;s blog">
 <meta property="og:description" content="框架首发于 安恒网络空间安全讲武堂 :https://mp.weixin.qq.com/s/r5gc0nfids896thBIW7XFg 花了大半个寒假的时间，终于完成了一直想写的awd线下半自动框架，编写过程中学到了很多，也感谢一些师傅的指点，文末会分享部分原创核心函数 框架已在我自有服务器搭建的awd环境下经过数次调试，修补了绝大部分致命bug 开发思路： 框架整体结构|--main.py(主">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://i.imgur.com/n1e9dGx.gif">
-<meta property="og:image" content="https://i.imgur.com/uv1yySL.gif">
-<meta property="og:image" content="https://i.imgur.com/zG1Wruj.jpg">
-<meta property="og:image" content="https://i.imgur.com/AJ4ygEO.jpg">
-<meta property="og:image" content="https://i.imgur.com/mxTK5OS.jpg">
-<meta property="og:image" content="https://i.imgur.com/FBZNNEh.jpg">
-<meta property="og:image" content="https://i.imgur.com/DgdjvR9.jpg">
-<meta property="og:image" content="https://i.imgur.com/cAF95An.gif">
-<meta property="og:updated_time" content="2019-03-04T11:00:39.124Z">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f692621b8c.gif">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6926038db.gif">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6926b364b.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f69269943f.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6926944b0.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f692682f9a.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6926538cd.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6926dad08.gif">
+<meta property="og:updated_time" content="2019-03-18T09:52:16.979Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="置顶-项目发布-YML-AWD-FRAMEWORK">
 <meta name="twitter:description" content="框架首发于 安恒网络空间安全讲武堂 :https://mp.weixin.qq.com/s/r5gc0nfids896thBIW7XFg 花了大半个寒假的时间，终于完成了一直想写的awd线下半自动框架，编写过程中学到了很多，也感谢一些师傅的指点，文末会分享部分原创核心函数 框架已在我自有服务器搭建的awd环境下经过数次调试，修补了绝大部分致命bug 开发思路： 框架整体结构|--main.py(主">
-<meta name="twitter:image" content="https://i.imgur.com/n1e9dGx.gif">
+<meta name="twitter:image" content="https://i.loli.net/2019/03/18/5c8f692621b8c.gif">
 
 
 
@@ -380,20 +380,20 @@
 </code></pre><h1 id="开发思路和部分模块工作原理"><a href="#开发思路和部分模块工作原理" class="headerlink" title="开发思路和部分模块工作原理"></a>开发思路和部分模块工作原理</h1><h2 id="ip和shell存储模块"><a href="#ip和shell存储模块" class="headerlink" title="ip和shell存储模块"></a>ip和shell存储模块</h2><p>为了方便后续维护和新功能的添加，将以TXT文件读写的方式存储和读取ip和shell信息，方便在程序退出第二次使用时，快速加载已储存的ip和shell信息</p>
 <h2 id="ip录入模块"><a href="#ip录入模块" class="headerlink" title="ip录入模块"></a>ip录入模块</h2><p>由于线下awd赛事靶机ip的不同(正式比赛中可能是范围类ip，小型比赛中可能是范围类端口)，框架同时支持范围ip和端口的添加，两类例子如下</p>
 <p>ip范围：</p>
-<p><img src="https://i.imgur.com/n1e9dGx.gif" alt=""></p>
+<p><img src="https://i.loli.net/2019/03/18/5c8f692621b8c.gif" alt=""></p>
 <p>端口范围：</p>
-<p><img src="https://i.imgur.com/uv1yySL.gif" alt=""></p>
+<p><img src="https://i.loli.net/2019/03/18/5c8f6926038db.gif" alt=""></p>
 <h2 id="不死马上传模块"><a href="#不死马上传模块" class="headerlink" title="不死马上传模块"></a>不死马上传模块</h2><p>不死马是awd线下赛中一大杀器，其删不掉，改不了的特性往往能在线下赛中打乱对手的比赛心态，为了提高框架在各类环境成功生成不死马的几率，作者使用了直接在靶机上命令执行的方式(网上流行的不死马PHP启动文件的方式其实对于框架编写来说更加简单，但是其触发过程中可能遭遇目标靶机waf的拦截)，在成功添加了基础shell后，可以直接使用不死马模块进行不死马上传，为适应各类基础shell，上传支持post和get两种方式。</p>
 <p>核心代码如图</p>
-<p><img src="https://i.imgur.com/zG1Wruj.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2019/03/18/5c8f6926b364b.jpg" alt=""></p>
 <h2 id="流量混淆模块"><a href="#流量混淆模块" class="headerlink" title="流量混淆模块"></a>流量混淆模块</h2><p>在获取站点源码结构时本来想利用自己的靶机做目录遍历然后返回路径列表，后来为了提升效率选择了将源码放在本地进行遍历，在使用模块前需要在库中attack_all()函数中修改框架所在路径，如图</p>
-<p><img src="https://i.imgur.com/AJ4ygEO.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2019/03/18/5c8f69269943f.jpg" alt=""></p>
 <p>为了模拟真实流量，在每段正常发送的URL后都会添加？shell=(随机字符串)，已达到隐藏获取flag真实流量的目的，相应代码如图</p>
-<p><img src="https://i.imgur.com/mxTK5OS.jpg" alt=""></p>
-<p><img src="https://i.imgur.com/FBZNNEh.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2019/03/18/5c8f6926944b0.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2019/03/18/5c8f692682f9a.jpg" alt=""></p>
 <h2 id="获取flag及提交模块"><a href="#获取flag及提交模块" class="headerlink" title="获取flag及提交模块"></a>获取flag及提交模块</h2><p>获取flag前需要再次添加shell，可以是生成的不死马shell，设置再次添加是为了当比赛中直接有可获取flag的后门时可以直接使用收发flag模块</p>
 <p>同时为了避免框架出现不可预期错误，程序会将最新flag保存在data目录下，在flag获取模块中，自动的过滤了重复的flag，减轻了框架在本地环境下的运行负担</p>
-<p><img src="https://i.imgur.com/DgdjvR9.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2019/03/18/5c8f6926538cd.jpg" alt=""></p>
 <h1 id="交互体验"><a href="#交互体验" class="headerlink" title="交互体验"></a>交互体验</h1><p>为了框架的运行稳定性，使用了cmd模块，cmd模块类型提供了一个创建命令行解析器的框架，在某部分函数出错时，不至于导致框架崩溃</p>
 <h1 id="使用方法和基本流程："><a href="#使用方法和基本流程：" class="headerlink" title="使用方法和基本流程："></a>使用方法和基本流程：</h1><p>命令集合：</p>
 <pre><code>Command          Tips
@@ -428,7 +428,7 @@ addshell /a.php c get
 <p>如果希望维持权限，可以通过Updead上传不死马文件</p>
 <p>flagshell是特定的shell文件，因为用Python去实现菜刀的功能很麻烦，所以获取flag 暂时通过命令执行的方式进行获取,添加flagshell的语法和addshell一样</p>
 <p>getflag需要附带获取flag的命令，添加后会提示输入提交flag的地址，这时需要用yml-flag来代替flag当做命令输入，如下图的演示</p>
-<p><img src="https://i.imgur.com/cAF95An.gif" alt=""></p>
+<p><img src="https://i.loli.net/2019/03/18/5c8f6926dad08.gif" alt=""></p>
 <p>这样就可以进行自动获取和提交了</p>
 <p>关于流量混淆模块：</p>
 <p>本人项目是在E盘写的，所以要正常使用该模块需要放在E盘下，并将站点源码放入html目录</p>
@@ -586,7 +586,7 @@ addshell /a.php c get
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

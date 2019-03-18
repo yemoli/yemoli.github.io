@@ -94,14 +94,14 @@
 <meta property="og:site_name" content="yemoli&#39;s blog">
 <meta property="og:description" content="今天偶然在群里看到这个骚操作 file_put_contents()第二个参数是可以传入数组的，那么在存在某些正则校验的时候，就可能带来绕过的可能 例如有如下代码 &amp;lt;?php $text = $_GET[&amp;apos;text&amp;apos;]; if(preg_match(&amp;apos;[&amp;lt;&amp;gt;?]&amp;apos;, $text)) { die(&amp;apos;fuck!!!!&amp;apos;);">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://i.imgur.com/YVnOO9P.jpg">
-<meta property="og:image" content="https://i.imgur.com/jNHMlZh.jpg">
-<meta property="og:image" content="https://i.imgur.com/XW2eAgK.jpg">
-<meta property="og:updated_time" content="2019-01-16T11:23:29.001Z">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f843aa62e4.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f843e4ac53.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/18/Amx1LF.jpg">
+<meta property="og:updated_time" content="2019-03-18T11:47:19.401Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="file_put_contents()的妙用">
 <meta name="twitter:description" content="今天偶然在群里看到这个骚操作 file_put_contents()第二个参数是可以传入数组的，那么在存在某些正则校验的时候，就可能带来绕过的可能 例如有如下代码 &amp;lt;?php $text = $_GET[&amp;apos;text&amp;apos;]; if(preg_match(&amp;apos;[&amp;lt;&amp;gt;?]&amp;apos;, $text)) { die(&amp;apos;fuck!!!!&amp;apos;);">
-<meta name="twitter:image" content="https://i.imgur.com/YVnOO9P.jpg">
+<meta name="twitter:image" content="https://i.loli.net/2019/03/18/5c8f843aa62e4.jpg">
 
 
 
@@ -373,11 +373,11 @@ file_put_contents(&apos;shell.php&apos;, $text);
 </code></pre><p>如果我们想写入一个php文件,正常的话传入</p>
 <pre><code>text = &lt;?php phpinfo();
 </code></pre><p>会被正则匹配到，无法写入</p>
-<p><img src="https://i.imgur.com/YVnOO9P.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2019/03/18/5c8f843aa62e4.jpg" alt=""></p>
 <p>如果我们将本段代码以数组的形式传入，数组会强制转化为字符串，这样就绕过了正则的匹配，达到了getshell的目的</p>
-<p><img src="https://i.imgur.com/jNHMlZh.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2019/03/18/5c8f843e4ac53.jpg" alt=""></p>
 <p>虽然出现了Warning，但是文件是被写入了的</p>
-<p><img src="https://i.imgur.com/XW2eAgK.jpg" alt=""></p>
+<p><img src="https://s2.ax1x.com/2019/03/18/Amx1LF.jpg" alt=""></p>
 
       
     </div>
@@ -517,7 +517,7 @@ file_put_contents(&apos;shell.php&apos;, $text);
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

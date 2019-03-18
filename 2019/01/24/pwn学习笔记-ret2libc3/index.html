@@ -94,15 +94,15 @@
 <meta property="og:site_name" content="yemoli&#39;s blog">
 <meta property="og:description" content="在ret2libc2的基础上，将 system 函数的地址去掉。此时，我们需要同时找到 system 函数地址与 /bin/sh 字符串的地址。首先，查看安全保护  程序仍然开启了NX 拖入ida中查看 int __cdecl main(int argc, const char **argv, const char **envp) {   char s; // [esp+1Ch] [ebp-64h">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://i.imgur.com/Qqt5qvG.jpg">
-<meta property="og:image" content="https://i.imgur.com/QV9x6dV.jpg">
-<meta property="og:image" content="https://i.imgur.com/nZ4kFH2.jpg">
-<meta property="og:image" content="https://i.imgur.com/NqwjcHN.jpg">
-<meta property="og:updated_time" content="2019-01-24T10:48:06.842Z">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f7e3b1e2ba.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f7df0b678b.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f7d9893778.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f7d539b420.jpg">
+<meta property="og:updated_time" content="2019-03-18T11:17:28.458Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pwn学习笔记-ret2libc3">
 <meta name="twitter:description" content="在ret2libc2的基础上，将 system 函数的地址去掉。此时，我们需要同时找到 system 函数地址与 /bin/sh 字符串的地址。首先，查看安全保护  程序仍然开启了NX 拖入ida中查看 int __cdecl main(int argc, const char **argv, const char **envp) {   char s; // [esp+1Ch] [ebp-64h">
-<meta name="twitter:image" content="https://i.imgur.com/Qqt5qvG.jpg">
+<meta name="twitter:image" content="https://i.loli.net/2019/03/18/5c8f7e3b1e2ba.jpg">
 
 
 
@@ -363,7 +363,7 @@
 
       
         <p>在ret2libc2的基础上，将 system 函数的地址去掉。此时，我们需要同时找到 system 函数地址与 /bin/sh 字符串的地址。首先，查看安全保护</p>
-<p><img src="https://i.imgur.com/Qqt5qvG.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2019/03/18/5c8f7e3b1e2ba.jpg" alt=""></p>
 <p>程序仍然开启了NX</p>
 <p>拖入ida中查看</p>
 <pre><code>int __cdecl main(int argc, const char **argv, const char **envp)
@@ -395,11 +395,11 @@ p.sendlineafter(&apos;!?&apos;,&apos;a&apos;*112+p32(elf.plt[&apos;puts&apos;])+
 
 p.interactive()
 </code></pre><p>我们可以通过此处泄露puts函数的地址</p>
-<p><img src="https://i.imgur.com/QV9x6dV.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2019/03/18/5c8f7df0b678b.jpg" alt=""></p>
 <p>可以看到地址的低三位为ca0</p>
 <p>下面我们可以确定libc的版本，我们可以用到LibcSearcher</p>
 <p>github地址为<a href="https://github.com/lieanu/LibcSearcher" target="_blank" rel="noopener">https://github.com/lieanu/LibcSearcher</a></p>
-<p><img src="https://i.imgur.com/nZ4kFH2.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2019/03/18/5c8f7d9893778.jpg" alt=""></p>
 <p>当然这个工具的强大之处不只如此，我们可以把它当做第三方库来使用</p>
 <p>引用说明文档的例子</p>
 <pre><code>from LibcSearcher import *
@@ -435,7 +435,7 @@ p.sendlineafter(&apos;!?&apos;,&apos;a&apos;*112+p32(system_addr)+p32(0x08048618
 
 p.interactive()
 </code></pre><p>调用完puts函数后我们让该函数返回到程序的主函数处<br>脚本执行需要等待一会，可能是寻找libc较费时间</p>
-<p><img src="https://i.imgur.com/NqwjcHN.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2019/03/18/5c8f7d539b420.jpg" alt=""></p>
 <p>成功获得了shell</p>
 
       
@@ -576,7 +576,7 @@ p.interactive()
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

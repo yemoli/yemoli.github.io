@@ -94,18 +94,18 @@
 <meta property="og:site_name" content="yemoli&#39;s blog">
 <meta property="og:description" content="此漏洞适用版本&amp;lt;= 5.1.2 漏洞原理是通过在恢复数据库备份时插入恶意代码，以达到getshell的目的 首先登陆到博客后台，进入数据备份和恢复功能  点击开始备份，我们会在本地生成一个数据库文件 要getshell，我们可以在得到的数据库文件中插入生成恶意文件的代码，但是我们需要知道该站点在服务器中的绝对路径 经过审计发现在admin/index.php中存在如下代码 这样我们只需访问1">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://i.imgur.com/my138Hf.jpg">
-<meta property="og:image" content="https://i.imgur.com/7ntlrjZ.jpg">
-<meta property="og:image" content="https://i.imgur.com/asVVjQD.jpg">
-<meta property="og:image" content="https://i.imgur.com/6X4UXpu.jpg">
-<meta property="og:image" content="https://i.imgur.com/acgRMlU.jpg">
-<meta property="og:image" content="https://i.imgur.com/2pk30Kd.jpg">
-<meta property="og:image" content="https://i.imgur.com/wOEIL0J.jpg">
-<meta property="og:updated_time" content="2019-01-11T10:06:12.600Z">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/18/AmxXlV.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/18/AmzpTJ.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/18/AmzkSx.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/18/AmzE6K.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/18/AmzemD.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/18/AmznTH.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/18/AmzQfI.jpg">
+<meta property="og:updated_time" content="2019-03-18T12:02:02.117Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="emlog后台数据备份getshell">
 <meta name="twitter:description" content="此漏洞适用版本&amp;lt;= 5.1.2 漏洞原理是通过在恢复数据库备份时插入恶意代码，以达到getshell的目的 首先登陆到博客后台，进入数据备份和恢复功能  点击开始备份，我们会在本地生成一个数据库文件 要getshell，我们可以在得到的数据库文件中插入生成恶意文件的代码，但是我们需要知道该站点在服务器中的绝对路径 经过审计发现在admin/index.php中存在如下代码 这样我们只需访问1">
-<meta name="twitter:image" content="https://i.imgur.com/my138Hf.jpg">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/03/18/AmxXlV.jpg">
 
 
 
@@ -368,21 +368,21 @@
         <p>此漏洞适用版本&lt;= 5.1.2</p>
 <p>漏洞原理是通过在恢复数据库备份时插入恶意代码，以达到getshell的目的</p>
 <p>首先登陆到博客后台，进入数据备份和恢复功能</p>
-<p><img src="https://i.imgur.com/my138Hf.jpg" alt=""></p>
+<p><img src="https://s2.ax1x.com/2019/03/18/AmxXlV.jpg" alt=""></p>
 <p>点击开始备份，我们会在本地生成一个数据库文件</p>
 <p>要getshell，我们可以在得到的数据库文件中插入生成恶意文件的代码，但是我们需要知道该站点在服务器中的绝对路径</p>
-<p>经过审计发现在admin/index.php中存在如下代码<br><img src="https://i.imgur.com/7ntlrjZ.jpg" alt=""></p>
+<p>经过审计发现在admin/index.php中存在如下代码<br><img src="https://s2.ax1x.com/2019/03/18/AmzpTJ.jpg" alt=""></p>
 <p>这样我们只需访问127.0.0.1/admin/index.php?action=phpinfo就可以触发phpinfo()函数进而得到绝对路径了</p>
-<p><img src="https://i.imgur.com/asVVjQD.jpg" alt=""></p>
+<p><img src="https://s2.ax1x.com/2019/03/18/AmzkSx.jpg" alt=""></p>
 <p>有了绝对路径我们就可以在数据库备份文件中插入如下代码</p>
-<p><img src="https://i.imgur.com/6X4UXpu.jpg" alt=""></p>
+<p><img src="https://s2.ax1x.com/2019/03/18/AmzE6K.jpg" alt=""></p>
 <p>这里调用了mysql语句，在目录下生成yml.php的文件</p>
 <p>把代码插入到数据备份中</p>
-<p><img src="https://i.imgur.com/acgRMlU.jpg" alt=""></p>
+<p><img src="https://s2.ax1x.com/2019/03/18/AmzemD.jpg" alt=""></p>
 <p>再次进入emlog后台，利用数据恢复功能，将修改过的备份文件导入</p>
-<p><img src="https://i.imgur.com/2pk30Kd.jpg" alt=""></p>
+<p><img src="https://s2.ax1x.com/2019/03/18/AmznTH.jpg" alt=""></p>
 <p>我们看下admin录下是否存在yml.php文件</p>
-<p><img src="https://i.imgur.com/wOEIL0J.jpg" alt=""></p>
+<p><img src="https://s2.ax1x.com/2019/03/18/AmzQfI.jpg" alt=""></p>
 <p>可以看到成功在admin目录下生成了可执行PHP文件，在实战中可将该文件变成一句话木马，进行下一步的操作</p>
 
       
@@ -523,7 +523,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

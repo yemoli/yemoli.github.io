@@ -94,19 +94,19 @@
 <meta property="og:site_name" content="yemoli&#39;s blog">
 <meta property="og:description" content="文章首发于 安恒网络空间安全讲武堂 ：https://mp.weixin.qq.com/s/N8liasMhiiTHC_1KC3JQJQ 随着Python近年的流行，很多开发者选择用Python作为自己首选的开发语言，其简洁的语法和轻量的运行方式受到越来越多开发者的喜爱，但是对于一些个人开发者而言，某些不想开源的程序使用Python开发后很难保证其源代码不被他人剽窃，今天作者就和大家说说几种流行的">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://i.imgur.com/qDVGebW.jpg">
-<meta property="og:image" content="https://i.imgur.com/nBydT2F.jpg">
-<meta property="og:image" content="https://i.imgur.com/UKj0YcX.jpg">
-<meta property="og:image" content="https://i.imgur.com/Mkwqpj8.jpg">
-<meta property="og:image" content="https://i.imgur.com/otBfkuf.jpg">
-<meta property="og:image" content="https://i.imgur.com/0KhICdR.jpg">
-<meta property="og:image" content="https://i.imgur.com/UQI4dgv.jpg">
-<meta property="og:image" content="https://i.imgur.com/MPuWLSe.jpg">
-<meta property="og:updated_time" content="2019-03-10T06:32:54.793Z">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6adda434d.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6af0799cf.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6b1e324db.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6b3bb665f.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6b5cd882d.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6b9033027.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6bad598db.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6bbf510b1.jpg">
+<meta property="og:updated_time" content="2019-03-18T09:58:58.851Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈几种Python源代码加密技术">
 <meta name="twitter:description" content="文章首发于 安恒网络空间安全讲武堂 ：https://mp.weixin.qq.com/s/N8liasMhiiTHC_1KC3JQJQ 随着Python近年的流行，很多开发者选择用Python作为自己首选的开发语言，其简洁的语法和轻量的运行方式受到越来越多开发者的喜爱，但是对于一些个人开发者而言，某些不想开源的程序使用Python开发后很难保证其源代码不被他人剽窃，今天作者就和大家说说几种流行的">
-<meta name="twitter:image" content="https://i.imgur.com/qDVGebW.jpg">
+<meta name="twitter:image" content="https://i.loli.net/2019/03/18/5c8f6adda434d.jpg">
 
 
 
@@ -370,16 +370,16 @@
 <p>随着Python近年的流行，很多开发者选择用Python作为自己首选的开发语言，其简洁的语法和轻量的运行方式受到越来越多开发者的喜爱，但是对于一些个人开发者而言，某些不想开源的程序使用Python开发后很难保证其源代码不被他人剽窃，今天作者就和大家说说几种流行的Python代码加密方式，分析各种利弊并给大家推荐一下最佳的Python代码加密方案，今天主要的对象是基于Python3.X开发的应用程序(实测这些方法在2.x版本中也是可以使用的)</p>
 <h1 id="生成pyc文件发布"><a href="#生成pyc文件发布" class="headerlink" title="生成pyc文件发布"></a>生成pyc文件发布</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>pyc文件是一种经py文件编译后的二进制文件，他可以跨平台在Python虚拟机中运行，pyc文件打开是无法看到我们正常的源码的，例如这样：</p>
 <p>源代码：</p>
-<p><img src="https://i.imgur.com/qDVGebW.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2019/03/18/5c8f6adda434d.jpg" alt=""></p>
 <p>编译成的pyc文件：</p>
-<p><img src="https://i.imgur.com/nBydT2F.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2019/03/18/5c8f6af0799cf.jpg" alt=""></p>
 <p>可以看到辨识度基本为0</p>
 <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>一般一个项目的代码会有多个Python文件，我们需要批量生成pyc文件，这里可以使用compileall模块，我这里的示例项目是在E盘下code文件夹中，生成代码为：</p>
 <pre><code>import compileall
 compileall.compile_dir(r&apos;E:/code&apos;)
-</code></pre><p><img src="https://i.imgur.com/UKj0YcX.jpg" alt=""></p>
+</code></pre><p><img src="https://i.loli.net/2019/03/18/5c8f6b1e324db.jpg" alt=""></p>
 <p>执行完后会发现项目下多了一个 <strong>pycache</strong> 文件夹，打开后就是编译后的pyc文件</p>
-<p><img src="https://i.imgur.com/Mkwqpj8.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2019/03/18/5c8f6b3bb665f.jpg" alt=""></p>
 <h1 id="代码函数变量混淆"><a href="#代码函数变量混淆" class="headerlink" title="代码函数变量混淆"></a>代码函数变量混淆</h1><p>这种加密方式类似于PHP的变量混淆加密，通过奇特的变量命名方式使代码难以被读取和理解，这种混淆非常恶心，有时源代码就在你眼前，你却无法知道该段代码的含义，令人很头疼</p>
 <p>经过一番探索，我找到了一个在线进行混淆的站点，下个月计划自己写一个混淆代码的程序，届时也会第一时间开源分享给大家</p>
 <p>神奇的站点：<a href="http://pyob.oxyry.com/" target="_blank" rel="noopener">http://pyob.oxyry.com/</a></p>
@@ -493,20 +493,20 @@ compileall.compile_dir(r&apos;E:/code&apos;)
 <h2 id="使用操作"><a href="#使用操作" class="headerlink" title="使用操作"></a>使用操作</h2><p>我的操作系统是windows10，这里给大家演示一下打包的操作</p>
 <p>就拿我前几天发布的AWD框架作为例子</p>
 <p>源码结构：</p>
-<p><img src="https://i.imgur.com/otBfkuf.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2019/03/18/5c8f6b5cd882d.jpg" alt=""></p>
 <p>定位到pyinstaller主程序的位置，在cmd窗口中输入命令</p>
 <pre><code>pyinstaller -F E:\YML-AWD-FRAMEWORK\main.py
 </code></pre><p>-F后输入的是项目主文件路径</p>
-<p><img src="https://i.imgur.com/0KhICdR.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2019/03/18/5c8f6b9033027.jpg" alt=""></p>
 <p>成功生成后会在dist文件夹下找到刚刚打包好的文件</p>
-<p><img src="https://i.imgur.com/UQI4dgv.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2019/03/18/5c8f6bad598db.jpg" alt=""></p>
 <p>但是当我们打开生成的程序时，却发生了闪退，为了看清错误，我们在powershell下运行程序，错误提示我们缺少自写的第三方库</p>
 <p>相信如果用过这个打包程序的师傅都会遇到这个问题，在打包简单程序时可以正常打开运行，但是当我们写的程序包含了自写的第三方库时，就会出现异常，最开始这个问题出现在我写机器人插件的时候，无奈之下我去百度上寻找pyinstaller的详细工作方式，它在打包的时候会自动导入Python的内置库，抱着试一试的心态我把自己写的第三方库放到了Python系统库目录下，而后同上面方式进行打包，最终成功解决了这个问题，后来的几个项目打包我也是采用这种方式，都很奏效。</p>
 <p>通过打包成exe的方式，我们可以发布exe文件，这样就可以很好的保护源代码</p>
 <h1 id="弊端分析"><a href="#弊端分析" class="headerlink" title="弊端分析"></a>弊端分析</h1><p>对于第一种编译为pyc的方法，近年出现了pyc的反编译技术，一些ctf比赛也以此作为一个考点 有很多站点例如<a href="https://tool.lu/pyc/" target="_blank" rel="noopener">https://tool.lu/pyc/</a>就可以将pyc文件还原成Python代码</p>
 <p>对于第三种方法，可能有人会觉得很安全，有一个名为pyinstxtractor.py的脚本可以在打包完毕的程序中提取出pyc文件，我们可以通过反编译pyc文件获得源代码 ，脚本下载地址：<a href="https://sourceforge.net/projects/pyinstallerextractor/" target="_blank" rel="noopener">https://sourceforge.net/projects/pyinstallerextractor/</a></p>
 <h1 id="方法推荐"><a href="#方法推荐" class="headerlink" title="方法推荐"></a>方法推荐</h1><h2 id="函数变量混淆-pyc编译"><a href="#函数变量混淆-pyc编译" class="headerlink" title="函数变量混淆+pyc编译"></a>函数变量混淆+pyc编译</h2><p>虽然pyc文件可以反编译出源代码，但是经过我多次试验，将源代码经过变量混淆后再反编译为pyc文件是很困难的，以我上面混淆完的函数为例子，它编译成pyc文件后在进行反编译结果如下：</p>
-<p><img src="https://i.imgur.com/MPuWLSe.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2019/03/18/5c8f6bbf510b1.jpg" alt=""></p>
 <p>可以看到它无法还原，甚至部分还原出来的代码都是错的</p>
 <h2 id="打包为exe文件加壳"><a href="#打包为exe文件加壳" class="headerlink" title="打包为exe文件加壳"></a>打包为exe文件加壳</h2><p>这个思路就很简单了，将项目用pyinstaller打包后再加壳，这样就很难进行源代码还原操作了</p>
 <p>最后感谢大家的阅读，祝安恒学院越来越好</p>
@@ -578,6 +578,10 @@ compileall.compile_dir(r&apos;E:/code&apos;)
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/12/sql注入备忘录/" rel="prev" title="sql注入备忘录">
+                sql注入备忘录 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -654,7 +658,7 @@ compileall.compile_dir(r&apos;E:/code&apos;)
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

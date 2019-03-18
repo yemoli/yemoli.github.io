@@ -94,21 +94,21 @@
 <meta property="og:site_name" content="yemoli&#39;s blog">
 <meta property="og:description" content="本文首发于 安恒网络空间安全讲武堂 :https://mp.weixin.qq.com/s/ffh-Jkt9UUKHErxeUMw4aw 很多师傅可能很少有接触线下赛AWD的机会，所以可能在比赛中比他人少很多经验，今天就和大家分享一下如何在资源有限的情况下去搭建自己的awd线下赛环境 因为前一段时间写awd框架的缘故，我迫切的需要找一个实战环境来实验自己的框架是否可以正常运行，翻遍各大资源站点后，">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://i.imgur.com/hw0mRPC.jpg">
-<meta property="og:image" content="https://i.imgur.com/Uoe8qW1.jpg">
-<meta property="og:image" content="https://i.imgur.com/kQef6E6.jpg">
-<meta property="og:image" content="https://i.imgur.com/HSeTRSo.jpg">
-<meta property="og:image" content="https://i.imgur.com/PDtuMXw.jpg">
-<meta property="og:image" content="https://i.imgur.com/8CC7Urd.jpg">
-<meta property="og:image" content="https://i.imgur.com/30IabSa.jpg">
-<meta property="og:image" content="https://i.imgur.com/pnH1z3s.jpg">
-<meta property="og:image" content="https://i.imgur.com/m66LXs2.jpg">
-<meta property="og:image" content="https://i.imgur.com/PJMx0kd.jpg">
-<meta property="og:updated_time" content="2019-03-07T07:53:46.951Z">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6c4730a05.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6c579202b.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6c6b0451a.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6c7cf3688.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6c9a49c34.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6caa925d3.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6cbddfd54.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6ccf00bd8.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6ce174279.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6cff19adf.jpg">
+<meta property="og:updated_time" content="2019-03-18T10:03:58.106Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="置顶-搭建属于自己的AWD训练平台">
 <meta name="twitter:description" content="本文首发于 安恒网络空间安全讲武堂 :https://mp.weixin.qq.com/s/ffh-Jkt9UUKHErxeUMw4aw 很多师傅可能很少有接触线下赛AWD的机会，所以可能在比赛中比他人少很多经验，今天就和大家分享一下如何在资源有限的情况下去搭建自己的awd线下赛环境 因为前一段时间写awd框架的缘故，我迫切的需要找一个实战环境来实验自己的框架是否可以正常运行，翻遍各大资源站点后，">
-<meta name="twitter:image" content="https://i.imgur.com/hw0mRPC.jpg">
+<meta name="twitter:image" content="https://i.loli.net/2019/03/18/5c8f6c4730a05.jpg">
 
 
 
@@ -373,26 +373,26 @@
 <p>因为前一段时间写awd框架的缘故，我迫切的需要找一个实战环境来实验自己的框架是否可以正常运行，翻遍各大资源站点后，终于在github上找到了一个开源项目，这里分享给大家：<a href="https://github.com/zhl2008/awd-platform" target="_blank" rel="noopener">https://github.com/zhl2008/awd-platform</a></p>
 <p>在搭建的过程中大家可能看不太懂项目中的说明文档，所以在这里我实际给大家演示一遍，其中的一些细节我尽量一一说到，另外在文末还会分享我自己写的一个积分统计板(我的第二个版本源码找不到了，所以在这里给大家分享我第一次写的那个)</p>
 <p>因为是个人嘛，毕竟资源有限，我只有一个腾讯云的学生机在空闲，今天就以这个机器为例进行搭建，给大家看一下我的配置</p>
-<p><img src="https://i.imgur.com/hw0mRPC.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2019/03/18/5c8f6c4730a05.jpg" alt=""></p>
 <p>这配置很低了，不过实测开启10个队伍的靶机是无压力的</p>
 <p>首先我们装一个ubuntu16.04的云服务器，然后登陆远程的ssh</p>
 <p>将项目克隆到服务器上：</p>
 <pre><code>git clone https://github.com/zhl2008/awd-platform.git
 </code></pre><p>然后进入项目</p>
 <pre><code>cd awd-platform/
-</code></pre><p><img src="https://i.imgur.com/Uoe8qW1.jpg" alt=""></p>
+</code></pre><p><img src="https://i.loli.net/2019/03/18/5c8f6c579202b.jpg" alt=""></p>
 <p>然后下载一下镜像：</p>
 <pre><code>docker pull zhl2008/web_14.04
 </code></pre><p>这块我卡了好久，他最后按文档操作会报错，后来我看源码的docker名字不是这个，而是zhl2008/web_14.04 web_14.04 所以为了方便直接可以改一下镜像的名字，这样就不用改源码去了</p>
 <pre><code>docker tag zhl2008/web_14.04 web_14.04
 </code></pre><p>然后接下来按照文档里说的操作一下</p>
-<p><img src="https://i.imgur.com/kQef6E6.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2019/03/18/5c8f6c6b0451a.jpg" alt=""></p>
 <p>我这里实际的命令有</p>
 <pre><code>python batch.py web_yunnan_simple 10
 
 
 python start.py ./ 10
-</code></pre><p><img src="https://i.imgur.com/HSeTRSo.jpg" alt=""></p>
+</code></pre><p><img src="https://i.loli.net/2019/03/18/5c8f6c7cf3688.jpg" alt=""></p>
 <p>这里用这个web_yunnan_simple的环境做例子，这个环境非常典型，包含了很多的基础漏洞，包括我的框架就是依照这个环境测试的</p>
 <p>到现在为止，我们的靶机就可以访问了</p>
 <p>因为是在一个服务器上运行了多个docker，靶机的映射端口规则是:</p>
@@ -404,9 +404,9 @@ team3 ---- 8803
 
 ....以此类推
 </code></pre><p>例如在我的环境下，靶机的地址就是：<a href="http://119.29.147.75:8801-8810" target="_blank" rel="noopener">http://119.29.147.75:8801-8810</a></p>
-<p><img src="https://i.imgur.com/PDtuMXw.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2019/03/18/5c8f6c9a49c34.jpg" alt=""></p>
 <p>各个靶机的ssh密码可以在项目的文件夹下的pass.txt文件中</p>
-<p><img src="https://i.imgur.com/8CC7Urd.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2019/03/18/5c8f6caa925d3.jpg" alt=""></p>
 <p>ssh的端口规则是：</p>
 <pre><code>team1 ---- 2201
 
@@ -416,15 +416,15 @@ team3 ---- 2203
 
 ....以此类推
 </code></pre><p>关于check模块，他的check脚本是不能用的，我们需要进行一些修改，这个规则要根据自己的环镜自己编写，总体思路就是判断页面是否存在，存在就加一分，不存在就减一分，在他内置check脚本的基础上，我们可以稍微修改一下靶机环境的源码，然后用check脚本去访问，在他内置的脚本中还可以修改每次加分和扣分的多少</p>
-<p><img src="https://i.imgur.com/30IabSa.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2019/03/18/5c8f6cbddfd54.jpg" alt=""></p>
 <p>还有一个要注意的地方就是，在项目的根目录的flag_server/中，我们<br>要赋予score.txt 和result.txt 777权限，否则分数变动无法进行同步</p>
 <p>关于flag的提交方式和文档是一样的</p>
-<p><img src="https://i.imgur.com/pnH1z3s.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2019/03/18/5c8f6ccf00bd8.jpg" alt=""></p>
 <p>得分情况可以访问ip:8080/score.txt</p>
 <p>像我这个</p>
-<p><img src="https://i.imgur.com/m66LXs2.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2019/03/18/5c8f6ce174279.jpg" alt=""></p>
 <p>我感觉太难看了，就写了个计分板</p>
-<p><img src="https://i.imgur.com/PJMx0kd.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2019/03/18/5c8f6cff19adf.jpg" alt=""></p>
 <p>在使用的时候改一下源码里的ip地址就可以了</p>
 <p>计分板源码打包：<a href="https://pan.baidu.com/s/18KlIeluaTtm-kT3KuXHseQ" target="_blank" rel="noopener">https://pan.baidu.com/s/18KlIeluaTtm-kT3KuXHseQ</a></p>
 <p>提取码：cvdn</p>
@@ -568,7 +568,7 @@ team3 ---- 2203
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

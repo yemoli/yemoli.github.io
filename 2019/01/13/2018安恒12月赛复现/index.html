@@ -94,20 +94,20 @@
 <meta property="og:site_name" content="yemoli&#39;s blog">
 <meta property="og:description" content="WEBeasy题目是如下代码 &amp;lt;?php   @error_reporting(1);  include &amp;apos;flag.php&amp;apos;; class baby  {    public $file; function __toString()   {   if(isset($this-&amp;gt;file))  { $filename = &amp;quot;./{$this-&amp;gt;fil">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://i.imgur.com/cyhUSm9.jpg">
-<meta property="og:image" content="https://i.imgur.com/RzSw8v1.jpg">
-<meta property="og:image" content="https://i.imgur.com/iCGwMkz.jpg">
-<meta property="og:image" content="https://i.imgur.com/EI5QmO5.jpg">
-<meta property="og:image" content="https://i.imgur.com/alpFdrk.jpg">
-<meta property="og:image" content="https://i.imgur.com/b2BFPjZ.jpg">
-<meta property="og:image" content="https://i.imgur.com/OxFdjul.jpg">
-<meta property="og:image" content="https://i.imgur.com/z5zuUKL.jpg">
-<meta property="og:image" content="https://i.imgur.com/z7Hp9Xc.jpg">
-<meta property="og:updated_time" content="2019-01-13T07:28:04.205Z">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/18/AmxsdH.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/18/AmxcFA.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/18/Amx2Wt.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/18/AmxWSP.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/18/AmxfQf.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/18/Amx4OS.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/18/AmxIeg.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/18/AmxowQ.jpg">
+<meta property="og:image" content="https://s2.ax1x.com/2019/03/18/AmxToj.jpg">
+<meta property="og:updated_time" content="2019-03-18T11:55:51.610Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2018安恒12月赛复现">
 <meta name="twitter:description" content="WEBeasy题目是如下代码 &amp;lt;?php   @error_reporting(1);  include &amp;apos;flag.php&amp;apos;; class baby  {    public $file; function __toString()   {   if(isset($this-&amp;gt;file))  { $filename = &amp;quot;./{$this-&amp;gt;fil">
-<meta name="twitter:image" content="https://i.imgur.com/cyhUSm9.jpg">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/03/18/AmxsdH.jpg">
 
 
 
@@ -431,28 +431,28 @@ echo serialize($a);
 </code></pre><p>本地访问页面生成的反序列化字符串为：</p>
 <pre><code>O:4:&quot;baby&quot;:1:{s:4:&quot;file&quot;;s:8:&quot;flag.php&quot;;}
 </code></pre><p>将该串内容作为data的值传入，发现被waf拦截</p>
-<p><img src="https://i.imgur.com/cyhUSm9.jpg" alt=""></p>
+<p><img src="https://s2.ax1x.com/2019/03/18/AmxsdH.jpg" alt=""></p>
 <p>仔细查看题目正则部分，用+4绕过即可</p>
-<p><img src="https://i.imgur.com/RzSw8v1.jpg" alt=""></p>
+<p><img src="https://s2.ax1x.com/2019/03/18/AmxcFA.jpg" alt=""></p>
 <h2 id="ezweb2"><a href="#ezweb2" class="headerlink" title="ezweb2"></a>ezweb2</h2><p>使用御剑扫描目录发现了admin.php文件，访问后提示：</p>
-<p><img src="https://i.imgur.com/iCGwMkz.jpg" alt=""></p>
+<p><img src="https://s2.ax1x.com/2019/03/18/Amx2Wt.jpg" alt=""></p>
 <p>提示不是admin，下意识的查看cookie</p>
-<p><img src="https://i.imgur.com/EI5QmO5.jpg" alt=""></p>
+<p><img src="https://s2.ax1x.com/2019/03/18/AmxWSP.jpg" alt=""></p>
 <p>将user部分base64解码得到user,我们将admin base64编码后将其替换</p>
 <p>进入到后台</p>
-<p><img src="https://i.imgur.com/alpFdrk.jpg" alt=""></p>
+<p><img src="https://s2.ax1x.com/2019/03/18/AmxfQf.jpg" alt=""></p>
 <p>发现可以命令执行，但是过滤了空格</p>
 <p>空格可以使用$IFS绕过</p>
-<p>ls$IFS/<br><img src="https://i.imgur.com/b2BFPjZ.jpg" alt=""></p>
+<p>ls$IFS/<br><img src="https://s2.ax1x.com/2019/03/18/Amx4OS.jpg" alt=""></p>
 <p>读取flag文件</p>
-<p><img src="https://i.imgur.com/OxFdjul.jpg" alt=""></p>
+<p><img src="https://s2.ax1x.com/2019/03/18/AmxIeg.jpg" alt=""></p>
 <h1 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h1><h2 id="学习资料"><a href="#学习资料" class="headerlink" title="学习资料"></a>学习资料</h2><p>拿到文件后很明显是明文攻击</p>
 <p>跑出密码</p>
 <p>打开解压后的Word文档，将图片移走，得到flag</p>
-<p><img src="https://i.imgur.com/z5zuUKL.jpg" alt=""></p>
+<p><img src="https://s2.ax1x.com/2019/03/18/AmxowQ.jpg" alt=""></p>
 <h2 id="JUJU"><a href="#JUJU" class="headerlink" title="JUJU"></a>JUJU</h2><p>题目提示有11只猪，而打开图片明显数量不足，尝试修改图片高度</p>
 <p>发现了base32编码</p>
-<p><img src="https://i.imgur.com/z7Hp9Xc.jpg" alt=""></p>
+<p><img src="https://s2.ax1x.com/2019/03/18/AmxToj.jpg" alt=""></p>
 <p>解密后得到flag</p>
 
       
@@ -602,7 +602,7 @@ echo serialize($a);
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
