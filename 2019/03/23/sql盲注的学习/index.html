@@ -86,13 +86,13 @@
 
 
 
-<meta name="description" content="这几天在学习sql注入的有关内容，今天记录一下我认为比较重要的部分，即sql盲注，我一开始学习的时候看到了好多的函数，看着看着就弄混了，相信不少新入门的师傅也有类似的困惑，经过多番心理斗争，我终于决定将这部分知识好整理一下，同时也给大家分享一下我在学习过程中编写的几个自动注入脚本，也欢迎各位师傅的指点和斧正。 函数整理这里我先将所用到的功能函数整理一下，同时也欢迎各位师傅的补充和纠正 left(m">
+<meta name="description" content="本文首发于：安恒网络空间安全讲武堂 这几天在学习sql注入的有关内容，今天记录一下我认为比较重要的部分，即sql盲注，我一开始学习的时候看到了好多的函数，看着看着就弄混了，相信不少新入门的师傅也有类似的困惑，经过多番心理斗争，我终于决定将这部分知识好整理一下，同时也给大家分享一下我在学习过程中编写的几个自动注入脚本，也欢迎各位师傅的指点和斧正。 函数整理这里我先将所用到的功能函数整理一下，同时也欢">
 <meta name="keywords" content="系统总结">
 <meta property="og:type" content="article">
 <meta property="og:title" content="sql盲注的学习">
 <meta property="og:url" content="https://yml-sec.top/2019/03/23/sql盲注的学习/index.html">
 <meta property="og:site_name" content="yemoli&#39;s blog">
-<meta property="og:description" content="这几天在学习sql注入的有关内容，今天记录一下我认为比较重要的部分，即sql盲注，我一开始学习的时候看到了好多的函数，看着看着就弄混了，相信不少新入门的师傅也有类似的困惑，经过多番心理斗争，我终于决定将这部分知识好整理一下，同时也给大家分享一下我在学习过程中编写的几个自动注入脚本，也欢迎各位师傅的指点和斧正。 函数整理这里我先将所用到的功能函数整理一下，同时也欢迎各位师傅的补充和纠正 left(m">
+<meta property="og:description" content="本文首发于：安恒网络空间安全讲武堂 这几天在学习sql注入的有关内容，今天记录一下我认为比较重要的部分，即sql盲注，我一开始学习的时候看到了好多的函数，看着看着就弄混了，相信不少新入门的师傅也有类似的困惑，经过多番心理斗争，我终于决定将这部分知识好整理一下，同时也给大家分享一下我在学习过程中编写的几个自动注入脚本，也欢迎各位师傅的指点和斧正。 函数整理这里我先将所用到的功能函数整理一下，同时也欢">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://yml-sec.top/2019/03/23/sql盲注的学习/img/1.jpg">
 <meta property="og:image" content="https://yml-sec.top/2019/03/23/sql盲注的学习/img/2.jpg">
@@ -106,10 +106,10 @@
 <meta property="og:image" content="https://yml-sec.top/2019/03/23/sql盲注的学习/img/11.jpg">
 <meta property="og:image" content="https://yml-sec.top/2019/03/23/sql盲注的学习/img/12.jpg">
 <meta property="og:image" content="https://yml-sec.top/2019/03/23/sql盲注的学习/img/13.jpg">
-<meta property="og:updated_time" content="2019-03-23T13:56:57.885Z">
+<meta property="og:updated_time" content="2019-03-23T14:26:58.531Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sql盲注的学习">
-<meta name="twitter:description" content="这几天在学习sql注入的有关内容，今天记录一下我认为比较重要的部分，即sql盲注，我一开始学习的时候看到了好多的函数，看着看着就弄混了，相信不少新入门的师傅也有类似的困惑，经过多番心理斗争，我终于决定将这部分知识好整理一下，同时也给大家分享一下我在学习过程中编写的几个自动注入脚本，也欢迎各位师傅的指点和斧正。 函数整理这里我先将所用到的功能函数整理一下，同时也欢迎各位师傅的补充和纠正 left(m">
+<meta name="twitter:description" content="本文首发于：安恒网络空间安全讲武堂 这几天在学习sql注入的有关内容，今天记录一下我认为比较重要的部分，即sql盲注，我一开始学习的时候看到了好多的函数，看着看着就弄混了，相信不少新入门的师傅也有类似的困惑，经过多番心理斗争，我终于决定将这部分知识好整理一下，同时也给大家分享一下我在学习过程中编写的几个自动注入脚本，也欢迎各位师傅的指点和斧正。 函数整理这里我先将所用到的功能函数整理一下，同时也欢">
 <meta name="twitter:image" content="https://yml-sec.top/2019/03/23/sql盲注的学习/img/1.jpg">
 
 
@@ -333,7 +333,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1.9k
+                  2k
                 </span>
               
 
@@ -370,7 +370,8 @@
       
 
       
-        <p>这几天在学习sql注入的有关内容，今天记录一下我认为比较重要的部分，即sql盲注，我一开始学习的时候看到了好多的函数，看着看着就弄混了，相信不少新入门的师傅也有类似的困惑，经过多番心理斗争，我终于决定将这部分知识好整理一下，同时也给大家分享一下我在学习过程中编写的几个自动注入脚本，也欢迎各位师傅的指点和斧正。</p>
+        <p>本文首发于：<a href="http://mp.weixin.qq.com/s?__biz=MzU1MzE3Njg2Mw==&amp;mid=2247486376&amp;idx=1&amp;sn=8913d98c94c124bc76d7ee4c996563dd&amp;chksm=fbf791d8cc8018ce6a1f9914577b2715066ccba46f45133b771dc80a3fd23a5d6a24e45777bf&amp;mpshare=1&amp;scene=23&amp;srcid=0323MfHuuKvUeaDbEe7QsWrn#rd" target="_blank" rel="noopener">安恒网络空间安全讲武堂</a></p>
+<p>这几天在学习sql注入的有关内容，今天记录一下我认为比较重要的部分，即sql盲注，我一开始学习的时候看到了好多的函数，看着看着就弄混了，相信不少新入门的师傅也有类似的困惑，经过多番心理斗争，我终于决定将这部分知识好整理一下，同时也给大家分享一下我在学习过程中编写的几个自动注入脚本，也欢迎各位师傅的指点和斧正。</p>
 <h1 id="函数整理"><a href="#函数整理" class="headerlink" title="函数整理"></a>函数整理</h1><p>这里我先将所用到的功能函数整理一下，同时也欢迎各位师傅的补充和纠正</p>
 <pre><code>left(m,n) #从左向右截取字符串m返回其前n位
 
