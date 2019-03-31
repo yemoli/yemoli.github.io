@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="系统总结,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本文首发于：安恒网络空间安全讲武堂 最近在跟师傅们讨论代码审计技巧的时候，好几个师傅都提到了变量覆盖漏洞，对于这一块的知识我并不是了解很多，网上的说明或多或少的都有一些粗略和不足，所以在这几天闲暇之余，我特意地将PHP变量覆盖漏洞进行了系统的总结，在此记录一下，个人难免会有疏漏和不足之处，非常欢迎各位师傅的补充与纠正 简介我认为一个比较正确的定义是：在PHP代码中将自定义参数值替换为原有参数值的情">
+<meta name="keywords" content="系统总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈变量覆盖漏洞">
+<meta property="og:url" content="https://yml-sec.top/2019/03/31/浅谈变量覆盖漏洞/index.html">
+<meta property="og:site_name" content="yemoli&#39;s blog">
+<meta property="og:description" content="本文首发于：安恒网络空间安全讲武堂 最近在跟师傅们讨论代码审计技巧的时候，好几个师傅都提到了变量覆盖漏洞，对于这一块的知识我并不是了解很多，网上的说明或多或少的都有一些粗略和不足，所以在这几天闲暇之余，我特意地将PHP变量覆盖漏洞进行了系统的总结，在此记录一下，个人难免会有疏漏和不足之处，非常欢迎各位师傅的补充与纠正 简介我认为一个比较正确的定义是：在PHP代码中将自定义参数值替换为原有参数值的情">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://i.loli.net/2019/03/27/5c9b4e89d4438.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/27/5c9b4ef8dbccb.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/27/5c9b52af257fe.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/27/5c9b5359c38d9.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/27/5c9b59ef34881.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/27/5c9b5a83781a0.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/27/5c9b60320de17.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/27/5c9b60c224053.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/27/5c9b6c0388949.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/27/5c9b6d72de986.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/27/5c9b70618d3b5.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/27/5c9b723da4462.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/27/5c9b75fe2de2a.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/27/5c9b776f0cc87.jpg">
+<meta property="og:updated_time" content="2019-03-31T12:59:42.240Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅谈变量覆盖漏洞">
+<meta name="twitter:description" content="本文首发于：安恒网络空间安全讲武堂 最近在跟师傅们讨论代码审计技巧的时候，好几个师傅都提到了变量覆盖漏洞，对于这一块的知识我并不是了解很多，网上的说明或多或少的都有一些粗略和不足，所以在这几天闲暇之余，我特意地将PHP变量覆盖漏洞进行了系统的总结，在此记录一下，个人难免会有疏漏和不足之处，非常欢迎各位师傅的补充与纠正 简介我认为一个比较正确的定义是：在PHP代码中将自定义参数值替换为原有参数值的情">
+<meta name="twitter:image" content="https://i.loli.net/2019/03/27/5c9b4e89d4438.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://yml-sec.top/2019/03/31/浅谈变量覆盖漏洞/">
+
+
+
+
+
+  <title>浅谈变量覆盖漏洞 | yemoli's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">yemoli's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2019/03/31/浅谈变量覆盖漏洞/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="夜莫离、">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yemoli's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">浅谈变量覆盖漏洞</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-31T20:53:40+08:00">
+                2019-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.8k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文首发于：<a href="安恒网络空间安全讲武堂" title="https://mp.weixin.qq.com/s?__biz=MzU1MzE3Njg2Mw==&amp;mid=2247486407&amp;idx=1&amp;sn=48ff4f80c3ba183132b7cfe86319196c&amp;chksm=fbf791b7cc8018a18a8730dd0e6431c6db114c6ab2b1c7d3a4fa515cf124f664341dbe39299b&amp;mpshare=1&amp;scene=23&amp;srcid=#rd">安恒网络空间安全讲武堂</a></p>
+<p>最近在跟师傅们讨论代码审计技巧的时候，好几个师傅都提到了变量覆盖漏洞，对于这一块的知识我并不是了解很多，网上的说明或多或少的都有一些粗略和不足，所以在这几天闲暇之余，我特意地将PHP变量覆盖漏洞进行了系统的总结，在此记录一下，个人难免会有疏漏和不足之处，非常欢迎各位师傅的补充与纠正</p>
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>我认为一个比较正确的定义是：在PHP代码中将自定义参数值替换为原有参数值的情况称为变量覆盖。</p>
+<p>变量覆盖漏洞一般单体作用很小，并不能造成很大危害，但是在与其他应用代码或漏洞结合后，其造成的危害可能是无法估量的，最简单的例如购买商品的支付系统，某些爆出的0元支付下单的BUG就常常可以见到变量覆盖漏洞的身影。</p>
+<h1 id="常见的漏洞引发类型"><a href="#常见的漏洞引发类型" class="headerlink" title="常见的漏洞引发类型"></a>常见的漏洞引发类型</h1><h2 id="由-变量赋值引发的覆盖"><a href="#由-变量赋值引发的覆盖" class="headerlink" title="由$$变量赋值引发的覆盖"></a>由$$变量赋值引发的覆盖</h2><p>$$是一种可变变量的写法，它可以使一个普通变量的值作为可变变量的名字，这种类型常常会使用遍历的方式来释放变量的代码，最常见的就是foreach的遍历，示例代码如下：</p>
+<pre><code>&lt;?php
+$yml = 10;
+echo $yml;
+echo &quot;&lt;br&gt;&quot;;
+foreach ($_POST as $k =&gt; $v){
+    $$k = $v;
+    echo $yml;
+}
+?&gt;
+</code></pre><p>无任何操作时的正常输出：</p>
+<p><img src="https://i.loli.net/2019/03/27/5c9b4e89d4438.jpg" alt=""></p>
+<p>当post内容为yml=1000时：</p>
+<p><img src="https://i.loli.net/2019/03/27/5c9b4ef8dbccb.jpg" alt=""></p>
+<p>很明显看到这里$yml的值变为了1000，我们成功的完成了一次变量覆盖。</p>
+<p>再拿出一个我前几天给学弟们出的一个小题为例子：</p>
+<p>代码：</p>
+<pre><code>&lt;?php
+include(&apos;flag.php&apos;);
+$flag = &apos;flag{it_Is_Y0ur_flag}&apos;;
+foreach ($_POST as $key =&gt; $value) {
+    $a = $value;
+    $$$key=$value;
+    $ccut = $flag;
+    $yml = $_GET[&quot;flag&quot;];
+    if ($yml == &quot;iwantflag&quot;)
+    {
+        if ($ccut == &quot;flag&quot;)
+        {
+            echo $fl4g;
+        }
+        else
+        {
+            echo &quot;you will get it&quot;;
+        }
+    }
+    else
+    {
+        echo &quot;nonono&quot;;
+    }    
+    # code...
+}
+highlight_file(__FILE__);   
+?&gt;
+</code></pre><p>题目的本质还是变量覆盖，题目中核心的部分就是需要将$flag的值由flag{it_Is_Y0ur_flag}覆盖为flag,仔细阅读代码流程再结合上面的例子就可以轻松解出，我这里直接给出payload：</p>
+<p><img src="https://i.loli.net/2019/03/27/5c9b52af257fe.jpg" alt=""></p>
+<h2 id="extract-函数使用不当导致的变量覆盖"><a href="#extract-函数使用不当导致的变量覆盖" class="headerlink" title="extract()函数使用不当导致的变量覆盖"></a>extract()函数使用不当导致的变量覆盖</h2><p>该函数可以将变量从数组中导入当前的符号表</p>
+<p>我们看一下在w3school中函数的定义</p>
+<p><img src="https://i.loli.net/2019/03/27/5c9b5359c38d9.jpg" alt=""></p>
+<p>这里我们要注意一下该函数的第二个参数，该参数的选择就确定了将变量导入符号表时的行为，在实际生产生活中，我们常常使用的值有EXTR_OVERWRITE和EXTR_SKIP。</p>
+<p>当值设定为EXTR_SKIP时，在导入符号表的过程中，如果变量名发生冲突，则跳过该变量不进行覆盖，当值为EXTR_OVERWRITE时如果发生冲突，则覆盖已有变量，该函数在不指定第二个参数时默认使用EXTR_OVERWRITE，这就为我们提供了覆盖的可能。</p>
+<p>示例代码：</p>
+<pre><code>&lt;?php
+$yml = 10;
+echo &apos;out0:&apos;.$yml;
+extract($_POST);
+echo &apos;&lt;br&gt;&apos;;
+echo &quot;out1:&quot;.$yml;
+
+?&gt;
+</code></pre><p>无post输入时</p>
+<p><img src="https://i.loli.net/2019/03/27/5c9b59ef34881.jpg" alt=""></p>
+<p>输入yml=199时：</p>
+<p><img src="https://i.loli.net/2019/03/27/5c9b5a83781a0.jpg" alt=""></p>
+<p>我们成功的将$yml的值从10覆盖为了199</p>
+<h2 id="全局变量的覆盖"><a href="#全局变量的覆盖" class="headerlink" title="全局变量的覆盖"></a>全局变量的覆盖</h2><p>如果某些变量没有被初始化，并且黑客可以控制，将会是一件很危险的事情，在这种情况下，漏洞触发的前提是register_globals为ON(register_globals的值可以在php.ini中修改，我在个人的PHPstudy上发现在php5.2版本后该值默认是OFF)</p>
+<p>示例代码：</p>
+<pre><code>&lt;?php
+
+echo (int)ini_get(&quot;register_globals&quot;);
+echo &apos;&lt;br&gt;&apos;;
+echo &quot;yml=&quot;.$yml;
+?&gt;
+</code></pre><p>当register_globals为OFF时</p>
+<p><img src="https://i.loli.net/2019/03/27/5c9b60320de17.jpg" alt=""></p>
+<p>可以我们无法将未初始化的变量进行注册，但是当register_globals的值为ON时，结果如下</p>
+<p><img src="https://i.loli.net/2019/03/27/5c9b60c224053.jpg" alt=""></p>
+<p>可以看到我们成功注册了一个未初始化的变量</p>
+<p>还有一种通过$GLOBALS获取的变量在使用不当时也会导致变量覆盖，同样漏洞触发的前提是register_globals为ON</p>
+<p>还是用上面的示例代码：</p>
+<p><img src="https://i.loli.net/2019/03/27/5c9b6c0388949.jpg" alt=""></p>
+<p>我们成功通过注入GLOBALS[yml]来改变$yml的值</p>
+<h2 id="parse-str-函数使用不当导致的覆盖"><a href="#parse-str-函数使用不当导致的覆盖" class="headerlink" title="parse_str()函数使用不当导致的覆盖"></a>parse_str()函数使用不当导致的覆盖</h2><p>该函数可以把查询的字符串解析到变量中，我们来看一下w3school中对该函数的定义</p>
+<p><img src="https://i.loli.net/2019/03/27/5c9b6d72de986.jpg" alt="23.jpg"></p>
+<p>这里指的注意的是，如果未设置第二个参数的值，由该函数设置的变量将覆盖已存在的同名变量</p>
+<p>所以当我们没有设置函数的第二个参数时，恶意攻击者很可能通过特定的输入来改变代码中已定义的变量的值</p>
+<p>示例：</p>
+<pre><code>&lt;?php
+$yml = &quot;cool&quot;;
+echo &quot;out0:&quot;.$yml;
+echo &quot;&lt;br&gt;&quot;;
+$a = $_GET[&apos;a&apos;];
+parse_str($a);
+echo &quot;out1:&quot;.$yml;
+?&gt;
+</code></pre><p>在这里我们没有设置parse_str()函数的第二个参数，现在我们来尝试构造同名变量</p>
+<p><img src="https://i.loli.net/2019/03/27/5c9b70618d3b5.jpg" alt=""></p>
+<p>可以看到我们成功的使用构造同名变量的方法覆盖掉了$yml的原有值</p>
+<h2 id="import-request-variables所导致的变量覆盖"><a href="#import-request-variables所导致的变量覆盖" class="headerlink" title="import_request_variables所导致的变量覆盖"></a>import_request_variables所导致的变量覆盖</h2><p>该函数可以将 GET／POST／Cookie 变量导入到全局作用域中，我们看一下该函数的定义(在PHP5.4之后的版本中，该函数将不再使用)</p>
+<p><img src="https://i.loli.net/2019/03/27/5c9b723da4462.jpg" alt=""></p>
+<p>该函数的第二个参数用于设置注册变量的前缀，漏洞触发的原因是当第二个参数未进行设置时，将会出现覆盖全局变量的情况</p>
+<p>示例：</p>
+<pre><code>&lt;?php
+$yml = &quot;happy&quot;;
+echo &quot;out0:&quot;.$yml;
+echo &quot;&lt;br&gt;&quot;;
+import_request_variables(&apos;P&apos;);
+echo &quot;out1:&quot;.$yml;
+?&gt;
+</code></pre><p>无输入时：</p>
+<p><img src="https://i.loli.net/2019/03/27/5c9b75fe2de2a.jpg" alt=""></p>
+<p>代码没有设置import_request_variables的第二个参数，我们来设置同名变量输入看是否能够进行覆盖</p>
+<p><img src="https://i.loli.net/2019/03/27/5c9b776f0cc87.jpg" alt=""></p>
+<p>在这里我们成功的注册了同名的全局变量将原有变量的值进行了覆盖。</p>
+<h1 id="漏洞防御"><a href="#漏洞防御" class="headerlink" title="漏洞防御"></a>漏洞防御</h1><p>对于第一种情况，在审计的时候要注意$$的赋值语句，使用恰当的方式防止变量覆盖漏洞的发生</p>
+<p>对于第二种情况，在使用extract()函数时，可以指定将第二个参数设置为EXTRSKIP，并且留意变量的获取顺序，控制好用户的输入。</p>
+<p>对于第三种情况，强烈推荐将registerglobals设置为Off</p>
+<p>对于第四种情况，我们应该在使用parse_str()时养成指定第二个参数的习惯，这样才能避免变量被覆盖</p>
+<p>对于最后一种情况，我们同样要指定第二个函数参数来设置要注册的变量前缀，不过这个函数现在已经很少用了。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>变量覆盖漏洞触发的灵活性较高，但我们只要抓住根本问题，控制好用户输入并且规范代码的书写，还是可以进行防范的，该漏洞经常在ctf题目中作为一个考点出现，只要我们紧跟代码逻辑，还是很容易解出题目的。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="夜莫离、 WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="夜莫离、 Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/系统总结/" rel="tag"># 系统总结</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/23/sql盲注的学习/" rel="next" title="sql盲注的学习">
+                <i class="fa fa-chevron-left"></i> sql盲注的学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">夜莫离、</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yemoli" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.baidu.com/" title="Baidu" target="_blank">Baidu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://chxing.xyz/" title="Bling_Dog" target="_blank">Bling_Dog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.smi1e.top/" title="Smi1e" target="_blank">Smi1e</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://altman.vip/" title="Altman" target="_blank">Altman</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.virtua1.cn/" title="Virtua1" target="_blank">Virtua1</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常见的漏洞引发类型"><span class="nav-number">2.</span> <span class="nav-text">常见的漏洞引发类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#由-变量赋值引发的覆盖"><span class="nav-number">2.1.</span> <span class="nav-text">由$$变量赋值引发的覆盖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#extract-函数使用不当导致的变量覆盖"><span class="nav-number">2.2.</span> <span class="nav-text">extract()函数使用不当导致的变量覆盖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全局变量的覆盖"><span class="nav-number">2.3.</span> <span class="nav-text">全局变量的覆盖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#parse-str-函数使用不当导致的覆盖"><span class="nav-number">2.4.</span> <span class="nav-text">parse_str()函数使用不当导致的覆盖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#import-request-variables所导致的变量覆盖"><span class="nav-number">2.5.</span> <span class="nav-text">import_request_variables所导致的变量覆盖</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#漏洞防御"><span class="nav-number">3.</span> <span class="nav-text">漏洞防御</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">夜莫离、</span>
+
+  
+</div>
+
+
+  <!-- <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div> 
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>-->
+
+
+
+<div class="theme-info">
+ <div class="powered-by"></div>
+ <span class="post-count">博客全站共34.3k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>
