@@ -49,8 +49,8 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[置顶-搭建属于自己的AWD训练平台]]></title>
-    <url>%2F2019%2F03%2F07%2F%E7%BD%AE%E9%A1%B6-%E6%90%AD%E5%BB%BA%E5%B1%9E%E4%BA%8E%E8%87%AA%E5%B7%B1%E7%9A%84AWD%E8%AE%AD%E7%BB%83%E5%B9%B3%E5%8F%B0%2F</url>
+    <title><![CDATA[搭建属于自己的AWD训练平台]]></title>
+    <url>%2F2019%2F03%2F07%2F%E6%90%AD%E5%BB%BA%E5%B1%9E%E4%BA%8E%E8%87%AA%E5%B7%B1%E7%9A%84AWD%E8%AE%AD%E7%BB%83%E5%B9%B3%E5%8F%B0%2F</url>
     <content type="text"><![CDATA[本文首发于 安恒网络空间安全讲武堂 :https://mp.weixin.qq.com/s/ffh-Jkt9UUKHErxeUMw4aw 很多师傅可能很少有接触线下赛AWD的机会，所以可能在比赛中比他人少很多经验，今天就和大家分享一下如何在资源有限的情况下去搭建自己的awd线下赛环境 因为前一段时间写awd框架的缘故，我迫切的需要找一个实战环境来实验自己的框架是否可以正常运行，翻遍各大资源站点后，终于在github上找到了一个开源项目，这里分享给大家：https://github.com/zhl2008/awd-platform 在搭建的过程中大家可能看不太懂项目中的说明文档，所以在这里我实际给大家演示一遍，其中的一些细节我尽量一一说到，另外在文末还会分享我自己写的一个积分统计板(我的第二个版本源码找不到了，所以在这里给大家分享我第一次写的那个) 因为是个人嘛，毕竟资源有限，我只有一个腾讯云的学生机在空闲，今天就以这个机器为例进行搭建，给大家看一下我的配置 这配置很低了，不过实测开启10个队伍的靶机是无压力的 首先我们装一个ubuntu16.04的云服务器，然后登陆远程的ssh 将项目克隆到服务器上： git clone https://github.com/zhl2008/awd-platform.git 然后进入项目 cd awd-platform/ 然后下载一下镜像： docker pull zhl2008/web_14.04 这块我卡了好久，他最后按文档操作会报错，后来我看源码的docker名字不是这个，而是zhl2008/web_14.04 web_14.04 所以为了方便直接可以改一下镜像的名字，这样就不用改源码去了 docker tag zhl2008/web_14.04 web_14.04 然后接下来按照文档里说的操作一下 我这里实际的命令有 python batch.py web_yunnan_simple 10 python start.py ./ 10 这里用这个web_yunnan_simple的环境做例子，这个环境非常典型，包含了很多的基础漏洞，包括我的框架就是依照这个环境测试的 到现在为止，我们的靶机就可以访问了 因为是在一个服务器上运行了多个docker，靶机的映射端口规则是: team1 ---- 8801 team3 ---- 8802 team3 ---- 8803 ....以此类推 例如在我的环境下，靶机的地址就是：http://119.29.147.75:8801-8810 各个靶机的ssh密码可以在项目的文件夹下的pass.txt文件中 ssh的端口规则是： team1 ---- 2201 team2 ---- 2202 team3 ---- 2203 ....以此类推 关于check模块，他的check脚本是不能用的，我们需要进行一些修改，这个规则要根据自己的环镜自己编写，总体思路就是判断页面是否存在，存在就加一分，不存在就减一分，在他内置check脚本的基础上，我们可以稍微修改一下靶机环境的源码，然后用check脚本去访问，在他内置的脚本中还可以修改每次加分和扣分的多少 还有一个要注意的地方就是，在项目的根目录的flag_server/中，我们要赋予score.txt 和result.txt 777权限，否则分数变动无法进行同步 关于flag的提交方式和文档是一样的 得分情况可以访问ip:8080/score.txt 像我这个 我感觉太难看了，就写了个计分板 在使用的时候改一下源码里的ip地址就可以了 计分板源码打包：https://pan.baidu.com/s/18KlIeluaTtm-kT3KuXHseQ 提取码：cvdn 最后祝x平台越办越好。]]></content>
       <tags>
         <tag>原创教程</tag>
