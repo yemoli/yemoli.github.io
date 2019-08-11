@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="漏洞复现,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="代码分析漏洞利用点主要是php弱类型的判断缺陷，漏洞代码位于 member\resetpassword.php 主要代码如下 123456789101112131415161718192021else if($dopost == &quot;safequestion&quot;)&amp;#123;    $mid = preg_replace(&quot;#[^0-9]#&quot;, &quot;&quot;, $id);    $sql = &quot;SELECT">
+<meta name="keywords" content="漏洞复现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DedeCms5-7任意用户密码重置分析">
+<meta property="og:url" content="https://yml-sec.top/2019/08/06/DedeCms5-7任意用户密码重置分析/index.html">
+<meta property="og:site_name" content="yemoli&#39;s blog">
+<meta property="og:description" content="代码分析漏洞利用点主要是php弱类型的判断缺陷，漏洞代码位于 member\resetpassword.php 主要代码如下 123456789101112131415161718192021else if($dopost == &quot;safequestion&quot;)&amp;#123;    $mid = preg_replace(&quot;#[^0-9]#&quot;, &quot;&quot;, $id);    $sql = &quot;SELECT">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://yml-sec.top/2019/08/06/DedeCms5-7任意用户密码重置分析/1.png">
+<meta property="og:image" content="https://yml-sec.top/2019/08/06/DedeCms5-7任意用户密码重置分析/2.png">
+<meta property="og:image" content="https://yml-sec.top/2019/08/06/DedeCms5-7任意用户密码重置分析/3.png">
+<meta property="og:image" content="https://yml-sec.top/2019/08/06/DedeCms5-7任意用户密码重置分析/4.png">
+<meta property="og:updated_time" content="2019-08-11T02:02:58.397Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DedeCms5-7任意用户密码重置分析">
+<meta name="twitter:description" content="代码分析漏洞利用点主要是php弱类型的判断缺陷，漏洞代码位于 member\resetpassword.php 主要代码如下 123456789101112131415161718192021else if($dopost == &quot;safequestion&quot;)&amp;#123;    $mid = preg_replace(&quot;#[^0-9]#&quot;, &quot;&quot;, $id);    $sql = &quot;SELECT">
+<meta name="twitter:image" content="https://yml-sec.top/2019/08/06/DedeCms5-7任意用户密码重置分析/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://yml-sec.top/2019/08/06/DedeCms5-7任意用户密码重置分析/">
+
+
+
+
+
+  <title>DedeCms5-7任意用户密码重置分析 | yemoli's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">yemoli's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-feiends">
+          <a href="/friends/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            feiends
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2019/08/06/DedeCms5-7任意用户密码重置分析/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="夜莫离、">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yemoli's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">DedeCms5-7任意用户密码重置分析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-06T10:53:47+08:00">
+                2019-08-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h1><p>漏洞利用点主要是php弱类型的判断缺陷，漏洞代码位于 member\resetpassword.php</p>
+<p>主要代码如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>($dopost == <span class="string">"safequestion"</span>)</span><br><span class="line">&#123;</span><br><span class="line">    $mid = preg_replace(<span class="string">"#[^0-9]#"</span>, <span class="string">""</span>, $id);</span><br><span class="line">    $sql = <span class="string">"SELECT safequestion,safeanswer,userid,email FROM #@__member WHERE mid = '$mid'"</span>;</span><br><span class="line">    $row = $db-&gt;GetOne($sql);</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">empty</span>($safequestion)) $safequestion = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">empty</span>($safeanswer)) $safeanswer = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>($row[<span class="string">'safequestion'</span>] == $safequestion &amp;&amp; $row[<span class="string">'safeanswer'</span>] == $safeanswer)</span><br><span class="line">    &#123;</span><br><span class="line">        sn($mid, $row[<span class="string">'userid'</span>], $row[<span class="string">'email'</span>], <span class="string">'N'</span>);</span><br><span class="line">        <span class="keyword">exit</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        ShowMsg(<span class="string">"对不起，您的安全问题或答案回答错误"</span>,<span class="string">"-1"</span>);</span><br><span class="line">        <span class="keyword">exit</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">if</span><span class="params">(<span class="variable">$row</span>[<span class="string">'safequestion'</span>] == <span class="variable">$safequestion</span> &amp;&amp; <span class="variable">$row</span>[<span class="string">'safeanswer'</span>] == <span class="variable">$safeanswer</span>)</span></span></span><br></pre></td></tr></table></figure>
+<p>在该处使用了双等号进行判断，因此我们可以利用弱类型的特性进行绕过，默认注册用户是没有设置安全问题的，我们在数据库看一下默认的值</p>
+<p><img src="/2019/08/06/DedeCms5-7任意用户密码重置分析/1.png" alt=""></p>
+<p>safequestion的值为0，safeanswer值为空</p>
+<p>对于上方的判断</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">empty</span>($safequestion)) $safequestion = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">empty</span>($safeanswer)) $safeanswer = <span class="string">''</span>;</span><br></pre></td></tr></table></figure>
+<p>最后的safequestion值为0，safeanswer值为空，这样对于safequestion，我们可以使用0.0     0.这样的字符串使他们强制转换为int后变为0 达到绕过判断的目的，而对于safeanswer我们直接置空就好</p>
+<p>绕过之后我们会进入sn()函数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sn($mid, $row[<span class="string">'userid'</span>], $row[<span class="string">'email'</span>], <span class="string">'N'</span>);</span><br></pre></td></tr></table></figure>
+<p>定位函数，该函数在/member/inc/inc_pwd_functions.php中，代码如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sn</span><span class="params">($mid,$userid,$mailto, $send = <span class="string">'Y'</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">global</span> $db;</span><br><span class="line">    $tptim= (<span class="number">60</span>*<span class="number">10</span>);</span><br><span class="line">    $dtime = time();</span><br><span class="line">    $sql = <span class="string">"SELECT * FROM #@__pwd_tmp WHERE mid = '$mid'"</span>;</span><br><span class="line">    $row = $db-&gt;GetOne($sql);</span><br><span class="line">    <span class="keyword">if</span>(!is_array($row))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//发送新邮件；</span></span><br><span class="line">        newmail($mid,$userid,$mailto,<span class="string">'INSERT'</span>,$send);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//10分钟后可以再次发送新验证码；</span></span><br><span class="line">    <span class="keyword">elseif</span>($dtime - $tptim &gt; $row[<span class="string">'mailtime'</span>])</span><br><span class="line">    &#123;</span><br><span class="line">        newmail($mid,$userid,$mailto,<span class="string">'UPDATE'</span>,$send);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//重新发送新的验证码确认邮件；</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> ShowMsg(<span class="string">'对不起，请10分钟后再重新申请'</span>, <span class="string">'login.php'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>首先该函数会在#@__pwd_tmp表中查询是否存在临时密码，当我们第一次重置密码时，该表中是没有值的，而后通过下面的判断，我们自然的进入了newmail函数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">newmail($mid,$userid,$mailto,<span class="string">'INSERT'</span>,$send);</span><br></pre></td></tr></table></figure>
+<p>该函数同样在/member/inc/inc_pwd_functions.php 中，代码如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">newmail</span><span class="params">($mid, $userid, $mailto, $type, $send)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">global</span> $db,$cfg_adminemail,$cfg_webname,$cfg_basehost,$cfg_memberurl;</span><br><span class="line">    $mailtime = time();</span><br><span class="line">    $randval = random(<span class="number">8</span>);</span><br><span class="line">    $mailtitle = $cfg_webname.<span class="string">":密码修改"</span>;</span><br><span class="line">    $mailto = $mailto;</span><br><span class="line">    $headers = <span class="string">"From: "</span>.$cfg_adminemail.<span class="string">"\r\nReply-To: $cfg_adminemail"</span>;</span><br><span class="line">    $mailbody = <span class="string">"亲爱的"</span>.$userid.<span class="string">"：\r\n您好！感谢您使用"</span>.$cfg_webname.<span class="string">"网。\r\n"</span>.$cfg_webname.<span class="string">"应您的要求，重新设置密码：（注：如果您没有提出申请，请检查您的信息是否泄漏。）\r\n本次临时登陆密码为："</span>.$randval.<span class="string">" 请于三天内登陆下面网址确认修改。\r\n"</span>.$cfg_basehost.$cfg_memberurl.<span class="string">"/resetpassword.php?dopost=getpasswd&amp;id="</span>.$mid;</span><br><span class="line">    <span class="keyword">if</span>($type == <span class="string">'INSERT'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        $key = md5($randval);</span><br><span class="line">        $sql = <span class="string">"INSERT INTO `#@__pwd_tmp` (`mid` ,`membername` ,`pwd` ,`mailtime`)VALUES ('$mid', '$userid',  '$key', '$mailtime');"</span>;</span><br><span class="line">        <span class="keyword">if</span>($db-&gt;ExecuteNoneQuery($sql))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>($send == <span class="string">'Y'</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                sendmail($mailto,$mailtitle,$mailbody,$headers);</span><br><span class="line">                <span class="keyword">return</span> ShowMsg(<span class="string">'EMAIL修改验证码已经发送到原来的邮箱请查收'</span>, <span class="string">'login.php'</span>,<span class="string">''</span>,<span class="string">'5000'</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> ($send == <span class="string">'N'</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> ShowMsg(<span class="string">'稍后跳转到修改页'</span>, $cfg_basehost.$cfg_memberurl.<span class="string">"/resetpassword.php?dopost=getpasswd&amp;amp;id="</span>.$mid.<span class="string">"&amp;amp;key="</span>.$randval);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> ShowMsg(<span class="string">'对不起修改失败，请联系管理员'</span>, <span class="string">'login.php'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">elseif</span>($type == <span class="string">'UPDATE'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        $key = md5($randval);</span><br><span class="line">        $sql = <span class="string">"UPDATE `#@__pwd_tmp` SET `pwd` = '$key',mailtime = '$mailtime'  WHERE `mid` ='$mid';"</span>;</span><br><span class="line">        <span class="keyword">if</span>($db-&gt;ExecuteNoneQuery($sql))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>($send == <span class="string">'Y'</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                sendmail($mailto,$mailtitle,$mailbody,$headers);</span><br><span class="line">                ShowMsg(<span class="string">'EMAIL修改验证码已经发送到原来的邮箱请查收'</span>, <span class="string">'login.php'</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">elseif</span>($send == <span class="string">'N'</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> ShowMsg(<span class="string">'稍后跳转到修改页'</span>, $cfg_basehost.$cfg_memberurl.<span class="string">"/resetpassword.php?dopost=getpasswd&amp;amp;id="</span>.$mid.<span class="string">"&amp;amp;key="</span>.$randval);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            ShowMsg(<span class="string">'对不起修改失败，请与管理员联系'</span>, <span class="string">'login.php'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>根据前面的参数传递，最后会执行到这里</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> ShowMsg(<span class="string">'稍后跳转到修改页'</span>, $cfg_basehost.$cfg_memberurl.<span class="string">"/resetpassword.php?dopost=getpasswd&amp;amp;id="</span>.$mid.<span class="string">"&amp;amp;key="</span>.$randval);</span><br></pre></td></tr></table></figure>
+<p>在这里$randval是我们所不知道的随机字符串，但是该行信息会进行回显输出，这也正是我们进行下一步密码重置操作所需要的链接</p>
+<p>我们继续来看getpasswd的操作，代码位于 member\resetpassword.php，关键代码如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>($dopost == <span class="string">"getpasswd"</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//修改密码</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">empty</span>($id))</span><br><span class="line">    &#123;</span><br><span class="line">        ShowMsg(<span class="string">"对不起，请不要非法提交"</span>,<span class="string">"login.php"</span>);</span><br><span class="line">        <span class="keyword">exit</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    $mid = preg_replace(<span class="string">"#[^0-9]#"</span>, <span class="string">""</span>, $id);</span><br><span class="line">    $row = $db-&gt;GetOne(<span class="string">"SELECT * FROM #@__pwd_tmp WHERE mid = '$mid'"</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">empty</span>($row))</span><br><span class="line">    &#123;</span><br><span class="line">        ShowMsg(<span class="string">"对不起，请不要非法提交"</span>,<span class="string">"login.php"</span>);</span><br><span class="line">        <span class="keyword">exit</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">empty</span>($setp))</span><br><span class="line">    &#123;</span><br><span class="line">        $tptim= (<span class="number">60</span>*<span class="number">60</span>*<span class="number">24</span>*<span class="number">3</span>);</span><br><span class="line">        $dtime = time();</span><br><span class="line">        <span class="keyword">if</span>($dtime - $tptim &gt; $row[<span class="string">'mailtime'</span>])</span><br><span class="line">        &#123;</span><br><span class="line">            $db-&gt;executenonequery(<span class="string">"DELETE FROM `#@__pwd_tmp` WHERE `md` = '$id';"</span>);</span><br><span class="line">            ShowMsg(<span class="string">"对不起，临时密码修改期限已过期"</span>,<span class="string">"login.php"</span>);</span><br><span class="line">            <span class="keyword">exit</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">require_once</span>(dirname(<span class="keyword">__FILE__</span>).<span class="string">"/templets/resetpassword2.htm"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">elseif</span>($setp == <span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">isset</span>($key)) $pwdtmp = $key;</span><br><span class="line"></span><br><span class="line">        $sn = md5(trim($pwdtmp));</span><br><span class="line">        <span class="keyword">if</span>($row[<span class="string">'pwd'</span>] == $sn)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>($pwd != <span class="string">""</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>($pwd == $pwdok)</span><br><span class="line">                &#123;</span><br><span class="line">                    $pwdok = md5($pwdok);</span><br><span class="line">                    $sql = <span class="string">"DELETE FROM `#@__pwd_tmp` WHERE `mid` = '$id';"</span>;</span><br><span class="line">                    $db-&gt;executenonequery($sql);</span><br><span class="line">                    $sql = <span class="string">"UPDATE `#@__member` SET `pwd` = '$pwdok' WHERE `mid` = '$id';"</span>;</span><br><span class="line">                    <span class="keyword">if</span>($db-&gt;executenonequery($sql))</span><br><span class="line">                    &#123;</span><br><span class="line">                        showmsg(<span class="string">'更改密码成功，请牢记新密码'</span>, <span class="string">'login.php'</span>);</span><br><span class="line">                        <span class="keyword">exit</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            showmsg(<span class="string">'对不起，新密码为空或填写不一致'</span>, <span class="string">'-1'</span>);</span><br><span class="line">            <span class="keyword">exit</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        showmsg(<span class="string">'对不起，临时密码错误'</span>, <span class="string">'-1'</span>);</span><br><span class="line">        <span class="keyword">exit</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第一次会执行到这里</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">empty</span>($setp))</span><br><span class="line">&#123;</span><br><span class="line">    $tptim= (<span class="number">60</span>*<span class="number">60</span>*<span class="number">24</span>*<span class="number">3</span>);</span><br><span class="line">    $dtime = time();</span><br><span class="line">    <span class="keyword">if</span>($dtime - $tptim &gt; $row[<span class="string">'mailtime'</span>])</span><br><span class="line">    &#123;</span><br><span class="line">        $db-&gt;executenonequery(<span class="string">"DELETE FROM `#@__pwd_tmp` WHERE `md` = '$id';"</span>);</span><br><span class="line">        ShowMsg(<span class="string">"对不起，临时密码修改期限已过期"</span>,<span class="string">"login.php"</span>);</span><br><span class="line">        <span class="keyword">exit</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">require_once</span>(dirname(<span class="keyword">__FILE__</span>).<span class="string">"/templets/resetpassword2.htm"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该段代码最后请求了/templets/resetpassword2.htm 这个页面，我们来看一下</p>
+<p><img src="/2019/08/06/DedeCms5-7任意用户密码重置分析/2.png" alt=""></p>
+<p>页面将step的值修改为2后又回到上面那段代码，接着执行该段</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">elseif</span>($setp == <span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">isset</span>($key)) $pwdtmp = $key;</span><br><span class="line"></span><br><span class="line">        $sn = md5(trim($pwdtmp));</span><br><span class="line">        <span class="keyword">if</span>($row[<span class="string">'pwd'</span>] == $sn)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>($pwd != <span class="string">""</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>($pwd == $pwdok)</span><br><span class="line">                &#123;</span><br><span class="line">                    $pwdok = md5($pwdok);</span><br><span class="line">                    $sql = <span class="string">"DELETE FROM `#@__pwd_tmp` WHERE `mid` = '$id';"</span>;</span><br><span class="line">                    $db-&gt;executenonequery($sql);</span><br><span class="line">                    $sql = <span class="string">"UPDATE `#@__member` SET `pwd` = '$pwdok' WHERE `mid` = '$id';"</span>;</span><br><span class="line">                    <span class="keyword">if</span>($db-&gt;executenonequery($sql))</span><br><span class="line">                    &#123;</span><br><span class="line">                        showmsg(<span class="string">'更改密码成功，请牢记新密码'</span>, <span class="string">'login.php'</span>);</span><br><span class="line">                        <span class="keyword">exit</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure>
+<p>该段进行了最后一步重置密码的操作</p>
+<h1 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h1><p>首先访问链接 <a href="http://127.0.0.1/dedecms/member/resetpassword.php?dopost=safequestion&amp;safequestion=0.0&amp;safeanswer=&amp;id=1" target="_blank" rel="noopener">http://127.0.0.1/dedecms/member/resetpassword.php?dopost=safequestion&amp;safequestion=0.0&amp;safeanswer=&amp;id=1</a></p>
+<p>抓包repeater取回带有key的链接</p>
+<p><img src="/2019/08/06/DedeCms5-7任意用户密码重置分析/3.png" alt=""></p>
+<p>访问该链接，即可重置密码</p>
+<p><img src="/2019/08/06/DedeCms5-7任意用户密码重置分析/4.png" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="夜莫离、 WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="夜莫离、 Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/漏洞复现/" rel="tag"># 漏洞复现</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/16/0ctf-2016-Unserialize题目分析/" rel="next" title="0ctf-2016-Unserialize题目分析">
+                <i class="fa fa-chevron-left"></i> 0ctf-2016-Unserialize题目分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">夜莫离、</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yemoli" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://chxing.xyz/" title="Bling_Dog" target="_blank">Bling_Dog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.smi1e.top/" title="Smi1e" target="_blank">Smi1e</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://altman.vip/" title="Altman" target="_blank">Altman</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.virtua1.cn/" title="Virtua1" target="_blank">Virtua1</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.zhaoj.in/" title="赵" target="_blank">赵</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.dongzt.cn/" title="Alkaid" target="_blank">Alkaid</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://cdusec.com/" title="CDUSEC" target="_blank">CDUSEC</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://cdusec.happyhacking.top/" title="CDUSEC内部博客" target="_blank">CDUSEC内部博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://jjhpkcr.xyz/" title="江江河畔砍柴人" target="_blank">江江河畔砍柴人</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.youknowi.xin/" title="图先生" target="_blank">图先生</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://a3ura.github.io/" title="a3ura" target="_blank">a3ura</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.recorday.cn/" title="C0d3r1iu" target="_blank">C0d3r1iu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.iloveflag.com/" title="醉梦半醒" target="_blank">醉梦半醒</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#代码分析"><span class="nav-number">1.</span> <span class="nav-text">代码分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#漏洞利用"><span class="nav-number">2.</span> <span class="nav-text">漏洞利用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">夜莫离、</span>
+
+  
+</div>
+
+
+  <!-- <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div> 
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>-->
+
+
+
+<div class="theme-info">
+ <div class="powered-by"></div>
+ <span class="post-count">博客全站共47k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>
