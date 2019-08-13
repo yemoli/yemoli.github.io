@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="代码审计,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -86,22 +86,13 @@
 
 
 
-<meta name="description" content="今天偶然在群里看到这个骚操作 file_put_contents()第二个参数是可以传入数组的，那么在存在某些正则校验的时候，就可能带来绕过的可能 例如有如下代码 &amp;lt;?php $text = $_GET[&amp;apos;text&amp;apos;]; if(preg_match(&amp;apos;[&amp;lt;&amp;gt;?]&amp;apos;, $text)) { die(&amp;apos;fuck!!!!&amp;apos;);">
-<meta name="keywords" content="代码审计">
-<meta property="og:type" content="article">
-<meta property="og:title" content="file_put_contents()的妙用">
-<meta property="og:url" content="https://yml-sec.top/2019/01/16/file-put-contents-的妙用/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="yemoli&#39;s blog">
+<meta property="og:url" content="https://yml-sec.top/archives/2019/page/6/index.html">
 <meta property="og:site_name" content="yemoli&#39;s blog">
-<meta property="og:description" content="今天偶然在群里看到这个骚操作 file_put_contents()第二个参数是可以传入数组的，那么在存在某些正则校验的时候，就可能带来绕过的可能 例如有如下代码 &amp;lt;?php $text = $_GET[&amp;apos;text&amp;apos;]; if(preg_match(&amp;apos;[&amp;lt;&amp;gt;?]&amp;apos;, $text)) { die(&amp;apos;fuck!!!!&amp;apos;);">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f843aa62e4.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f843e4ac53.jpg">
-<meta property="og:image" content="https://s2.ax1x.com/2019/03/18/Amx1LF.jpg">
-<meta property="og:updated_time" content="2019-03-18T11:47:19.401Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="file_put_contents()的妙用">
-<meta name="twitter:description" content="今天偶然在群里看到这个骚操作 file_put_contents()第二个参数是可以传入数组的，那么在存在某些正则校验的时候，就可能带来绕过的可能 例如有如下代码 &amp;lt;?php $text = $_GET[&amp;apos;text&amp;apos;]; if(preg_match(&amp;apos;[&amp;lt;&amp;gt;?]&amp;apos;, $text)) { die(&amp;apos;fuck!!!!&amp;apos;);">
-<meta name="twitter:image" content="https://i.loli.net/2019/03/18/5c8f843aa62e4.jpg">
+<meta name="twitter:title" content="yemoli&#39;s blog">
 
 
 
@@ -131,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://yml-sec.top/2019/01/16/file-put-contents-的妙用/">
+  <link rel="canonical" href="https://yml-sec.top/archives/2019/page/6/">
 
 
 
 
 
-  <title>file_put_contents()的妙用 | yemoli's blog</title>
+  <title>Archive | yemoli's blog</title>
   
 
 
@@ -156,7 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left page-archive">
     <div class="headband"></div>
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
@@ -259,227 +250,75 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block archive">
+    <div id="posts" class="posts-collapse">
+      <span class="archive-move-on"></span>
 
-  
+      <span class="archive-page-counter">
+        
+        
+         
+          
+        Nice! 52 posts in total. Keep on posting.
+      </span>
 
-  
-  
-  
+      
+
+        
+        
+        
+
+        
+          
+          <div class="collection-title">
+            <h1 class="archive-year" id="archive-year-2019">2019</h1>
+          </div>
+        
+        
+
+        
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2019/01/16/file-put-contents-的妙用/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="夜莫离、">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="yemoli's blog">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
+            <a class="post-title-link" href="/2019/01/11/emlog后台数据备份getshell/" itemprop="url">
+              
+                <span itemprop="name">emlog后台数据备份getshell</span>
+              
+            </a>
         
-          <h1 class="post-title" itemprop="name headline">file_put_contents()的妙用</h1>
-        
+      </h2>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-16T19:05:24+08:00">
-                2019-01-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  178
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>今天偶然在群里看到这个骚操作</p>
-<p>file_put_contents()第二个参数是可以传入数组的，那么在存在某些正则校验的时候，就可能带来绕过的可能</p>
-<p>例如有如下代码</p>
-<pre><code>&lt;?php
-$text = $_GET[&apos;text&apos;];
-if(preg_match(&apos;[&lt;&gt;?]&apos;, $text)) {
-die(&apos;fuck!!!!&apos;);
-}
-file_put_contents(&apos;shell.php&apos;, $text);
-</code></pre><p>如果我们想写入一个php文件,正常的话传入</p>
-<pre><code>text = &lt;?php phpinfo();
-</code></pre><p>会被正则匹配到，无法写入</p>
-<p><img src="https://i.loli.net/2019/03/18/5c8f843aa62e4.jpg" alt=""></p>
-<p>如果我们将本段代码以数组的形式传入，数组会强制转化为字符串，这样就绕过了正则的匹配，达到了getshell的目的</p>
-<p><img src="https://i.loli.net/2019/03/18/5c8f843e4ac53.jpg" alt=""></p>
-<p>虽然出现了Warning，但是文件是被写入了的</p>
-<p><img src="https://s2.ax1x.com/2019/03/18/Amx1LF.jpg" alt=""></p>
-
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-      <div>
-        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
-  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-    <span>Donate</span>
-  </button>
-  <div id="QR" style="display: none;">
-
-    
-      <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="夜莫离、 WeChat Pay">
-        <p>WeChat Pay</p>
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2019-01-11T17:45:31+08:00" content="2019-01-11">
+          01-11
+        </time>
       </div>
-    
 
-    
-      <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/images/alipay.jpg" alt="夜莫离、 Alipay">
-        <p>Alipay</p>
-      </div>
-    
-
-    
-
-  </div>
-</div>
-
-      </div>
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/代码审计/" rel="tag"># 代码审计</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/01/15/PHP利用回溯次数限制绕过/" rel="next" title="PHP利用回溯次数限制绕过">
-                <i class="fa fa-chevron-left"></i> PHP利用回溯次数限制绕过
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/17/命令执行漏洞小结/" rel="prev" title="命令执行漏洞小结">
-                命令执行漏洞小结 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
 
-    <div class="post-spread">
       
+
     </div>
   </div>
+  
+  
+  
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/archives/2019/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/2019/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2019/page/5/">5</a><span class="page-number current">6</span>
+  </nav>
+
+
 
 
           </div>
@@ -487,10 +326,6 @@ file_put_contents(&apos;shell.php&apos;, $text);
 
 
           
-
-  
-
-
 
         </div>
         
@@ -778,10 +613,6 @@ file_put_contents(&apos;shell.php&apos;, $text);
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
