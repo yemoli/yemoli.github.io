@@ -88,18 +88,18 @@
 
 
 
-<meta name="description" content="文章部分内容来源于网络 strcmpstrcmp(a1，a2)函数用来比较两个字符串是否相等的，比较的是对应字符的ascii码，如果相等返回0，当a1的ascii大于a2的返回小于0，a1的ascii码小于a2的，返回大于0. 但是这个函数是存在漏洞的，我们知道这个函数是用来比较字符串的，但是当我们传入为数组是，那变成字符串和数组进行比较了，因此php在5.2之前，默认返回的-1，5.2版本之后返">
+<meta name="description" content="本篇请忽略">
 <meta name="keywords" content="CTF">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CTF中常出现的PHP函数">
-<meta property="og:url" content="https://yml-sec.top/2019/01/28/CTF中常出现的PHP函数/index.html">
+<meta property="og:title" content="update">
+<meta property="og:url" content="https://yml-sec.top/2020/04/29/update/index.html">
 <meta property="og:site_name" content="yemoli&#39;s blog">
-<meta property="og:description" content="文章部分内容来源于网络 strcmpstrcmp(a1，a2)函数用来比较两个字符串是否相等的，比较的是对应字符的ascii码，如果相等返回0，当a1的ascii大于a2的返回小于0，a1的ascii码小于a2的，返回大于0. 但是这个函数是存在漏洞的，我们知道这个函数是用来比较字符串的，但是当我们传入为数组是，那变成字符串和数组进行比较了，因此php在5.2之前，默认返回的-1，5.2版本之后返">
+<meta property="og:description" content="本篇请忽略">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-28T12:26:16.046Z">
+<meta property="og:updated_time" content="2020-04-29T02:12:51.460Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CTF中常出现的PHP函数">
-<meta name="twitter:description" content="文章部分内容来源于网络 strcmpstrcmp(a1，a2)函数用来比较两个字符串是否相等的，比较的是对应字符的ascii码，如果相等返回0，当a1的ascii大于a2的返回小于0，a1的ascii码小于a2的，返回大于0. 但是这个函数是存在漏洞的，我们知道这个函数是用来比较字符串的，但是当我们传入为数组是，那变成字符串和数组进行比较了，因此php在5.2之前，默认返回的-1，5.2版本之后返">
+<meta name="twitter:title" content="update">
+<meta name="twitter:description" content="本篇请忽略">
 
 
 
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="https://yml-sec.top/2019/01/28/CTF中常出现的PHP函数/">
+  <link rel="canonical" href="https://yml-sec.top/2020/04/29/update/">
 
 
 
 
 
-  <title>CTF中常出现的PHP函数 | yemoli's blog</title>
+  <title>update | yemoli's blog</title>
   
 
 
@@ -271,7 +271,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2019/01/28/CTF中常出现的PHP函数/">
+    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2020/04/29/update/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="夜莫离、">
@@ -288,7 +288,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CTF中常出现的PHP函数</h1>
+          <h1 class="post-title" itemprop="name headline">update</h1>
         
 
         <div class="post-meta">
@@ -300,8 +300,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-28T20:03:48+08:00">
-                2019-01-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-29T10:12:21+08:00">
+                2020-04-29
               </time>
             
 
@@ -332,7 +332,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  662
+                  5
                 </span>
               
 
@@ -348,7 +348,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  2
+                  1
                 </span>
               
             </div>
@@ -369,76 +369,8 @@
       
 
       
-        <p>文章部分内容来源于网络</p>
-<h2 id="strcmp"><a href="#strcmp" class="headerlink" title="strcmp"></a>strcmp</h2><p>strcmp(a1，a2)函数用来比较两个字符串是否相等的，比较的是对应字符的ascii码，如果相等返回0，当a1的ascii大于a2的返回小于0，a1的ascii码小于a2的，返回大于0.</p>
-<p>但是这个函数是存在漏洞的，我们知道这个函数是用来比较字符串的，但是当我们传入为数组是，那变成字符串和数组进行比较了，因此php在5.2之前，默认返回的-1，5.2版本之后返回0.因此有时我们便可以利用这个漏洞</p>
-<p>demo：</p>
-<pre><code>&lt;?php
-  error_reporting();
-  $flag=$_GET[&apos;flag&apos;];
-  if(strcmp(&apos;Waldo_cuit&apos;,$flag)){
-  echo &apos;NO!&apos;;
-   }
-  else{
-  echo &apos;YES!&apos;;
-  }
-?&gt;
-</code></pre><h2 id="ereg"><a href="#ereg" class="headerlink" title="ereg"></a>ereg</h2><pre><code>ereg (&quot;^[a-zA-Z0-9]+$&quot;, $_GET[&apos;password&apos;]) === FALSE
-</code></pre><p>字符串对比解析，这里如果$_GET[‘password’]为数组，则返回值为NULL<br>，如果为123 || asd || 12as || 123%00&amp;&amp;&amp;**，则返回值为true </p>
-<h2 id="is-numeric"><a href="#is-numeric" class="headerlink" title="is_numeric"></a>is_numeric</h2><p>demo:</p>
-<pre><code>&lt;?php
+        <p>本篇请忽略</p>
 
-echo is_numeric(233333);   # 1
-
-echo is_numeric(&apos;233333&apos;);# 1
-
-echo is_numeric(0x233333);# 1
-
-echo is_numeric(&apos;0x233333&apos;);   # 1
-
-echo is_numeric(&apos;233333abc&apos;);  # 0
-
-?&gt;
-</code></pre><h2 id="Intval"><a href="#Intval" class="headerlink" title="Intval"></a>Intval</h2><p>获取变量的整数值，允许以使用特定的进制返回。默认10进制 </p>
-<p>注:如果参数为整数，则不做任何处理。</p>
-<p>我们可以构造字符串绕过：</p>
-<p>当取回字符串整数的时候，如果字符串中含有非数字的字符，将会返回第一次出现非数字符的前面的整数。若果没有数字返回0</p>
-<h2 id="parse-str"><a href="#parse-str" class="headerlink" title="parse_str"></a>parse_str</h2><p>与 parse_str() 类似的函数还有 mb_parse_str()，parse_str 将字符串解析成多个变量，如果参数str是URL传递入的查询字符串（query string），则将它解析为变量并设置到当前作用域。</p>
-<pre><code>//var.php?var=new
-
-$var=&apos;init&apos;;
-
-parse_str($_SERVER[&apos;QUERY_STRING&apos;]);
-
-print $var;
-</code></pre><h2 id="MD5"><a href="#MD5" class="headerlink" title="MD5"></a>MD5</h2><p>PHP在处理哈希字符串时，会利用”!=”或”==”来对哈希值进行比较，它把每一个以”0E”开头的哈希值都解释为0，所以如果两个不同的密码经过哈希以后，其哈希值都是以”0E”开头的，那么PHP将会认为他们相同，都是0</p>
-<p>常见字符串：</p>
-<pre><code>QNKCDZO
-240610708
-s878926199a
-s155964671a
-s214587387a
-s214587387a
-sha1(str)
-sha1(&apos;aaroZmOk&apos;)  
-sha1(&apos;aaK1STfY&apos;)
-sha1(&apos;aaO8zKZF&apos;)
-sha1(&apos;aa3OFF9m&apos;)
-</code></pre><p>同时MD5不能处理数组，有以下判断可用数组绕过：</p>
-<pre><code>if(@md5($_GET[&apos;a&apos;]) == @md5($_GET[&apos;b&apos;]))
-{
-echo &quot;yes&quot;;
-}
-</code></pre><h2 id="preg-match"><a href="#preg-match" class="headerlink" title="preg_match"></a>preg_match</h2><p>如果在进行正则表达式匹配的时候，没有限制字符串的开始和结束(^ 和 $)，则可以存在绕过的问题</p>
-<pre><code>&lt;?php
-$ip = &apos;1.1.1.1 abcd&apos;; // 可以绕过
-if(!preg_match(&quot;/(\d+)\.(\d+)\.(\d+)\.(\d+)/&quot;,$ip)) {
-  die(&apos;error&apos;);
-} else {
-   echo(&apos;key...&apos;);
-}
-?&gt;
-</code></pre>
       
     </div>
     
@@ -497,8 +429,8 @@ if(!preg_match(&quot;/(\d+)\.(\d+)\.(\d+)\.(\d+)/&quot;,$ip)) {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/27/php反序列化pop链的构造/" rel="next" title="php反序列化pop链的构造">
-                <i class="fa fa-chevron-left"></i> php反序列化pop链的构造
+              <a href="/2020/03/06/thinkphp反序列化漏洞分析/" rel="next" title="thinkphp反序列化漏洞分析">
+                <i class="fa fa-chevron-left"></i> thinkphp反序列化漏洞分析
               </a>
             
           </div>
@@ -506,10 +438,6 @@ if(!preg_match(&quot;/(\d+)\.(\d+)\.(\d+)\.(\d+)/&quot;,$ip)) {
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/29/pwn之shellcode编写/" rel="prev" title="pwn之shellcode编写">
-                pwn之shellcode编写 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -561,17 +489,8 @@ if(!preg_match(&quot;/(\d+)\.(\d+)\.(\d+)\.(\d+)/&quot;,$ip)) {
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -701,22 +620,6 @@ if(!preg_match(&quot;/(\d+)\.(\d+)\.(\d+)\.(\d+)/&quot;,$ip)) {
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#strcmp"><span class="nav-number">1.</span> <span class="nav-text">strcmp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ereg"><span class="nav-number">2.</span> <span class="nav-text">ereg</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#is-numeric"><span class="nav-number">3.</span> <span class="nav-text">is_numeric</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Intval"><span class="nav-number">4.</span> <span class="nav-text">Intval</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#parse-str"><span class="nav-number">5.</span> <span class="nav-text">parse_str</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MD5"><span class="nav-number">6.</span> <span class="nav-text">MD5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#preg-match"><span class="nav-number">7.</span> <span class="nav-text">preg_match</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
