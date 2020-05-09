@@ -96,26 +96,26 @@
 <meta property="og:site_name" content="yemoli&#39;s blog">
 <meta property="og:description" content="前言在90论坛上看到一篇关于该CMS的贴子，文章中分析的是两处注入，以前没有分析过该CMS，决定对着补丁看一下近期的版本来分析下  环境： Windows 10 php5.5.9 Apache  代码分析在GitHub上看到该cms近期版本更新很频繁  本文先对2.0.7版本分析下，首先与2.0.8版本来对比下  该处增加了一些敏感函数的过滤和正则上的改动，这说明在2.0.7版本中该段代码存在着安">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/3.png">
-<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/4.png">
-<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/5.png">
-<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/6.png">
-<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/7.png">
-<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/8.png">
-<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/9.png">
-<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/10.png">
-<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/11.png">
-<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/12.png">
-<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/13.png">
-<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/14.png">
-<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/15.png">
-<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/16.png">
-<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/17.png">
-<meta property="og:updated_time" content="2020-05-07T15:08:45.735Z">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/3.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/4.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/5.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/6.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/7.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/8.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/9.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/10.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/11.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/12.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/13.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/14.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/15.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/16.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/17.png">
+<meta property="og:updated_time" content="2020-05-09T04:32:43.947Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PbootCms-2.0.7模板注入到RCE">
 <meta name="twitter:description" content="前言在90论坛上看到一篇关于该CMS的贴子，文章中分析的是两处注入，以前没有分析过该CMS，决定对着补丁看一下近期的版本来分析下  环境： Windows 10 php5.5.9 Apache  代码分析在GitHub上看到该cms近期版本更新很频繁  本文先对2.0.7版本分析下，首先与2.0.8版本来对比下  该处增加了一些敏感函数的过滤和正则上的改动，这说明在2.0.7版本中该段代码存在着安">
-<meta name="twitter:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/3.png">
+<meta name="twitter:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/3.png">
 
 
 
@@ -393,43 +393,43 @@
 <p>Apache</p>
 </blockquote>
 <h1 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h1><p>在<code>GitHub</code>上看到该<code>cms</code>近期版本更新很频繁</p>
-<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/3.png" alt="3"></p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/3.png" alt="3"></p>
 <p>本文先对<code>2.0.7</code>版本分析下，首先与<code>2.0.8</code>版本来对比下</p>
-<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/4.png" alt="4"></p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/4.png" alt="4"></p>
 <p>该处增加了一些敏感函数的过滤和正则上的改动，这说明在<code>2.0.7</code>版本中该段代码存在着安全问题，我们来看一下该段代码所在的函数做起着什么作用</p>
-<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/5.png" alt="5"></p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/5.png" alt="5"></p>
 <p>在源码中找到了该函数的注释，该函数是用来解析模板中的<code>IF</code>标签</p>
 <p>继续阅读我们可以看到，在进行了过滤之后，如果没有发现危险的项目，会将if中的代码带入到<code>eval</code>中执行，如图</p>
-<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/6.png" alt="6"></p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/6.png" alt="6"></p>
 <p>那么可以联想到，如果可以在页面中插入<code>if</code>标签并且绕过该处的安全验证，就可以执行任意<code>php</code>代码，下面来寻找一下是否存在插入<code>if</code>标签的地方，寻找之前我们先看一下该<code>CMS</code>的标签语法</p>
-<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/7.png" alt="7"></p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/7.png" alt="7"></p>
 <p><code>{pboot:if(TRUE)}test{/pboot:if}</code></p>
 <p>在后台尝试在站点信息编辑页面插入</p>
-<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/8.png" alt="8"></p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/8.png" alt="8"></p>
 <p>进入首页看一下</p>
-<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/9.png" alt="9"></p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/9.png" alt="9"></p>
 <p>可以看到这里是成功解析了的，那么下面我们需要来思考如何绕过前面的安全过滤</p>
 <p>我们来看第一个判断</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ((function_exists($value) || preg_match(<span class="string">'/^eval$/i'</span>, $value)) &amp;&amp; ! in_array($value, $white_fun)) &#123;</span><br><span class="line">  	$danger = <span class="keyword">true</span>;</span><br><span class="line">  	<span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>该处的意思是如果<code>if</code>中存在着一个函数并且该函数不在白名单中将会被认定为危险，看一下白名单中的函数</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$white_fun = <span class="keyword">array</span>(<span class="string">'date'</span>,<span class="string">'in_array'</span>,<span class="string">'explode'</span>,<span class="string">'implode'</span>);</span><br></pre></td></tr></table></figure>
 <p>显然没有可以利用的函数，我们需要一些可以进行输出或者执行代码的函数来进行下一步的验证，在该处我们如果想越过验证可以参考一下<code>KCon 2019</code>中<code>P</code>神的一个议题</p>
-<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/10.png" alt="10"></p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/10.png" alt="10"></p>
 <p>简单的来说就是可以在函数名和括号之间插入一些控制字符，这样函数仍然会正常执行，但是在本例中<code>function_exists</code>将会失效，我们可以插入下面的代码来尝试下</p>
-<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/11.png" alt="11"></p>
-<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/12.png" alt="12"></p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/11.png" alt="11"></p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/12.png" alt="12"></p>
 <p>可以看到是成功执行的，下面来看一下第二个过滤点的<code>if</code>判断</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (preg_match(<span class="string">'/(\$_GET\[)|(\$_POST\[)|(\$_REQUEST\[)|(\$_COOKIE\[)|(\$_SESSION\[)|(file_put_contents)|(fwrite)|(phpinfo)|(base64_decode)|(`)|(shell_exec)|(eval)|(system)|(exec)|(passthru)/i'</span>, $matches[<span class="number">1</span>][$i]))</span><br></pre></td></tr></table></figure>
 <p>这里虽然过滤了很多函数，但是我们还有assert可用，首先想到的直接是下面的写法</p>
-<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/13.png" alt="13"></p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/13.png" alt="13"></p>
 <p>但是经过测试，存在<code>$</code>符号的时候模板不会解析，该处我并没有深究为什么出现这个情况，而是想到了<code>codebreaking</code>中无参数<code>RCE</code>来解决这个问题，这样就可以不传入其他一些字符，只使用函数来利用了</p>
 <p>这里可以使用<code>getallheaders</code>来获取<code>head</code>头</p>
-<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/14.png" alt="14"></p>
-<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/15.png" alt=""></p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/14.png" alt="14"></p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/15.png" alt=""></p>
 <p>这里可以利用<code>cookie</code>，使用<code>current</code>方法，并且将<code>print_r</code>改成<code>assert</code></p>
-<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/16.png" alt="16"></p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/16.png" alt="16"></p>
 <p>将代码写在<code>cookie</code>中执行</p>
-<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/17.png" alt="17"></p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/17.png" alt="17"></p>
 
       
     </div>
