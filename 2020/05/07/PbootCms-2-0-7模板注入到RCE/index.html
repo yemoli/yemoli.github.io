@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="CTF,">
+  <meta name="keywords" content="代码审计,">
 
 
 
@@ -88,28 +88,34 @@
 
 
 
-<meta name="description" content="Cryptohahaha打开压缩包应该是CRC32爆破    密码是： tanny_is_very_beautifu1_ 打开压缩包里的PDF文件  很简单的一个排列组合问题，除去了flag{}这几个字符，组成flag的字符有以下几种情况 1@eshlcn  12eshlcn  !2eshlcn  !@eshlcn 写出脚本跑一下发现是1@eshlcn 脚本如下： 1234567891011121">
-<meta name="keywords" content="CTF">
+<meta name="description" content="前言在90论坛上看到一篇关于该CMS的贴子，文章中分析的是两处注入，以前没有分析过该CMS，决定对着补丁看一下近期的版本来分析下  环境： Windows 10 php5.5.9 Apache  代码分析在GitHub上看到该cms近期版本更新很频繁  本文先对2.0.7版本分析下，首先与2.0.8版本来对比下  该处增加了一些敏感函数的过滤和正则上的改动，这说明在2.0.7版本中该段代码存在着安">
+<meta name="keywords" content="代码审计">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2019-安恒2月赛部分writeup">
-<meta property="og:url" content="https://yml-sec.top/2019/02/25/2019-安恒2月赛部分writeup/index.html">
+<meta property="og:title" content="PbootCms-2.0.7模板注入到RCE">
+<meta property="og:url" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/index.html">
 <meta property="og:site_name" content="yemoli&#39;s blog">
-<meta property="og:description" content="Cryptohahaha打开压缩包应该是CRC32爆破    密码是： tanny_is_very_beautifu1_ 打开压缩包里的PDF文件  很简单的一个排列组合问题，除去了flag{}这几个字符，组成flag的字符有以下几种情况 1@eshlcn  12eshlcn  !2eshlcn  !@eshlcn 写出脚本跑一下发现是1@eshlcn 脚本如下： 1234567891011121">
+<meta property="og:description" content="前言在90论坛上看到一篇关于该CMS的贴子，文章中分析的是两处注入，以前没有分析过该CMS，决定对着补丁看一下近期的版本来分析下  环境： Windows 10 php5.5.9 Apache  代码分析在GitHub上看到该cms近期版本更新很频繁  本文先对2.0.7版本分析下，首先与2.0.8版本来对比下  该处增加了一些敏感函数的过滤和正则上的改动，这说明在2.0.7版本中该段代码存在着安">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6dfd6774a.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6dfd726fe.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6dfd8aaf2.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6e2289326.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6e38e5701.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6e4b3bf00.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6e5cbdaeb.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6e787da99.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f6e8d9599c.jpg">
-<meta property="og:updated_time" content="2019-03-18T10:10:39.856Z">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/3.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/4.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/5.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/6.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/7.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/8.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/9.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/10.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/11.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/12.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/13.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/14.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/15.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/16.png">
+<meta property="og:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/17.png">
+<meta property="og:updated_time" content="2020-05-07T15:08:45.735Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2019-安恒2月赛部分writeup">
-<meta name="twitter:description" content="Cryptohahaha打开压缩包应该是CRC32爆破    密码是： tanny_is_very_beautifu1_ 打开压缩包里的PDF文件  很简单的一个排列组合问题，除去了flag{}这几个字符，组成flag的字符有以下几种情况 1@eshlcn  12eshlcn  !2eshlcn  !@eshlcn 写出脚本跑一下发现是1@eshlcn 脚本如下： 1234567891011121">
-<meta name="twitter:image" content="https://i.loli.net/2019/03/18/5c8f6dfd6774a.jpg">
+<meta name="twitter:title" content="PbootCms-2.0.7模板注入到RCE">
+<meta name="twitter:description" content="前言在90论坛上看到一篇关于该CMS的贴子，文章中分析的是两处注入，以前没有分析过该CMS，决定对着补丁看一下近期的版本来分析下  环境： Windows 10 php5.5.9 Apache  代码分析在GitHub上看到该cms近期版本更新很频繁  本文先对2.0.7版本分析下，首先与2.0.8版本来对比下  该处增加了一些敏感函数的过滤和正则上的改动，这说明在2.0.7版本中该段代码存在着安">
+<meta name="twitter:image" content="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/3.png">
 
 
 
@@ -139,13 +145,13 @@
 
 
 
-  <link rel="canonical" href="https://yml-sec.top/2019/02/25/2019-安恒2月赛部分writeup/">
+  <link rel="canonical" href="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/">
 
 
 
 
 
-  <title>2019-安恒2月赛部分writeup | yemoli's blog</title>
+  <title>PbootCms-2.0.7模板注入到RCE | yemoli's blog</title>
   
 
 
@@ -281,7 +287,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2019/02/25/2019-安恒2月赛部分writeup/">
+    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2020/05/07/PbootCms-2-0-7模板注入到RCE/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="夜莫离、">
@@ -298,7 +304,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">2019-安恒2月赛部分writeup</h1>
+          <h1 class="post-title" itemprop="name headline">PbootCms-2.0.7模板注入到RCE</h1>
         
 
         <div class="post-meta">
@@ -310,8 +316,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-25T19:43:44+08:00">
-                2019-02-25
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-07T20:41:10+08:00">
+                2020-05-07
               </time>
             
 
@@ -342,7 +348,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  860
+                  786
                 </span>
               
 
@@ -358,7 +364,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  4
+                  2
                 </span>
               
             </div>
@@ -379,100 +385,52 @@
       
 
       
-        <h1 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h1><h2 id="hahaha"><a href="#hahaha" class="headerlink" title="hahaha"></a>hahaha</h2><p>打开压缩包应该是CRC32爆破</p>
-<p><img src="https://i.loli.net/2019/03/18/5c8f6dfd6774a.jpg" alt=""></p>
-<p><img src="https://i.loli.net/2019/03/18/5c8f6dfd726fe.jpg" alt=""></p>
-<p><img src="https://i.loli.net/2019/03/18/5c8f6dfd8aaf2.jpg" alt=""></p>
-<p>密码是：</p>
-<pre><code>tanny_is_very_beautifu1_
-</code></pre><p>打开压缩包里的PDF文件</p>
-<p><img src="https://i.loli.net/2019/03/18/5c8f6e2289326.jpg" alt=""></p>
-<p>很简单的一个排列组合问题，除去了flag{}这几个字符，组成flag的字符有以下几种情况</p>
-<pre><code>1@eshlcn
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在<code>90</code>论坛上看到一篇关于该<code>CMS</code>的贴子，文章中分析的是两处注入，以前没有分析过该<code>CMS</code>，决定对着补丁看一下近期的版本来分析下</p>
+<blockquote>
+<p>环境：</p>
+<p>Windows 10</p>
+<p>php5.5.9</p>
+<p>Apache</p>
+</blockquote>
+<h1 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h1><p>在<code>GitHub</code>上看到该<code>cms</code>近期版本更新很频繁</p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/3.png" alt="3"></p>
+<p>本文先对<code>2.0.7</code>版本分析下，首先与<code>2.0.8</code>版本来对比下</p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/4.png" alt="4"></p>
+<p>该处增加了一些敏感函数的过滤和正则上的改动，这说明在<code>2.0.7</code>版本中该段代码存在着安全问题，我们来看一下该段代码所在的函数做起着什么作用</p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/5.png" alt="5"></p>
+<p>在源码中找到了该函数的注释，该函数是用来解析模板中的<code>IF</code>标签</p>
+<p>继续阅读我们可以看到，在进行了过滤之后，如果没有发现危险的项目，会将if中的代码带入到<code>eval</code>中执行，如图</p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/6.png" alt="6"></p>
+<p>那么可以联想到，如果可以在页面中插入<code>if</code>标签并且绕过该处的安全验证，就可以执行任意<code>php</code>代码，下面来寻找一下是否存在插入<code>if</code>标签的地方，寻找之前我们先看一下该<code>CMS</code>的标签语法</p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/7.png" alt="7"></p>
+<p><code>{pboot:if(TRUE)}test{/pboot:if}</code></p>
+<p>在后台尝试在站点信息编辑页面插入</p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/8.png" alt="8"></p>
+<p>进入首页看一下</p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/9.png" alt="9"></p>
+<p>可以看到这里是成功解析了的，那么下面我们需要来思考如何绕过前面的安全过滤</p>
+<p>我们来看第一个判断</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ((function_exists($value) || preg_match(<span class="string">'/^eval$/i'</span>, $value)) &amp;&amp; ! in_array($value, $white_fun)) &#123;</span><br><span class="line">  	$danger = <span class="keyword">true</span>;</span><br><span class="line">  	<span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>该处的意思是如果<code>if</code>中存在着一个函数并且该函数不在白名单中将会被认定为危险，看一下白名单中的函数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$white_fun = <span class="keyword">array</span>(<span class="string">'date'</span>,<span class="string">'in_array'</span>,<span class="string">'explode'</span>,<span class="string">'implode'</span>);</span><br></pre></td></tr></table></figure>
+<p>显然没有可以利用的函数，我们需要一些可以进行输出或者执行代码的函数来进行下一步的验证，在该处我们如果想越过验证可以参考一下<code>KCon 2019</code>中<code>P</code>神的一个议题</p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/10.png" alt="10"></p>
+<p>简单的来说就是可以在函数名和括号之间插入一些控制字符，这样函数仍然会正常执行，但是在本例中<code>function_exists</code>将会失效，我们可以插入下面的代码来尝试下</p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/11.png" alt="11"></p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/12.png" alt="12"></p>
+<p>可以看到是成功执行的，下面来看一下第二个过滤点的<code>if</code>判断</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (preg_match(<span class="string">'/(\$_GET\[)|(\$_POST\[)|(\$_REQUEST\[)|(\$_COOKIE\[)|(\$_SESSION\[)|(file_put_contents)|(fwrite)|(phpinfo)|(base64_decode)|(`)|(shell_exec)|(eval)|(system)|(exec)|(passthru)/i'</span>, $matches[<span class="number">1</span>][$i]))</span><br></pre></td></tr></table></figure>
+<p>这里虽然过滤了很多函数，但是我们还有assert可用，首先想到的直接是下面的写法</p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/13.png" alt="13"></p>
+<p>但是经过测试，存在<code>$</code>符号的时候模板不会解析，该处我并没有深究为什么出现这个情况，而是想到了<code>codebreaking</code>中无参数<code>RCE</code>来解决这个问题，这样就可以不传入其他一些字符，只使用函数来利用了</p>
+<p>这里可以使用<code>getallheaders</code>来获取<code>head</code>头</p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/14.png" alt="14"></p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/15.png" alt=""></p>
+<p>这里可以利用<code>cookie</code>，使用<code>current</code>方法，并且将<code>print_r</code>改成<code>assert</code></p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/16.png" alt="16"></p>
+<p>将代码写在<code>cookie</code>中执行</p>
+<p><img src="/2020/05/07/PbootCms-2-0-7模板注入到RCE/PbootCms-2-0-7模板注入到RCEE/17.png" alt="17"></p>
 
-12eshlcn
-
-!2eshlcn
-
-!@eshlcn
-</code></pre><p>写出脚本跑一下发现是1@eshlcn</p>
-<p>脚本如下：</p>
-<pre><code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hash_encode</span><span class="params">(test)</span>:</span></span><br><span class="line">    sha1 = hashlib.sha1()</span><br><span class="line">    sha1.update(test.encode(<span class="string">'utf-8'</span>))</span><br><span class="line">    res = sha1.hexdigest()</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">str_sort</span><span class="params">(s)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> len(s) &lt;= <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> [s]</span><br><span class="line">    str_list = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> str_sort(s[<span class="number">0</span>:i] + s[i + <span class="number">1</span>:]):</span><br><span class="line">            str_list.append(s[i] + j)</span><br><span class="line">    <span class="keyword">return</span> str_list</span><br><span class="line"></span><br><span class="line">s = <span class="string">'1@eshcn'</span></span><br><span class="line">str_list = str_sort(s)</span><br><span class="line">print(len(str_list), str_list)</span><br><span class="line"><span class="keyword">for</span> test <span class="keyword">in</span> str_list:</span><br><span class="line">    test = <span class="string">"flag&#123;"</span>+test+<span class="string">"&#125;"</span></span><br><span class="line">    result = hash_encode(test)</span><br><span class="line">    <span class="keyword">if</span> result == <span class="string">"e6079c5ce56e781a50f4bf853cdb5302e0d8f054"</span>:</span><br><span class="line">        print(<span class="string">"flag:"</span>+test)</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
-</code></pre><p><img src="https://i.loli.net/2019/03/18/5c8f6e38e5701.jpg" alt=""></p>
-<p>flag为：</p>
-<pre><code>flag{sh@1enc}
-</code></pre><h1 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h1><h2 id="来玩个游戏吧"><a href="#来玩个游戏吧" class="headerlink" title="来玩个游戏吧"></a>来玩个游戏吧</h2><p>题目如图</p>
-<p><img src="https://i.loli.net/2019/03/18/5c8f6e4b3bf00.jpg" alt=""></p>
-<p>第一关的字符串明显是盲文，在线解密一下</p>
-<p><a href="https://www.qqxiuzi.cn/bianma/wenbenjiami.php?s=mangwen" target="_blank" rel="noopener">https://www.qqxiuzi.cn/bianma/wenbenjiami.php?s=mangwen</a></p>
-<p><img src="https://i.loli.net/2019/03/18/5c8f6e5cbdaeb.jpg" alt=""></p>
-<p>得到了??41402abc4b2a76b9719d911017c592，这应该是一串MD5 ，百度一下应该是hello的</p>
-<p>第二关要求两个文件不相同但是MD5要一样，网上有这样一篇文章</p>
-<p><a href="https://blog.csdn.net/sysprogram/article/details/73753354" target="_blank" rel="noopener">https://blog.csdn.net/sysprogram/article/details/73753354</a></p>
-<p>用命令</p>
-<pre><code>fastcoll_v1.0.0.5.exe -p C:\windows\notepad.exe -o D:\notepad1.exe D:\notepad2.exe
-</code></pre><p>生成两个文件，成功得到邮件</p>
-<p><img src="https://i.loli.net/2019/03/18/5c8f6e787da99.jpg" alt=""></p>
-<pre><code>送你一封包含flag的邮件：
-Dear Professional ; Especially for you - this cutting-edge 
-intelligence ! If you no longer wish to receive our 
-publications simply reply with a Subject: of &quot;REMOVE&quot; 
-and you will immediately be removed from our club . 
-This mail is being sent in compliance with Senate bill 
-2216 , Title 9 ; Section 306 ! THIS IS NOT MULTI-LEVEL 
-MARKETING . Why work for somebody else when you can 
-become rich as few as 35 weeks . Have you ever noticed 
-more people than ever are surfing the web and people 
-will do almost anything to avoid mailing their bills 
-. Well, now is your chance to capitalize on this ! 
-WE will help YOU decrease perceived waiting time by 
-120% &amp; decrease perceived waiting time by 140% . You 
-can begin at absolutely no cost to you . But don&apos;t 
-believe us ! Mrs Jones of Minnesota tried us and says 
-&quot;I was skeptical but it worked for me&quot; . We assure 
-you that we operate within all applicable laws . Because 
-the Internet operates on &quot;Internet time&quot; you must act 
-now ! Sign up a friend and your friend will be rich 
-too . Warmest regards . Dear Cybercitizen , We know 
-you are interested in receiving red-hot announcement 
-! We will comply with all removal requests ! This mail 
-is being sent in compliance with Senate bill 1619 ; 
-Title 2 ; Section 301 . This is NOT unsolicited bulk 
-mail ! Why work for somebody else when you can become 
-rich within 53 MONTHS ! Have you ever noticed more 
-people than ever are surfing the web and more people 
-than ever are surfing the web . Well, now is your chance 
-to capitalize on this . We will help you use credit 
-cards on your website plus decrease perceived waiting 
-time by 150% . The best thing about our system is that 
-it is absolutely risk free for you ! But don&apos;t believe 
-us ! Mrs Simpson of Washington tried us and says &quot;Now 
-I&apos;m rich, Rich, RICH&quot; . We assure you that we operate 
-within all applicable laws ! We beseech you - act now 
-! Sign up a friend and your friend will be rich too 
-. Thank-you for your serious consideration of our offer 
-! Dear Friend ; This letter was specially selected 
-to be sent to you ! If you no longer wish to receive 
-our publications simply reply with a Subject: of &quot;REMOVE&quot; 
-and you will immediately be removed from our mailing 
-list . This mail is being sent in compliance with Senate 
-bill 2716 , Title 2 ; Section 306 ! This is a ligitimate 
-business proposal . Why work for somebody else when 
-you can become rich inside 33 weeks . Have you ever 
-noticed more people than ever are surfing the web plus 
-more people than ever are surfing the web . Well, now 
-is your chance to capitalize on this ! WE will help 
-YOU SELL MORE and process your orders within seconds 
-. You can begin at absolutely no cost to you . But 
-don&apos;t believe us ! Mrs Jones of Kentucky tried us and 
-says &quot;I was skeptical but it worked for me&quot; ! This 
-offer is 100% legal ! We implore you - act now . Sign 
-up a friend and you&apos;ll get a discount of 50% . God 
-Bless . 
-</code></pre><p>正好以前遇到过这种邮件的解密站点<a href="http://www.spammimic.com/decode.shtml" target="_blank" rel="noopener">http://www.spammimic.com/decode.shtml</a></p>
-<p><img src="https://i.loli.net/2019/03/18/5c8f6e8d9599c.jpg" alt=""></p>
-<pre><code>flag{a0dd1e2e6b87fe47e5ad0184dc291e04}
-</code></pre>
       
     </div>
     
@@ -518,7 +476,7 @@ Bless .
       
         <div class="post-tags">
           
-            <a href="/tags/CTF/" rel="tag"># CTF</a>
+            <a href="/tags/代码审计/" rel="tag"># 代码审计</a>
           
         </div>
       
@@ -531,8 +489,8 @@ Bless .
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/21/转载-Metasploit模块简介/" rel="next" title="转载-Metasploit模块简介">
-                <i class="fa fa-chevron-left"></i> 转载-Metasploit模块简介
+              <a href="/2020/05/06/zzzcmsV1-7-5前台sql注入/" rel="next" title="zzzcmsV1.7.5前台sql注入">
+                <i class="fa fa-chevron-left"></i> zzzcmsV1.7.5前台sql注入
               </a>
             
           </div>
@@ -540,10 +498,6 @@ Bless .
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/04/置顶-项目发布-YML-AWD-FRAMEWORK/" rel="prev" title="置顶-项目发布-YML-AWD-FRAMEWORK">
-                置顶-项目发布-YML-AWD-FRAMEWORK <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -745,7 +699,7 @@ Bless .
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Crypto"><span class="nav-number">1.</span> <span class="nav-text">Crypto</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#hahaha"><span class="nav-number">1.1.</span> <span class="nav-text">hahaha</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Misc"><span class="nav-number">2.</span> <span class="nav-text">Misc</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#来玩个游戏吧"><span class="nav-number">2.1.</span> <span class="nav-text">来玩个游戏吧</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码分析"><span class="nav-number">2.</span> <span class="nav-text">代码分析</span></a></li></ol></div>
             
 
           </div>
